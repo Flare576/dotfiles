@@ -25,7 +25,7 @@ brew install --with-override-system-vi vim
 
 # Pull the rest of the project
 cd $HOME
-git clone git@github.com:Flare576/dotfiles.git
+git clone https://github.com/Flare576/dotfiles.git
 # Link dotFiles
 sh $HOME/dotfiles/scripts/linkFiles.sh
 
