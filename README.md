@@ -1,7 +1,7 @@
 # Want to setup a new Mac?
 
 ```
-curl "https://raw.githubusercontent.com/Flare576/randomSettings/master/macSetup.sh" | sh
+curl "https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/macSetup.sh" | sh
 ```
 
 This script will require your admin password a number of times, so don't just walk away from it :)
@@ -108,7 +108,7 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 1. Installs Homebrew
 1. Installs brews:
       - cask
-      - python
+      - python (with unversioned override)
       - git
       - nvm
       - the\_silver_searcher
@@ -126,11 +126,9 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
     - With powerline fonts
 1. Wires iTerm2's preferences to dotfiles version
 1. Installs casks _Admin Password Required_
-    - Dash (offline documentation)
     - Docker Edge
     - Dropbox
     - Firefox
-    - IntelliJ IDEA
     - iTerm2
     - LaunchBar
     - Slack
@@ -139,15 +137,12 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
     - VLC
     - Google Chrome
 1. Sets up initial Z file
-1. Sets desktop image to resources/background.jpg
 1. Moves dock to left side of screen
 1. Shows hidden items in Finder
 1. Fixes scroll direction
 1. Kills smart quotes
-1. Installs FadeText screen saver _Admin Password Required_
 1. Makes bottom-left hot corner for screen saver
 1. Locks machine on screen saver
-1. Sets profile pic to resources/profile.jpg
 1. Restarts Finder and Dock
 1. Sets up vim
     - symlink .vimrc
@@ -165,18 +160,10 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
     - .zshrc.kubeHelper
     - idea script
     - vroom script
-1. Installs Apps from AppStore _Requires AppStore Credentials_
-    - Magnet
-    - Spark
-    - MS Remote Desktop
-1. Installs text replacements _Requires manual interaction_
 1. Forces setup of apps _Requires manual interaction_
-    - Magnet
     - Spotify
     - Dropbox
     - LaunchBar
-    - Dash
-    - Spark
 
 # I don't want ALL of that! I just want SOME of it!
 It'll make your life easier if you clone the dotfiles project to your home directory (i.e. ~/dotfiles). You don't have to setup all the symlinks (though I highly recommend it), butall of the scripts assume you're following this structure.
@@ -189,7 +176,7 @@ ln -sF ~/dotfiles/.doNotCommit ~
 ```
 
 ## I want that Jira CLI Awesomeness
-This script will get you all setup:
+This script will get you all setup (assuming you cloned this project to ~/dotfiles)
 
 ```
 ~/dotfiles/scripts/jiraSetup
@@ -201,6 +188,47 @@ You should have on-hand:
 - Jira API token (see https://id.atlassian.com/manage/api-tokens)
 - Main project name
 - your "Shortname" (the name you use when you type [~first.last]) or otherwise tag yourself in Jira
+
+### 'Splain More
+
+The script will ask you for your information and write it to `~/dotfiles/.doNotCommit.jira`
+
+Now comes the fun part. If everything is setup correctly, you can run `jira -h`
+
+You'll see the list of default commands (`help` through `session`), and then the ones I added.
+
+My day generally goes like this
+```
+# See what I've been assigned
+jira mine
+
+# Otherwise, I'll see what we have in the sprint I can snag
+jira sprint
+
+# Look at a ticket
+jira v PROJECT-TICKET
+
+# Set an environment variable to the ticket I want to work on: I actually have the above aliased. See https://github.com/Flare576/dotfiles/blob/master/.zshenv#L18)
+export JIRA_S_ISSUE=PROJECT-TICKET
+
+# If it wasn't mine already, grab it
+jira g
+
+# Look at it again
+jira v
+
+# Drop a comment on it
+jira c -m 'This is an awesome ticket'
+
+# After I'm done, check where it can go next
+jira ts
+# if I don't have  a shortcut like `d[one]` or `p[R Review]`, I use the longer syntax
+jira t -s "Whatever State" -m "I've done what I can!"```
+```
+
+The `r[eviewed]` command is a good example of combining several actions together if you want to add your own!
+
+The last thing I want to mention is that all of the views you see are 100% configurable; see the `.jira.d/templates` folder.
 
 ## Others coming soon!
 

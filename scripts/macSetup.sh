@@ -22,6 +22,7 @@ brews=(
 brew update
 brew install ${brews[@]}
 brew install --with-override-system-vi vim
+brew link --overwrite python
 
 # Pull the rest of the project
 cd $HOME
