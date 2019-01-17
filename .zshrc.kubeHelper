@@ -1,0 +1,19 @@
+alias kc='kubectl'
+alias kcp='kubectl get pods -o wide --all-namespaces | grep $1' 
+alias kcl='kc logs -n $1 $2'
+function kcsh() {
+  kc exec -it -n $1 $2 sh
+}
+
+function kcd() {
+  kc describe pod $2 -n $1
+}
+
+function kcw() {
+ watch -d 'kubectl get pods -o wide --all-namespaces | grep "'$1'"'
+}
+
+function kced() {
+  kc edit deployment $1-service-vessel -n $1
+}
+

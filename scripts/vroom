@@ -1,0 +1,50 @@
+#!/bin/zsh
+# 30/08/2018 update - will only switch to a branch if
+# provided as first argument; will warn if changes
+usage="$(basename "$0") If given an argument, tries to switch to that branch. Then, uses NVM to install NPM, then determines if yarn or npm should be used to start. Starts server logging to server.log in folder where run."
+
+while getopts ':h' option; do
+  case "$option" in
+    h) echo "$usage"
+       exit
+       ;;
+  esac
+done
+
+#Setup NVM
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
+changes=$(git diff --name-only)
+if [ -n "$1" ] ; then
+  if [ -n "$changes" ] ; then
+    read "nuke?You have local changes; Nuke 'em? (y): "
+  fi
+  if [ -z "$nuke" ] || [ "$nuke" = "y" ] || [ "$nuke" = "yes" ] ; then
+    if [ -n "$changes" ] ; then
+      git reset --hard
+    fi
+    git checkout $1
+    git pull
+  fi
+else
+  if [ -z "$changes" ] ; then
+    git pull
+  fi
+fi
+
+nvm install
+files=$(ls)
+if [[ "$files" == *"yarn"* ]] ; then
+  yarn install
+  yarn dev > server.log 2>&1
+else
+  npm install
+  scripts=$(npm run)
+   if [[ $scripts =~ '[[:space:]]+dev[[:space:]]+' ]] ; then
+    npm run dev > server.log 2>&1
+  else
+    npm start > server.log 2>&1 
+  fi
+fi
+

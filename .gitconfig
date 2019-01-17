@@ -1,0 +1,22 @@
+[core]
+	autocrlf = input
+  excludesfile = ~/.gitignore
+[push]
+	default = current
+[alias]
+	cleanhouse = ! echo "Deleting old branches" && git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
+  d = difftool
+  m = mergetool
+[diff]
+  tool = vimdiff
+[include]
+  path = ~/.gitconfig.personal
+[difftool]
+  prompt = false
+[difftool "vimdiff"]
+	cmd = vim -f -d -c \"wincmd l\" -c 'cd \"$GIT_PREFIX\"' \"$LOCAL\" \"$REMOTE\"
+[merge]
+  tool = vimdiff
+  conflictsstyle = diff3
+[mergetool]
+  prompt = false

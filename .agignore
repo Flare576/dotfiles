@@ -1,0 +1,11 @@
+node_modules
+git
+#__tests__
+#__test__
+test_e2e
+coverage
+dist
+lib
+yarn.lock
+build
+

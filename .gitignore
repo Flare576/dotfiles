@@ -1,0 +1,7 @@
+*.swp
+*.swo
+.doNotCommit
+.gitconfig.personal
+.DS_Store
+._.DS_Store
+/.idea

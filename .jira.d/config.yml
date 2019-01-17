@@ -1,0 +1,154 @@
+#!/bin/zsh
+echo "endpoint: ${JIRA_S_ENDPOINT}"
+echo "project: ${JIRA_S_PROJECT}"
+echo "login: ${JIRA_S_LOGIN}"
+echo "user: ${JIRA_S_USER}"
+echo "API_TOKEN: ${JIRA_API_TOKEN}"
+if [ -n "$(command -v bat)" ] ; then 
+  viewer="bat"
+else
+  viewer="cat"
+fi
+
+cat<<END
+custom-commands:
+# FIND WORK
+  - name: mine
+    help: display issues assigned to me
+    args:
+      - name: PROJECT
+        default: \$JIRA_PROJECT
+    script: |-
+      {{jira}} list -t ISuStRA --query "resolution = unresolved and assignee=currentuser() ORDER BY created"
+  - name: sprint
+    aliases: ['s']
+    help: shows stories in curent sprint
+    args:
+      - name: PROJECT
+        default: \$JIRA_PROJECT
+    options:
+      - name: text
+        short: t
+    script: |-
+      {{jira}} list -t ISuStRA --query "sprint IN openSprints() and project={{args.PROJECT}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee"
+  - name: link
+    help: Puts the link for JIRA_S_ISSUE in your clipboard if no ISSUE is provided
+    args:
+      - name: ISSUE
+        default: \$JIRA_S_ISSUE
+    script: |
+      printf "${JIRA_S_ENDPOINT}browse/{{args.ISSUE}}" | pbcopy
+  - name: chrome
+    help: brings the JIRA_S_ISSUE up in the browser if no ISSUE is provided
+    args:
+      - name: ISSUE
+        default: \$JIRA_S_ISSUE
+    script: |
+      {{jira}} view -b {{args.ISSUE}}
+  - name: v
+    help: views current JIRA_S_ISSUE if no ISSUE is provided
+    args:
+      - name: ISSUE
+        default: \$JIRA_S_ISSUE
+    script: |
+      {{jira}} view -t customView {{args.ISSUE}} | $viewer
+# DO WORK
+  - name: g
+    help: actually takes the story
+    args: 
+      - name: ISSUE
+        default: \$JIRA_S_ISSUE
+    script: |
+      {{jira}} assign {{args.ISSUE}} \$JIRA_USER
+      {{jira}} trans "In Progress" {{args.ISSUE}}
+  - name: qa
+    help: Assigns the story to you, moves it to QA, and brings up details
+    args: 
+       - name: ISSUE
+         default: \$JIRA_S_ISSUE
+    script: |
+      {{jira}} trans "Testing" {{args.ISSUE}}
+      {{jira}} edit -t qa {{args.ISSUE}}
+      {{jira}} v {{args.ISSUE}} 
+  - name: r
+    help: Open a comment with the template then move to signoff
+    args:
+      - name: STATUS
+        default: "Signoff"
+      - name: ISSUE
+        default: \$JIRA_S_ISSUE
+    script: |
+      {{jira}} comment -m "h1. Testing Session 
+      
+      h2. Acceptance Criteria 
+      
+      h2. Edge Cases 
+      
+      h2. Regression Testing 
+      
+      h2. Look and Feel" {{args.ISSUE}}
+      {{jira}} trans {{args.STATUS}} {{args.ISSUE}}
+  - name: e
+    help: edits current JIRA_S_ISSUE if no ISSUE is provided
+    args:
+      - name: ISSUE
+        default: \$JIRA_S_ISSUE
+    script: |
+      {{jira}} edit {{args.ISSUE}}
+  - name: c
+    help: comments on current JIRA_S_ISSUE if no ISSUE is provided
+    args:
+      - name: ISSUE
+        default: \$JIRA_S_ISSUE
+    options:
+      - name: comment
+        short: m
+    script: |
+      {{jira}} comment{{if options.comment}} -m "{{options.comment}}"{{end}} {{args.ISSUE}}
+  - name: ts
+    help: Lists the transitions for the JIRA_S_ISSUE if no ISSUE is provied
+    args:
+      - name: ISSUE
+        default: \$JIRA_S_ISSUE
+    script: |
+      {{jira}} transitions {{args.ISSUE}}
+  - name: t
+    help: transitions the current JIRA_S_ISSUE if no ISSUE is provided
+    args:
+      - name: ISSUE
+        default: \$JIRA_S_ISSUE
+    options:
+      - name: state
+        short: s
+        required: true
+      - name: comment
+        short: m
+    script: |
+      {{jira}} trans{{if options.comment}} -m "{{options.comment}}"{{end}} "{{options.state}}" {{args.ISSUE}}
+  - name: p
+    help: Moves story to "PR Review"
+    args:
+      - name: ISSUE
+        default: \$JIRA_S_ISSUE
+    script: |
+      {{jira}} trans "PR Review" {{args.ISSUE}}
+  - name: d
+    help: Moves story to "Ready for QA" or provided state
+    args:
+      - name: ISSUE
+        default: \$JIRA_S_ISSUE
+    options:
+      - name: comment
+        short: m
+      - name: state
+        short: s
+        default: "Ready for QA"
+    script: |
+      {{jira}} trans{{if options.comment}} -m "{{options.comment}}"{{end}} "{{options.state}}" {{args.ISSUE}}
+# HELPERS
+  - name: test
+    help: prints out Jira-related env vars avaialable during run
+    script: |
+      env | grep 'JIRA'
+END
+
