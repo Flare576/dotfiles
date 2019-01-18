@@ -2,7 +2,7 @@
 # https://github.com/Netflix-Skunkworks/go-jira
 ln -sf $HOME/dotfiles/.jira.d $HOME
 brew install go-jira
-read -P "Are you actively working on JIRA instance? (Y/n)" doit
+read -p "Are you actively working on JIRA instance? (Y/n)" doit
 
 if [[ $doit == "y"* ]] ; then
   echo "Setting up Jira CLI"

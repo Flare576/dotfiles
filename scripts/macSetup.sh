@@ -8,7 +8,7 @@ fi
 brews=(
   bat
   cask
-  python
+  pyenv
   git
   hub
   nvm
@@ -22,7 +22,8 @@ brews=(
 brew update
 brew install ${brews[@]}
 brew install --with-override-system-vi vim
-brew link --overwrite python
+pyenv install 3.7.2
+pyenv global 3.7.2
 
 # Pull the rest of the project
 cd $HOME
@@ -68,6 +69,9 @@ sh $HOME/dotfiles/scripts/vimSetup.sh
 
 # Setup Jira
 sh $HOME/dotfiles/scripts/jiraSetup.sh
+
+# Setup iTerm Location stuff
+sh $HOME/dotfiles/scripts/itermLayout.sh
 
 # Force setup of apps
 open -a Spotify
