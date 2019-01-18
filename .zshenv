@@ -5,6 +5,8 @@ export PATH="/usr/local/bin:${PATH}"
 #bindkey -v
 #bindkey 'jk' vi-cmd-mode
 export KEYTIMEOUT=2
+export EDITOR=vim
+export DEFAULT_CHEAT_DIR='$HOME/dotfiles/.cheat'
 
 alias chrome='open -a Google\ Chrome'
 alias vz='vi -o ~/.zshrc ~/.zshenv'
@@ -40,7 +42,7 @@ function gac() {
   git commit -m "$1"
 }
 
-function gap() {
+function gacp() {
   git add .
   git commit -m "$1"
   git push

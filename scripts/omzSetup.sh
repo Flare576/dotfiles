@@ -1,7 +1,7 @@
 #!/bin/sh
 # Install and setup Oh My Zshell
 pip install --user powerline-status
-curl -L http://install.ohmyz.sh | sh
+curl -sL http://install.ohmyz.sh | sh
 cd $HOME/.oh-my-zsh/themes
 curl -LSso cobalt2.zsh-theme https://raw.githubusercontent.com/wesbos/Cobalt2-iterm/master/cobalt2.zsh-theme
 cd /tmp

@@ -1,8 +1,9 @@
 #!/bin/sh
 # Ask first
-read -p "Do you want to set up some iTerm fun? (Y/n) " doit
+read -p "Do you want to set up some iTerm fun? (Y/n) " -n 1 doit
+echo
 
-if [[ $doit == "y"* ]] ; then
+if [[ $doit =~ ^[yY]$ ]] ; then
   echo "Atta kid"
   read -p "What is your current location called? " myname
   read -p "What is your current Zip code? " myzip

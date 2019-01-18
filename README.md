@@ -1,7 +1,7 @@
 # Want to setup a new Mac?
 
 ```
-curl "https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/macSetup.sh" | sh
+sh -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/macSetup.sh)"
 ```
 
 This script will require your admin password a number of times, so don't just walk away from it :)
@@ -20,7 +20,8 @@ This script will require your admin password a number of times, so don't just wa
 #### Git
 | Command | Params | Result |
 |---------|--------|--------|
-| gac |Comment for commit (e.g., "Improve README")|Git Add/Commit/Push (set upstream if necessary |
+| gac |Comment for commit (e.g., "Improve README")|Git Add/Commit |
+| gacp |Comment for commit (e.g., "Improve README")|gac + Push (set upstream if necessary |
 | gmb | None | Git Master Branch |
 
 #### Jira

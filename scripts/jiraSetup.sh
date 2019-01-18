@@ -2,9 +2,10 @@
 # https://github.com/Netflix-Skunkworks/go-jira
 ln -sf $HOME/dotfiles/.jira.d $HOME
 brew install go-jira
-read -p "Are you actively working on JIRA instance? (Y/n)" doit
+read -p "Are you actively working on JIRA instance? (Y/n)" -n 1 doit
+echo
 
-if [[ $doit == "y"* ]] ; then
+if [[ $doit =~ ^[yY]$ ]] ; then
   echo "Setting up Jira CLI"
   read -p "What is your email address? " email
   read -p "What is your base Jira URL? " url

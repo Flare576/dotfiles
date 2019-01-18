@@ -21,9 +21,10 @@ brews=(
 
 brew update
 brew install ${brews[@]}
-brew install --with-override-system-vi vim
+brew install --with-override-system-vim vim
 pyenv install 3.7.2
 pyenv global 3.7.2
+pip cheat
 
 # Pull the rest of the project
 cd $HOME
