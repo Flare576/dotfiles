@@ -2,10 +2,10 @@
 # https://github.com/Netflix-Skunkworks/go-jira
 ln -sf $HOME/dotfiles/.jira.d $HOME
 brew install go-jira
-read -p "Are you actively working on JIRA instance? (Y/n)" -n 1 doit
+read -p "Are you actively working on JIRA instance? (Y/n)" doit
 echo
 
-if [[ $doit =~ ^[yY]$ ]] ; then
+if [[ $doit =~ ^[yY] ]] ; then
   echo "Setting up Jira CLI"
   read -p "What is your email address? " email
   read -p "What is your base Jira URL? " url
@@ -22,7 +22,7 @@ if [[ $doit =~ ^[yY]$ ]] ; then
   config="${HOME}/dotfiles/.doNotcommit.jira"
 
   if ! grep -q '.doNotCommit.jira' ${HOME}/dotfiles/.doNotCommit ; then
-    cat "source ${config}" >> ${HOME}/dotfiles/.doNotCommit
+    echo "source ${config}" >> ${HOME}/dotfiles/.doNotCommit
   fi
 
   if [ ! -f $config ] ; then

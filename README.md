@@ -8,6 +8,19 @@ This script will require your admin password a number of times, so don't just wa
 
 ## What do I get?
 
+### Tools
+
+1) Homebrew / Cask
+1) `bat` replaces `cat`
+1) `git` + `hub`
+1) `pyenv` (w/ python 3.7.2), `nvm`
+1) `the_silver_searcher`
+1) ZSH
+1) `shellcheck`
+1) git-secrets (enabled on this project)
+1) `mas` (cli app store tool)
+1) `cheat`
+
 ### Zshell hotkey-style commands
 
 #### General

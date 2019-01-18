@@ -8,6 +8,10 @@ export KEYTIMEOUT=2
 export EDITOR=vim
 export DEFAULT_CHEAT_DIR='$HOME/dotfiles/.cheat'
 
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
 alias chrome='open -a Google\ Chrome'
 alias vz='vi -o ~/.zshrc ~/.zshenv'
 alias sz='source ~/.zshrc && source ~/.zshenv'
