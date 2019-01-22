@@ -12,7 +12,7 @@ if [[ $doit =~ ^[yY] ]] ; then
   read -p "What is your remote location called? " remotename
   read -p "What is your remote location Timezone (e.g., America/Los_Angeles)? " remotetz
 
-  config="${HOME}/dotfiles/.doNotcommit.locations"
+  config="${HOME}/dotfiles/.doNotCommit.locations"
 
   if ! grep -q '.doNotCommit.locations' ${HOME}/dotfiles/.doNotCommit ; then
     echo "source ${config}" >> ${HOME}/dotfiles/.doNotCommit

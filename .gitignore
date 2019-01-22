@@ -1,6 +1,6 @@
 *.swp
 *.swo
-.doNotCommit
+.doNotCommit*
 .gitconfig.personal
 .DS_Store
 ._.DS_Store

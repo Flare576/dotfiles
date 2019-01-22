@@ -19,7 +19,7 @@ if [[ $doit =~ ^[yY] ]] ; then
     short=email
   fi
 
-  config="${HOME}/dotfiles/.doNotcommit.jira"
+  config="${HOME}/dotfiles/.doNotCommit.jira"
 
   if ! grep -q '.doNotCommit.jira' ${HOME}/dotfiles/.doNotCommit ; then
     echo "source ${config}" >> ${HOME}/dotfiles/.doNotCommit

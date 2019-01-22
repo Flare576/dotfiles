@@ -81,10 +81,10 @@ function weather() {
 function prettyDate() {
   echo
   echo $MY_LOC_NAME
-  TZ=$MY_LOC_TZ
+  TZ=$MY_LOC_TZ date
   echo
   echo $REMOTE_LOC_NAME
-  TZ=$REMOTE_LOC_TZ
+  TZ=$REMOTE_LOC_TZ date
 }
 
 function wweather() {
