@@ -40,10 +40,12 @@ This script will require your admin password a number of times, so don't just wa
 #### Jira
 | Command | Params | Result |
 |---------|--------|--------|
-| jiras | TicketID (e.g., PROJECT-123) | Set global story/ticket for `jira` commands |
+| jira workon | TicketID (e.g., PROJECT-123) | Set global story/ticket for `jira` commands |
+| jira git | Branch Name | Create a new branch with JIRA_PREFIX/JIRA_ISSUE-BRANCH |
 | jira sprint | None | see the current sprint for your PROJECT |
 | jira mine | None | see a list of unresolved tickets in PROJECT with you as ASSIGNEE |
 | jira chrome | TicketID\* | Open ticket in Chrome |
+| jira i | None | See current global story/ticket for `jira` commands |
 | jira v | TicketID\* | View ticket details in `bat` if available, or `cat` otherwise |
 | jira e | TicketID\* | Edit(vi) |
 | jira c | TicketID\*, -m | Comment(vi) on ticket, follows `-m` pattern for predefined comment |
@@ -52,7 +54,7 @@ This script will require your admin password a number of times, so don't just wa
 | jira g | TicketID\* | Transition ticket to "In Progress" and assigns to you (feel free to modify this to your "In Progress" state) |
 | jira qa | TicketID\* | Transition ticket to "Testing" and sets you as the Reviewer (feel free to modify this to your "QA" state) |
 | jira r | [State], TicketID\* | Review ticket by Comment(vi) on ticket, Transition to provided state or "Signoff" by default (feel free to modify this to your preferred Post-QA stateand with your preferred review template) |
-> \*NOTE: If you don't provide a TIcketID, the global story/ticket set by `jiras` is used
+> \*NOTE: If you don't provide a TicketID, the global story/ticket set by `jira workon` is used
 
 #### Kubernetes
 | Command | Params | Result |

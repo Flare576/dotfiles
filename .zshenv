@@ -20,27 +20,6 @@ alias v='vi .'
 alias cat='bat'
 alias git='hub'
 
-# Print the current jira story/bug/task/etc. ID
-function jirai() {
-  echo $JIRA_S_ISSUE
-}
-
-# Set the provided string as the jira story/bug/task/etc.
-function jiras() {
-  export JIRA_S_ISSUE=$1
-}
-
-# Create a new branch with the devs first name, then jiraID, then provided description (if provided)
-function jirag() {
-  if [ -n "$JIRA_S_ISSUE" ] ; then
-    if [ -n "$1" ] ; then
-      git checkout -b ${JIRA_S_PREFIX}/${JIRA_S_ISSUE}-${1}
-    else
-      git checkout -b ${JIRA_S_PREFIX}/${JIRA_S_ISSUE}
-    fi
-  fi
-}
-
 function gac() {
   git add .
   git commit -m "$1"

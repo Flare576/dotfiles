@@ -1,9 +1,15 @@
 #!/bin/zsh
+issueFile="${HOME}/.jira.d/.jira.issue"
+echo "ISSUE_FILE: ${issueFile}"
+read issue < ${issueFile}
+echo "issue: ${issue}"
+
 echo "endpoint: ${JIRA_S_ENDPOINT}"
 echo "project: ${JIRA_S_PROJECT}"
 echo "login: ${JIRA_S_LOGIN}"
 echo "user: ${JIRA_S_USER}"
 echo "API_TOKEN: ${JIRA_API_TOKEN}"
+echo "PREFIX: ${JIRA_S_PREFIX}"
 if [ -n "$(command -v bat)" ] ; then 
   viewer="bat"
 else
@@ -12,6 +18,21 @@ fi
 
 cat<<END
 custom-commands:
+  - name: workon
+    help: Sets the global "worked on" issue. To clear, call with empty string ""
+    args:
+      - name: ISSUE
+    script: |-
+      echo "{{args.ISSUE}}" > "\${JIRA_ISSUE_FILE}"
+  - name: i
+    help: Displays the global "worked on"  issue
+    script: echo \${JIRA_ISSUE}
+  - name: git
+    help: Creates a new Git branch with the Jira prefix/issue and, if provided, branch
+    args:
+      - name: BRANCH
+    script: |-
+      git checkout -b \${JIRA_PREFIX}/\${JIRA_ISSUE}{{if args.BRANCH}}-{{args.BRANCH}}{{end}}
 # FIND WORK
   - name: mine
     help: display issues assigned to me
@@ -32,24 +53,24 @@ custom-commands:
     script: |-
       {{jira}} list -t ISuStRA --query "sprint IN openSprints() and project={{args.PROJECT}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee"
   - name: link
-    help: Puts the link for JIRA_S_ISSUE in your clipboard if no ISSUE is provided
+    help: Puts the link for JIRA_ISSUE in your clipboard if no ISSUE is provided
     args:
       - name: ISSUE
-        default: \$JIRA_S_ISSUE
+        default: \$JIRA_ISSUE
     script: |
       printf "${JIRA_S_ENDPOINT}browse/{{args.ISSUE}}" | pbcopy
   - name: chrome
-    help: brings the JIRA_S_ISSUE up in the browser if no ISSUE is provided
+    help: brings the JIRA_ISSUE up in the browser if no ISSUE is provided
     args:
       - name: ISSUE
-        default: \$JIRA_S_ISSUE
+        default: \$JIRA_ISSUE
     script: |
       {{jira}} view -b {{args.ISSUE}}
   - name: v
-    help: views current JIRA_S_ISSUE if no ISSUE is provided
+    help: views current JIRA_ISSUE if no ISSUE is provided
     args:
       - name: ISSUE
-        default: \$JIRA_S_ISSUE
+        default: \$JIRA_ISSUE
     script: |
       {{jira}} view -t customView {{args.ISSUE}} | $viewer
 # DO WORK
@@ -57,7 +78,7 @@ custom-commands:
     help: actually takes the story
     args: 
       - name: ISSUE
-        default: \$JIRA_S_ISSUE
+        default: \$JIRA_ISSUE
     script: |
       {{jira}} assign {{args.ISSUE}} \$JIRA_USER
       {{jira}} trans "In Progress" {{args.ISSUE}}
@@ -65,18 +86,17 @@ custom-commands:
     help: Assigns the story to you, moves it to QA, and brings up details
     args: 
        - name: ISSUE
-         default: \$JIRA_S_ISSUE
+         default: \$JIRA_ISSUE
     script: |
-      {{jira}} trans "Testing" {{args.ISSUE}}
-      {{jira}} edit -t qa {{args.ISSUE}}
+      {{jira}} trans "QA" {{args.ISSUE}}
       {{jira}} v {{args.ISSUE}} 
   - name: r
     help: Open a comment with the template then move to signoff
     args:
       - name: STATUS
-        default: "Signoff"
+        default: "Sign Off"
       - name: ISSUE
-        default: \$JIRA_S_ISSUE
+        default: \$JIRA_ISSUE
     script: |
       {{jira}} comment -m "h1. Testing Session 
       
@@ -89,34 +109,34 @@ custom-commands:
       h2. Look and Feel" {{args.ISSUE}}
       {{jira}} trans {{args.STATUS}} {{args.ISSUE}}
   - name: e
-    help: edits current JIRA_S_ISSUE if no ISSUE is provided
+    help: edits current JIRA_ISSUE if no ISSUE is provided
     args:
       - name: ISSUE
-        default: \$JIRA_S_ISSUE
+        default: \$JIRA_ISSUE
     script: |
       {{jira}} edit {{args.ISSUE}}
   - name: c
-    help: comments on current JIRA_S_ISSUE if no ISSUE is provided
+    help: comments on current JIRA_ISSUE if no ISSUE is provided
     args:
       - name: ISSUE
-        default: \$JIRA_S_ISSUE
+        default: \$JIRA_ISSUE
     options:
       - name: comment
         short: m
     script: |
       {{jira}} comment{{if options.comment}} -m "{{options.comment}}"{{end}} {{args.ISSUE}}
   - name: ts
-    help: Lists the transitions for the JIRA_S_ISSUE if no ISSUE is provied
+    help: Lists the transitions for the JIRA_ISSUE if no ISSUE is provied
     args:
       - name: ISSUE
-        default: \$JIRA_S_ISSUE
+        default: \$JIRA_ISSUE
     script: |
       {{jira}} transitions {{args.ISSUE}}
   - name: t
-    help: transitions the current JIRA_S_ISSUE if no ISSUE is provided
+    help: transitions the current JIRA_ISSUE if no ISSUE is provided
     args:
       - name: ISSUE
-        default: \$JIRA_S_ISSUE
+        default: \$JIRA_ISSUE
     options:
       - name: state
         short: s
@@ -129,14 +149,14 @@ custom-commands:
     help: Moves story to "PR Review"
     args:
       - name: ISSUE
-        default: \$JIRA_S_ISSUE
+        default: \$JIRA_ISSUE
     script: |
       {{jira}} trans "PR Review" {{args.ISSUE}}
   - name: d
     help: Moves story to "Ready for QA" or provided state
     args:
       - name: ISSUE
-        default: \$JIRA_S_ISSUE
+        default: \$JIRA_ISSUE
     options:
       - name: comment
         short: m
