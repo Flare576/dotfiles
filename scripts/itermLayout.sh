@@ -30,4 +30,5 @@ export REMOTE_LOC_NAME=${remotename}
 export REMOTE_LOC_TZ=${remotetz}
 END
 
+npm install -g vtop
 fi
