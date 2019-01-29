@@ -3,13 +3,18 @@
 # provided as first argument; will warn if changes
 usage="$(basename "$0") If given an argument, tries to switch to that branch. Then, uses NVM to install NPM, then determines if yarn or npm should be used to start. Starts server logging to server.log in folder where run."
 
-while getopts ':h' option; do
+nolog=false
+
+while getopts ':hn' option; do
   case "$option" in
     h) echo "$usage"
        exit
        ;;
+    n) nolog=true
+      ;;
   esac
 done
+shift $((OPTIND -1))
 
 #Setup NVM
 export NVM_DIR="$HOME/.nvm"
@@ -37,14 +42,29 @@ nvm install
 files=$(ls)
 if [[ "$files" == *"yarn"* ]] ; then
   yarn install
-  yarn dev > server.log 2>&1
+  if $nolog ; then
+    yarn dev
+  else
+    echo "\033[0;31mrun 'less +F server.log' to see the log.\033[0m"
+    yarn dev > server.log 2>&1
+  fi
 else
   npm install
   scripts=$(npm run)
    if [[ $scripts =~ '[[:space:]]+dev[[:space:]]+' ]] ; then
-    npm run dev > server.log 2>&1
+     if $nolog ; then
+       npm run dev
+     else
+      echo "\033[0;31mrun 'less +F server.log' to see the log.\033[0m"
+      npm run dev > server.log 2>&1
+    fi
   else
-    npm start > server.log 2>&1 
+    if $nolog ; then
+      npm start
+    else
+      echo "\033[0;31mrun 'less +F server.log' to see the log.\033[0m"
+      npm start > server.log 2>&1 
+    fi
   fi
 fi
 
