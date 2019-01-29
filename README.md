@@ -224,8 +224,8 @@ jira sprint
 # Look at a ticket
 jira v PROJECT-TICKET
 
-# Set an environment variable to the ticket I want to work on: I actually have the above aliased. See https://github.com/Flare576/dotfiles/blob/master/.zshenv#L18)
-export JIRA_S_ISSUE=PROJECT-TICKET
+# Set the global issue
+jira workon PROJECT-TICKET
 
 # If it wasn't mine already, grab it
 jira g
@@ -238,8 +238,12 @@ jira c -m 'This is an awesome ticket'
 
 # After I'm done, check where it can go next
 jira ts
+
 # if I don't have  a shortcut like `d[one]` or `p[R Review]`, I use the longer syntax
 jira t -s "Whatever State" -m "I've done what I can!"```
+
+# In case I need to drop a link to a poor, non-CLI coworker - this will put it on the Mac clipboard
+jira link
 ```
 
 The `r[eviewed]` command is a good example of combining several actions together if you want to add your own!
