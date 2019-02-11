@@ -45,6 +45,7 @@ This script will require your admin password a number of times, so don't just wa
 | jira sprint | None | see the current sprint for your PROJECT |
 | jira mine | None | see a list of unresolved tickets in PROJECT with you as ASSIGNEE |
 | jira chrome | TicketID\* | Open ticket in Chrome |
+| jira link | None | copies the link to the global ticket to the Mac clipboard |
 | jira i | None | See current global story/ticket for `jira` commands |
 | jira v | TicketID\* | View ticket details in `bat` if available, or `cat` otherwise |
 | jira e | TicketID\* | Edit(vi) |
