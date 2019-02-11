@@ -107,7 +107,7 @@ custom-commands:
       h2. Regression Testing 
       
       h2. Look and Feel" {{args.ISSUE}}
-      {{jira}} trans {{args.STATUS}} {{args.ISSUE}}
+      {{jira}} trans "{{args.STATUS}}" {{args.ISSUE}}
   - name: e
     help: edits current JIRA_ISSUE if no ISSUE is provided
     args:
