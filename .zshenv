@@ -20,6 +20,10 @@ alias v='vi .'
 alias cat='bat'
 alias git='hub'
 
+function gs() {
+  git submodule foreach $1
+}
+
 function gac() {
   git add .
   git commit -m "$1"
@@ -28,7 +32,7 @@ function gac() {
 function gacp() {
   git add .
   git commit -m "$1"
-  git push
+  git push -u
 }
 
 function fwatch() {
