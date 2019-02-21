@@ -50,8 +50,11 @@ custom-commands:
     options:
       - name: text
         short: t
+      - name: workable 
+        short: w
+        type: BOOL
     script: |-
-      {{jira}} list -t ISuStRA --query "sprint IN openSprints() and project={{args.PROJECT}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee"
+      {{jira}} list -t ISuStRA --query "sprint IN openSprints(){{if options.workable}} and status NOT IN (\"Done\",\"Dead\",\"Sign Off\"){{end}} and project={{args.PROJECT}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee"
   - name: link
     help: Puts the link for JIRA_ISSUE in your clipboard if no ISSUE is provided
     args:
