@@ -46,13 +46,16 @@ custom-commands:
     help: shows stories in curent sprint
     args:
       - name: PROJECT
+        help: Filter on a Project, defaults to \$JIRA_PROJECT
         default: \$JIRA_PROJECT
     options:
       - name: text
         short: t
+        help: Search the text of the ticket for this value
       - name: workable 
         short: w
         type: BOOL
+        help: Pass this flag to filter out Done, Dead, and Sign Off stories
     script: |-
       {{jira}} list -t ISuStRA --query "sprint IN openSprints(){{if options.workable}} and status NOT IN (\"Done\",\"Dead\",\"Sign Off\"){{end}} and project={{args.PROJECT}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee"
   - name: link
