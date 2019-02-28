@@ -17,6 +17,7 @@ brews=(
   shellcheck
   git-secrets
   mas
+  watch
   kubectx
   kubens
 )
