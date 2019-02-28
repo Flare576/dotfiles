@@ -17,6 +17,8 @@ brews=(
   shellcheck
   git-secrets
   mas
+  kubectx
+  kubens
 )
 
 brew update
