@@ -16,6 +16,7 @@ brews=(
   zsh
   shellcheck
   git-secrets
+  lastpass-cli
   mas
   watch
   kubectx
@@ -54,6 +55,7 @@ defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 apps=(
   homebrew/cask-versions/docker-edge
   dropbox
+  postman
   firefox
   iterm2
   launchbar
