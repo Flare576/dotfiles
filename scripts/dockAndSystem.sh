@@ -19,8 +19,10 @@ defaults write com.apple.finder AppleShowAllFiles YES
 defaults write -g com.apple.swipescrolldirection -bool NO
 # Tap to click
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
-#Enable battery icon in menu bar
+# Enable battery icon in menu bar
 defaults write com.apple.menuextra.battery ShowPercent YES
+# Tab through controls of dialog boxes
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Disable SmartQuotes
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
