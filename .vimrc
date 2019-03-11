@@ -3,6 +3,11 @@ syntax enable
 set shell=zsh           " bring ZShell config in
 let mapleader=","       " leader is comma
 colorscheme badwolf     " try it out
+
+" highlights characterse over 80 width
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
 set showcmd             " Will display the command as it is typed
 set tabstop=2           " number of visual spaces per TAB
 set softtabstop=2       " number of spaces in tab when editing
@@ -89,7 +94,6 @@ nnoremap <leader>ee :vsp ~/.zshenv<CR>
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>ej :vsp ~/.jira.d/config.yml<CR>
 nnoremap <leader>ed :vsp ~/dotfiles<CR>
-
 
 " CtrlP settings
 let g:ctrlp_match_window = 'bottom,order:ttb'
