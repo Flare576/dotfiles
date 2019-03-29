@@ -6,7 +6,8 @@ colorscheme badwolf     " try it out
 
 " highlights characterse over 80 width
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+match OverLength /\%121v.\+/
+set cc=120
 
 set showcmd             " Will display the command as it is typed
 set tabstop=2           " number of visual spaces per TAB
