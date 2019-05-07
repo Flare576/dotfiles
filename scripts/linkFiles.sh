@@ -11,6 +11,7 @@ ln -Fs $HOME/dotfiles/.gitignore $HOME
 ln -Fs $HOME/dotfiles/.zshrc.kubeHelper $HOME
 ln -Fs $HOME/dotfiles/.cheat $HOME
 ln -Fs $HOME/dotfiles/scripts/idea /usr/local/bin/
+ln -Fs $HOME/dotfiles/scripts/clientClone /usr/local/bin/
 ln -Fs $HOME/dotfiles/scripts/vroom /usr/local/bin/
 ln -Fs $HOME/dotfiles/scripts/gmb /usr/local/bin/
 

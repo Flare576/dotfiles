@@ -1,16 +1,39 @@
 #!/bin/sh
+
+usage="$(basename "$0") Creates new SSH tokens and hostnames for one or more GitHub accounts.
+
+If you want to add a new secondary account, enter 2 or more for the number of accounts and use 'skip' for the first account username.
+ 
+This command takes no arguments."
+
+while getopts ':hn' option; do
+  case "$option" in
+    h) echo "$usage"
+       exit
+       ;;
+  esac
+done
+
 echo "Setting up Git"
 read -p "How many git accounts? " gitCount
 if [ $gitCount -gt 1 ] ; then
   echo "
 The first github account will be the 'default', meaning if you
 don't change the domain during cloning from 'github.com', that will be used.
-All others will require you to change to 'github.com-<username>"
+All others will require you to change to 'github.com-<username>.
+
+If you want to add a new secondary account, enter 2 or more for the number 
+of accounts and use 'skip' for the first account username.
+to setup a new secondary account, enter 2 for "
 fi
 if [ $gitCount -gt 0 ] ; then
   eval "$(ssh-agent -s)" > /dev/null
   for i in $(seq 1 $gitCount); do
     read -p "GitHub Username $i: " userName
+    if [ "$userName" == "skip" ] ; then
+      continue
+    fi
+
     read -p "(P)assword or (t)oken: " passToke
     passToke=$(echo $passToke | tr '[A-Z]' '[a-z]')
     cred="Password"
