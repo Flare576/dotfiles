@@ -5,8 +5,6 @@ let mapleader=","       " leader is comma
 colorscheme badwolf     " try it out
 
 " highlights characterse over 80 width
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%121v.\+/
 set cc=120
 
 set showcmd             " Will display the command as it is typed
@@ -27,6 +25,7 @@ set hlsearch            " highlight matches
 set foldlevelstart=10   " open most folds by default
 set foldmethod=indent   " Auto-define folds by indentation
 set spelllang=en        " English for spelling!
+set backspace=eol       " Backspace will work on new-lines!
 " New, better words!
 set spellfile=$HOME/dotfiles/en.utf-8.add
 " enables Leader + y to do clipboard copy in visual mode
@@ -107,7 +106,10 @@ let g:html_indent_style1 = "inc"
 " File-type specific settings
 autocmd Filetype javascript setlocal ts=4 sw=2 sts=0 suffixesadd=.js,.jsx
 autocmd Filetype typescript setlocal ts=4 sw=4 sts=0 suffixesadd=.ts,.tsx
+autocmd Filetype typescript,javascript highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+autocmd Filetype typescript,javascript match OverLength /\%121v.\+/
 autocmd Filetype markdown setlocal spell
+autocmd Filetype text setlocal linebreak spell
 
 " Jira green text
 map <silent> <leader>jg :setlocal indentkeys-=<:><CR>a{color:#14892c}{color}jk7h:setlocal indentkeys+=<:><CR>a
