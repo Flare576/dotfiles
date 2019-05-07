@@ -36,7 +36,7 @@
 	<key>CopySelection</key>
 	<true/>
 	<key>Default Arrangement Name</key>
-	<string>Full Screen Fun</string>
+	<string>Full Widgets</string>
 	<key>Default Bookmark Guid</key>
 	<string>9EC815F6-3A6A-4FE5-B87F-58CC267656E3</string>
 	<key>DimBackgroundWindows</key>
@@ -67,8 +67,8 @@
 			<key>Action</key>
 			<integer>25</integer>
 			<key>Text</key>
-			<string>Full Screen Fun
-Full Screen Fun:Restore Window Arrangement</string>
+			<string>Full Widgets
+Full Widgets:Restore Window Arrangement</string>
 		</dict>
 		<key>0x9-0x40000</key>
 		<dict>
@@ -190,6 +190,8 @@ Full Screen Fun:Restore Window Arrangement</string>
 			<string></string>
 		</dict>
 	</dict>
+	<key>HapticFeedbackForEsc</key>
+	<false/>
 	<key>HiddenAFRStrokeThickness</key>
 	<real>0.0</real>
 	<key>HiddenAdvancedFontRendering</key>
@@ -262,13 +264,13 @@ Full Screen Fun:Restore Window Arrangement</string>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>410 363 620 392 0 0 1440 877 </string>
+	<string>2090 498 620 392 1440 0 1920 1057 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>269 109 796 486 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1440 0 1440 877 1440 0 1920 1080 </string>
+	<string>1440 0 1920 1057 1440 0 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>2400 0 955 1057 1440 0 1920 1057 </string>
+	<string>2438 387 570 427 1440 0 1920 1057 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1005,6 +1007,8 @@ Full Screen Fun:Restore Window Arrangement</string>
 			<true/>
 			<key>Shortcut</key>
 			<string></string>
+			<key>Show Status Bar</key>
+			<false/>
 			<key>Silence Bell</key>
 			<false/>
 			<key>Smart Cursor Color</key>
@@ -1100,6 +1104,119 @@ Full Screen Fun:Restore Window Arrangement</string>
 					<string>\btelnet:([a-z0-9A-Z_]+@)?([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\b</string>
 				</dict>
 			</array>
+			<key>Status Bar Layout</key>
+			<dict>
+				<key>advanced configuration</key>
+				<dict>
+					<key>algorithm</key>
+					<integer>0</integer>
+					<key>font</key>
+					<string>.AppleSystemUIFont 12</string>
+				</dict>
+				<key>components</key>
+				<array>
+					<dict>
+						<key>class</key>
+						<string>iTermStatusBarCPUUtilizationComponent</string>
+						<key>configuration</key>
+						<dict>
+							<key>knobs</key>
+							<dict>
+								<key>base: compression resistance</key>
+								<integer>1</integer>
+								<key>base: priority</key>
+								<real>5</real>
+								<key>shared text color</key>
+								<dict>
+									<key>Alpha Component</key>
+									<real>1</real>
+									<key>Blue Component</key>
+									<real>0.63</real>
+									<key>Color Space</key>
+									<string>sRGB</string>
+									<key>Green Component</key>
+									<real>0.63</real>
+									<key>Red Component</key>
+									<real>0.90000000000000002</real>
+								</dict>
+							</dict>
+							<key>layout advanced configuration dictionary value</key>
+							<dict>
+								<key>algorithm</key>
+								<integer>0</integer>
+								<key>font</key>
+								<string>.AppleSystemUIFont 12</string>
+							</dict>
+						</dict>
+					</dict>
+					<dict>
+						<key>class</key>
+						<string>iTermStatusBarMemoryUtilizationComponent</string>
+						<key>configuration</key>
+						<dict>
+							<key>knobs</key>
+							<dict>
+								<key>base: priority</key>
+								<real>5</real>
+								<key>shared text color</key>
+								<dict>
+									<key>Alpha Component</key>
+									<real>1</real>
+									<key>Blue Component</key>
+									<real>0.32327827345579863</real>
+									<key>Color Space</key>
+									<string>sRGB</string>
+									<key>Green Component</key>
+									<real>0.62750244140625</real>
+									<key>Red Component</key>
+									<real>0.32327827345579863</real>
+								</dict>
+							</dict>
+							<key>layout advanced configuration dictionary value</key>
+							<dict>
+								<key>algorithm</key>
+								<integer>0</integer>
+								<key>font</key>
+								<string>.AppleSystemUIFont 12</string>
+							</dict>
+						</dict>
+					</dict>
+					<dict>
+						<key>class</key>
+						<string>iTermStatusBarNetworkUtilizationComponent</string>
+						<key>configuration</key>
+						<dict>
+							<key>knobs</key>
+							<dict>
+								<key>base: compression resistance</key>
+								<integer>1</integer>
+								<key>base: priority</key>
+								<real>5</real>
+								<key>shared text color</key>
+								<dict>
+									<key>Alpha Component</key>
+									<real>1</real>
+									<key>Blue Component</key>
+									<real>0.90000000000000002</real>
+									<key>Color Space</key>
+									<string>sRGB</string>
+									<key>Green Component</key>
+									<real>0.63</real>
+									<key>Red Component</key>
+									<real>0.63</real>
+								</dict>
+							</dict>
+							<key>layout advanced configuration dictionary value</key>
+							<dict>
+								<key>algorithm</key>
+								<integer>0</integer>
+								<key>font</key>
+								<string>.AppleSystemUIFont 12</string>
+							</dict>
+						</dict>
+					</dict>
+				</array>
+			</dict>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tags</key>
@@ -3710,6 +3827,20 @@ Full Screen Fun:Restore Window Arrangement</string>
 			<string>~</string>
 		</dict>
 	</array>
+	<key>NoSyncFrame_SessionsPreferences</key>
+	<dict>
+		<key>screenFrame</key>
+		<string>{{1440, 0}, {1920, 1080}}</string>
+		<key>topLeft</key>
+		<string>{1709, 595}</string>
+	</dict>
+	<key>NoSyncFrame_SharedPreferences</key>
+	<dict>
+		<key>screenFrame</key>
+		<string>{{1440, 0}, {1920, 1080}}</string>
+		<key>topLeft</key>
+		<string>{1781, 811}</string>
+	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
@@ -3717,9 +3848,614 @@ Full Screen Fun:Restore Window Arrangement</string>
 	<key>NoSyncInstallationId</key>
 	<string>D42E41E4-8576-4A6E-9779-B68DABCD561A</string>
 	<key>NoSyncLastTipTime</key>
-	<real>573069731.3599</real>
+	<real>578931340.00594294</real>
+	<key>NoSyncLaunchExperienceControllerRunCount</key>
+	<integer>6</integer>
+	<key>NoSyncNextAnnoyanceTime</key>
+	<real>576083041.05922699</real>
+	<key>NoSyncOnboardingWindowHasBeenShown</key>
+	<true/>
 	<key>NoSyncPermissionToShowTip</key>
 	<true/>
+	<key>NoSyncRecordedVariables</key>
+	<dict>
+		<key>0</key>
+		<array>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>id</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+		</array>
+		<key>1</key>
+		<array>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>columns</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>creationTimeString</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>tmuxWindowTitle</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>tmuxStatusRight</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>tmuxClientName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>tty</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>mouseReportingMode</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>badge</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>tab</string>
+				<key>nonterminalContext</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>presentationName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>tmuxRole</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>path</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>jobName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>name</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>lastCommand</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>autoName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>tmuxWindowPane</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>id</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>terminalIconName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>tmuxStatusLeft</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>autoLogId</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>terminalWindowName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>rows</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>autoNameFormat</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>triggerName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>hostname</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>jobPid</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>pid</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>profileName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>termid</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>iterm2</string>
+				<key>nonterminalContext</key>
+				<integer>4</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>username</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+		</array>
+		<key>16</key>
+		<array>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.name</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>titleOverrideFormat</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.username</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.pid</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.presentationName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.jobName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>currentTab</string>
+				<key>nonterminalContext</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>titleOverride</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.terminalIconName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.window</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.terminalWindowName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.tty</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>iterm2</string>
+				<key>nonterminalContext</key>
+				<integer>4</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.iterm2.localhostName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.path</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.hostname</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+		</array>
+		<key>2</key>
+		<array>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>id</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>titleOverrideFormat</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>currentSession</string>
+				<key>nonterminalContext</key>
+				<integer>1</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.username</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>titleOverride</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.hostname</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.terminalWindowName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.name</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.jobName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.presentationName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.tty</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>iterm2.localhostName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.pid</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>window</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>iterm2</string>
+				<key>nonterminalContext</key>
+				<integer>4</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>tmuxWindow</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.terminalIconName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.path</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+		</array>
+		<key>4</key>
+		<array>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>pid</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>localhostName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>effectiveTheme</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+		</array>
+	</dict>
+	<key>NoSyncSearchHistory</key>
+	<array>
+		<string>appointment</string>
+		<string>should return a valid appointment if logged inappon</string>
+	</array>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>561589749.73909605</real>
 	<key>NoSyncTipsToNotShow</key>
@@ -3731,6 +4467,46 @@ Full Screen Fun:Restore Window Arrangement</string>
 		<string>0003</string>
 		<string>0004</string>
 		<string>0005</string>
+		<string>0006</string>
+		<string>0007</string>
+		<string>0008</string>
+		<string>0009</string>
+		<string>0010</string>
+		<string>0011</string>
+		<string>0012</string>
+		<string>0013</string>
+		<string>0014</string>
+		<string>0015</string>
+		<string>0016</string>
+		<string>0017</string>
+		<string>0018</string>
+		<string>0019</string>
+		<string>0020</string>
+		<string>0021</string>
+		<string>0022</string>
+		<string>0023</string>
+		<string>0024</string>
+		<string>0025</string>
+		<string>0026</string>
+		<string>0027</string>
+		<string>0028</string>
+		<string>0029</string>
+		<string>0030</string>
+		<string>0031</string>
+		<string>0032</string>
+		<string>0033</string>
+		<string>0034</string>
+		<string>0035</string>
+		<string>0036</string>
+		<string>0037</string>
+		<string>0038</string>
+		<string>0039</string>
+		<string>0040</string>
+		<string>0041</string>
+		<string>0042</string>
+		<string>0043</string>
+		<string>0044</string>
+		<string>0045</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -3782,7 +4558,7 @@ Full Screen Fun:Restore Window Arrangement</string>
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>~/dotfiles</string>
+	<string>~/dotfiles/</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>
@@ -3798,12 +4574,14 @@ Full Screen Fun:Restore Window Arrangement</string>
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml?shard=15</string>
+	<string>https://iterm2.com/appcasts/testing_new.xml?shard=15</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-02-28T18:02:10Z</date>
+	<date>2019-05-06T22:00:03Z</date>
 	<key>SUSendProfileInfo</key>
+	<false/>
+	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
@@ -3814,6 +4592,8 @@ Full Screen Fun:Restore Window Arrangement</string>
 	<key>ShowPaneTitles</key>
 	<true/>
 	<key>SmartPlacement</key>
+	<false/>
+	<key>SoundForEsc</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
 	<real>0.40000000596046448</real>
@@ -3837,13 +4617,15 @@ Full Screen Fun:Restore Window Arrangement</string>
 	<true/>
 	<key>UseLionStyleFullscreen</key>
 	<true/>
+	<key>VisualIndicatorForEsc</key>
+	<false/>
 	<key>WebKitDefaultFontSize</key>
 	<integer>11</integer>
 	<key>WebKitStandardFont</key>
 	<string>.AppleSystemUIFont</string>
 	<key>Window Arrangements</key>
 	<dict>
-		<key>Full Screen Fun</key>
+		<key>Full Widgets</key>
 		<array>
 			<dict>
 				<key>Desired Columns</key>
@@ -3858,6 +4640,8 @@ Full Screen Fun:Restore Window Arrangement</string>
 				<false/>
 				<key>Hiding Toolbelt Should Resize Window</key>
 				<true/>
+				<key>Initial Profile</key>
+				<dict/>
 				<key>Is Hotkey Window</key>
 				<false/>
 				<key>Old Height</key>
@@ -3865,11 +4649,11 @@ Full Screen Fun:Restore Window Arrangement</string>
 				<key>Old Width</key>
 				<real>400</real>
 				<key>Old X Origin</key>
-				<real>1666</real>
+				<real>1687</real>
 				<key>Old Y Origin</key>
-				<real>390</real>
+				<real>107</real>
 				<key>Saved Window Type</key>
-				<integer>4</integer>
+				<integer>0</integer>
 				<key>Screen</key>
 				<integer>1</integer>
 				<key>Selected Tab Index</key>
@@ -4621,6 +5405,8 @@ Full Screen Fun:Restore Window Arrangement</string>
 											<true/>
 											<key>Shortcut</key>
 											<string></string>
+											<key>Show Status Bar</key>
+											<false/>
 											<key>Silence Bell</key>
 											<false/>
 											<key>Smart Cursor Color</key>
@@ -4716,6 +5502,119 @@ Full Screen Fun:Restore Window Arrangement</string>
 													<string>\btelnet:([a-z0-9A-Z_]+@)?([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\b</string>
 												</dict>
 											</array>
+											<key>Status Bar Layout</key>
+											<dict>
+												<key>advanced configuration</key>
+												<dict>
+													<key>algorithm</key>
+													<integer>0</integer>
+													<key>font</key>
+													<string>.AppleSystemUIFont 12</string>
+												</dict>
+												<key>components</key>
+												<array>
+													<dict>
+														<key>class</key>
+														<string>iTermStatusBarCPUUtilizationComponent</string>
+														<key>configuration</key>
+														<dict>
+															<key>knobs</key>
+															<dict>
+																<key>base: compression resistance</key>
+																<integer>1</integer>
+																<key>base: priority</key>
+																<real>5</real>
+																<key>shared text color</key>
+																<dict>
+																	<key>Alpha Component</key>
+																	<real>1</real>
+																	<key>Blue Component</key>
+																	<real>0.63</real>
+																	<key>Color Space</key>
+																	<string>sRGB</string>
+																	<key>Green Component</key>
+																	<real>0.63</real>
+																	<key>Red Component</key>
+																	<real>0.90000000000000002</real>
+																</dict>
+															</dict>
+															<key>layout advanced configuration dictionary value</key>
+															<dict>
+																<key>algorithm</key>
+																<integer>0</integer>
+																<key>font</key>
+																<string>.AppleSystemUIFont 12</string>
+															</dict>
+														</dict>
+													</dict>
+													<dict>
+														<key>class</key>
+														<string>iTermStatusBarMemoryUtilizationComponent</string>
+														<key>configuration</key>
+														<dict>
+															<key>knobs</key>
+															<dict>
+																<key>base: priority</key>
+																<real>5</real>
+																<key>shared text color</key>
+																<dict>
+																	<key>Alpha Component</key>
+																	<real>1</real>
+																	<key>Blue Component</key>
+																	<real>0.32327827345579863</real>
+																	<key>Color Space</key>
+																	<string>sRGB</string>
+																	<key>Green Component</key>
+																	<real>0.62750244140625</real>
+																	<key>Red Component</key>
+																	<real>0.32327827345579863</real>
+																</dict>
+															</dict>
+															<key>layout advanced configuration dictionary value</key>
+															<dict>
+																<key>algorithm</key>
+																<integer>0</integer>
+																<key>font</key>
+																<string>.AppleSystemUIFont 12</string>
+															</dict>
+														</dict>
+													</dict>
+													<dict>
+														<key>class</key>
+														<string>iTermStatusBarNetworkUtilizationComponent</string>
+														<key>configuration</key>
+														<dict>
+															<key>knobs</key>
+															<dict>
+																<key>base: compression resistance</key>
+																<integer>1</integer>
+																<key>base: priority</key>
+																<real>5</real>
+																<key>shared text color</key>
+																<dict>
+																	<key>Alpha Component</key>
+																	<real>1</real>
+																	<key>Blue Component</key>
+																	<real>0.90000000000000002</real>
+																	<key>Color Space</key>
+																	<string>sRGB</string>
+																	<key>Green Component</key>
+																	<real>0.63</real>
+																	<key>Red Component</key>
+																	<real>0.63</real>
+																</dict>
+															</dict>
+															<key>layout advanced configuration dictionary value</key>
+															<dict>
+																<key>algorithm</key>
+																<integer>0</integer>
+																<key>font</key>
+																<string>.AppleSystemUIFont 12</string>
+															</dict>
+														</dict>
+													</dict>
+												</array>
+											</dict>
 											<key>Sync Title</key>
 											<false/>
 											<key>Tags</key>
@@ -4745,8 +5644,6 @@ Full Screen Fun:Restore Window Arrangement</string>
 											<key>Working Directory</key>
 											<string>~</string>
 										</dict>
-										<key>Bookmark Name</key>
-										<string>Sweetness</string>
 										<key>Columns</key>
 										<integer>272</integer>
 										<key>Commands</key>
@@ -4768,6 +5665,19 @@ Full Screen Fun:Restore Window Arrangement</string>
 											<string>~</string>
 											<string>~</string>
 											<string>~</string>
+											<string>~</string>
+											<string>~</string>
+											<string>~</string>
+											<string>~</string>
+											<string>~/dotfiles</string>
+											<string>~/dotfiles</string>
+											<string>~/dotfiles</string>
+											<string>~/dotfiles</string>
+											<string>~/dotfiles</string>
+											<string>~/dotfiles</string>
+											<string>~/dotfiles</string>
+											<string>~/dotfiles</string>
+											<string>~/dotfiles</string>
 										</array>
 										<key>Environment</key>
 										<dict>
@@ -4851,6 +5761,13 @@ Full Screen Fun:Restore Window Arrangement</string>
 										</array>
 										<key>Is UTF-8</key>
 										<true/>
+										<key>Name Controller State</key>
+										<dict>
+											<key>icon title stack</key>
+											<array/>
+											<key>window title stack</key>
+											<array/>
+										</dict>
 										<key>Program</key>
 										<dict>
 											<key>Type</key>
@@ -4858,20 +5775,16 @@ Full Screen Fun:Restore Window Arrangement</string>
 										</dict>
 										<key>Rows</key>
 										<integer>32</integer>
-										<key>Session Default Name</key>
-										<string>Sweetness</string>
 										<key>Session GUID</key>
-										<string>36D1AC45-C7DE-4D1D-BA64-73AF390362A1</string>
-										<key>Session Name</key>
-										<string>~</string>
-										<key>Session Window Title</key>
-										<string>~</string>
+										<string>23B54291-CAB1-427D-86EC-3C550A5BAA11</string>
 										<key>Shell Integration Ever Used</key>
 										<true/>
+										<key>Short Lived Single Use</key>
+										<false/>
 										<key>Substitutions</key>
 										<dict/>
 										<key>Working Directory</key>
-										<string>~</string>
+										<string>~/dotfiles</string>
 									</dict>
 									<key>View Type</key>
 									<string>SessionView</string>
@@ -5630,6 +6543,8 @@ Full Screen Fun:Restore Window Arrangement</string>
 													<true/>
 													<key>Shortcut</key>
 													<string></string>
+													<key>Show Status Bar</key>
+													<false/>
 													<key>Silence Bell</key>
 													<false/>
 													<key>Smart Cursor Color</key>
@@ -5725,6 +6640,119 @@ Full Screen Fun:Restore Window Arrangement</string>
 															<string>\btelnet:([a-z0-9A-Z_]+@)?([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\b</string>
 														</dict>
 													</array>
+													<key>Status Bar Layout</key>
+													<dict>
+														<key>advanced configuration</key>
+														<dict>
+															<key>algorithm</key>
+															<integer>0</integer>
+															<key>font</key>
+															<string>.AppleSystemUIFont 12</string>
+														</dict>
+														<key>components</key>
+														<array>
+															<dict>
+																<key>class</key>
+																<string>iTermStatusBarCPUUtilizationComponent</string>
+																<key>configuration</key>
+																<dict>
+																	<key>knobs</key>
+																	<dict>
+																		<key>base: compression resistance</key>
+																		<integer>1</integer>
+																		<key>base: priority</key>
+																		<real>5</real>
+																		<key>shared text color</key>
+																		<dict>
+																			<key>Alpha Component</key>
+																			<real>1</real>
+																			<key>Blue Component</key>
+																			<real>0.63</real>
+																			<key>Color Space</key>
+																			<string>sRGB</string>
+																			<key>Green Component</key>
+																			<real>0.63</real>
+																			<key>Red Component</key>
+																			<real>0.90000000000000002</real>
+																		</dict>
+																	</dict>
+																	<key>layout advanced configuration dictionary value</key>
+																	<dict>
+																		<key>algorithm</key>
+																		<integer>0</integer>
+																		<key>font</key>
+																		<string>.AppleSystemUIFont 12</string>
+																	</dict>
+																</dict>
+															</dict>
+															<dict>
+																<key>class</key>
+																<string>iTermStatusBarMemoryUtilizationComponent</string>
+																<key>configuration</key>
+																<dict>
+																	<key>knobs</key>
+																	<dict>
+																		<key>base: priority</key>
+																		<real>5</real>
+																		<key>shared text color</key>
+																		<dict>
+																			<key>Alpha Component</key>
+																			<real>1</real>
+																			<key>Blue Component</key>
+																			<real>0.32327827345579863</real>
+																			<key>Color Space</key>
+																			<string>sRGB</string>
+																			<key>Green Component</key>
+																			<real>0.62750244140625</real>
+																			<key>Red Component</key>
+																			<real>0.32327827345579863</real>
+																		</dict>
+																	</dict>
+																	<key>layout advanced configuration dictionary value</key>
+																	<dict>
+																		<key>algorithm</key>
+																		<integer>0</integer>
+																		<key>font</key>
+																		<string>.AppleSystemUIFont 12</string>
+																	</dict>
+																</dict>
+															</dict>
+															<dict>
+																<key>class</key>
+																<string>iTermStatusBarNetworkUtilizationComponent</string>
+																<key>configuration</key>
+																<dict>
+																	<key>knobs</key>
+																	<dict>
+																		<key>base: compression resistance</key>
+																		<integer>1</integer>
+																		<key>base: priority</key>
+																		<real>5</real>
+																		<key>shared text color</key>
+																		<dict>
+																			<key>Alpha Component</key>
+																			<real>1</real>
+																			<key>Blue Component</key>
+																			<real>0.90000000000000002</real>
+																			<key>Color Space</key>
+																			<string>sRGB</string>
+																			<key>Green Component</key>
+																			<real>0.63</real>
+																			<key>Red Component</key>
+																			<real>0.63</real>
+																		</dict>
+																	</dict>
+																	<key>layout advanced configuration dictionary value</key>
+																	<dict>
+																		<key>algorithm</key>
+																		<integer>0</integer>
+																		<key>font</key>
+																		<string>.AppleSystemUIFont 12</string>
+																	</dict>
+																</dict>
+															</dict>
+														</array>
+													</dict>
 													<key>Sync Title</key>
 													<false/>
 													<key>Tags</key>
@@ -5754,14 +6782,13 @@ Full Screen Fun:Restore Window Arrangement</string>
 													<key>Working Directory</key>
 													<string>~</string>
 												</dict>
-												<key>Bookmark Name</key>
-												<string>Sweetness</string>
 												<key>Columns</key>
-												<integer>200</integer>
+												<integer>211</integer>
 												<key>Commands</key>
 												<array/>
 												<key>Directories</key>
 												<array>
+													<string>~</string>
 													<string>~</string>
 													<string>~</string>
 													<string>~</string>
@@ -5822,6 +6849,13 @@ Full Screen Fun:Restore Window Arrangement</string>
 												</array>
 												<key>Is UTF-8</key>
 												<true/>
+												<key>Name Controller State</key>
+												<dict>
+													<key>icon title stack</key>
+													<array/>
+													<key>window title stack</key>
+													<array/>
+												</dict>
 												<key>Program</key>
 												<dict>
 													<key>Type</key>
@@ -5829,16 +6863,12 @@ Full Screen Fun:Restore Window Arrangement</string>
 												</dict>
 												<key>Rows</key>
 												<integer>32</integer>
-												<key>Session Default Name</key>
-												<string>Sweetness</string>
 												<key>Session GUID</key>
-												<string>773466A4-EF8D-4B3C-909B-0E9B8BA9574C</string>
-												<key>Session Name</key>
-												<string>~</string>
-												<key>Session Window Title</key>
-												<string>~</string>
+												<string>F9201790-76A8-4EC9-8182-557072EECA62</string>
 												<key>Shell Integration Ever Used</key>
 												<true/>
+												<key>Short Lived Single Use</key>
+												<false/>
 												<key>Substitutions</key>
 												<dict/>
 												<key>Working Directory</key>
@@ -5851,7 +6881,7 @@ Full Screen Fun:Restore Window Arrangement</string>
 												<key>height</key>
 												<real>541</real>
 												<key>width</key>
-												<real>1415</real>
+												<real>1492</real>
 												<key>x</key>
 												<real>0.0</real>
 												<key>y</key>
@@ -6111,7 +7141,7 @@ Full Screen Fun:Restore Window Arrangement</string>
 																		<real>0.73333334922790527</real>
 																	</dict>
 																	<key>Guid</key>
-																	<string>8FD21AC9-DE83-4428-85EF-1978ACE34996</string>
+																	<string>DB02C70E-C0C2-4269-9ACE-415B02BD566B</string>
 																	<key>Hide After Opening</key>
 																	<false/>
 																	<key>Horizontal Spacing</key>
@@ -6732,10 +7762,8 @@ Full Screen Fun:Restore Window Arrangement</string>
 																	<key>Working Directory</key>
 																	<string>~</string>
 																</dict>
-																<key>Bookmark Name</key>
-																<string>Sweetness</string>
 																<key>Columns</key>
-																<integer>35</integer>
+																<integer>30</integer>
 																<key>Commands</key>
 																<array>
 																	<string>watch weather</string>
@@ -6760,6 +7788,8 @@ Full Screen Fun:Restore Window Arrangement</string>
 																</array>
 																<key>Directories</key>
 																<array>
+																	<string>~</string>
+																	<string>~</string>
 																	<string>~</string>
 																	<string>~</string>
 																	<string>~</string>
@@ -6995,23 +8025,26 @@ Full Screen Fun:Restore Window Arrangement</string>
 																</array>
 																<key>Is UTF-8</key>
 																<true/>
+																<key>Name Controller State</key>
+																<dict>
+																	<key>icon title stack</key>
+																	<array/>
+																	<key>window title stack</key>
+																	<array/>
+																</dict>
 																<key>Program</key>
 																<dict>
 																	<key>Type</key>
 																	<string>Shell Launcher</string>
 																</dict>
 																<key>Rows</key>
-																<integer>5</integer>
-																<key>Session Default Name</key>
-																<string>Weather</string>
+																<integer>7</integer>
 																<key>Session GUID</key>
-																<string>7CE6BBC3-39F0-47A1-ADB6-4029948C4FEC</string>
-																<key>Session Name</key>
-																<string>wweather</string>
-																<key>Session Window Title</key>
-																<string>wweather</string>
+																<string>BC6A5ECD-3537-40D2-8B8F-DA46220782EF</string>
 																<key>Shell Integration Ever Used</key>
 																<true/>
+																<key>Short Lived Single Use</key>
+																<false/>
 																<key>Substitutions</key>
 																<dict/>
 																<key>Working Directory</key>
@@ -7022,9 +8055,9 @@ Full Screen Fun:Restore Window Arrangement</string>
 															<key>frame</key>
 															<dict>
 																<key>height</key>
-																<real>121</real>
+																<real>152</real>
 																<key>width</key>
-																<real>255</real>
+																<real>220</real>
 																<key>x</key>
 																<real>0.0</real>
 																<key>y</key>
@@ -7278,7 +8311,7 @@ Full Screen Fun:Restore Window Arrangement</string>
 																		<real>0.73333334922790527</real>
 																	</dict>
 																	<key>Guid</key>
-																	<string>572C8A2E-D67B-4909-A70E-0588E7C4CCE1</string>
+																	<string>32893DDA-D635-4811-A05D-72B5C72A93A4</string>
 																	<key>Hide After Opening</key>
 																	<false/>
 																	<key>Horizontal Spacing</key>
@@ -7899,10 +8932,8 @@ Full Screen Fun:Restore Window Arrangement</string>
 																	<key>Working Directory</key>
 																	<string>~</string>
 																</dict>
-																<key>Bookmark Name</key>
-																<string>Weather</string>
 																<key>Columns</key>
-																<integer>34</integer>
+																<integer>28</integer>
 																<key>Commands</key>
 																<array>
 																	<string>wweather</string>
@@ -7911,6 +8942,8 @@ Full Screen Fun:Restore Window Arrangement</string>
 																</array>
 																<key>Directories</key>
 																<array>
+																	<string>~</string>
+																	<string>~</string>
 																	<string>~</string>
 																	<string>~</string>
 																	<string>~</string>
@@ -7964,21 +8997,26 @@ Full Screen Fun:Restore Window Arrangement</string>
 																</array>
 																<key>Is UTF-8</key>
 																<true/>
+																<key>Name Controller State</key>
+																<dict>
+																	<key>icon title stack</key>
+																	<array/>
+																	<key>window title stack</key>
+																	<array/>
+																</dict>
 																<key>Program</key>
 																<dict>
 																	<key>Type</key>
 																	<string>Shell Launcher</string>
 																</dict>
 																<key>Rows</key>
-																<integer>5</integer>
-																<key>Session Default Name</key>
-																<string>Date</string>
+																<integer>7</integer>
 																<key>Session GUID</key>
-																<string>85A4CEF8-C672-4AA6-A74B-069784CAF075</string>
-																<key>Session Name</key>
-																<string>Date</string>
+																<string>335EF141-D927-4F15-AF5F-E3D74FACEAB7</string>
 																<key>Shell Integration Ever Used</key>
 																<true/>
+																<key>Short Lived Single Use</key>
+																<false/>
 																<key>Substitutions</key>
 																<dict/>
 																<key>Working Directory</key>
@@ -7989,11 +9027,11 @@ Full Screen Fun:Restore Window Arrangement</string>
 															<key>frame</key>
 															<dict>
 																<key>height</key>
-																<real>121</real>
+																<real>152</real>
 																<key>width</key>
-																<real>248</real>
+																<real>206</real>
 																<key>x</key>
-																<real>256</real>
+																<real>221</real>
 																<key>y</key>
 																<real>0.0</real>
 															</dict>
@@ -8004,9 +9042,9 @@ Full Screen Fun:Restore Window Arrangement</string>
 													<key>frame</key>
 													<dict>
 														<key>height</key>
-														<real>121</real>
+														<real>152</real>
 														<key>width</key>
-														<real>504</real>
+														<real>427</real>
 														<key>x</key>
 														<real>0.0</real>
 														<key>y</key>
@@ -8262,7 +9300,7 @@ Full Screen Fun:Restore Window Arrangement</string>
 																<real>0.73333334922790527</real>
 															</dict>
 															<key>Guid</key>
-															<string>237B4046-8B58-4E5F-90E5-528BC6F5AA0D</string>
+															<string>39B85E99-CA5D-488A-8600-08B74F42CC3E</string>
 															<key>Hide After Opening</key>
 															<false/>
 															<key>Horizontal Spacing</key>
@@ -8883,10 +9921,8 @@ Full Screen Fun:Restore Window Arrangement</string>
 															<key>Working Directory</key>
 															<string>~</string>
 														</dict>
-														<key>Bookmark Name</key>
-														<string>Sweetness</string>
 														<key>Columns</key>
-														<integer>70</integer>
+														<integer>59</integer>
 														<key>Commands</key>
 														<array>
 															<string>~</string>
@@ -8898,6 +9934,8 @@ Full Screen Fun:Restore Window Arrangement</string>
 														</array>
 														<key>Directories</key>
 														<array>
+															<string>~</string>
+															<string>~</string>
 															<string>~</string>
 															<string>~</string>
 															<string>~</string>
@@ -8976,23 +10014,26 @@ Full Screen Fun:Restore Window Arrangement</string>
 														</array>
 														<key>Is UTF-8</key>
 														<true/>
+														<key>Name Controller State</key>
+														<dict>
+															<key>icon title stack</key>
+															<array/>
+															<key>window title stack</key>
+															<array/>
+														</dict>
 														<key>Program</key>
 														<dict>
 															<key>Type</key>
 															<string>Shell Launcher</string>
 														</dict>
 														<key>Rows</key>
-														<integer>24</integer>
-														<key>Session Default Name</key>
-														<string>System Status</string>
+														<integer>22</integer>
 														<key>Session GUID</key>
-														<string>D0CAE4FA-2EF9-4B27-A558-68F99E33A16D</string>
-														<key>Session Name</key>
-														<string>vtop</string>
-														<key>Session Window Title</key>
-														<string>vtop</string>
+														<string>5BC70635-814F-4B63-8164-94687323DE4D</string>
 														<key>Shell Integration Ever Used</key>
 														<true/>
+														<key>Short Lived Single Use</key>
+														<false/>
 														<key>Substitutions</key>
 														<dict>
 															<key>$$$$</key>
@@ -9006,13 +10047,13 @@ Full Screen Fun:Restore Window Arrangement</string>
 													<key>frame</key>
 													<dict>
 														<key>height</key>
-														<real>419</real>
+														<real>388</real>
 														<key>width</key>
-														<real>504</real>
+														<real>427</real>
 														<key>x</key>
 														<real>0.0</real>
 														<key>y</key>
-														<real>122</real>
+														<real>153</real>
 													</dict>
 												</dict>
 											</array>
@@ -9023,9 +10064,9 @@ Full Screen Fun:Restore Window Arrangement</string>
 												<key>height</key>
 												<real>541</real>
 												<key>width</key>
-												<real>504</real>
+												<real>427</real>
 												<key>x</key>
-												<real>1416</real>
+												<real>1493</real>
 												<key>y</key>
 												<real>0.0</real>
 											</dict>
@@ -9070,6 +10111,20 @@ Full Screen Fun:Restore Window Arrangement</string>
 				</array>
 				<key>TerminalGuid</key>
 				<string>pty-1F2E68E5-846A-4976-937D-17950187DA86</string>
+				<key>Toolbelt Proportions</key>
+				<dict>
+					<key>proportions</key>
+					<array>
+						<dict>
+							<key>heightAsFraction</key>
+							<real>1</real>
+							<key>name</key>
+							<string>Profiles</string>
+						</dict>
+					</array>
+				</dict>
+				<key>Use Transparency</key>
+				<true/>
 				<key>Width</key>
 				<real>1920</real>
 				<key>Window Type</key>
@@ -9077,7 +10132,7 @@ Full Screen Fun:Restore Window Arrangement</string>
 				<key>X Origin</key>
 				<real>1440</real>
 				<key>Y Origin</key>
-				<real>260</real>
+				<real>0.0</real>
 			</dict>
 		</array>
 	</dict>
@@ -9094,6 +10149,10 @@ Full Screen Fun:Restore Window Arrangement</string>
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.7beta4</string>
+	<string>3.3.0beta6</string>
+	<key>kCPKSelectionViewPreferredModeKey</key>
+	<integer>0</integer>
+	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
 </dict>
 </plist>
