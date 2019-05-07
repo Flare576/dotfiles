@@ -1,0 +1,4 @@
+If an option has an argument, put the ":" AFTER it
+If first character is ":", you get silent error reporting mode
+$OPTARG holds thar argument
+ONLY put `exit` in the help or error conditions :)

@@ -1,0 +1,5 @@
+cs"' => change " to '
+cs'<q> => change ' to <q>
+ds" => remove " (there's a space on the end of the command)
+ysiw<em> => `ys` for insert surround, `iw` for inner-word, `<em>` for the tag
+VS<p class="important"> => `V` for visual-line, `S` for surround, then the tag
