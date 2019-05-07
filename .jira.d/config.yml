@@ -93,9 +93,16 @@ custom-commands:
     args: 
        - name: ISSUE
          default: \$JIRA_ISSUE
+    options:
+      - name: template
+        short: t
+        help: Additional edit, such as a custom "reviewer" field
     script: |
+      {{if options.template}}
+      {{jira}} edit -t {{options.template}} {{args.ISSUE}}
+      {{end}}
       {{jira}} trans "QA" {{args.ISSUE}}
-      {{jira}} v {{args.ISSUE}} 
+      {{jira}} v {{args.ISSUE}}
   - name: r
     help: Open a comment with the template then move to signoff
     args:

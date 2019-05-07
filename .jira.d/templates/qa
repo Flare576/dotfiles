@@ -1,6 +1,6 @@
 {{/* qa template */ -}}
 # issue: {{ .key }} - created: {{ .fields.created | age}} ago
 fields:
-  customfield_19360:
+  customfield_19392:
     name: {{ env.JIRA_USER }}
  
