@@ -62,11 +62,10 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Mode | Keys | Actions |
 |------|------|---------|
 | Visual | 'y | yank selected to mac clipboard |
-| Normal | 'h | set Vim PWD to current directory (set home)
-| Normal | 'd | Diff current buffer against on-disk file (changes since last safe)
-| Normal | 'D | Diffs visible windows against eachother
+| Normal | 'd | Diff current buffer against on-disk file (changes since last save)
+| Normal | 'D | Diffs visible windows against each other
 | Normal | '<space> | turns off search highlighting
-| Normal/Visual | j & k | move "visually" up and down, makes softwraps easier
+| Normal/Visual | j & k | move "visually" up and down, makes soft-wraps easier
 | Insert | jk | shortcut to Escape
 | Normal | B & E | shortcuts for `^` and `$`
 | Normal | ctrl + j, k, h, l | change focus between windows
@@ -74,6 +73,7 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Normal | >, <, +, - | resize current window
 | Normal | gV | highlight last inserted text
 | Normal | 'u | Brings up "Super Undo"
+| Normal | 'h | set Vim PWD to current directory (set home)
 | Normal | 'a | fuzzy search for files under `pwd`
 | Normal | ctrl+p | brings up file search under `pwd`
 
@@ -109,20 +109,21 @@ You should have on-hand:
 - Main project name
 - your "Shortname" (the name you use when you type [~first.last]) or otherwise tag yourself in Jira
 
-The script will ask you for your information and write it to `~/dotfiles/.doNotCommit.jira`
+The script will ask you for your information and write it to `~/dotfiles/.doNotCommit.jira`, then linking
+to it from your normal `.doNotCommit` file.
 
 Now comes the fun part. If everything is setup correctly, you can run `jira -h`
 
 You'll see the list of default commands (`help` through `session`), and then the ones I added.
 
-My day generally goes like this
+My day generally goes like this (assuming I'm on Project **ABC** with various ticket numbers)
 ```
 jira mine # See what I've been assigned
 jira sprint # Otherwise, I'll see what we have in the sprint I can snag
-jira v PROJECT-TICKET # Look at a ticket
-jira workon PROJECT-TICKET # Set the global issue
+jira v ABC-1234 # Look at a ticket
+jira workon ABC-1234 # Set the global issue, depends on ~/.jira.d existing
 jira g # If it wasn't mine already, grab it
-jira v # Look at it again
+jira v # Look at it again, notice no more typing ABC-1234!
 jira c -m 'This is an awesome ticket' # Drop a comment on it
 jira ts # After I'm done, check where it can go next
 
@@ -146,14 +147,14 @@ The last thing I want to mention is that all of the views you see are 100% confi
 | jira mine | None | see a list of unresolved tickets in PROJECT with you as ASSIGNEE |
 | jira chrome | TicketID\* | Open ticket in Chrome |
 | jira link | None | copies the link to the global ticket to the Mac clipboard |
-| jira i | None | See current global story/ticket for `jira` commands |
+| jira i | None | Inspect current global story/ticket for `jira` commands |
 | jira v | TicketID\* | View ticket details in `bat` if available, or `cat` otherwise |
 | jira e | TicketID\* | Edit(vi) |
 | jira c | TicketID\*, -m | Comment(vi) on ticket, follows `-m` pattern for predefined comment |
 | jira t | State, TicketID\* | Transition ticket to new state (see `jira transitions`) |
-| jira d | TicketID\* | Transition ticket to "Ready for QA" (feel free to modify this to be your "Dev Done" state) |
-| jira g | TicketID\* | Transition ticket to "In Progress" and assigns to you (feel free to modify this to your "In Progress" state) |
-| jira qa | TicketID\* | Transition ticket to "Testing" and sets you as the Reviewer (feel free to modify this to your "QA" state) |
+| jira d | TicketID\* | Done: Transition ticket to "Ready for QA" (feel free to modify this to be your "Dev Done" state) |
+| jira g | TicketID\* | Grab: Transition ticket to "In Progress" and assigns to you (feel free to modify this to your "In Progress" state) |
+| jira qa | TicketID\* | QA: Transition ticket to "Testing" and sets you as the Reviewer (feel free to modify this to your "QA" state) |
 | jira r | [State], TicketID\* | Review ticket by Comment(vi) on ticket, Transition to provided state or "Signoff" by default (feel free to modify this to your preferred Post-QA stateand with your preferred review template) |
 > \*NOTE: If you don't provide a TicketID, the global story/ticket set by `jira workon` is used
 
@@ -170,8 +171,8 @@ The last thing I want to mention is that all of the views you see are 100% confi
 | Command | Params | Result |
 |---------|--------|--------|
 | gac |Comment for commit (e.g., "Improve README")|Git Add/Commit |
-| gacp |Comment for commit (e.g., "Improve README")|gac + Push (set upstream if necessary |
-| gmb | None | Git Master Branch |
+| gacp |Comment for commit (e.g., "Improve README")|gac + Push (sets upstream if necessary |
+| gmb | Branch other than master | Git Master Branch - Force-pull a branch, defaults to master |
 
 
 #### Kubernetes
