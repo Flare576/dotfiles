@@ -24,4 +24,5 @@ git clone https://github.com/plytophogy/vim-diffchanges
 git clone https://github.com/lingceng/z.vim.git
 # Flip those surroundings!
 git clone https://github.com/tpope/vim-surround.git
-
+# Multi-cursor support
+git clone https://github.com/terryma/vim-multiple-cursors.git
