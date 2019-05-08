@@ -35,7 +35,7 @@ custom-commands:
       git checkout -b \${JIRA_PREFIX}/\${JIRA_ISSUE}{{if args.BRANCH}}-{{args.BRANCH}}{{end}}
 # FIND WORK
   - name: mine
-    help: display issues assigned to me
+    help: Display issues assigned to me
     args:
       - name: PROJECT
         default: \$JIRA_PROJECT
@@ -43,7 +43,7 @@ custom-commands:
       {{jira}} list -t ISuStRA --query "resolution = unresolved and assignee=currentuser() ORDER BY created"
   - name: sprint
     aliases: ['s']
-    help: shows stories in curent sprint
+    help: Shows stories in curent sprint
     args:
       - name: PROJECT
         help: Filter on a Project, defaults to \$JIRA_PROJECT
@@ -66,14 +66,14 @@ custom-commands:
     script: |
       printf "${JIRA_S_ENDPOINT}browse/{{args.ISSUE}}" | pbcopy
   - name: chrome
-    help: brings the JIRA_ISSUE up in the browser if no ISSUE is provided
+    help: Brings the JIRA_ISSUE up in the browser if no ISSUE is provided
     args:
       - name: ISSUE
         default: \$JIRA_ISSUE
     script: |
       {{jira}} view -b {{args.ISSUE}}
   - name: v
-    help: views current JIRA_ISSUE if no ISSUE is provided
+    help: Views current JIRA_ISSUE if no ISSUE is provided
     args:
       - name: ISSUE
         default: \$JIRA_ISSUE
@@ -81,7 +81,7 @@ custom-commands:
       {{jira}} view -t customView {{args.ISSUE}} | $viewer
 # DO WORK
   - name: g
-    help: actually takes the story
+    help: Actually takes the story
     args: 
       - name: ISSUE
         default: \$JIRA_ISSUE
@@ -122,14 +122,14 @@ custom-commands:
       h2. Look and Feel" {{args.ISSUE}}
       {{jira}} trans "{{args.STATUS}}" {{args.ISSUE}}
   - name: e
-    help: edits current JIRA_ISSUE if no ISSUE is provided
+    help: Edits current JIRA_ISSUE if no ISSUE is provided
     args:
       - name: ISSUE
         default: \$JIRA_ISSUE
     script: |
       {{jira}} edit {{args.ISSUE}}
   - name: c
-    help: comments on current JIRA_ISSUE if no ISSUE is provided
+    help: Comments on current JIRA_ISSUE if no ISSUE is provided
     args:
       - name: ISSUE
         default: \$JIRA_ISSUE
@@ -146,7 +146,7 @@ custom-commands:
     script: |
       {{jira}} transitions {{args.ISSUE}}
   - name: t
-    help: transitions the current JIRA_ISSUE if no ISSUE is provided
+    help: Transitions the current JIRA_ISSUE if no ISSUE is provided
     args:
       - name: ISSUE
         default: \$JIRA_ISSUE
