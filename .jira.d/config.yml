@@ -19,6 +19,7 @@ fi
 cat<<END
 custom-commands:
   - name: workon
+    aliases: ['w']
     help: Sets the global "worked on" issue. To clear, call with empty string ""
     args:
       - name: ISSUE
