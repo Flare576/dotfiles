@@ -10,7 +10,7 @@ function kcd() {
 }
 
 function kcw() {
- watch -d 'kubectl get pods -o wide --all-namespaces | grep "'$1'"'
+ watch -d 'kubectl get pods -o wide -n "'$1'"'
 }
 
 function kced() {
