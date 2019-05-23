@@ -2,6 +2,7 @@
 source $HOME/.doNotCommit
 
 export PATH="/usr/local/bin:${PATH}"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 #bindkey -v
 #bindkey 'jk' vi-cmd-mode
 export KEYTIMEOUT=2
