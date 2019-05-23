@@ -20,3 +20,5 @@
   conflictsstyle = diff3
 [mergetool]
   prompt = false
+[hub]
+  protocol = ssh
