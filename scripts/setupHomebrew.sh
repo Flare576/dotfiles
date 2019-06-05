@@ -26,3 +26,6 @@ brews=(
 brew update
 brew install ${brews[@]}
 brew install --with-override-system-vim vim
+
+#K9s is an amazing Kubernetes manager
+brew tap derailed/k9s && brew install k9s
