@@ -81,8 +81,6 @@ nmap <silent> L gt
 
 " highlight last inserted text
 nnoremap gV `[v`]
-" ctrl+space is autocomplete
-inoremap <C-@> <C-N>
 " jk is escape
 inoremap jk <esc>
 " Super-undo
