@@ -140,7 +140,7 @@ custom-commands:
     script: |
       {{jira}} comment{{if options.comment}} -m "{{options.comment}}"{{end}} {{args.ISSUE}}
   - name: ts
-    help: Lists the transitions for the JIRA_ISSUE if no ISSUE is provied
+    help: Lists the TransitionS for the JIRA_ISSUE if no ISSUE is provied
     args:
       - name: ISSUE
         default: \$JIRA_ISSUE
