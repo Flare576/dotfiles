@@ -119,31 +119,31 @@ You'll see the list of default commands (`help` through `session`), and then the
 My day generally goes like this (assuming I'm on Project **ABC** with various ticket numbers)
 ```
 jira mine # See what I've been assigned
-jira sprint # Otherwise, I'll see what we have in the sprint I can snag
-jira v ABC-1234 # Look at a ticket
-jira workon ABC-1234 # Set the global issue, depends on ~/.jira.d existing
-jira g # If it wasn't mine already, grab it
-jira v # Look at it again, notice no more typing ABC-1234!
-jira c -m 'This is an awesome ticket' # Drop a comment on it
-jira ts # After I'm done, check where it can go next
+jira s -w # s[print], Otherwise, I'll see what we have in the sprint I can snag
+jira v ABC-1234 # v(iew), Look at a ticket
+jira w ABC-1234 # w[orkon], Set the global issue, depends on ~/.jira.d existing
+jira g # g(rab) If it wasn't mine already, grab it
+jira v # v(iew), Look at it again, notice no more typing ABC-1234!
+jira c -m 'This is an awesome ticket' # c(omment), Drop a comment on it
+jira ts # (TransitionS), After I'm done, check where it can go next
 
-# if I don't have  a shortcut like `d[one]` or `p[R Review]`, I use the longer syntax
+# if I don't have  a shortcut like `d(one)` or `p(R Review)`, I use the longer syntax
 jira t -s "Whatever State" -m "I've done what I can!"```
 
 # In case I need to drop a link to a poor, non-CLI coworker - this will put it on the Mac clipboard
 jira link
 ```
 
-The `r[eviewed]` command is a good example of combining several actions together if you want to add your own!
+The `r(eviewed)` command is a good example of combining several actions together if you want to add your own!
 
 The last thing I want to mention is that all of the views you see are 100% configurable; see the `.jira.d/templates` folder.
 
 #### Jira
 | Command | Params | Result |
 |---------|--------|--------|
-| jira workon | TicketID (e.g., PROJECT-123) | Set global story/ticket for `jira` commands |
+| jira w[orkon] | TicketID (e.g., PROJECT-123) | Set global story/ticket for `jira` commands |
 | jira git | Branch Name | Create a new branch with JIRA_PREFIX/JIRA_ISSUE-BRANCH |
-| jira sprint | None | see the current sprint for your PROJECT |
+| jira s[print] | None | see the current sprint for your PROJECT |
 | jira mine | None | see a list of unresolved tickets in PROJECT with you as ASSIGNEE |
 | jira chrome | TicketID\* | Open ticket in Chrome |
 | jira link | None | copies the link to the global ticket to the Mac clipboard |
@@ -156,7 +156,7 @@ The last thing I want to mention is that all of the views you see are 100% confi
 | jira g | TicketID\* | Grab: Transition ticket to "In Progress" and assigns to you (feel free to modify this to your "In Progress" state) |
 | jira qa | TicketID\* | QA: Transition ticket to "Testing" and sets you as the Reviewer (feel free to modify this to your "QA" state) |
 | jira r | [State], TicketID\* | Review ticket by Comment(vi) on ticket, Transition to provided state or "Signoff" by default (feel free to modify this to your preferred Post-QA stateand with your preferred review template) |
-> \*NOTE: If you don't provide a TicketID, the global story/ticket set by `jira workon` is used
+> \*NOTE: If you don't provide a TicketID, the global story/ticket set by `jira w[orkon]` is used
 
 ### Zshell hotkey-style commands
 
