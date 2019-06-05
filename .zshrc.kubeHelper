@@ -1,6 +1,23 @@
 alias kc='kubectl'
 alias kcp='kubectl get pods -o wide --all-namespaces | grep $1' 
-alias kcl='kc logs -n $1 $2'
+function kcl() {
+  if [[ -z $2 ]]; then
+    if [[ -n $KC_NAMESPACE ]]; then
+      POD=$1
+      NS=$KC_NAMESPACE
+    else
+      echo "need Namespace, try setting KC_NAMESPACE"
+      return 1
+    fi
+  else
+    POD=$1
+    NS=$2
+  fi
+  echo "sup $NS"
+  echo "hia $POD"
+  kc logs -n $NS $POD -f
+}
+
 function kcsh() {
   if [[ -z $2 ]]; then
     if [[ -n $KC_NAMESPACE ]]; then
@@ -8,7 +25,7 @@ function kcsh() {
       NS=$KC_NAMESPACE
     else
       echo "need Namespace, try setting KC_NAMESPACE"
-      exit 1
+      return 1
     fi
   else
     POD=$1
@@ -24,7 +41,7 @@ function kcd() {
       NS=$KC_NAMESPACE
     else
       echo "need Namespace, try setting KC_NAMESPACE"
-      exit 1
+      return 1
     fi
   else
     POD=$1
@@ -34,10 +51,13 @@ function kcd() {
 }
 
 function kcw() {
+  NS=$1
   if [[ -z $1 ]]; then
-    NS=$KC_NAMESPACE
     if [[ -n $KC_NAMESPACE ]]; then
       NS=$KC_NAMESPACE
+    else
+      echo "need Namespace, try setting KC_NAMESPACE"
+      return 1
     fi
   fi
   watch -d 'kubectl get pods -o wide -n "'$NS'"'
