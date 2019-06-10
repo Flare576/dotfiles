@@ -1,16 +1,21 @@
 #!/bin/zsh
 # 30/08/2018 update - will only switch to a branch if
 # provided as first argument; will warn if changes
-usage="$(basename "$0") If given an argument, tries to switch to that branch. Then, uses NVM to install NPM, then determines if yarn or npm should be used to start. Starts server logging to server.log in folder where run."
+# 10/06/2019 update - branch is now -b
+usage="$(basename "$0") If given an argument, tries to switch to that branch. Then, uses NVM to install NPM, then determines if yarn or npm should be used to start. Starts server logging to server.log in folder where run.
+  -n Log to standard output instead of server.log
+  -b Provide branch to switch to; will prompt if there are changes"
 
 nolog=false
 
-while getopts ':hn' option; do
+while getopts ':hnb:' option; do
   case "$option" in
     h) echo "$usage"
        exit
        ;;
     n) nolog=true
+      ;;
+    b) branch=$OPTARG
       ;;
   esac
 done
@@ -21,7 +26,7 @@ export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
 
 changes=$(git diff --name-only)
-if [ -n "$1" ] ; then
+if [ -n "$branch" ] ; then
   if [ -n "$changes" ] ; then
     read "nuke?You have local changes; Nuke 'em? (y): "
   fi
@@ -29,7 +34,7 @@ if [ -n "$1" ] ; then
     if [ -n "$changes" ] ; then
       git reset --hard
     fi
-    git checkout $1
+    git checkout $branch
     git pull
   fi
 else
