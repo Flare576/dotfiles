@@ -38,7 +38,7 @@ function gacp() {
 
 function fwatch() {
   time=$1
-  if [[ ! $time =~ ^[0-9]+$ ]] ; then
+  if [[ ! $time =~ ^[\.0-9]+$ ]] ; then
     echo "First argument must be sleep seconds"
     return 1
   fi
@@ -65,10 +65,10 @@ function weather() {
 function prettyDate() {
   echo
   echo $MY_LOC_NAME
-  TZ=$MY_LOC_TZ date "+%a %b %e %H:%M:%S %Z"
+  TZ=$MY_LOC_TZ date "+%a %b%e %H:%M:%S %Z"
   echo
   echo $REMOTE_LOC_NAME
-  TZ=$REMOTE_LOC_TZ date "+%a %b %e %H:%M:%S %Z"
+  TZ=$REMOTE_LOC_TZ date "+%a %b%e %H:%M:%S %Z"
 }
 
 function wweather() {
