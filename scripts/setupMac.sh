@@ -4,9 +4,11 @@
 
 # Install Homebrew
 if test ! $(which brew); then
+  echo "Installing Homebrew"
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+echo "Instalalling git for project clone"
 brew install git
 
 # Pull the rest of the project
@@ -17,7 +19,7 @@ git clone https://github.com/Flare576/dotfiles.git
 sh $HOME/dotfiles/scripts/setupHomebrew.sh
 
 # Install safety precautions around this repo
-sh $HOME/scripts/setupRepo.sh
+sh $HOME/dotfiles/scripts/setupRepo.sh
 
 # Install Python and applications
 sh $HOME/dotfiles/scripts/setupPython.sh
