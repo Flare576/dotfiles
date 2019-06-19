@@ -17,7 +17,7 @@ git clone https://github.com/Flare576/dotfiles.git
 sh $HOME/dotfiles/scripts/setupHomebrew.sh
 
 # Install safety precautions around this repo
-sh $HOME/scripts/setupReo.sh
+sh $HOME/scripts/setupRepo.sh
 
 # Install Python and applications
 sh $HOME/dotfiles/scripts/setupPython.sh
