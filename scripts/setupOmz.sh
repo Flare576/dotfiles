@@ -20,4 +20,4 @@ touch $HOME/.z
 ln -Fs $HOME/dotfiles/.zshrc $HOME
 
 echo "Making Zsh default"
-chsh -s /usr/local/bin/zsh
+sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
