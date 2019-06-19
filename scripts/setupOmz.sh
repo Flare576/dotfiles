@@ -1,4 +1,6 @@
 #!/bin/sh
+echo "Setup Oh My Zshell"
+
 # Install and setup Oh My Zshell
 pip install --user powerline-status
 curl -sL http://install.ohmyz.sh | sh

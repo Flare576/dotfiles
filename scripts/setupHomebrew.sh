@@ -1,6 +1,7 @@
 #!/bin/bash
 # Install Homebrew
 if test ! $(which brew); then
+  echo "Installing Homebrew"
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
@@ -23,6 +24,7 @@ brews=(
   kubens
 )
 
+echo "Installing brews"
 brew update
 brew install ${brews[@]}
 brew install --with-override-system-vim vim

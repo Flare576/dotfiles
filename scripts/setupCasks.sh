@@ -13,4 +13,5 @@ apps=(
   google-chrome
 )
 
+echo "Installing Homebrew Casks"
 brew cask install --appdir="/Applications" ${apps[@]}

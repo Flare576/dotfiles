@@ -1,3 +1,6 @@
+#!/bin/bash
+echo "Configuring Dock and System settings"
+
 # Put dock on left side of screen
 defaults write com.apple.dock orientation left
 # Auto-hide

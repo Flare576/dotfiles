@@ -1,5 +1,6 @@
 #!/bin/sh
 # Setup other symlinks
+echo "Setting up symlnks and creating placeholder files"
 touch $HOME/dotfiles/.doNotCommit
 touch $HOME/dotfiles/.gitconfig.personal
 
