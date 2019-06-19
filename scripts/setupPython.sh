@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 echo "Setting up Python"
 
 # Install Python and applications

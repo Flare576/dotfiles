@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 echo "Cloning DotFiles repo"
 
 cd $HOME/dotfiles

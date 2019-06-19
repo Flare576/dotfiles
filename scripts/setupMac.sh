@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # This script is designed to setup a new Mac from scratch. If you just want pieces of my dot files, check the Setup
 # Scripts referenced here or read the Project ReadMe!
 

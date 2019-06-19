@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 echo "Linking .vimrc, setting up plugins"
 
 ln -s $HOME/dotfiles/.vimrc $HOME

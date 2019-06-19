@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Install Homebrew
 if test ! $(which brew); then
   echo "Installing Homebrew"

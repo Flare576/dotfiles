@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 echo "Configuring Dock and System settings"
 
 # Put dock on left side of screen
