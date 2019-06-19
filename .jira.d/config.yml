@@ -176,7 +176,7 @@ custom-commands:
         short: m
       - name: state
         short: s
-        default: "Ready for QA"
+        default: "QA"
     script: |
       {{jira}} trans{{if options.comment}} -m "{{options.comment}}"{{end}} "{{options.state}}" {{args.ISSUE}}
 # HELPERS
