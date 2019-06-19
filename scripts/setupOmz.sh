@@ -19,3 +19,5 @@ touch $HOME/.z
 
 ln -Fs $HOME/dotfiles/.zshrc $HOME
 
+echo "Making Zsh default"
+sudo -s 'echo /usr/local/bin/zsh >> /etc/shells' && chsh -s /usr/local/bin/zsh
