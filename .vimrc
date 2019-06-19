@@ -26,6 +26,8 @@ set foldlevelstart=10   " open most folds by default
 set foldmethod=indent   " Auto-define folds by indentation
 set spelllang=en        " English for spelling!
 set backspace=eol       " Backspace will work on new-lines!
+set splitbelow          " Open new split windows UNDER current window
+set splitright          " Open new vsplit windows RIGHT of current window
 " New, better words!
 set spellfile=$HOME/dotfiles/en.utf-8.add
 " enables Leader + y to do clipboard copy in visual mode
