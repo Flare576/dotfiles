@@ -2,7 +2,7 @@
 echo "Setup Oh My Zshell"
 
 # Install and setup Oh My Zshell
-pip install --user powerline-status
+pip3 install --user powerline-status
 curl -sL http://install.ohmyz.sh | sh
 cd $HOME/.oh-my-zsh/themes
 curl -LSso cobalt2.zsh-theme https://raw.githubusercontent.com/wesbos/Cobalt2-iterm/master/cobalt2.zsh-theme
