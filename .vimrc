@@ -25,9 +25,11 @@ set hlsearch            " highlight matches
 set foldlevelstart=10   " open most folds by default
 set foldmethod=indent   " Auto-define folds by indentation
 set spelllang=en        " English for spelling!
-set backspace=eol       " Backspace will work on new-lines!
 set splitbelow          " Open new split windows UNDER current window
 set splitright          " Open new vsplit windows RIGHT of current window
+set switchbuf=split, open
+" Backspace will work on new-lines!
+set backspace=eol,indent
 " New, better words!
 set spellfile=$HOME/dotfiles/en.utf-8.add
 " enables Leader + y to do clipboard copy in visual mode
@@ -92,12 +94,12 @@ nnoremap <leader>a :Ag
 " Z for Vim!
 nnoremap <leader>z :Z 
 " edit vimrc/zshrc and load vimrc bindings
-nnoremap <leader>ev :vsp $MYVIMRC<CR>
-nnoremap <leader>ez :vsp ~/.zshrc<CR>
-nnoremap <leader>ee :vsp ~/.zshenv<CR>
+nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
-nnoremap <leader>ej :vsp ~/.jira.d/config.yml<CR>
-nnoremap <leader>ed :vsp ~/dotfiles<CR>
+nnoremap <leader>ez :tabnew ~/.zshrc<CR>
+nnoremap <leader>ee :tabnew ~/.zshenv<CR>
+nnoremap <leader>ej :tabnew ~/.jira.d/config.yml<CR>
+nnoremap <leader>ed :tabnew ~/dotfiles<CR>
 
 " CtrlP settings
 let g:ctrlp_match_window = 'bottom,order:ttb'
