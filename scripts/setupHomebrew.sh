@@ -9,19 +9,20 @@ fi
 brews=(
   bat
   cask
-  pyenv
   git
-  hub
-  nvm
-  the_silver_searcher
-  zsh
-  shellcheck
   git-secrets
+  hub
+  kubectx
   lastpass-cli
   mas
-  watch
-  kubectx
+  nvm
+  pipenv
+  python
+  shellcheck
+  the_silver_searcher
   vim
+  watch
+  zsh
 )
 
 echo "Installing brews"
