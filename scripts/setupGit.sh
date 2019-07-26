@@ -23,8 +23,7 @@ don't change the domain during cloning from 'github.com', that will be used.
 All others will require you to change to 'github.com-<username>.
 
 If you want to add a new secondary account, enter 2 or more for the number 
-of accounts and use 'skip' for the first account username.
-to setup a new secondary account, enter 2 for "
+of accounts and use 'skip' for the first account username."
 fi
 if [ $gitCount -gt 0 ] ; then
   eval "$(ssh-agent -s)" > /dev/null
@@ -43,7 +42,7 @@ if [ $gitCount -gt 0 ] ; then
     read -s -p "GitHub $cred $i: " password
     echo -e ''
 
-    fileName=id_rsa_$i
+    fileName=id_rsa_$userName
 
     fullFileName="$HOME/.ssh/$fileName"
 
