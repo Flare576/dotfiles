@@ -2,7 +2,9 @@
 source $HOME/.doNotCommit
 
 export PATH="/usr/local/bin:${PATH}"
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
+export PATH="$HOME/scripts/js:${PATH}"
+
 #bindkey -v
 #bindkey 'jk' vi-cmd-mode
 export KEYTIMEOUT=2
@@ -17,7 +19,10 @@ alias chrome='open -a Google\ Chrome'
 alias vz='vi -o ~/.zshrc ~/.zshenv'
 alias sz='source ~/.zshrc && source ~/.zshenv'
 alias vd='vi ~/dotfiles'
+alias vs='vi ~/scripts'
 alias v='vi .'
+alias pi='pipenv'
+alias py='pipenv run python'
 alias cat='bat'
 alias git='hub'
 
@@ -65,10 +70,10 @@ function weather() {
 function prettyDate() {
   echo
   echo $MY_LOC_NAME
-  TZ=$MY_LOC_TZ date "+%a %b%e %H:%M:%S %Z"
+  TZ=$MY_LOC_TZ date "+%a %b %e %H:%M:%S %Z"
   echo
   echo $REMOTE_LOC_NAME
-  TZ=$REMOTE_LOC_TZ date "+%a %b%e %H:%M:%S %Z"
+  TZ=$REMOTE_LOC_TZ date "+%a %b %e %H:%M:%S %Z"
 }
 
 function wweather() {
