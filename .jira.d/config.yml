@@ -58,7 +58,7 @@ custom-commands:
         type: BOOL
         help: Pass this flag to filter out Done, Dead, and Sign Off stories
     script: |-
-      {{jira}} list -t ISuStRA --query "sprint IN openSprints(){{if options.workable}} and status NOT IN (\"Done\",\"Dead\",\"Sign Off\"){{end}} and project={{args.PROJECT}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee"
+      {{jira}} list -t ISuStRA --query "sprint IN openSprints(){{if options.workable}} and status NOT IN (\"Done\",\"Dead\",\"Sign Off\"){{end}} and project={{args.PROJECT}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee" -f "key,status,assignee,customfield_19392,summary"
   - name: link
     help: Puts the link for JIRA_ISSUE in your clipboard if no ISSUE is provided
     args:
@@ -66,7 +66,7 @@ custom-commands:
         default: \$JIRA_ISSUE
     script: |
       printf "${JIRA_S_ENDPOINT}browse/{{args.ISSUE}}" | pbcopy
-  - name: chrome
+  - name: browser
     help: Brings the JIRA_ISSUE up in the browser if no ISSUE is provided
     args:
       - name: ISSUE
@@ -95,12 +95,13 @@ custom-commands:
        - name: ISSUE
          default: \$JIRA_ISSUE
     options:
-      - name: template
-        short: t
-        help: Additional edit, such as a custom "reviewer" field
+      - name: review
+        short: r
+        help: Also run the 'qa' template
+        type: BOOL
     script: |
-      {{if options.template}}
-      {{jira}} edit -t {{options.template}} {{args.ISSUE}}
+      {{if options.review}}
+      {{jira}} edit -t qa {{args.ISSUE}}
       {{end}}
       {{jira}} trans "QA" {{args.ISSUE}}
       {{jira}} v {{args.ISSUE}}
@@ -119,6 +120,8 @@ custom-commands:
       h2. Edge Cases 
       
       h2. Regression Testing 
+        * Existing: 
+        * New: 
       
       h2. Look and Feel" {{args.ISSUE}}
       {{jira}} trans "{{args.STATUS}}" {{args.ISSUE}}
