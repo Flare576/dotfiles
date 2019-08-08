@@ -28,8 +28,7 @@ set spelllang=en        " English for spelling!
 set splitbelow          " Open new split windows UNDER current window
 set splitright          " Open new vsplit windows RIGHT of current window
 set switchbuf=split, open
-" Backspace will work on new-lines!
-set backspace=eol,indent
+set backspace=2         " Same as indent, eol, start, allows backspace essentially anywhere in insert mode
 " New, better words!
 set spellfile=$HOME/dotfiles/en.utf-8.add
 " enables Leader + y to do clipboard copy in visual mode
@@ -87,10 +86,12 @@ nmap <silent> L gt
 nnoremap gV `[v`]
 " jk is escape
 inoremap jk <esc>
+" Show count of last find
+nnoremap <leader>/ :%s///gn<CR>
 " Super-undo
 nnoremap <leader>u :GundoToggle<CR>
 " open ag.vim: Close window with :ccl(ose)
-nnoremap <leader>a :Ag 
+nnoremap <leader>a :Ag! 
 " Z for Vim!
 nnoremap <leader>z :Z 
 " edit vimrc/zshrc and load vimrc bindings

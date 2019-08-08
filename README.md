@@ -52,6 +52,7 @@ You can read each of the scripts for details of how/what _they_ do, but as far a
 - ag.vim - Silver Searcher... IN VIM
 - ctrlp.vim - Fuzzy file finder!
 - z.vim - The power of Z-script in Vim... not sure I like it yet
+- gundo - Makes traversing the undo tree not suck
 - vim-surround - easily change '' to "" to ` `, with `cs` then the thing that's there, and the thing you want
   - (e.g. 'hello world' to `hello world`, do cs'\`)
 
@@ -65,6 +66,7 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Normal | 'd | Diff current buffer against on-disk file (changes since last save)
 | Normal | 'D | Diffs visible windows against each other
 | Normal | '<space> | turns off search highlighting
+| Normal | '/ | Shows the count of your last search
 | Normal/Visual | j & k | move "visually" up and down, makes soft-wraps easier
 | Insert | jk | shortcut to Escape
 | Normal | B & E | shortcuts for `^` and `$`
@@ -74,7 +76,7 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Normal | gV | highlight last inserted text
 | Normal | 'u | Brings up "Super Undo"
 | Normal | 'h | set Vim PWD to current directory (set home)
-| Normal | 'a | fuzzy search for files under `pwd`
+| Normal | 'a | fuzzy search (Silver Searcher) for files under `pwd`
 | Normal | ctrl+p | brings up file search under `pwd`
 
 ##### Editing with _style_ in Jira
