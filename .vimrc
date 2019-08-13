@@ -29,6 +29,7 @@ set splitbelow          " Open new split windows UNDER current window
 set splitright          " Open new vsplit windows RIGHT of current window
 set switchbuf=split, open
 set backspace=2         " Same as indent, eol, start, allows backspace essentially anywhere in insert mode
+set modeline            " Allows files to define some variables (e.g., filetype)
 " New, better words!
 set spellfile=$HOME/dotfiles/en.utf-8.add
 " enables Leader + y to do clipboard copy in visual mode
