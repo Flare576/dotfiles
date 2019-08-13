@@ -1,0 +1,18 @@
+Files
+-f File exists
+-d Directory exists
+-e "File" exists (Node, socket, directory file...)
+-h _Symbolic Link_ exists
+-w File exists and is writable
+-x File exists and is executable
+
+Math
+-eq, -ne, -gt, -ge, -lt, -le, 
+
+String
+= Equal to
+== Equal to
+< Less-than, ASCII compare
+> Greater-than, ASCII compare
+-z Zero-length
+-n NOT Zero length 
