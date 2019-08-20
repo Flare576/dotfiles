@@ -1,7 +1,8 @@
 node_modules
 git
-#__tests__
-#__test__
+__tests__
+__test__
+unit_test
 test_e2e
 coverage
 dist
