@@ -1,0 +1,6 @@
+--options=/Users/flare576/Projects/Personal/ctags-patterns-for-javascript/ctagsrc
+--exclude=.git
+--exclude=log
+--exclude=tmp
+--exclude=node_modules
+--exclude=coverage

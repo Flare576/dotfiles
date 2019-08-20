@@ -21,3 +21,4 @@ source $HOME/dotfiles/scripts/gmb-completion.zsh
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
 
+ctags=/usr/local/bin/ctags

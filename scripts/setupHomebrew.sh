@@ -9,6 +9,7 @@ fi
 brews=(
   bat
   cask
+  ctags-exuberant
   git
   git-secrets
   hub

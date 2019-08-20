@@ -124,3 +124,4 @@ map <silent> <leader>jg :setlocal indentkeys-=<:><CR>a{color:#14892c}{color}jk7h
 map <silent> <leader>jr :setlocal indentkeys-=<:><CR>a{color:#d04437}{color}jk7h:setlocal indentkeys+=<:><CR>a
 map <silent> <leader>jo :setlocal indentkeys-=<:><CR>a{color:#f79232}{color}jk7h:setlocal indentkeys+=<:><CR>a
 
+set tags=tags           " The tags file is... tags
