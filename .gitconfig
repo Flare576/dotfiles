@@ -22,3 +22,5 @@
   prompt = false
 [hub]
   protocol = ssh
+[interactive]
+  singleKey = true
