@@ -1,3 +1,4 @@
+node_modules
 *.swp
 *.swo
 .doNotCommit*
@@ -6,3 +7,4 @@
 ._.DS_Store
 /.idea
 .jira.issue
+tags
