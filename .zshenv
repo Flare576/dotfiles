@@ -16,10 +16,10 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 alias chrome='open -a Google\ Chrome'
-alias vz='vi -o ~/.zshrc ~/.zshenv'
+alias vz='vi -o ~/.zshrc ~/.zshenv -c "cd ~"'
 alias sz='source ~/.zshrc && source ~/.zshenv'
-alias vd='vi ~/dotfiles'
-alias vs='vi ~/scripts'
+alias vd='vi ~/dotfiles -c "cd ~/dotfiles"'
+alias vs='vi ~/scripts -c "cd ~/scripts"'
 alias v='vi .'
 alias pi='pipenv'
 alias py='pipenv run python'
