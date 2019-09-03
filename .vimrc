@@ -4,7 +4,7 @@ set shell=zsh           " bring ZShell config in
 let mapleader=","       " leader is comma
 colorscheme badwolf     " try it out
 
-" highlights characterse over 80 width
+" highlights characterse over 120 width
 set cc=120
 
 set showcmd             " Will display the command as it is typed
@@ -118,6 +118,14 @@ autocmd Filetype typescript,javascript highlight OverLength ctermbg=red ctermfg=
 autocmd Filetype typescript,javascript match OverLength /\%121v.\+/
 autocmd Filetype markdown setlocal spell
 autocmd Filetype text setlocal linebreak spell
+
+" Extra whitespace in yellow
+highlight ExtraWhitespace ctermbg=yellow ctermfg=white guibg=#592929 " Define color scheme
+match ExtraWhitespace /\s\+\%#\@<!$/ " Define match set
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/ " Run on Window enter
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/ " Run on insert enter (this plus next makes screen not flash)
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/ " Run on exiting Insert Mode (only trailing)
+autocmd BufWinLeave * call clearmatches() " Run on leaving window (Clear all the matches)
 
 " Jira green text
 map <silent> <leader>jg :setlocal indentkeys-=<:><CR>a{color:#14892c}{color}jk7h:setlocal indentkeys+=<:><CR>a
