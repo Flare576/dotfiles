@@ -1,5 +1,5 @@
 execute pathogen#infect()
-syntax enable 
+syntax enable
 set shell=zsh           " bring ZShell config in
 let mapleader=","       " leader is comma
 colorscheme badwolf     " try it out
@@ -33,7 +33,7 @@ set modeline            " Allows files to define some variables (e.g., filetype)
 " New, better words!
 set spellfile=$HOME/dotfiles/en.utf-8.add
 " enables Leader + y to do clipboard copy in visual mode
-vnoremap <silent> <leader>y :<CR>:let @a=@" \| execute "normal! vgvy" \| let res=system("pbcopy", @") \| let @"=@a<CR> 
+vnoremap <silent> <leader>y :<CR>:let @a=@" \| execute "normal! vgvy" \| let res=system("pbcopy", @") \| let @"=@a<CR>
 " enables Leader + h to set vim pwd on local buffer
 nnoremap <silent> <leader>h :lcd %:p:h<CR>
 " enables Leader + d to diff current file buffer
@@ -92,9 +92,9 @@ nnoremap <leader>/ :%s///gn<CR>
 " Super-undo
 nnoremap <leader>u :GundoToggle<CR>
 " open ag.vim: Close window with :ccl(ose)
-nnoremap <leader>a :Ag! 
+nnoremap <leader>a :Ag!
 " Z for Vim!
-nnoremap <leader>z :Z 
+nnoremap <leader>z :Z
 " edit vimrc/zshrc and load vimrc bindings
 nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
