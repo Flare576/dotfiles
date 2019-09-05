@@ -21,12 +21,13 @@ shift $((OPTIND -1))
 
 repo="$1"
 root=$(pwd)
-name=${repo##*/}
-name=${name%.git}
+# https://www.tldp.org/LDP/abs/html/string-manipulation.html
+name=${repo##*/} # Deletes longest instance of * (anything)/ (the slash) from front
+name=${name%.git} # Deletes shortest instance of ".git" from back
 command="git clone"
 include="[include]
   path = ${root}/.gitconfig"
-  
+
 if [ -n "$prefix" ]; then
   repo=${repo/git@github.com/git@github.com-$prefix}
 fi
