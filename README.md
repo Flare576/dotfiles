@@ -39,7 +39,6 @@ You can read each of the scripts for details of how/what _they_ do, but as far a
   - [Jira Setup](#i-want-that-jira-cli-awesomeness)
   - [Jira Commands](#jira)
 - [Zshell Hotkey commands](#zshell-hotkey-style-commands)
-  - [Git shortcuts](#git)
   - [Kubernetes shortcuts](#kubernetes)
 - [Tooling Updates](#tools)
 - [Some fun autocompletes](#setup-keyboard-replacements)
