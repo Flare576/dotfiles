@@ -10,11 +10,14 @@ sh -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/sc
 If not setting up a new machine I `git clone` directly into `~` and run the script for the thing(s) I want to setup:
 ```
 sh dotfiles/scripts/setupRepo.sh # You should absoultey run this file to help prevent leaking secrets
-sh dotfiles/scripts/setupLinks.sh # Symlinks files to ~ and to /usr/local/bin
+sh dotfiles/scripts/setupLinks.sh # Symlinks files to ~ and pull scripts
 sh dotfiles/scripts/setupVim.sh # Yes, this sets up vim
 sh dotfiles/scripts/setupOmz.sh # Oh My Zshell goes deliciously with Zsh
 sh dotfiles/scripts/setupIterm.sh # I prefer iTerm over Terminal or other solutions
 ```
+
+> Note: `setupLinks.sh` also brings in [Flare576/scripts](https://github.com/Flare576/scripts); you should check there
+for details on what all comes with it!
 
 If I also want to install all the apps I use frequently, I'll run
 ```
@@ -168,14 +171,6 @@ The last thing I want to mention is that all of the views you see are 100% confi
 | vz | Edit(vi) .zshrc and .zshenv |
 | sz | Source .zshrc and .zshenv |
 | vd | edit(vi) `dotfiles` root dir |
-
-#### Git
-| Command | Params | Result |
-|---------|--------|--------|
-| gac |Comment for commit (e.g., "Improve README")|Git Add/Commit |
-| gacp |Comment for commit (e.g., "Improve README")|gac + Push (sets upstream if necessary |
-| gmb | Branch other than master | Git Master Branch - Force-pull a branch, defaults to master |
-
 
 #### Kubernetes
 | Command | Params | Result |

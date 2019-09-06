@@ -3,7 +3,7 @@ source $HOME/.doNotCommit
 
 export PATH="/usr/local/bin:${PATH}"
 export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
-export PATH="$HOME/scripts/js:${PATH}"
+export PATH="$HOME/scripts/shell:$HOME/scripts/js:${PATH}"
 
 #bindkey -v
 #bindkey 'jk' vi-cmd-mode
