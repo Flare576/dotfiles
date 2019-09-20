@@ -9,3 +9,5 @@ node_modules
 .jira.issue
 tags
 .vroom
+server.log
+cookies.js
