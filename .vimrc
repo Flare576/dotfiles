@@ -89,12 +89,9 @@ nnoremap gV `[v`]
 inoremap jk <esc>
 " Show count of last find
 nnoremap <leader>/ :%s///gn<CR>
+nnoremap <F5> :bufdo e<CR>
 " Super-undo
 nnoremap <leader>u :GundoToggle<CR>
-" open ag.vim: Close window with :ccl(ose)
-nnoremap <leader>a :Ag!
-" Z for Vim!
-nnoremap <leader>z :Z
 " edit vimrc/zshrc and load vimrc bindings
 nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
@@ -102,6 +99,12 @@ nnoremap <leader>ez :tabnew ~/.zshrc<CR>
 nnoremap <leader>ee :tabnew ~/.zshenv<CR>
 nnoremap <leader>ej :tabnew ~/.jira.d/config.yml<CR>
 nnoremap <leader>ed :tabnew ~/dotfiles<CR>
+
+" Note: intentional trailing space on these comamnds
+" open ag.vim: Close window with :ccl(ose)
+nnoremap <leader>a :Ag! 
+" Z for Vim!
+nnoremap <leader>z :Z 
 
 " CtrlP settings
 let g:ctrlp_match_window = 'bottom,order:ttb'
