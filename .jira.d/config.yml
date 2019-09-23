@@ -4,7 +4,7 @@ echo "ISSUE_FILE: ${issueFile}"
 read issue < ${issueFile}
 echo "issue: ${issue}"
 
-echo "endpoint: ${JIRA_S_ENDPOINT}"
+echo "endpoint: https://${JIRA_S_ENDPOINT}"
 echo "project: ${JIRA_S_PROJECT}"
 echo "login: ${JIRA_S_LOGIN}"
 echo "user: ${JIRA_S_USER}"
