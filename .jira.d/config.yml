@@ -65,7 +65,7 @@ custom-commands:
       - name: ISSUE
         default: \$JIRA_ISSUE
     script: |
-      printf "${JIRA_S_ENDPOINT}browse/{{args.ISSUE}}" | pbcopy
+      printf "https://${JIRA_S_ENDPOINT}/browse/{{args.ISSUE}}" | pbcopy
   - name: browser
     help: Brings the JIRA_ISSUE up in the browser if no ISSUE is provided
     args:

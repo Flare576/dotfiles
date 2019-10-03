@@ -18,6 +18,7 @@ if [[ $doit =~ ^[yY] ]] ; then
   if [ -z $shortuser ] ; then
     short=email
   fi
+  url=$(echo $url | sed 's/https:\/\///')
 
   config="${HOME}/dotfiles/.doNotCommit.jira"
 
