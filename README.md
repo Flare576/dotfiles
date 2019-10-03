@@ -10,7 +10,8 @@ sh -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/sc
 If not setting up a new machine I `git clone` directly into `~` and run the script for the thing(s) I want to setup:
 ```
 sh dotfiles/scripts/setupRepo.sh # You should absoultey run this file to help prevent leaking secrets
-sh dotfiles/scripts/setupLinks.sh # Symlinks files to ~ and pull scripts
+sh dotfiles/scripts/setupLinks.sh # Symlinks files to ~ 
+sh dotfiles/scripts/setupScripts.sh # pull scripts and sets up paths
 sh dotfiles/scripts/setupVim.sh # Yes, this sets up vim
 sh dotfiles/scripts/setupOmz.sh # Oh My Zshell goes deliciously with Zsh
 sh dotfiles/scripts/setupIterm.sh # I prefer iTerm over Terminal or other solutions

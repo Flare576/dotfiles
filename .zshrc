@@ -1,4 +1,6 @@
 # See https://github.com/robbyrussell/oh-my-zsh/blob/master/templates/zshrc.zsh-template
+# This file is loaded after .zshenv
+
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="cobalt2"
 plugins=(git extract node npm z zsh-better-npm-completion kubectl)
@@ -12,12 +14,12 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # Jira cli auto complete
 eval "$(jira --completion-script-zsh)"
-# vroom autocomplete
-source $HOME/dotfiles/scripts/vroom-completion.zsh
-# gmb autocomplete
-source $HOME/dotfiles/scripts/gmb-completion.zsh
 
 #Setup NVM
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
 
+here=$(pwd)
+if [[ $here == *"/Projects/"* ]] ; then
+  nvm install
+fi

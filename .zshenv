@@ -1,9 +1,9 @@
+# This file is loaded before .zshrc
 # Secrets
 source $HOME/.doNotCommit
 
 export PATH="/usr/local/bin:${PATH}"
 export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
-export PATH="$HOME/scripts/shell:$HOME/scripts/js:${PATH}"
 
 #bindkey -v
 #bindkey 'jk' vi-cmd-mode
@@ -81,4 +81,3 @@ function wdate() {
 
 # kubectl shortcuts
 source $HOME/.zshrc.kubeHelper
-
