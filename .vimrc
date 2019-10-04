@@ -92,6 +92,8 @@ nnoremap <leader>/ :%s///gn<CR>
 nnoremap <F5> :bufdo e<CR>
 " Super-undo
 nnoremap <leader>u :GundoToggle<CR>
+" TagBar
+nnoremap <leader>. :TagbarToggle<CR>
 " edit vimrc/zshrc and load vimrc bindings
 nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
@@ -121,6 +123,7 @@ autocmd Filetype typescript,javascript highlight OverLength ctermbg=red ctermfg=
 autocmd Filetype typescript,javascript match OverLength /\%121v.\+/
 autocmd Filetype markdown setlocal spell
 autocmd Filetype text setlocal linebreak spell
+autocmd BufRead COMMIT_EDITMSG setlocal spell
 
 " Extra whitespace in yellow
 highlight ExtraWhitespace ctermbg=yellow ctermfg=white guibg=#592929 " Define color scheme
