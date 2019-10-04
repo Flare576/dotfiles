@@ -29,5 +29,8 @@ echo "Installing brews"
 brew update
 brew install ${brews[@]}
 
-#K9s is an amazing Kubernetes manager
+# K9s is an amazing Kubernetes manager
 brew tap derailed/k9s && brew install k9s
+
+# Looking forward to this being on normal tap
+brew install --HEAD universal-ctags/universal-ctags/universal-ctags
