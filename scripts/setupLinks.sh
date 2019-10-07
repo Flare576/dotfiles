@@ -5,7 +5,7 @@ touch $HOME/dotfiles/.doNotCommit
 touch $HOME/dotfiles/.gitconfig.personal
 
 ln -Fs $HOME/dotfiles/.doNotCommit $HOME
-ln -Fs $HOME/dotfiles/.ctags.d $HOME
+ln -Fs $HOME/dotfiles/.ctags.dir $HOME/.ctags.d
 ln -Fs $HOME/dotfiles/.gitconfig.personal $HOME
 ln -Fs $HOME/dotfiles/.zshenv $HOME
 ln -Fs $HOME/dotfiles/.gitconfig $HOME
