@@ -23,7 +23,7 @@ brews=(
   zsh
 )
 
-if [ "$isLinux" -eq "1" ] ; then
+if [ "$isLinux" -eq "0" ] ; then
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.doNotCommit
 else
   brews+=(cask kubectx mas)
