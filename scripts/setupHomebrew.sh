@@ -24,15 +24,14 @@ brews=(
 )
 
 if [ "$isLinux" -eq "1" ] ; then
-  echo "cat"
-  # echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.doNotCommit
+  echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.doNotCommit
 else
   brews+=(cask kubectx mas)
 fi
 
 echo "Installing brews"
-#brew update
-echo "brew install ${brews[@]}"
+brew update
+brew install ${brews[@]}
 
 # K9s is an amazing Kubernetes manager
 # brew tap derailed/k9s && brew install k9s
