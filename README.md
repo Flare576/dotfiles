@@ -7,6 +7,13 @@ minimal messing around.
 sh -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupMac.sh)"
 ```
 
+Or a new Linux (Mint for now)
+
+```
+sh -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/mintyFres/scripts/setupMint.sh)"
+```
+
+
 If not setting up a new machine I `git clone` directly into `~` and run the script for the thing(s) I want to setup:
 ```
 sh dotfiles/scripts/setupRepo.sh # You should absoultey run this file to help prevent leaking secrets
