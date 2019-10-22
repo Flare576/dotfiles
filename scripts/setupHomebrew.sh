@@ -6,19 +6,13 @@ if test ! $(which brew); then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-if [ $isLinux ] ; then
-  echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.doNotCommit
-fi
 
 # Install Good Stuff
 brews=(
   bat
-  cask
   git
   git-secrets
   hub
-  kubectx
-  mas
   nvm
   pipenv
   python
@@ -29,13 +23,20 @@ brews=(
   zsh
 )
 
+if [ "$isLinux" -eq "1" ] ; then
+  echo "cat"
+  # echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.doNotCommit
+else
+  brews+=(cask kubectx mas)
+fi
+
 echo "Installing brews"
-brew update
-brew install ${brews[@]}
+#brew update
+echo "brew install ${brews[@]}"
 
 # K9s is an amazing Kubernetes manager
-brew tap derailed/k9s && brew install k9s
+# brew tap derailed/k9s && brew install k9s
 
 # Looking forward to this being on normal tap
 # choked in Mint
-brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+# brew install --HEAD universal-ctags/universal-ctags/universal-ctags
