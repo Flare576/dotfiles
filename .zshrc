@@ -17,7 +17,7 @@ eval "$(jira --completion-script-zsh)"
 
 #Setup NVM
 export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+. "$(brew --prefix nvm)/nvm.sh"
 
 here=$(pwd)
 if [[ $here == *"/Projects/"* ]] ; then
