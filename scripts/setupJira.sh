@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # https://github.com/Netflix-Skunkworks/go-jira
 ln -sf $HOME/dotfiles/.jira.d $HOME
 brew install go-jira
@@ -28,7 +28,7 @@ if [[ $doit =~ ^[yY] ]] ; then
 
   if [ ! -f $config ] ; then
     touch $config
-    ln -Fs $config $HOME
+    ln -fs $config $HOME
   fi
 
   cat<<END > ${config}

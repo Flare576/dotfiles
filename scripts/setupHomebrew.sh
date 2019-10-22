@@ -1,8 +1,13 @@
-#!/bin/sh
+#!/bin/bash
+isLinux=0; [ -f "/etc/os-version" ] && isLinux=1
 # Install Homebrew
 if test ! $(which brew); then
   echo "Installing Homebrew"
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+if [ $isLinux ] ; then
+  echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.doNotCommit
 fi
 
 # Install Good Stuff
@@ -13,7 +18,6 @@ brews=(
   git-secrets
   hub
   kubectx
-  lastpass-cli
   mas
   nvm
   pipenv
@@ -33,4 +37,5 @@ brew install ${brews[@]}
 brew tap derailed/k9s && brew install k9s
 
 # Looking forward to this being on normal tap
+# choked in Mint
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags

@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 echo "Linking .vimrc, setting up plugins"
 
-ln -s $HOME/dotfiles/.vimrc $HOME
+ln -fs $HOME/dotfiles/.vimrc $HOME
 # Setup pathogen
 mkdir -p ~/.vim/autoload ~/.vim/bundle
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim

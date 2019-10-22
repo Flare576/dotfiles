@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+isLinux=0; [ -f "/etc/os-version" ] && isLinux=1
 echo "Setup Oh My Zshell"
 
 # Install and setup Oh My Zshell
@@ -17,7 +18,11 @@ cd fonts
 # Sometimes Z doesn't setup its file
 touch $HOME/.z
 
-ln -Fs $HOME/dotfiles/.zshrc $HOME
+ln -fs $HOME/dotfiles/.zshrc $HOME
 
 echo "Making Zsh default"
-sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+if [ "$isLinux" ] ; then
+  chsh -s $(which zsh)
+else
+  sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+fi
