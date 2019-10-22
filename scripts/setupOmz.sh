@@ -22,7 +22,7 @@ ln -fs $HOME/dotfiles/.zshrc $HOME
 
 echo "Making Zsh default"
 if [ "$isLinux" -eq "1" ] ; then
-  which zsh >> /etc/shells
+  which zsh | sudo tee -a /etc/shells
   chsh -s $(which zsh)
 else
   sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
