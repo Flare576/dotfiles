@@ -80,7 +80,7 @@ END
     fi
     keyPart="
     UseKeychain yes"
-    if [ "$isLinux" ] ; then
+    if [ $isLinux ] ; then
       keyPart=""
     fi
     cat<<END >> $HOME/.ssh/config
@@ -95,7 +95,7 @@ Host ${domain}
 END
 
 echo -e "Adding key to ssh-agent"
-if [ "$isLinux" ] ; then
+if [ $isLinux ] ; then
   ssh-add $fullFileName
 else
   ssh-add -K $fullFileName

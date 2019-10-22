@@ -7,7 +7,7 @@ if test ! $(which brew); then
   echo "Installing Homebrew requirements"
   sudo apt-get -y install build-essential curl file git
   echo "Installing Homebrew"
-  yes '' | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+  yes '' | bash -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
   # Temporarily set environment variables: dotfile profile will set in future sessions
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
@@ -20,34 +20,34 @@ git checkout mintyFresh
 cd ..
 
 # Install Homebrew and applications
-sh $HOME/dotfiles/scripts/setupHomebrew.sh
+bash $HOME/dotfiles/scripts/setupHomebrew.sh
 
 # Install safety precautions around this repo
-sh $HOME/dotfiles/scripts/setupRepo.sh
+bash $HOME/dotfiles/scripts/setupRepo.sh
 
 # Link dotFiles
-sh $HOME/dotfiles/scripts/setupLinks.sh
+bash $HOME/dotfiles/scripts/setupLinks.sh
 
 # Setup GIT
-sh $HOME/dotfiles/scripts/setupGit.sh
+bash $HOME/dotfiles/scripts/setupGit.sh
 
 # Setup Oh-My-Zsh
-sh $HOME/dotfiles/scripts/setupOmz.sh
+bash $HOME/dotfiles/scripts/setupOmz.sh
 
 # Setup application
-sh $HOME/dotfiles/scripts/setupCasks.sh
+bash $HOME/dotfiles/scripts/setupCasks.sh
 
 # Configure iTerm2
-sh $HOME/dotfiles/scripts/setupIterm.sh
+bash $HOME/dotfiles/scripts/setupIterm.sh
 
 # Setup background and dock settings
-sh $HOME/dotfiles/scripts/setupDockAndSystem.sh
+bash $HOME/dotfiles/scripts/setupDockAndSystem.sh
 
 # Setup VIM
-sh $HOME/dotfiles/scripts/setupVim.sh
+bash $HOME/dotfiles/scripts/setupVim.sh
 
 # Setup Jira
-sh $HOME/dotfiles/scripts/setupJira.sh
+bash $HOME/dotfiles/scripts/setupJira.sh
 
 # Force setup of apps
 open -a Spotify
