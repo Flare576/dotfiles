@@ -1,5 +1,5 @@
 #!/bin/bash
-isLinux=0; [ -f "/etc/os-version" ] && isLinux=1
+isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
 echo "Setup Oh My Zshell"
 
 # Install and setup Oh My Zshell

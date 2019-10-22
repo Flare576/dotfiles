@@ -1,5 +1,5 @@
 #!/bin/bash
-isLinux=0; [ -f "/etc/os-version" ] && isLinux=1
+isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
 # Install Homebrew
 if test ! $(which brew); then
   echo "Installing Homebrew"
@@ -10,7 +10,6 @@ fi
 # Install Good Stuff
 brews=(
   bat
-  git
   git-secrets
   hub
   nvm
@@ -23,10 +22,10 @@ brews=(
   zsh
 )
 
-if [ "$isLinux" -eq "0" ] ; then
+if [ "$isLinux" -eq "1" ] ; then
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.doNotCommit
 else
-  brews+=(cask kubectx mas)
+  brews+=(cask git kubectx mas)
 fi
 
 echo "Installing brews"

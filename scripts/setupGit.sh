@@ -1,5 +1,5 @@
 #!/bin/bash
-isLinux=0; [ -f "/etc/os-version" ] && isLinux=1
+isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
 
 usage="$(basename "$0") Creates new SSH tokens and hostnames for one or more GitHub accounts.
 
