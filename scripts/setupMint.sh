@@ -34,24 +34,12 @@ bash $HOME/dotfiles/scripts/setupGit.sh
 # Setup Oh-My-Zsh
 bash $HOME/dotfiles/scripts/setupOmz.sh
 
-# Setup application
-bash $HOME/dotfiles/scripts/setupCasks.sh
-
-# Configure iTerm2
-bash $HOME/dotfiles/scripts/setupIterm.sh
-
 # Setup background and dock settings
-bash $HOME/dotfiles/scripts/setupDockAndSystem.sh
+# bash $HOME/dotfiles/scripts/setupDockAndSystem.sh
 
 # Setup VIM
-bash $HOME/dotfiles/scripts/setupVim.sh
+#bash $HOME/dotfiles/scripts/setupVim.sh
 
 # Setup Jira
 bash $HOME/dotfiles/scripts/setupJira.sh
-
-# Force setup of apps
-open -a Spotify
-read -p "Once you setup Spotify, press enter."
-open -a Dropbox
-read -p "Once you setup Dropbox, press enter."
 

@@ -4,13 +4,13 @@ I've also included a setup script, mostly for personal use, that will bring a br
 minimal messing around.
 
 ```
-sh -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupMac.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupMac.sh)"
 ```
 
 Or a new Linux (Mint for now)
 
 ```
-sh -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/mintyFres/scripts/setupMint.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/mintyFresh/scripts/setupMint.sh)"
 ```
 
 
