@@ -16,7 +16,7 @@ fi
 cd $HOME
 git clone https://github.com/Flare576/dotfiles.git
 cd dotfiles
-git switch mintyFresh
+git checkout mintyFresh
 cd ..
 
 # Install Homebrew and applications
