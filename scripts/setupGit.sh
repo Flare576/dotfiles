@@ -56,12 +56,12 @@ if [ $gitCount -gt 0 ] ; then
     payload='{"title": "'$HOSTNAME'", "key": "'$public'"}'
 
     # Need to check for two-factor as failure mode
-    curlCmd='curl --silent --output -H "Content-Type: applicaiton/json" '$auth' -d '"'${payload}'"' https://api.github.com/user/keys'
-    result=$(eval curlCmd)
+    curlCmd='curl --silent -H "Content-Type: application/json" '$auth' -d '"'${payload}'"' https://api.github.com/user/keys'
+    result=$(eval $curlCmd)
 
     if [[ $result == *"OTP"* ]] ; then
       read -s -p "Enter the the current 2FA code: " tfc
-      curlCmd='curl --silent --output -H "X-GitHub-OTP: '$tfc'" -H "Content-Type: applicaiton/json" '$auth' -d '"'${payload}'"' https://api.github.com/user/keys'
+      curlCmd='curl --silent -H "X-GitHub-OTP: '$tfc'" -H "Content-Type: application/json" '$auth' -d '"'${payload}'"' https://api.github.com/user/keys'
       eval $curlCmd
     fi
 
