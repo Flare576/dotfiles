@@ -27,6 +27,9 @@ bash $HOME/dotfiles/scripts/setupPython.sh
 # Link dotFiles
 bash $HOME/dotfiles/scripts/setupLinks.sh
 
+# Setup Scripts
+bash $HOME/dotfiles/scripts/setupScripts.sh
+
 # Setup GIT
 bash $HOME/dotfiles/scripts/setupGit.sh
 
