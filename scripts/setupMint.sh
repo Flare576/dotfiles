@@ -8,8 +8,8 @@ if test ! $(which brew); then
   sudo apt-get -y install build-essential curl file git
   echo "Installing Homebrew"
   yes '' | bash -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-  # Temporarily set environment variables: dotfile profile will set in future sessions
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
 fi
 
 # Pull the rest of the project
@@ -38,7 +38,7 @@ bash $HOME/dotfiles/scripts/setupOmz.sh
 # bash $HOME/dotfiles/scripts/setupDockAndSystem.sh
 
 # Setup VIM
-#bash $HOME/dotfiles/scripts/setupVim.sh
+bash $HOME/dotfiles/scripts/setupVim.sh
 
 # Setup Jira
 bash $HOME/dotfiles/scripts/setupJira.sh

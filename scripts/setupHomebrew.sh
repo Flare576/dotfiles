@@ -23,6 +23,7 @@ brews=(
 )
 
 if [ "$isLinux" -eq "1" ] ; then
+  touch $HOME/.doNotCommit
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >> $HOME/.doNotCommit
 else
   brews+=(cask git kubectx mas)
