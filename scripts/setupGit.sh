@@ -36,15 +36,16 @@ if [ $gitCount -gt 0 ] ; then
 
     read -p "Do you want to use a (P)assword, or a (t)oken: " passToke
     passToke=$(echo $passToke | tr '[A-Z]' '[a-z]')
-    cred="Password"
-    auth="-u \"${userName}:"
     if [[ $passToke == "t"* ]] ; then
       cred="Token"
       auth="-H \"Authorization: token "
+    else
+      cred="Password"
+      auth="-u \"${userName}:"
     fi
     read -s -p "GitHub $cred $i: " password
     echo -e ''
-    auth="${auth}${password}\""
+    auth+="${password}\""
 
     fileName=id_rsa_$userName
 
@@ -55,12 +56,12 @@ if [ $gitCount -gt 0 ] ; then
     payload='{"title": "'$HOSTNAME'", "key": "'$public'"}'
 
     # Need to check for two-factor as failure mode
-    curlCmd='curl --silent --output -H "Content-Type: applicaiton/json" '$auth' -d '"'${payload}'"' "https://api.github.com/user/keys'
+    curlCmd='curl --silent --output -H "Content-Type: applicaiton/json" '$auth' -d '"'${payload}'"' https://api.github.com/user/keys'
     result=$(eval curlCmd)
 
     if [[ $result == *"OTP"* ]] ; then
       read -s -p "Enter the the current 2FA code: " tfc
-      curlCmd='curl --silent --output -H "X-GitHub-OTP: '$tfc'" -H "Content-Type: applicaiton/json" '$auth' -d '"'${payload}'"' "https://api.github.com/user/keys'
+      curlCmd='curl --silent --output -H "X-GitHub-OTP: '$tfc'" -H "Content-Type: applicaiton/json" '$auth' -d '"'${payload}'"' https://api.github.com/user/keys'
       eval $curlCmd
     fi
 
