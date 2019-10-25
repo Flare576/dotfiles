@@ -28,6 +28,9 @@ bash $HOME/dotfiles/scripts/setupRepo.sh
 # Link dotFiles
 bash $HOME/dotfiles/scripts/setupLinks.sh
 
+# Setup Scripts
+bash $HOME/dotfiles/scripts/setupScripts.sh
+
 # Setup GIT
 bash $HOME/dotfiles/scripts/setupGit.sh
 
@@ -36,6 +39,7 @@ bash $HOME/dotfiles/scripts/setupOmz.sh
 
 # Setup background and dock settings
 # bash $HOME/dotfiles/scripts/setupDockAndSystem.sh
+bash $HOME/dotfiles/scripts/setupGnome.sh
 
 # Setup VIM
 bash $HOME/dotfiles/scripts/setupVim.sh
