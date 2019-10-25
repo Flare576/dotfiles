@@ -14,6 +14,10 @@ brew install git
 # Pull the rest of the project
 cd $HOME
 git clone https://github.com/Flare576/dotfiles.git
+cd dotfiles
+git checkout mintyFresh
+cd ..
+
 
 # Install Homebrew and applications
 bash $HOME/dotfiles/scripts/setupHomebrew.sh
