@@ -8,6 +8,7 @@ fi
 
 if [[ "$dest" != "skip" ]] ; then
   git clone https://github.com/flare576/scripts.git $dest
+  sed -i'' -e 's/https:\/\/github.com\//git@github.com:/' $dest/.git/config
 
   config="${HOME}/dotfiles/.doNotCommit"
   cat<<END >> ${config}

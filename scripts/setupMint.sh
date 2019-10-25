@@ -15,9 +15,6 @@ fi
 # Pull the rest of the project
 cd $HOME
 git clone https://github.com/Flare576/dotfiles.git
-cd dotfiles
-git checkout mintyFresh
-cd ..
 
 # Install Homebrew and applications
 bash $HOME/dotfiles/scripts/setupHomebrew.sh
@@ -37,8 +34,7 @@ bash $HOME/dotfiles/scripts/setupGit.sh
 # Setup Oh-My-Zsh
 bash $HOME/dotfiles/scripts/setupOmz.sh
 
-# Setup background and dock settings
-# bash $HOME/dotfiles/scripts/setupDockAndSystem.sh
+# Setup terminal
 bash $HOME/dotfiles/scripts/setupGnome.sh
 
 # Setup VIM
