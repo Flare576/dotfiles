@@ -1,15 +1,16 @@
-#!/bin/sh
+#!/bin/bash
 read -p "Downloading useful scripts; enter Dir ($HOME/scripts) or 'skip' to skip: " dest
 echo
 
-config="${HOME}/dotfiles/.doNotCommit"
 if [[ -z "$dest" ]] ; then
   dest=$HOME/scripts
 fi
 
 if [[ "$dest" != "skip" ]] ; then
-  git clone git@github.com:Flare576/scripts.git $dest
+  git clone https://github.com/flare576/scripts.git $dest
+  sed -i'' -e 's/https:\/\/github.com\//git@github.com:/' $dest/.git/config
 
+  config="${HOME}/dotfiles/.doNotCommit"
   cat<<END >> ${config}
 FLARE_SCRIPTS="$dest"
 fpath=(\$FLARE_SCRIPTS/shell \$fpath)

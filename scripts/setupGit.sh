@@ -1,9 +1,10 @@
-#!/bin/sh
+#!/bin/bash
+isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
 
 usage="$(basename "$0") Creates new SSH tokens and hostnames for one or more GitHub accounts.
 
 If you want to add a new secondary account, enter 2 or more for the number of accounts and use 'skip' for the first account username.
- 
+
 This command takes no arguments."
 
 while getopts ':hn' option; do
@@ -33,14 +34,18 @@ if [ $gitCount -gt 0 ] ; then
       continue
     fi
 
-    read -p "(P)assword or (t)oken: " passToke
+    read -p "Do you want to use a (P)assword, or a (t)oken: " passToke
     passToke=$(echo $passToke | tr '[A-Z]' '[a-z]')
-    cred="Password"
     if [[ $passToke == "t"* ]] ; then
       cred="Token"
+      auth="-H \"Authorization: token "
+    else
+      cred="Password"
+      auth="-u \"${userName}:"
     fi
     read -s -p "GitHub $cred $i: " password
     echo -e ''
+    auth+="${password}\""
 
     fileName=id_rsa_$userName
 
@@ -51,11 +56,13 @@ if [ $gitCount -gt 0 ] ; then
     payload='{"title": "'$HOSTNAME'", "key": "'$public'"}'
 
     # Need to check for two-factor as failure mode
-    result=$(curl --silent --output -H "Content-Type: application/json" -d "${payload}" -u "${userName}:${password}" "https://api.github.com/user/keys")
+    curlCmd='curl --silent -H "Content-Type: application/json" '$auth' -d '"'${payload}'"' https://api.github.com/user/keys'
+    result=$(eval $curlCmd)
 
     if [[ $result == *"OTP"* ]] ; then
       read -s -p "Enter the the current 2FA code: " tfc
-      curl -H "X-GitHub-OTP: ${tfc}" -H "Content-Type: application/json" -d "${payload}" -u "${userName}:${password}" "https://api.github.com/user/keys"
+      curlCmd='curl --silent -H "X-GitHub-OTP: '$tfc'" -H "Content-Type: application/json" '$auth' -d '"'${payload}'"' https://api.github.com/user/keys'
+      eval $curlCmd
     fi
 
     touch $HOME/.ssh/config
@@ -77,19 +84,29 @@ END
 
 END
     fi
+    keyPart="
+    UseKeychain yes"
+    if [ "$isLinux" -eq "1" ] ; then
+      keyPart=""
+    fi
     cat<<END >> $HOME/.ssh/config
 Host ${domain}
   HostName github.com
   User ${userName}
   PreferredAuthentications publickey
-  AddKeysToAgent yes
-  UseKeychain yes
+  AddKeysToAgent yes ${keyPart}
   IdentityFile ${fullFileName}
   IdentitiesOnly yes
 
 END
+
 echo -e "Adding key to ssh-agent"
-ssh-add -K $fullFileName
+if [ "$isLinux" -eq "1" ] ; then
+  ssh-add $fullFileName
+else
+  ssh-add -K $fullFileName
+fi
+
 done
 fi
 

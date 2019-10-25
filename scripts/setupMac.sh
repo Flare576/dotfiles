@@ -16,37 +16,40 @@ cd $HOME
 git clone https://github.com/Flare576/dotfiles.git
 
 # Install Homebrew and applications
-sh $HOME/dotfiles/scripts/setupHomebrew.sh
+bash $HOME/dotfiles/scripts/setupHomebrew.sh
 
 # Install safety precautions around this repo
-sh $HOME/dotfiles/scripts/setupRepo.sh
+bash $HOME/dotfiles/scripts/setupRepo.sh
 
 # Install Python and applications
-sh $HOME/dotfiles/scripts/setupPython.sh
+bash $HOME/dotfiles/scripts/setupPython.sh
 
 # Link dotFiles
-sh $HOME/dotfiles/scripts/setupLinks.sh
+bash $HOME/dotfiles/scripts/setupLinks.sh
+
+# Setup Scripts
+bash $HOME/dotfiles/scripts/setupScripts.sh
 
 # Setup GIT
-sh $HOME/dotfiles/scripts/setupGit.sh
+bash $HOME/dotfiles/scripts/setupGit.sh
 
 # Setup Oh-My-Zsh
-sh $HOME/dotfiles/scripts/setupOmz.sh
+bash $HOME/dotfiles/scripts/setupOmz.sh
 
 # Setup application
-sh $HOME/dotfiles/scripts/setupCasks.sh
+bash $HOME/dotfiles/scripts/setupCasks.sh
 
 # Configure iTerm2
-sh $HOME/dotfiles/scripts/setupIterm.sh
+bash $HOME/dotfiles/scripts/setupIterm.sh
 
 # Setup background and dock settings
-sh $HOME/dotfiles/scripts/setupDockAndSystem.sh
+bash $HOME/dotfiles/scripts/setupDockAndSystem.sh
 
 # Setup VIM
-sh $HOME/dotfiles/scripts/setupVim.sh
+bash $HOME/dotfiles/scripts/setupVim.sh
 
 # Setup Jira
-sh $HOME/dotfiles/scripts/setupJira.sh
+bash $HOME/dotfiles/scripts/setupJira.sh
 
 # Force setup of apps
 open -a Spotify
