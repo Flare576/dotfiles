@@ -1,20 +1,17 @@
-#!/bin/sh
+#!/bin/bash
+isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
 # Install Homebrew
 if test ! $(which brew); then
   echo "Installing Homebrew"
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+
 # Install Good Stuff
 brews=(
   bat
-  cask
-  git
   git-secrets
   hub
-  kubectx
-  lastpass-cli
-  mas
   nvm
   pipenv
   python
@@ -25,6 +22,12 @@ brews=(
   zsh
 )
 
+if [ "$isLinux" -eq "1" ] ; then
+  echo "eval \$($(brew --prefix)/bin/brew shellenv)" >> $HOME/dotfiles/.doNotCommit
+else
+  brews+=(cask git kubectx mas)
+fi
+
 echo "Installing brews"
 brew update
 brew install ${brews[@]}
@@ -33,4 +36,7 @@ brew install ${brews[@]}
 brew tap derailed/k9s && brew install k9s
 
 # Looking forward to this being on normal tap
+if [ "$isLinux" -eq "1" ] ; then
+  sudo apt-get install python-setuptools
+fi
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags

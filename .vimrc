@@ -117,10 +117,8 @@ let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
 " File-type specific settings
-autocmd Filetype javascript setlocal ts=4 sw=2 sts=0 suffixesadd=.js,.jsx
-autocmd Filetype typescript setlocal ts=4 sw=4 sts=0 suffixesadd=.ts,.tsx
-autocmd Filetype typescript,javascript highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-autocmd Filetype typescript,javascript match OverLength /\%121v.\+/
+so ~/dotfiles/.vimrc.typescript
+so ~/dotfiles/.vimrc.javascript
 autocmd Filetype markdown setlocal spell
 autocmd Filetype text setlocal linebreak spell
 autocmd BufRead COMMIT_EDITMSG setlocal spell
@@ -137,4 +135,3 @@ autocmd BufWinLeave * call clearmatches() " Run on leaving window (Clear all the
 map <silent> <leader>jg :setlocal indentkeys-=<:><CR>a{color:#14892c}{color}jk7h:setlocal indentkeys+=<:><CR>a
 map <silent> <leader>jr :setlocal indentkeys-=<:><CR>a{color:#d04437}{color}jk7h:setlocal indentkeys+=<:><CR>a
 map <silent> <leader>jo :setlocal indentkeys-=<:><CR>a{color:#f79232}{color}jk7h:setlocal indentkeys+=<:><CR>a
-

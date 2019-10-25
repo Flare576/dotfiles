@@ -25,7 +25,7 @@ if [[ $doit =~ ^[yY] ]] ; then
 
   if [ ! -f $config ] ; then
     touch $config
-    ln -Fs $config $HOME
+    ln -fs $config $HOME
   fi
   cat<<END > ${config}
 export MY_LOC_NAME=${myname}

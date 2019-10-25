@@ -1,5 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 apps=(
+  1password
+  1password-cli
   homebrew/cask-versions/docker-edge
   dropbox
   postman

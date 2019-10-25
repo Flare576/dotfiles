@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 echo "Linking .vimrc, setting up plugins"
 
-ln -s $HOME/dotfiles/.vimrc $HOME
+ln -fs $HOME/dotfiles/.vimrc $HOME
 # Setup pathogen
 mkdir -p ~/.vim/autoload ~/.vim/bundle
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
@@ -29,7 +29,7 @@ git clone https://github.com/tpope/vim-surround.git
 # Multi-cursor support
 git clone https://github.com/terryma/vim-multiple-cursors.git
 # Better Uber-undo
-git clone git@github.com:sjl/gundo.vim.git
+git clone https://github.com/sjl/gundo.vim.git
 # tag support
 git clone https://github.com/ludovicchabant/vim-gutentags.git
-git clone git://github.com/majutsushi/tagbar
+git clone https://github.com/majutsushi/tagbar.git

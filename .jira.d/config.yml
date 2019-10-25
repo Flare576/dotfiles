@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 issueFile="${HOME}/.jira.d/.jira.issue"
 echo "ISSUE_FILE: ${issueFile}"
 read issue < ${issueFile}
@@ -183,6 +183,11 @@ custom-commands:
     script: |
       {{jira}} trans{{if options.comment}} -m "{{options.comment}}"{{end}} "{{options.state}}" {{args.ISSUE}}
 # HELPERS
+  - name: cookie
+    args:
+      - name: COOKIE
+    help: Set the cookie used to talk to a hosted Jira instance
+    script: jiraCookie '{{args.COOKIE}}'
   - name: test
     help: prints out Jira-related env vars avaialable during run
     script: |

@@ -1,0 +1,27 @@
+" TypeScirpt also requires:
+" .ctags.d/typescript.ctags
+" active NPM version having tstags available
+autocmd Filetype typescript setlocal ts=4 sw=4 sts=0 suffixesadd=.ts,.tsx
+autocmd Filetype typescript highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+autocmd Filetype typescript match OverLength /\%121v.\+/
+
+" If you get errors, run the following command:
+" npm install --global git+https://github.com/Perlence/tstags.git
+let g:tagbar_type_typescript = {
+  \ 'ctagsbin' : 'tstags',
+  \ 'ctagsargs' : '-f-',
+  \ 'kinds': [
+    \ 'e:enums:0:1',
+    \ 'f:function:0:1',
+    \ 't:typealias:0:1',
+    \ 'M:Module:0:1',
+    \ 'I:import:0:1',
+    \ 'i:interface:0:1',
+    \ 'C:class:0:1',
+    \ 'm:method:0:1',
+    \ 'p:property:0:1',
+    \ 'v:variable:0:1',
+    \ 'c:const:0:1',
+  \ ],
+  \ 'sort' : 0
+\ }
