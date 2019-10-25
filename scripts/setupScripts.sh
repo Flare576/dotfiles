@@ -7,7 +7,7 @@ if [[ -z "$dest" ]] ; then
 fi
 
 if [[ "$dest" != "skip" ]] ; then
-  git clone git@github.com:Flare576/scripts.git $dest
+  git clone https://github.com/flare576/scripts.git $dest
 
   config="${HOME}/dotfiles/.doNotCommit"
   cat<<END >> ${config}
