@@ -20,6 +20,6 @@ export NVM_DIR="$HOME/.nvm"
 . "$(brew --prefix nvm)/nvm.sh"
 
 here=$(pwd)
-if [[ $here == *"/Projects/"* ]] ; then
+if [ -f "$here/.nvmrc" ] ; then
   nvm install
 fi
