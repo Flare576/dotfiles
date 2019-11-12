@@ -1,6 +1,6 @@
 " TypeScirpt also requires:
 " .ctags.d/typescript.ctags
-" active NPM version having tstags available
+" active NPM version having ts-tags available
 autocmd Filetype typescript setlocal ts=4 sw=4 sts=0 suffixesadd=.ts,.tsx
 autocmd Filetype typescript highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 autocmd Filetype typescript match OverLength /\%121v.\+/
