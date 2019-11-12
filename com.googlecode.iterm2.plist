@@ -277,14 +277,18 @@ Full Widgets:Restore Window Arrangement</string>
 	<string>410 363 620 392 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>269 109 796 486 0 0 1440 877 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>99 293 592 584 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1440 23 1920 1034 1440 0 1920 1057 </string>
+	<string>2400 23 955 1034 1440 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>2400 0 955 1057 1440 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>1440 630 570 427 1440 0 1920 1057 </string>
+	<string>1440 0 1920 1057 1440 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>1729 61 570 427 1440 0 1920 1057 </string>
+	<string>1440 0 1920 1057 1440 0 1920 1057 </string>
+	<key>NSWindow Frame iTerm Window 4</key>
+	<string>239 1 570 427 0 0 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_9EC815F6-3A6A-4FE5-B87F-58CC267656E3</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_9EC815F6-3A6A-4FE5-B87F-58CC267656E3_selection</key>
@@ -3853,13 +3857,16 @@ Full Widgets:Restore Window Arrangement</string>
 		<string>3.3.0beta11</string>
 		<string>3.3.2beta1</string>
 		<string>3.3.0beta12</string>
+		<string>3.3.7beta1</string>
 		<string>3.3.0beta13</string>
+		<string>3.3.7beta3</string>
 		<string>3.3.1beta1</string>
 		<string>3.3.0beta15</string>
 		<string>3.3.3beta2</string>
 		<string>3.3.0beta16</string>
 		<string>3.3.5beta1</string>
 		<string>3.3.5beta3</string>
+		<string>3.3.7beta2</string>
 		<string>3.3.4beta1</string>
 		<string>3.3.2beta2</string>
 	</array>
@@ -3873,9 +3880,9 @@ Full Widgets:Restore Window Arrangement</string>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{1440, 0}, {1920, 1080}}</string>
+		<string>{{0, 0}, {1440, 900}}</string>
 		<key>topLeft</key>
-		<string>{1781, 811}</string>
+		<string>{190, 773}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
@@ -3888,7 +3895,7 @@ Full Widgets:Restore Window Arrangement</string>
 	<key>NoSyncLastTipTime</key>
 	<real>588606712.91256201</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>55</integer>
+	<integer>72</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4804,7 +4811,7 @@ Full Widgets:Restore Window Arrangement</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-10-04T11:06:49Z</date>
+	<date>2019-11-05T21:37:11Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -4835,6 +4842,8 @@ Full Widgets:Restore Window Arrangement</string>
 	<integer>10</integer>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1571324800</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
@@ -10375,7 +10384,7 @@ Full Widgets:Restore Window Arrangement</string>
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.5beta3</string>
+	<string>3.3.7beta3</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
