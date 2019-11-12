@@ -40,6 +40,8 @@ nnoremap <silent> <leader>h :lcd %:p:h<CR>
 nnoremap <silent> <leader>d :DiffChangesDiffToggle<CR>
 " enables Leader + D to diff all current windows
 nnoremap <silent> <leader>D :windo diffthis<CR>
+" enables Leader + dg to diff currnt buffer against git
+nnoremap <leader>dg :call GitDiff()<cr>
 
 filetype indent on      " load filetype-specific indent files
 " turn off search highlight
@@ -97,8 +99,7 @@ nnoremap <leader>. :TagbarToggle<CR>
 " edit vimrc/zshrc and load vimrc bindings
 nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
-nnoremap <leader>ez :tabnew ~/.zshrc<CR>
-nnoremap <leader>ee :tabnew ~/.zshenv<CR>
+nnoremap <leader>ez :tabnew ~/.zshrc<CR>:spl ~/.zshenv<CR>
 nnoremap <leader>ej :tabnew ~/.jira.d/config.yml<CR>
 nnoremap <leader>ed :tabnew ~/dotfiles<CR>
 
@@ -135,3 +136,11 @@ autocmd BufWinLeave * call clearmatches() " Run on leaving window (Clear all the
 map <silent> <leader>jg :setlocal indentkeys-=<:><CR>a{color:#14892c}{color}jk7h:setlocal indentkeys+=<:><CR>a
 map <silent> <leader>jr :setlocal indentkeys-=<:><CR>a{color:#d04437}{color}jk7h:setlocal indentkeys+=<:><CR>a
 map <silent> <leader>jo :setlocal indentkeys-=<:><CR>a{color:#f79232}{color}jk7h:setlocal indentkeys+=<:><CR>a
+
+" Used by <leader>dg
+function GitDiff()
+    :silent write
+    :silent execute '!git diff --color=always -- ' . expand('%:p') . ' | less --RAW-CONTROL-CHARS'
+    :redraw!
+endfunction
+
