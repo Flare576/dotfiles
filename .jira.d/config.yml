@@ -89,6 +89,14 @@ custom-commands:
     script: |
       {{jira}} assign {{args.ISSUE}} \$JIRA_USER
       {{jira}} trans "In Progress" {{args.ISSUE}}
+  - name: u
+    help: Marks story as unassigned and puts it back into ToDo
+    args:
+      - name: ISSUE
+        default: \$JIRA_ISSUE
+    script: |
+      {{jira}} unassign {{args.ISSUE}}
+      {{jira}} trans "To Do" {{args.ISSUE}}
   - name: qa
     help: Assigns the story to you, moves it to QA, and brings up details
     args: 
