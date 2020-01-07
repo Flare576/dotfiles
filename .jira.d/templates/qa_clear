@@ -2,4 +2,5 @@
 # issue: {{ .key }} - created: {{ .fields.created | age}} ago
 fields:
   customfield_19392:
-    name: {{ env.JIRA_USER }}
+    name:
+
