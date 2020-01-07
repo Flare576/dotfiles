@@ -133,9 +133,9 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/ " Run on exiting Insert Mode
 autocmd BufWinLeave * call clearmatches() " Run on leaving window (Clear all the matches)
 
 " Jira green text
-map <silent> <leader>jg :setlocal indentkeys-=<:><CR>a{color:#14892c}{color}jk7h:setlocal indentkeys+=<:><CR>a
-map <silent> <leader>jr :setlocal indentkeys-=<:><CR>a{color:#d04437}{color}jk7h:setlocal indentkeys+=<:><CR>a
-map <silent> <leader>jo :setlocal indentkeys-=<:><CR>a{color:#f79232}{color}jk7h:setlocal indentkeys+=<:><CR>a
+map <silent> <leader>jg E:setlocal indentkeys-=<:><CR>a {color:#14892c}{color}jk7h:setlocal indentkeys+=<:><CR>a
+map <silent> <leader>jr E:setlocal indentkeys-=<:><CR>a {color:#d04437}{color}jk7h:setlocal indentkeys+=<:><CR>a
+map <silent> <leader>jo E:setlocal indentkeys-=<:><CR>a {color:#f79232}{color}jk7h:setlocal indentkeys+=<:><CR>a
 
 " Used by <leader>dg
 function GitDiff()
