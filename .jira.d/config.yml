@@ -1,7 +1,7 @@
 #!/bin/bash
 issueFile="${HOME}/.jira.d/.jira.issue"
 echo "ISSUE_FILE: ${issueFile}"
-read issue < ${issueFile}
+issue=$(head -n 1 $issueFile)
 echo "issue: ${issue}"
 
 echo "endpoint: https://${JIRA_S_ENDPOINT}"
@@ -20,20 +20,31 @@ cat<<END
 custom-commands:
   - name: workon
     aliases: ['w']
-    help: Sets the global "worked on" issue. To clear, call with empty string ""
+    help: Sets the global "worked on" issue.
     args:
       - name: ISSUE
+    options:
+      - name: remove
+        short: r
+        type: BOOL
+        help: Remove the current issue number
     script: |-
-      echo "{{args.ISSUE}}" > "\${JIRA_ISSUE_FILE}"
+      {{if options.remove}}
+      tail -n +2 "\${JIRA_ISSUE_FILE}" > /tmp/jiratemp && mv /tmp/jiratemp "\${JIRA_ISSUE_FILE}"
+      {{else if not args.ISSUE}}
+      echo "Must provide a Issue"
+      {{else}}
+      echo "{{args.ISSUE}}" | cat - "\${JIRA_ISSUE_FILE}" > /tmp/jiratemp && mv /tmp/jiratemp "\${JIRA_ISSUE_FILE}"
+      {{end}}
   - name: i
-    help: Displays the global "worked on"  issue
-    script: echo \${JIRA_ISSUE}
+    help: Displays the global "worked on" issues
+    script: head "\${JIRA_ISSUE_FILE}"
   - name: git
-    help: Creates a new Git branch with the Jira prefix/issue and, if provided, branch
+    help: Creates a new Git branch with the Jira prefix/issue and, if provided, name
     args:
-      - name: BRANCH
+      - name: NAME
     script: |-
-      git checkout -b \${JIRA_PREFIX}/\${JIRA_ISSUE}{{if args.BRANCH}}-{{args.BRANCH}}{{end}}
+      git checkout -b \${JIRA_PREFIX}/\${JIRA_ISSUE}{{if args.NAME}}-{{args.NAME}}{{end}}
 # FIND WORK
   - name: mine
     help: Display issues assigned to me
@@ -53,12 +64,12 @@ custom-commands:
       - name: text
         short: t
         help: Search the text of the ticket for this value
-      - name: workable 
-        short: w
+      - name: all
+        short: a
         type: BOOL
-        help: Pass this flag to filter out Done, Dead, and Sign Off stories
+        help: Include Done, Dead, and Sign Off stories
     script: |-
-      {{jira}} list -t ISuStRA --query "sprint IN openSprints(){{if options.workable}} and status NOT IN (\"Done\",\"Dead\",\"Sign Off\"){{end}} and project={{args.PROJECT}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee" -f "key,status,assignee,customfield_19392,summary"
+      {{jira}} list -t ISuStRA --query "sprint IN openSprints(){{if not options.all}} and status NOT IN (\"Done\",\"Dead\",\"Sign Off\"){{end}} and project={{args.PROJECT}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee" -f "key,status,assignee,customfield_19392,summary"
   - name: link
     help: Puts the link for JIRA_ISSUE in your clipboard if no ISSUE is provided
     args:
@@ -112,7 +123,14 @@ custom-commands:
       {{jira}} edit -t qa {{args.ISSUE}}
       {{end}}
       {{jira}} trans "QA" {{args.ISSUE}}
-      {{jira}} v {{args.ISSUE}}
+      {{jira}} v {{args.ISSUE}} | vi -
+  - name: cr
+    help: Clears "reviewer" field
+    args:
+      - name: ISSUE
+        default: \$JIRA_ISSUE
+    script: |
+      {{jira}} edit -t qa_clear {{args.ISSUE}}
   - name: r
     help: Open a comment with the template then move to signoff
     args:
@@ -121,16 +139,16 @@ custom-commands:
       - name: ISSUE
         default: \$JIRA_ISSUE
     script: |
-      {{jira}} comment -m "h1. Testing Session 
-      
-      h2. Acceptance Criteria 
-      
-      h2. Edge Cases 
-      
-      h2. Regression Testing 
-        * Existing: 
-        * New: 
-      
+      {{jira}} comment -m "h1. Testing Session
+
+      h2. Acceptance Criteria
+
+      h2. Edge Case
+
+      h2. Regression Testing
+        * Existing:
+        * New:
+
       h2. Look and Feel" {{args.ISSUE}}
       {{jira}} trans "{{args.STATUS}}" {{args.ISSUE}}
   - name: e
@@ -200,5 +218,8 @@ custom-commands:
     help: prints out Jira-related env vars avaialable during run
     script: |
       env | grep 'JIRA'
+  - name: args_example
+    script: |
+      echo "I actually have no args... {{args}}, or options {{options}}"
 END
 
