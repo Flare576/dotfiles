@@ -12,6 +12,8 @@
 	<false/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
+	<key>ApplePressAndHoldEnabled</key>
+	<false/>
 	<key>AppleScrollAnimationEnabled</key>
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
@@ -280,13 +282,13 @@ Full Widgets:Restore Window Arrangement</string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 293 592 584 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2400 23 955 1034 1440 0 1920 1057 </string>
+	<string>1440 208 1920 1034 1440 185 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>2400 0 955 1057 1440 0 1920 1057 </string>
+	<string>0 0 717 877 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>1440 0 1920 1057 1440 0 1920 1057 </string>
+	<string>2400 185 955 1057 1440 185 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>1440 0 1920 1057 1440 0 1920 1057 </string>
+	<string>2400 0 955 1057 1440 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
 	<string>239 1 570 427 0 0 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_9EC815F6-3A6A-4FE5-B87F-58CC267656E3</key>
@@ -979,7 +981,7 @@ Full Widgets:Restore Window Arrangement</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>InconsolataForPowerline 14</string>
+			<string>JetBrainsMono-Medium 12</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1258,6 +1260,8 @@ Full Widgets:Restore Window Arrangement</string>
 			<key>Use Canonical Parser</key>
 			<false/>
 			<key>Use Italic Font</key>
+			<true/>
+			<key>Use Non-ASCII Font</key>
 			<true/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
@@ -3852,23 +3856,34 @@ Full Widgets:Restore Window Arrangement</string>
 	<key>NoSyncAllAppVersions</key>
 	<array>
 		<string>3.3.3beta1</string>
-		<string>3.3.0beta10</string>
 		<string>3.3.5beta2</string>
-		<string>3.3.0beta11</string>
 		<string>3.3.2beta1</string>
-		<string>3.3.0beta12</string>
 		<string>3.3.7beta1</string>
-		<string>3.3.0beta13</string>
 		<string>3.3.7beta3</string>
 		<string>3.3.1beta1</string>
-		<string>3.3.0beta15</string>
 		<string>3.3.3beta2</string>
-		<string>3.3.0beta16</string>
 		<string>3.3.5beta1</string>
+		<string>3.3.0beta16</string>
+		<string>3.3.0beta15</string>
 		<string>3.3.5beta3</string>
+		<string>3.3.0beta13</string>
+		<string>3.3.0beta12</string>
+		<string>3.3.0beta11</string>
+		<string>3.3.0beta10</string>
 		<string>3.3.7beta2</string>
 		<string>3.3.4beta1</string>
 		<string>3.3.2beta2</string>
+		<string>3.3.7beta4</string>
+		<string>3.3.8beta1</string>
+		<string>3.3.8beta2</string>
+		<string>3.3.8beta3</string>
+		<string>3.3.8beta4</string>
+		<string>3.3.8beta5</string>
+	</array>
+	<key>NoSyncBFPRecents</key>
+	<array>
+		<string>JetBrains Mono</string>
+		<string>Inconsolata for Powerline</string>
 	</array>
 	<key>NoSyncFrame_SessionsPreferences</key>
 	<dict>
@@ -3880,9 +3895,9 @@ Full Widgets:Restore Window Arrangement</string>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {1440, 900}}</string>
+		<string>{{1440, 185}, {1920, 1080}}</string>
 		<key>topLeft</key>
-		<string>{190, 773}</string>
+		<string>{1717, 918}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
@@ -3895,7 +3910,7 @@ Full Widgets:Restore Window Arrangement</string>
 	<key>NoSyncLastTipTime</key>
 	<real>588606712.91256201</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>72</integer>
+	<integer>95</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4636,26 +4651,6 @@ Full Widgets:Restore Window Arrangement</string>
 			</dict>
 		</array>
 	</dict>
-	<key>NoSyncSearchHistory</key>
-	<array>
-		<string>node</string>
-		<string>inquire</string>
-		<string>status</string>
-		<string>conference</string>
-		<string>sco</string>
-		<string>auth</string>
-		<string>aytho</string>
-		<string>225q</string>
-		<string>741</string>
-		<string>appointment</string>
-	</array>
-	<key>NoSyncSearchHistory2</key>
-	<array>
-		<string>modu</string>
-		<string>node_mo</string>
-		<string>node_no</string>
-		<string>nodemo</string>
-	</array>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>561589749.73909605</real>
 	<key>NoSyncTipsToNotShow</key>
@@ -4811,7 +4806,7 @@ Full Widgets:Restore Window Arrangement</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-11-05T21:37:11Z</date>
+	<date>2020-02-03T17:39:53Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -10384,7 +10379,7 @@ Full Widgets:Restore Window Arrangement</string>
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.7beta3</string>
+	<string>3.3.8beta5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
