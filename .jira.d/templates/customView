@@ -6,6 +6,7 @@ created: {{ .fields.created | age }} ago
 {{if .fields.status -}}
 status: {{ .fields.status.name }}
 {{end -}}
+sprint: {{ .fields.customfield_10007 }}
 estimate: {{ .fields.customfield_10005 }}
 summary: {{ .fields.summary }}
 project: {{ .fields.project.key }}
