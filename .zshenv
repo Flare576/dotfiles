@@ -9,7 +9,7 @@ export PATH="/usr/local/bin:${PATH}"
 #bindkey 'jk' vi-cmd-mode
 export KEYTIMEOUT=2
 export EDITOR=vim
-export DEFAULT_CHEAT_DIR='$HOME/dotfiles/.cheat'
+export CHEAT_CONFIG_PATH="$HOME/dotfiles/.cheat/conf.yml"
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
