@@ -10,6 +10,7 @@ fi
 # Install Good Stuff
 brews=(
   bat
+  cheat
   git-secrets
   hub
   nvm
@@ -31,6 +32,10 @@ fi
 echo "Installing brews"
 brew update
 brew install ${brews[@]}
+
+echo "Grabbing Cheatsheets"
+git clone git@github.com:cheat/cheatsheets.git $HOME/dotfiles/.cheat.community/
+
 
 # K9s is an amazing Kubernetes manager
 brew tap derailed/k9s && brew install k9s
