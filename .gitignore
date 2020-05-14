@@ -1,6 +1,7 @@
 node_modules
 *.swp
 *.swo
+*.orig
 .doNotCommit*
 .gitconfig.personal
 .DS_Store
@@ -12,4 +13,4 @@ tags
 server.log
 cookies.js
 .ctags.d
-.cheat.community
+/cheat/community
