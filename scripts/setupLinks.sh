@@ -11,4 +11,3 @@ ln -fs $HOME/dotfiles/.zshenv $HOME
 ln -fs $HOME/dotfiles/.gitconfig $HOME
 ln -fs $HOME/dotfiles/.gitignore $HOME
 ln -fs $HOME/dotfiles/.zshrc.kubeHelper $HOME
-ln -fs $HOME/dotfiles/.cheat $HOME
