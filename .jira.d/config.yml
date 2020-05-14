@@ -6,6 +6,7 @@ echo "issue: ${issue}"
 
 echo "endpoint: https://${JIRA_S_ENDPOINT}"
 echo "project: ${JIRA_S_PROJECT}"
+echo "component: ${JIRA_S_COMPONENT}"
 echo "login: ${JIRA_S_LOGIN}"
 echo "user: ${JIRA_S_USER}"
 echo "API_TOKEN: ${JIRA_API_TOKEN}"
@@ -58,7 +59,7 @@ custom-commands:
     help: Shows stories in curent sprint
     args:
       - name: PROJECT
-        help: Filter on a Project, defaults to \$JIRA_PROJECT
+        help: Filter on a Project & Component if set, defaults to \$JIRA_PROJECT
         default: \$JIRA_PROJECT
     options:
       - name: text
@@ -68,8 +69,12 @@ custom-commands:
         short: a
         type: BOOL
         help: Include Done, Dead, and Sign Off stories
+      - name: component
+        short: c
+        help: Filter on a component, defaults to \$JIRA_COMPONENT
+        default: \$JIRA_COMPONENT
     script: |-
-      {{jira}} list -t ISuStRA --query "sprint IN openSprints(){{if not options.all}} and status NOT IN (\"Done\",\"Dead\",\"Sign Off\"){{end}} and project={{args.PROJECT}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee" -f "key,status,assignee,customfield_19392,summary"
+      {{jira}} list -t ISuStRA --query "sprint IN openSprints(){{if not options.all}} and status NOT IN (\"Signoff\",\"Done\",\"Dead\",\"Sign Off\"){{end}} and project={{args.PROJECT}}{{if options.component}} and component = \"{{options.component}}\"{{end}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee" -f "key,status,assignee,customfield_19359,customfield_19392,summary"
   - name: link
     help: Puts the link for JIRA_ISSUE in your clipboard if no ISSUE is provided
     args:
@@ -119,10 +124,7 @@ custom-commands:
         help: Also run the 'qa' template
         type: BOOL
     script: |
-      {{if options.review}}
-      {{jira}} edit -t qa {{args.ISSUE}}
-      {{end}}
-      {{jira}} trans "QA" {{args.ISSUE}}
+      {{jira}} trans "In Test" -t "qa" {{args.ISSUE}}
       {{jira}} v {{args.ISSUE}} | vi -
   - name: cr
     help: Clears "reviewer" field
@@ -135,7 +137,7 @@ custom-commands:
     help: Open a comment with the template then move to signoff
     args:
       - name: STATUS
-        default: "Sign Off"
+        default: "SignOff"
       - name: ISSUE
         default: \$JIRA_ISSUE
     script: |
@@ -196,7 +198,7 @@ custom-commands:
     script: |
       {{jira}} trans "PR Review" {{args.ISSUE}}
   - name: d
-    help: Moves story to "Ready for QA" or provided state
+    help: Moves story to "Ready for Test" or provided state
     args:
       - name: ISSUE
         default: \$JIRA_ISSUE
@@ -205,7 +207,7 @@ custom-commands:
         short: m
       - name: state
         short: s
-        default: "QA"
+        default: "Ready for Test"
     script: |
       {{jira}} trans{{if options.comment}} -m "{{options.comment}}"{{end}} "{{options.state}}" {{args.ISSUE}}
 # HELPERS
