@@ -30,6 +30,8 @@ git clone https://github.com/tpope/vim-surround.git
 git clone https://github.com/terryma/vim-multiple-cursors.git
 # Better Uber-undo
 git clone https://github.com/sjl/gundo.vim.git
+# Merge tool soooo good
+git clone git@github.com:samoshkin/vim-mergetool.git
 # tag support
 git clone https://github.com/ludovicchabant/vim-gutentags.git
 git clone https://github.com/majutsushi/tagbar.git

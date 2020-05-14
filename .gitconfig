@@ -7,6 +7,7 @@
 	cleanhouse = ! echo "Deleting old branches" && git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
   d = difftool
   m = mergetool
+  pu = push -u
 [diff]
   tool = vimdiff
 [include]
@@ -16,11 +17,20 @@
 [difftool "vimdiff"]
 	cmd = vim -f -d -c \"wincmd l\" -c 'cd \"$GIT_PREFIX\"' \"$LOCAL\" \"$REMOTE\"
 [merge]
-  tool = vimdiff
-  conflictsstyle = diff3
+  tool = vim_mergetool
+  conflictStyle = diff3
+[mergetool "vim_mergetool"]
+  cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+  trustExitCode = true
 [mergetool]
   prompt = false
 [hub]
   protocol = ssh
 [interactive]
   singleKey = true
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+[commit]
+  template = ~/dotfiles/.gitcommit.md
