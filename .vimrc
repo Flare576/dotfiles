@@ -41,7 +41,8 @@ nnoremap <silent> <leader>d :DiffChangesDiffToggle<CR>
 " enables Leader + D to diff all current windows
 nnoremap <silent> <leader>D :windo diffthis<CR>
 " enables Leader + dg to diff currnt buffer against git
-nnoremap <leader>dg :call GitDiff()<cr>
+nnoremap <leader>dg :calls GitDiff()<cr>
+nmap <leader>mt <plug>(MergetoolToggle)
 
 filetype indent on      " load filetype-specific indent files
 " turn off search highlight
@@ -84,6 +85,9 @@ nnoremap <silent> + :exec "resize +1"<CR>
 nnoremap <silent> - :exec "resize -1"<CR>
 nmap <silent> H gT
 nmap <silent> L gt
+" netrw can be a dick about <c-l>
+" see https://stackoverflow.com/questions/33351179/how-to-rewrite-existing-vim-key-bindings
+nmap <unique> <c-a-r> <Plug>NetrwRefresh
 
 " highlight last inserted text
 nnoremap gV `[v`]
