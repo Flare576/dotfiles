@@ -19,8 +19,8 @@ issuetype: {{ .fields.issuetype.name }}
 {{if .fields.assignee -}}
 assignee: {{ .fields.assignee.name }}
 {{end -}}
-{{if .fields.customfield_19392 -}}
-reviewer: {{ .fields.customfield_19392.name }}
+{{if .fields.customfield_19359 -}}
+reviewer: {{ .fields.customfield_19359.name }}
 {{end -}}
 reporter: {{ if .fields.reporter }}{{ .fields.reporter.name }}{{end}}
 {{if .fields.customfield_10110 -}}
