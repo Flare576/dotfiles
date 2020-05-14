@@ -9,7 +9,7 @@ export PATH="/usr/local/bin:${PATH}"
 #bindkey 'jk' vi-cmd-mode
 export KEYTIMEOUT=2
 export EDITOR=vim
-export CHEAT_CONFIG_PATH="$HOME/dotfiles/.cheat/conf.yml"
+export CHEAT_CONFIG_PATH="$HOME/dotfiles/cheat/conf.yml"
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
@@ -73,6 +73,15 @@ function prettyDate() {
 
 function wweather() {
   fwatch 600 weather
+}
+
+function svtop() {
+  if command -v vtop; then
+    vtop
+  else
+    npm i -g vtop
+    vtop
+  fi
 }
 
 function wdate() {
