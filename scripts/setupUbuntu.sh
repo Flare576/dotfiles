@@ -10,7 +10,6 @@ if test ! $(which brew); then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
-  brew install gcc
 fi
 # Pull the rest of the project
 cd $HOME
