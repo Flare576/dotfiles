@@ -7,12 +7,17 @@ minimal messing around.
 bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupMac.sh)"
 ```
 
-Or a new Linux (Mint for now)
+Or a new Mint Linux
 
 ```
 bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupMint.sh)"
 ```
 
+Or a new Ubuntu Linux
+
+```
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/ubuntu/master/scripts/setupUbuntu.sh)"
+```
 If not setting up a new machine I `git clone` directly into `~` and run the script for the thing(s) I want to setup:
 
 ```
