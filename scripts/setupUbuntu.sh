@@ -5,12 +5,13 @@
 # Install Homebrew
 if test ! $(which brew); then
   echo "Installing Homebrew requirements"
+  export HOMEBREW_PREFIX_DEFAULT=/home/linuxbrew
   # sudo apt-get -y install build-essential curl file git
   echo "Installing Homebrew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
-  brew install llvm
+  brew install gcc
 fi
 # Pull the rest of the project
 cd $HOME
