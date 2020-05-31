@@ -6,7 +6,6 @@ if test ! $(which brew); then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-
 # Install Good Stuff
 brews=(
   bat
@@ -23,9 +22,7 @@ brews=(
   zsh
 )
 
-if [ "$isLinux" -eq "1" ] ; then
-  echo "eval \$($(brew --prefix)/bin/brew shellenv)" >> $HOME/dotfiles/.doNotCommit
-else
+if [ "$isLinux" -ne "1" ] ; then
   brews+=(cask git kubectx mas)
 fi
 
