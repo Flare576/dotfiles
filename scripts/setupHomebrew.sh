@@ -8,6 +8,7 @@ fi
 
 # Install Good Stuff
 brews=(
+  zsh
   bat
   cheat
   git-secrets
@@ -19,7 +20,6 @@ brews=(
   the_silver_searcher
   vim
   watch
-  zsh
 )
 
 if [ "$isLinux" -ne "1" ] ; then
