@@ -29,7 +29,7 @@ sh dotfiles/scripts/setupOmz.sh # Oh My Zshell goes deliciously with Zsh
 sh dotfiles/scripts/setupIterm.sh # I prefer iTerm over Terminal or other solutions
 ```
 
-> Note: `setupLinks.sh` also brings in [Flare576/scripts](https://github.com/Flare576/scripts); you should check there
+> Note: `setupScripts.sh` also brings in [Flare576/scripts](https://github.com/Flare576/scripts); you should check there
 for details on what all comes with it!
 
 If I also want to install all the apps I use frequently, I'll run
