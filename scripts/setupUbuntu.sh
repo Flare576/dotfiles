@@ -7,7 +7,7 @@ if test ! $(which brew); then
   echo "Installing Homebrew requirements"
   sudo apt-get -y install build-essential
   echo "Installing Homebrew"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" < /dev/null
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
   echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
 fi
