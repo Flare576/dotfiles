@@ -14,6 +14,9 @@ fi
 # Pull the rest of the project
 cd $HOME
 git clone https://github.com/Flare576/dotfiles.git
+# TODO: remove next 2 lines
+git fetch
+git checkout ubuntu
 
 # Install Homebrew and applications
 bash $HOME/dotfiles/scripts/setupHomebrew.sh
