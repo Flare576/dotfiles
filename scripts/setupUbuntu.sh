@@ -36,9 +36,6 @@ bash $HOME/dotfiles/scripts/setupGit.sh
 # Setup Oh-My-Zsh
 bash $HOME/dotfiles/scripts/setupOmz.sh
 
-# Setup terminal
-bash $HOME/dotfiles/scripts/setupGnome.sh
-
 # Setup VIM
 bash $HOME/dotfiles/scripts/setupVim.sh
 
