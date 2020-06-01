@@ -31,7 +31,7 @@ brew update
 brew install ${brews[@]}
 
 echo "Grabbing Cheatsheets"
-git clone git@github.com:cheat/cheatsheets.git $HOME/dotfiles/.cheat.community/
+git clone https://github.com/cheat/cheatsheets.git $HOME/dotfiles/.cheat.community/
 
 
 # K9s is an amazing Kubernetes manager
