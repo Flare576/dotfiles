@@ -9,13 +9,13 @@ fi
 # Install Good Stuff
 brews=(
   zsh
+  python
+  pipenv
   bat
   cheat
   git-secrets
   hub
   nvm
-  pipenv
-  python
   shellcheck
   the_silver_searcher
   vim
