@@ -3,7 +3,7 @@
 
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="cobalt2"
-plugins=(git extract node npm z zsh-better-npm-completion kubectl)
+plugins=(git extract node npm yarn z zsh-better-npm-completion kubectl)
 
 export PATH="${HOME}/.nvm/versions/node/v5.9.0/bin:/usr/bin/env:${PATH}"
 

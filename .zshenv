@@ -63,12 +63,29 @@ function weather() {
 }
 
 function prettyDate() {
-  echo
-  echo $MY_LOC_NAME
+  echo "$MY_LOC_NAME"
   TZ=$MY_LOC_TZ date "+%a %b %e %H:%M:%S %Z"
-  echo
-  echo $REMOTE_LOC_NAME
+  echo "$REMOTE_LOC_NAME"
   TZ=$REMOTE_LOC_TZ date "+%a %b %e %H:%M:%S %Z"
+  echo
+  # Covid date is marked by the start of the first discovery
+  discoverS=$(date -j -f "%b %d %Y %H:%M:%S" "Nov 17 2019 0:0:00" +%s)
+  # Nice to track days since America gave a fuck
+  quarentineS=$(date -j -f "%b %d %Y %H:%M:%S" "Mar 14 2020 0:0:00" +%s)
+  # 2012 was a leap year (like 2020) that started on a day that matches day names
+  similarCalS=$(date -j -f "%b %d %Y %H:%M:%S" "Jan 1 2012 0:0:00" +%s)
+  # needed for maths
+  realNowS=$(date +%s)
+
+  secondsPassedZeroDay=$((realNowS - discoverS))
+  secondsPassedQuar=$((realNowS - quarentineS))
+
+  now=$((similarCalS + secondsPassedZeroDay))
+  quarentine=$((similarCalS + secondsPassedQuar))
+
+  cdate=$(date -r $now "+%a %b %e 0AC  %H:%M:%S")
+  echo "$cdate"
+  echo "Quarantine: $((secondsPassedQuar / 86400)) days"
 }
 
 function wweather() {
