@@ -6,8 +6,6 @@ if test ! $(which brew); then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-# perl is a pre-req for a lot of stuff, and it's having issues on WSL: https://github.com/Homebrew/linuxbrew-core/issues/4808
-
 # Install Good Stuff
 brews=(
   zsh
@@ -22,6 +20,7 @@ brews=(
   the_silver_searcher
   vim
   watch
+  jq
 )
 
 if [ "$isLinux" -ne "1" ] ; then
