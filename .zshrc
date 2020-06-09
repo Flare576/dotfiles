@@ -13,8 +13,7 @@ source $ZSH/oh-my-zsh.sh
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Jira cli auto complete
-eval "$(jira --completion-script-zsh)"
-
+eval "$(jira --completion-script-zsh > /dev/null 2>&1)"
 #Setup NVM
 export NVM_DIR="$HOME/.nvm"
 . "$(brew --prefix nvm)/nvm.sh"

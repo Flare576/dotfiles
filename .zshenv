@@ -7,6 +7,7 @@ export PATH="/usr/local/bin:${PATH}"
 
 #bindkey -v
 #bindkey 'jk' vi-cmd-mode
+setopt PUSHDSILENT
 export KEYTIMEOUT=2
 export EDITOR=vim
 export CHEAT_CONFIG_PATH="$HOME/dotfiles/.cheat/conf.yml"
