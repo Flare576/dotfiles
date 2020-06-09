@@ -209,7 +209,7 @@ custom-commands:
         short: s
         default: "Ready for Test"
     script: |
-      {{jira}} trans{{if options.comment}} -m "{{options.comment}}"{{end}} "{{options.state}}" {{args.ISSUE}}
+      {{jira}} trans{{if options.comment}} -m "{{options.comment}}"{{end}} -t done "{{options.state}}" {{args.ISSUE}}
 # HELPERS
   - name: cookie
     args:

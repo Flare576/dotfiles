@@ -36,6 +36,9 @@ priority: {{ .fields.priority.name }}
 {{if .fields.labels -}}
 labels: {{ join ", " .fields.labels }}
 {{end -}}
+{{if .fields.customfield_20007 -}}
+testing: {{ .fields.customfield_20007 }}
+{{end -}}
 description: |
   {{ or .fields.description "" | indent 2 }}
 {{if .fields.comment.comments}}
