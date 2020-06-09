@@ -182,7 +182,8 @@ The last thing I want to mention is that all of the views you see are 100% confi
 #### Kubernetes
 | Command | Params | Result |
 |---------|--------|--------|
-| kc | \* | alias to `kubectl`, so whatever you pass to kubectl |
+| k | \* | alias to `kubectl`, so whatever you pass to kubectl |
+| klog | none | call kubelogin to authenticate in browser for current context |
 | kcw | [namepace] | Watch the pods in context, refreshing 2sec, optionally grepping results |
 | kcp | [namespace] | view pods in context, optionally grepping results |
 | kcd\* | <namespace pod> | describe the pod |

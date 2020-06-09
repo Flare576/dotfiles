@@ -1,4 +1,5 @@
-alias kc='kubectl'
+alias k='kubectl'
+alias klog='kubelogin'
 alias kcp='kubectl get pods -o wide --all-namespaces | grep $1' 
 function kcl() {
   if [[ -z $2 ]]; then
