@@ -60,7 +60,7 @@ nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 nnoremap <silent> <leader>ws :%s/\s\+$//g<CR>
 
 " Take the jest coverage and convert it to PR format
-let @c='kkBt|jjdET|jjd'
+let @c=':set nowrapkkBt|jjdET|jjd:set wrap'
 
 " Take a row from postgres with headers and make an insert sequelize line
 let @v='I|jk:s/\v\s+\|/|/g:s/\v\|\s+/|/g:s/\v\|([^\|]*)/''\1'', /g::silent! s/\v''''/NULL/gExxa)jk'
@@ -147,4 +147,3 @@ function GitDiff()
     :silent execute '!git diff --color=always -- ' . expand('%:p') . ' | less --RAW-CONTROL-CHARS'
     :redraw!
 endfunction
-
