@@ -16,8 +16,8 @@ if [ -n "$(command -v bat)" ] ; then
 else
   viewer="cat"
 fi
-
 cat<<END
+authentication-method: api-token
 custom-commands:
   - name: workon
     aliases: ['w']
