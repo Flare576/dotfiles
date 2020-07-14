@@ -7,12 +7,17 @@ minimal messing around.
 bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupMac.sh)"
 ```
 
-Or a new Linux (Mint for now)
+Or a new Mint Linux
 
 ```
 bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupMint.sh)"
 ```
 
+Or a new Ubuntu Linux
+
+```
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupUbuntu.sh)"
+```
 If not setting up a new machine I `git clone` directly into `~` and run the script for the thing(s) I want to setup:
 
 ```
@@ -24,7 +29,7 @@ sh dotfiles/scripts/setupOmz.sh # Oh My Zshell goes deliciously with Zsh
 sh dotfiles/scripts/setupIterm.sh # I prefer iTerm over Terminal or other solutions
 ```
 
-> Note: `setupLinks.sh` also brings in [Flare576/scripts](https://github.com/Flare576/scripts); you should check there
+> Note: `setupScripts.sh` also brings in [Flare576/scripts](https://github.com/Flare576/scripts); you should check there
 for details on what all comes with it!
 
 If I also want to install all the apps I use frequently, I'll run

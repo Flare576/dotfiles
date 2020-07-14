@@ -6,26 +6,24 @@ if test ! $(which brew); then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-
 # Install Good Stuff
 brews=(
+  zsh
+  python
+  pipenv
   bat
   cheat
   git-secrets
   hub
   nvm
-  pipenv
-  python
   shellcheck
   the_silver_searcher
   vim
   watch
-  zsh
+  jq
 )
 
-if [ "$isLinux" -eq "1" ] ; then
-  echo "eval \$($(brew --prefix)/bin/brew shellenv)" >> $HOME/dotfiles/.doNotCommit
-else
+if [ "$isLinux" -ne "1" ] ; then
   brews+=(cask git kubectx mas)
 fi
 
@@ -34,7 +32,7 @@ brew update
 brew install ${brews[@]}
 
 echo "Grabbing Cheatsheets"
-git clone git@github.com:cheat/cheatsheets.git $HOME/dotfiles/.cheat.community/
+git clone https://github.com/cheat/cheatsheets.git $HOME/dotfiles/.cheat.community/
 
 
 # K9s is an amazing Kubernetes manager
