@@ -16,7 +16,7 @@ bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/
 Or a new Ubuntu Linux
 
 ```
-bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/ubuntu/scripts/setupUbuntu.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupUbuntu.sh)"
 ```
 If not setting up a new machine I `git clone` directly into `~` and run the script for the thing(s) I want to setup:
 
