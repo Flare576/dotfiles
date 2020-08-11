@@ -54,6 +54,27 @@ custom-commands:
         default: \$JIRA_PROJECT
     script: |-
       {{jira}} list -t ISuStRA --query "resolution = unresolved and assignee=currentuser() ORDER BY created"
+  - name: kanban
+    aliases: ['k']
+    help: Shows stories on curent board
+    args:
+      - name: PROJECT
+        help: Filter on a Project & Component if set, defaults to \$JIRA_PROJECT
+        default: \$JIRA_PROJECT
+    options:
+      - name: text
+        short: t
+        help: Search the text of the ticket for this value
+      - name: all
+        short: a
+        type: BOOL
+        help: Include Done, Dead, and Sign Off stories
+      - name: component
+        short: c
+        help: Filter on a component, defaults to \$JIRA_COMPONENT
+        default: \$JIRA_COMPONENT
+    script: |-
+      {{jira}} list -t ISuStRA --query "project={{args.PROJECT}} {{if not options.all}} and status NOT IN (\"Signoff\",\"Done\",\"Dead\",\"Sign Off\"){{end}} {{if options.component}} and component = \"{{options.component}}\"{{end}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee" -f "key,status,assignee,customfield_19359,customfield_19392,summary"
   - name: sprint
     aliases: ['s']
     help: Shows stories in curent sprint
