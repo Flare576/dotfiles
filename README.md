@@ -187,16 +187,14 @@ The last thing I want to mention is that all of the views you see are 100% confi
 | vd | edit(vi) `dotfiles` root dir |
 
 #### Kubernetes
-| Command | Params | Result |
-|---------|--------|--------|
-| k | \* | alias to `kubectl`, so whatever you pass to kubectl |
-| klog | none | call kubelogin to authenticate in browser for current context |
-| kcw | [namepace] | Watch the pods in context, refreshing 2sec, optionally grepping results |
-| kcp | [namespace] | view pods in context, optionally grepping results |
-| kcd\* | <namespace pod> | describe the pod |
-| kcsh\* | <namespace pod> | ssh into the pod
-| kced\* | <namespace> | edit deployment for namespace |
-> \*note: these commands are designed for you to copy/paste the left-two columns from `kcp` or `kcw` and paste them in as their arguments
+| Command | Params    | Result                                                        |
+|---------|-----------|---------------------------------------------------------------|
+| k       | see docs  | alias to `kubectl`, so whatever you pass to kubectl           |
+| k9s     | see docs  | UI for K8s. You're welcome                                    |
+| klog    | none      | call kubelogin to authenticate in browser for current context |
+| kcon    | context   | alias to `kubectl config use-context`                         |
+| kcons   | none      | alias to `kubectl config get-context`                         |
+| kn      | namespace | alias to `kubectl config set-context --current --namespace`   |
 
 ### Tools
 
