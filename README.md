@@ -78,6 +78,7 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Mode | Keys | Actions |
 |------|------|---------|
 | Visual | 'y | yank selected to mac clipboard |
+| Visual |'uq | Removes quotes from selected text
 | Normal | 'd | Diff current buffer against on-disk file (changes since last save)
 | Normal | 'D | Diffs visible windows against each other
 | Normal | '<space> | turns off search highlighting
@@ -93,6 +94,7 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Normal | 'h | set Vim PWD to current directory (set home)
 | Normal | 'a | fuzzy search (Silver Searcher) for files under `pwd`
 | Normal | ctrl+p | brings up file search under `pwd`
+| Normal | @y | converts "Describe Table" and converts to YAML (beta)
 
 ##### Editing with _style_ in Jira
 
