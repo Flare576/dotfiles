@@ -43,6 +43,8 @@ nnoremap <silent> <leader>D :windo diffthis<CR>
 " enables Leader + dg to diff currnt buffer against git
 nnoremap <leader>dg :calls GitDiff()<cr>
 nmap <leader>mt <plug>(MergetoolToggle)
+" enables Leader + uq to remove quotes from selection
+vnoremap <leader>uq :s/\v"([^"]+)"/\1/g<CR>
 
 filetype indent on      " load filetype-specific indent files
 " turn off search highlight
@@ -65,6 +67,9 @@ let @c=':set nowrapkkBt|jjdET|jjd:set wrap'
 " Take a row from postgres with headers and make an insert sequelize line
 let @v='I|jk:s/\v\s+\|/|/g:s/\v\|\s+/|/g:s/\v\|([^\|]*)/''\1'', /g::silent! s/\v''''/NULL/gExxa)jk'
 let @p='OAOAI|jk:s/\v\s+\|/|/g:s/\v\|\s+/|/g:s/\v\|([^\|]*)/\1, /gI(jkExxa) VALUES (jkOBdd@vOAEJx'
+" Take a table def from `describe table` and convert to YAML
+let @y=':%s/\v^\|\s*([^ ]+)\s*\|\s*([^ ]+)\s*\|\s*([^ ]+)\s*\|\s*([^ ]*)\s*\|\s*([^ ]*)\s*\|\s*(\w[^\|]+|)\s+\|/  - field_name: \1\r    description:\r    type: \2\r    nullable: \3\r    key: \4\r    default: \5\r    extra: \6'
+
 
 " move to beginning/end of line
 noremap B ^
