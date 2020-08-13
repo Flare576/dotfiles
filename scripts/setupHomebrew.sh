@@ -17,6 +17,7 @@ brews=(
   hub
   nvm
   shellcheck
+  tmux
   the_silver_searcher
   vim
   watch

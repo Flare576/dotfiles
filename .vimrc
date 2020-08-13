@@ -2,6 +2,7 @@ execute pathogen#infect()
 syntax enable
 set shell=zsh           " bring ZShell config in
 let mapleader=","       " leader is comma
+set t_Co=256            " compatability with tmux: 256 colors
 colorscheme badwolf     " try it out
 
 " highlights characterse over 120 width
@@ -84,6 +85,8 @@ nmap <silent> <C-j> :wincmd j<CR>
 nmap <silent> <C-k> :wincmd k<CR>
 nmap <silent> <C-h> :wincmd h<CR>
 nmap <silent> <C-l> :wincmd l<CR>
+nmap <silent>  :spli<CR>
+nmap <silent>  :vspli<CR>
 nnoremap <silent> > :exec "vertical resize +1"<CR>
 nnoremap <silent> < :exec "vertical resize -1"<CR>
 nnoremap <silent> + :exec "resize +1"<CR>

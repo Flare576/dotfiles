@@ -34,3 +34,4 @@ killall Finder
 killall Dock
 killall SystemUIServer
 
+sh $HOME/dotfiles/scripts/reassignCapsLock.sh
