@@ -12,7 +12,7 @@ if [[ "$dest" != "skip" ]] ; then
 
   config="${HOME}/dotfiles/.doNotCommit"
   cat<<END >> ${config}
-FLARE_SCRIPTS="$dest"
+export FLARE_SCRIPTS="$dest"
 fpath=(\$FLARE_SCRIPTS/shell \$fpath)
 export PATH="\$FLARE_SCRIPTS/shell:\$FLARE_SCRIPTS/js:\${PATH}"
 END
