@@ -22,7 +22,7 @@ If not setting up a new machine I `git clone` directly into `~` and run the scri
 
 ```
 sh dotfiles/scripts/setupRepo.sh # You should absoultey run this file to help prevent leaking secrets
-sh dotfiles/scripts/setupLinks.sh # Symlinks files to ~ 
+sh dotfiles/scripts/setupLinks.sh # Symlinks files to ~
 sh dotfiles/scripts/setupScripts.sh # pull scripts and sets up paths
 sh dotfiles/scripts/setupVim.sh # Yes, this sets up vim
 sh dotfiles/scripts/setupOmz.sh # Oh My Zshell goes deliciously with Zsh
@@ -42,12 +42,14 @@ sh dotfiles/scripts/setupCasks.sh # Check the script for details
 # Sure man, but what do they DO?!
 
 You can read each of the scripts for details of how/what _they_ do, but as far as what YOU can do, here's a breakdown:
+- [Hotkey Mentality](#Hotkey-Mentality)
 - [vimrc](#vim-config-galore)
   - [Lots of custom config](#hand-picked-values)
   - [Plugins](#pathogen-driven-plugins)
   - [Hotkeys](#daily-hot-keys)
   - [Vim + Jira Hotkeys](#editing-with-style-in-jira)
   - [Quick-edit Hotkeys](#dot-file-hot-keys)
+- [tmux](#tmux-config-galore)
 - Jira Awesomeness
   - [Jira Setup](#i-want-that-jira-cli-awesomeness)
   - [Jira Commands](#jira)
@@ -57,6 +59,21 @@ You can read each of the scripts for details of how/what _they_ do, but as far a
 - [Some fun autocompletes](#setup-keyboard-replacements)
 
 ## What do I get?
+
+### Hotkey Mentality
+
+There's a lot going on here, I know. Looking at all these lists is enough to make most folks close the browser tab, but bear with me for a moment.
+
+The most important part of program/tool is, in my opinion, getting around. For my configs, I've settled on a "vim-style" approach to this, which means using H, J, K, and L to move Left, Down, Up, and Right. Combining these movements with different modifiers makes up the bulk of getting around!
+
+|  Modifier  | App |         Notes            |
+|------------|------|-------------------------|
+| Ctrl       | Vim  | Moves between *Buffers*
+| Shift      | Vim  | Moves between *Tabs*
+| Alt        | tmux | Moves between *panes*
+| Shift+Ctrl | tmux | Moves between *Windows*
+
+As a bonus: `_` and `|` plus the above modifiers also splits/creates the thing it navigates horizontally or vertically!
 
 ### vim config galore!
 
@@ -87,6 +104,8 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Insert | jk | shortcut to Escape
 | Normal | B & E | shortcuts for `^` and `$`
 | Normal | ctrl + j, k, h, l | change focus between windows
+| Normal | ctrl + _ | split window horizontally
+| Normal | ctrl + \| | split window vertically
 | Normal | H & L | Move between tabs
 | Normal | >, <, +, - | resize current window
 | Normal | gV | highlight last inserted text
@@ -113,6 +132,19 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Normal | sv | Source .vimrc in open vim instance
 | Normal | ej | Edit .jira.d/config.yml in new window
 | Normal | ed | Edit dotfiles root folder in new window
+
+### tmux hotkeys galore
+|  Mode   |    Keys   | Actions |
+|---------|-----------|---------|
+| Default | Ma h, j, k, l  | Resize pane 2 units in given direction
+| Default | M + h, j, k, l | Switch to pane given direction
+| Default | M + \, -       | New horizontal, vertical split
+| Default | M +⇧ + \|, _   | New window
+| Default | M +⇧ + K       | Switch to the "last" window
+| Default | M +⇧ + H, L    | Switch to window to the left/right
+| Default | M +⇧ + :       | tmux command prompt
+| Default | C-k            | clear buffer
+| Default | M-Enter        | Maximize/Restore current pane
 
 ## I want that Jira CLI Awesomeness
 This script will get you all setup (assuming you cloned this project to ~/dotfiles)
