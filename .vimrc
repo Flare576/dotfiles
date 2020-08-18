@@ -4,6 +4,8 @@ set shell=zsh           " bring ZShell config in
 let mapleader=","       " leader is comma
 set t_Co=256            " compatability with tmux: 256 colors
 colorscheme badwolf     " try it out
+" take BG from term/tmux
+ hi Normal guibg=NONE ctermbg=NONE
 
 " highlights characterse over 120 width
 set cc=120
@@ -95,7 +97,7 @@ nmap <silent> H gT
 nmap <silent> L gt
 " netrw can be a dick about <c-l>
 " see https://stackoverflow.com/questions/33351179/how-to-rewrite-existing-vim-key-bindings
-nmap <unique> <c-a-r> <Plug>NetrwRefresh
+nmap <silent> <unique> <c-a-r> <Plug>NetrwRefresh
 
 " highlight last inserted text
 nnoremap gV `[v`]

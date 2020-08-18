@@ -26,7 +26,7 @@ sh dotfiles/scripts/setupLinks.sh # Symlinks files to ~
 sh dotfiles/scripts/setupScripts.sh # pull scripts and sets up paths
 sh dotfiles/scripts/setupVim.sh # Yes, this sets up vim
 sh dotfiles/scripts/setupOmz.sh # Oh My Zshell goes deliciously with Zsh
-sh dotfiles/scripts/setupIterm.sh # I prefer iTerm over Terminal or other solutions
+sh dotfiles/scripts/setupLocations.sh # `wdate` and `wweather` use location information
 ```
 
 > Note: `setupScripts.sh` also brings in [Flare576/scripts](https://github.com/Flare576/scripts); you should check there
@@ -236,17 +236,20 @@ makes my life easier:
 1) Homebrew / Cask (https://brew.sh/)
 1) `bat` replaces `cat` (https://github.com/sharkdp/bat) †
 1) `git` + `hub` (https://hub.github.com/) †
-1) `pyenv` (w/ python 3.7.2) (https://github.com/pyenv/pyenv) †
+1) `pipenv` (w/ python 3.7.2) (https://pipenv-fork.readthedocs.io/en/latest/) †
 1) `nvm` (https://github.com/nvm-sh/nvm) †
 1) `the_silver_searcher` (https://github.com/ggreer/the_silver_searcher) †
-1) iTerm2 (https://www.iterm2.com/) ††
 1) ZSH (https://www.zsh.org/) †
 1) `shellcheck` (https://www.shellcheck.net/) †
 1) `git-secrets` (enabled on this project) (https://github.com/awslabs/git-secrets) †
 1) `mas` (cli app store tool) (https://github.com/mas-cli/mas) †
-1) `cheat` (https://github.com/cheat/cheat) 
+1) `vim` (grab the most recent version) (https://www.vim.org/) †
+1) `tmux` (panel/window manager in terminal) (https://github.com/tmux/tmux/wiki) †
+1) `cheat` (https://github.com/cheat/cheat)
+1) `watch` (re-run commands on timer) (https://linux.die.net/man/1/watch)
+1) `jq` (process JSON output) (https://stedolan.github.io/jq/)
 1) All my Vim config; sorry, you're gonna have to read it for details.
-> † Installable with Homebrew  
+> † Installable with Homebrew
 > †† Installable with Homebrew Cask
 
 # Setup keyboard replacements
