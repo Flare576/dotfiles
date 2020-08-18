@@ -35,3 +35,5 @@ git clone git@github.com:samoshkin/vim-mergetool.git
 # tag support
 git clone https://github.com/ludovicchabant/vim-gutentags.git
 git clone https://github.com/majutsushi/tagbar.git
+# active/inactive color update
+git clone https://github.com/TaDaa/vimade

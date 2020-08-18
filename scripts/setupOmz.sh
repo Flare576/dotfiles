@@ -8,7 +8,10 @@ curl -sL http://install.ohmyz.sh | sh
 cd $HOME/.oh-my-zsh/themes
 curl -LSso cobalt2.zsh-theme https://raw.githubusercontent.com/wesbos/Cobalt2-iterm/master/cobalt2.zsh-theme
 cd $HOME/.oh-my-zsh/custom/plugins/
+
+# NVM and Node Optimizations
 git clone https://github.com/lukechilds/zsh-better-npm-completion
+git clone https://github.com/lukechilds/zsh-nvm
 
 cd /tmp
 git clone https://github.com/powerline/fonts
