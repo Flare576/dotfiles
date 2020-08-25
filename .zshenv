@@ -27,6 +27,8 @@ alias pi='pipenv'
 alias py='pipenv run python'
 alias cat='bat'
 alias git='hub'
+alias lzy='lazydocker'
+alias lzye='vi /Users/flare576/Library/Application\ Support/jesseduffield/lazydocker/config.yml'
 
 function gs() {
   git submodule foreach $1
