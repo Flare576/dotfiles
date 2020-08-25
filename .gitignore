@@ -14,4 +14,4 @@ server.log
 cookies.js
 .ctags.d
 /cheat/community
-.env
+.env*
