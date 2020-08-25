@@ -6,16 +6,16 @@ ln -fs $HOME/dotfiles/.vimrc $HOME
 mkdir -p ~/.vim/autoload ~/.vim/bundle
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 cd ~/.vim/bundle
+pick
+
+
+############################## Theme ###########
 # Preferred Theme
 git clone https://github.com/sjl/badwolf.git
-# Formatter for JSON
-git clone https://github.com/elzr/vim-json.git
-# Formatter for Javascript
-git clone https://github.com/pangloss/vim-javascript.git
-# Formmatter for HTML
-git clone https://github.com/vim-scripts/indenthtml.vim.git
-# Formatter for Typescript
-git clone https://github.com/leafgarland/typescript-vim.git
+# active/inactive color update
+git clone https://github.com/TaDaa/vimade
+
+############################## Plugins ###########
 # Silver Searcher in Vim
 git clone https://github.com/rking/ag.vim.git
 # CtrlP (file finder)
@@ -35,5 +35,17 @@ git clone git@github.com:samoshkin/vim-mergetool.git
 # tag support
 git clone https://github.com/ludovicchabant/vim-gutentags.git
 git clone https://github.com/majutsushi/tagbar.git
-# active/inactive color update
-git clone https://github.com/TaDaa/vimade
+# EditorConfig support (see https://editorconfig.org/)
+git clone https://github.com/editorconfig/editorconfig-vim.git
+
+############################## Syntax ###########
+# JSX
+git clone https://github.com/MaxMEllon/vim-jsx-pretty.git
+# JSON
+git clone https://github.com/elzr/vim-json.git
+# Javascript
+git clone https://github.com/pangloss/vim-javascript.git
+# HTML
+git clone https://github.com/vim-scripts/indenthtml.vim.git
+# Typescript
+git clone https://github.com/leafgarland/typescript-vim.git
