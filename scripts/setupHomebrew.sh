@@ -9,7 +9,7 @@ fi
 # Install Good Stuff
 brews=(
   zsh
-  python
+  python # must preceed vim
   pipenv
   bat
   cheat
@@ -22,6 +22,8 @@ brews=(
   vim
   watch
   jq
+  k9s # Any project using K8s
+  lazydocker # Any project using straight Docker
 )
 
 if [ "$isLinux" -ne "1" ] ; then
