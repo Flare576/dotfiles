@@ -94,12 +94,12 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 #### Daily hot keys!
 | Mode | Keys | Actions |
 |------|------|---------|
-| Visual | 'y | yank selected to mac clipboard |
-| Visual |'uq | Removes quotes from selected text
-| Normal | 'd | Diff current buffer against on-disk file (changes since last save)
-| Normal | 'D | Diffs visible windows against each other
-| Normal | '<space> | turns off search highlighting
-| Normal | '/ | Shows the count of your last search
+| Visual | ,y | yank selected to mac clipboard |
+| Visual |,uq | Removes quotes from selected text
+| Normal | ,d | Diff current buffer against on-disk file (changes since last save)
+| Normal | ,D | Diffs visible windows against each other
+| Normal | ,<space> | turns off search highlighting
+| Normal | ,/ | Shows the count of your last search
 | Normal/Visual | j & k | move "visually" up and down, makes soft-wraps easier
 | Insert | jk | shortcut to Escape
 | Normal | B & E | shortcuts for `^` and `$`
@@ -109,11 +109,12 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Normal | H & L | Move between tabs
 | Normal | >, <, +, - | resize current window
 | Normal | gV | highlight last inserted text
-| Normal | 'u | Brings up "Super Undo"
-| Normal | 'h | set Vim PWD to current directory (set home)
-| Normal | 'a | fuzzy search (Silver Searcher) for files under `pwd`
+| Normal | ,u | Brings up "Super Undo"
+| Normal | ,h | set Vim PWD to current directory (set home)
+| Normal | ,a | fuzzy search (Silver Searcher) for files under `pwd`
 | Normal | ctrl+p | brings up file search under `pwd`
 | Normal | @y | converts "Describe Table" and converts to YAML (beta)
+| Visual | <count>,<Tab> | works on range, starts a # comment at column <count>
 
 ##### Editing with _style_ in Jira
 
@@ -234,20 +235,22 @@ Sometimes you just don't want to dig through a bunch of scripts and want to know
 makes my life easier:
 
 1) Homebrew / Cask (https://brew.sh/)
-1) `bat` replaces `cat` (https://github.com/sharkdp/bat) †
-1) `git` + `hub` (https://hub.github.com/) †
-1) `pipenv` (w/ python 3.7.2) (https://pipenv-fork.readthedocs.io/en/latest/) †
-1) `nvm` (https://github.com/nvm-sh/nvm) †
-1) `the_silver_searcher` (https://github.com/ggreer/the_silver_searcher) †
-1) ZSH (https://www.zsh.org/) †
-1) `shellcheck` (https://www.shellcheck.net/) †
-1) `git-secrets` (enabled on this project) (https://github.com/awslabs/git-secrets) †
-1) `mas` (cli app store tool) (https://github.com/mas-cli/mas) †
-1) `vim` (grab the most recent version) (https://www.vim.org/) †
-1) `tmux` (panel/window manager in terminal) (https://github.com/tmux/tmux/wiki) †
-1) `cheat` (https://github.com/cheat/cheat)
-1) `watch` (re-run commands on timer) (https://linux.die.net/man/1/watch)
-1) `jq` (process JSON output) (https://stedolan.github.io/jq/)
+1) `bat` [replaces `cat`] (https://github.com/sharkdp/bat) †
+1) `git` + `hub` [gitHub actions in your CLI] (https://hub.github.com/) †
+1) `pipenv` [w/ python 3.7.2] (https://pipenv-fork.readthedocs.io/en/latest/) †
+1) `nvm` [99 problems, but node versions ain't one] (https://github.com/nvm-sh/nvm) †
+1) `the_silver_searcher` [Bettah than awk] (https://github.com/ggreer/the_silver_searcher) †
+1) ZSH [Bettah than bash] (https://www.zsh.org/) †
+1) `shellcheck` [static analysis on scripts] (https://www.shellcheck.net/) †
+1) `git-secrets` [enabled on this project] (https://github.com/awslabs/git-secrets) †
+1) `mas` [cli app store tool] (https://github.com/mas-cli/mas) †
+1) `vim` [grab the most recent version] (https://www.vim.org/) †
+1) `tmux` [panel/window manager in terminal] (https://github.com/tmux/tmux/wiki) †
+1) `cheat` [CLI Cheat sheets] (https://github.com/cheat/cheat) †
+1) `watch` [re-run commands on timer] (https://linux.die.net/man/1/watch) †
+1) `jq` [process JSON output] (https://stedolan.github.io/jq/) †
+1) `k9s` [CLI UI for K8s] (https://github.com/derailed/k9s) †
+1) `lazydocker` [CLI UI for Docker] (https://github.com/jesseduffield/lazydocker) †
 1) All my Vim config; sorry, you're gonna have to read it for details.
 > † Installable with Homebrew
 > †† Installable with Homebrew Cask
