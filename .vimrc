@@ -105,7 +105,6 @@ nnoremap <silent> < :exec "vertical resize -1"<CR>
 nnoremap <silent> + :exec "resize +1"<CR>
 nnoremap <silent> - :exec "resize -1"<CR>
 
-
 "########################## Others
 " Show count of last find
 nnoremap <leader>/ :%s///gn<CR>
@@ -115,7 +114,11 @@ nnoremap <leader>/ :%s///gn<CR>
 " see https://stackoverflow.com/questions/33351179/how-to-rewrite-existing-vim-key-bindings
 nmap <c-a-r> <Plug>NetrwRefresh
 " Apparently :E only works by default because there's only one command that starts with E... fix that
-command! E Explore
+command! -bang  E Explore<bang>
+command!        VE Vexplore!
+command!        HE Hexplore
+command!        TE Texplore
+
 " Super-undo
 nnoremap <leader>u :GundoToggle<CR>
 " TagBar
@@ -206,7 +209,7 @@ let @y=':%s/\v^\|\s*([^ ]+)\s*\|\s*([^ ]+)\s*\|\s*([^ ]+)\s*\|\s*([^ ]*)\s*\|\s*
 filetype indent on      " load filetype-specific indent files
 
 "########################## JavaScript
-autocmd Filetype javascript setlocal ts=4 sw=2 sts=0 suffixesadd=.js,.jsx
+autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 suffixesadd=.js,.jsx
 autocmd Filetype javascript highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 autocmd Filetype javascript match OverLength /\%121v.\+/
 
