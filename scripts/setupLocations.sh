@@ -8,10 +8,10 @@ if [[ $doit =~ ^[yY] ]] ; then
   echo "Atta kid"
   read -p "What is your current location called? " myname
   read -p "What is your current Zip code? " myzip
-  read -p "What is your current Timezone (e.g., America/Chicago)? " mytz
+  read -p "What is your current Timezone (See /usr/share/zoneinfo)? " mytz
 
   read -p "What is your remote location called? " remotename
-  read -p "What is your remote location Timezone (e.g., America/Los_Angeles)? " remotetz
+  read -p "What is your remote location Timezone (See /usr/share/zoneinfo)? " remotetz
 
   config="${HOME}/dotfiles/.doNotCommit.locations"
 
