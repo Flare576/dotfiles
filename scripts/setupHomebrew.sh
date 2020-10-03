@@ -14,6 +14,7 @@ brews=(
   bat
   cheat
   git-secrets
+  git
   hub
   nvm
   shellcheck
@@ -25,7 +26,7 @@ brews=(
 )
 
 if [ "$isLinux" -ne "1" ] ; then
-  brews+=(cask git kubectx mas)
+  brews+=(cask kubectx mas)
 fi
 
 echo "Installing brews"
