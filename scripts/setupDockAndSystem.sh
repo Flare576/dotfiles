@@ -26,6 +26,9 @@ defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 defaults write com.apple.menuextra.battery ShowPercent YES
 # Tab through controls of dialog boxes
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+# make repeating keys fast
+defaults write -g InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms)
+defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
 # Disable SmartQuotes
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
