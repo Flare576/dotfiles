@@ -84,7 +84,7 @@ As a bonus: `_` and `|` plus the above modifiers also splits/creates the thing i
 - ag.vim - Silver Searcher... IN VIM
 - ctrlp.vim - Fuzzy file finder!
 - z.vim - The power of Z-script in Vim... not sure I like it yet
-- gundo - Makes traversing the undo tree not suck
+- undotree - Makes traversing the undo tree not suck
 - vim-surround - easily change '' to "" to ` `, with `cs` then the thing that's there, and the thing you want
   - (e.g. 'hello world' to `hello world`, do cs'\`)
 

@@ -120,9 +120,11 @@ command!        HE Hexplore
 command!        TE Texplore
 
 " Super-undo
-nnoremap <leader>u :GundoToggle<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
 " TagBar
 nnoremap <leader>. :TagbarToggle<CR>
+" ZoomWin (fullscreen toggle)
+nnoremap <leader><Enter> <C-w>o
 
 " Note: intentional trailing space on these comamnds
 " open Silver Searcher - Close window with :ccl(ose)

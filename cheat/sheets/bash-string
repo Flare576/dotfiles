@@ -1,0 +1,16 @@
+Bash is strong, but silly
+https://tldp.org/LDP/abs/html/string-manipulation.html
+
+${string/substring/replacement}
+    Replace first match of $substring with $replacement. [2]
+
+${string//substring/replacement}
+    Replace all matches of $substring with $replacement.
+
+${string:position}
+    Extracts substring from $string at $position.
+    If the $string parameter is "*" or "@", then this extracts the positional parameters, starting at $position.
+    Negative numbers start from end of string
+
+${string:position:length}
+    Extracts $length characters of substring from $string at $position.
