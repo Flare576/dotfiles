@@ -4,19 +4,19 @@ I've also included a setup script, mostly for personal use, that will bring a br
 minimal messing around.
 
 ```
-bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupMac.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/OSX/setupMac.sh)"
 ```
 
 Or a new Mint Linux
 
 ```
-bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupMint.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/NIX/setupMint.sh)"
 ```
 
 Or a new Ubuntu Linux
 
 ```
-bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupUbuntu.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/NIX/setupUbuntu.sh)"
 ```
 If not setting up a new machine I `git clone` directly into `~` and run the script for the thing(s) I want to setup:
 
@@ -35,8 +35,7 @@ for details on what all comes with it!
 If I also want to install all the apps I use frequently, I'll run
 ```
 sh dotfiles/scripts/setupHomebrew.sh # Check the script for details
-sh dotfiles/scripts/setupPython.sh # Check the script for details
-sh dotfiles/scripts/setupCasks.sh # Check the script for details
+sh dotfiles/scripts/OSX/setupCasks.sh # Check the script for details
 ```
 
 # Sure man, but what do they DO?!

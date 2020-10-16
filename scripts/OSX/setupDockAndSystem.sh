@@ -33,8 +33,9 @@ defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 # Disable SmartQuotes
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
+sh $HOME/dotfiles/scripts/OSX/reassignCapsLock.sh
+sh $HOME/dotfiles/scripts/OSX/setupTerminalApp.sh
+
 killall Finder
 killall Dock
 killall SystemUIServer
-
-sh $HOME/dotfiles/scripts/reassignCapsLock.sh
