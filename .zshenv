@@ -29,6 +29,7 @@ alias cat='bat'
 alias git='hub'
 alias lzy='lazydocker'
 alias lzye='vi /Users/flare576/Library/Application\ Support/jesseduffield/lazydocker/config.yml'
+alias plcat='plutil -convert xml1 -o -'
 
 function gs() {
   git submodule foreach $1
