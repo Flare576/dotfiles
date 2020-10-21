@@ -7,12 +7,20 @@ Files
 -x File exists and is executable
 
 Math
--eq, -ne, -gt, -ge, -lt, -le, 
+-eq, -ne, -gt, -ge, -lt, -le,
 
 String
 = Equal to
 == Equal to
+!= Not Equal to
 < Less-than, ASCII compare
 > Greater-than, ASCII compare
 -z Zero-length
--n NOT Zero length 
+-n NOT Zero length
+
+String Matching
+[[ $doit =~ ^[yY] ]]
+[[ $passToke == "t"* ]]
+
+Combo
+[ $rock == "true" ] && [ $roll == "true" ]; then
