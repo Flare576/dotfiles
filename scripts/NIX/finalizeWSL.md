@@ -2,12 +2,13 @@
 
 During setup a new folder should have been created at C:\\flarescript_temp, and three files should have been downloaded:
 
-   - Windows. Select all font files in the folder, right-click any of them, then pick *"Install"* from the menu.
 - JetBrainsMono-Regular.ttf
 - wsltty-3.1.4.2-install-x86_64.exe (version may differ)
 
 The font is awesome, and wsltty is a terminal for WSL based on Mintty.
+
 **FROM WINDOWS**:
+> Note: Read the above note
 
 1. Navigate to C:\\flaresscript_temp
 2. Double-click JetBrainsMono-Regular.ttf to install it.
