@@ -35,6 +35,7 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
 sh $HOME/dotfiles/scripts/OSX/reassignCapsLock.sh
 sh $HOME/dotfiles/scripts/OSX/setupTerminalApp.sh
+sh $HOME/dotfiles/scripts/OSX/setupMenuClock.sh
 
 killall Finder
 killall Dock

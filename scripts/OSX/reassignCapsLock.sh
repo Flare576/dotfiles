@@ -1,7 +1,10 @@
 #!/bin/sh
 # "Inspired" by https://apple.stackexchange.com/a/122573
 
+# Bug: if there's no other keyboard, the code to select a keyboard breaks the script
 # Probably a better way to do this...
+echo "Attempting to use UI to set caps lock action..."
+
 osascript -e '
 --reboot system preferences to make GUI state more predictable
 tell application "System Preferences"
@@ -19,11 +22,11 @@ tell application "System Events"
   delay 0.5
   key code 53 --escape
   keystroke "keyboard"
-  delay 0.5
+  delay 1.0
   key code 36 --return
   delay 1.0
   keystroke tab
-  delay 0.1
+  delay 0.5
 
   --Open modifier keys submenu
   repeat 3 times
