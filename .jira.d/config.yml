@@ -6,18 +6,23 @@ echo "issue: ${issue}"
 
 echo "endpoint: https://${JIRA_S_ENDPOINT}"
 echo "project: ${JIRA_S_PROJECT}"
-echo "component: ${JIRA_S_COMPONENT}"
 echo "login: ${JIRA_S_LOGIN}"
 echo "user: ${JIRA_S_USER}"
-echo "API_TOKEN: ${JIRA_API_TOKEN}"
 echo "PREFIX: ${JIRA_S_PREFIX}"
+
+method="session"
+if [ -n "$JIRA_API_TOKEN" ]; then
+  method="api-token"
+  echo "API_TOKEN: ${JIRA_API_TOKEN}"
+fi
+
+viewer="cat"
 if [ -n "$(command -v bat)" ] ; then 
   viewer="bat"
-else
-  viewer="cat"
 fi
+
 cat<<END
-authentication-method: api-token
+authentication-method: $method
 custom-commands:
   - name: workon
     aliases: ['w']
@@ -93,9 +98,9 @@ custom-commands:
       - name: component
         short: c
         help: Filter on a component, defaults to \$JIRA_COMPONENT
-        default: \$JIRA_COMPONENT
+        default: $JIRA_S_COMPONENT
     script: |-
-      {{jira}} list -t ISuStRA --query "sprint IN openSprints(){{if not options.all}} and status NOT IN (\"Signoff\",\"Done\",\"Dead\",\"Sign Off\"){{end}} and project={{args.PROJECT}}{{if options.component}} and component = \"{{options.component}}\"{{end}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee" -f "key,status,assignee,customfield_19359,customfield_19392,summary"
+      {{jira}} list -t ISuStRA --query "sprint IN openSprints(){{if not options.all}} and status IN (\"TO DO\",\"IN PROGRESS\",\"BLOCKED\",\"IN REVIEW\"){{end}} and project={{args.PROJECT}}{{if options.component}} and component = \"{{options.component}}\"{{end}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee" -f "key,status,assignee,customfield_19359,customfield_19392,summary"
   - name: link
     help: Puts the link for JIRA_ISSUE in your clipboard if no ISSUE is provided
     args:
@@ -235,7 +240,7 @@ custom-commands:
   - name: cookie
     args:
       - name: COOKIE
-    help: Set the cookie used to talk to a hosted Jira instance
+    help: Set the cookie used to talk to a hosted Jira instance (inspect network call)
     script: jiraCookie '{{args.COOKIE}}'
   - name: test
     help: prints out Jira-related env vars avaialable during run
