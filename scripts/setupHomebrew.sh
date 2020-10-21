@@ -37,7 +37,9 @@ brew install ${brews[@]}
 echo "Grabbing Cheatsheets"
 git clone https://github.com/cheat/cheatsheets.git $HOME/dotfiles/.cheat.community/
 
-  # Jetbrains Mono is a great font that later scripts use for configuration... Install it
+brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+
+  # Jetbrains Mono is a great font for terminals; install it so it's available on this system
 if [ "$isLinux" -eq "1" ] ; then
   # I don't remember what these are for, commenting out to see what breaks
   # sudo apt-get install python-setuptools
@@ -45,4 +47,3 @@ if [ "$isLinux" -eq "1" ] ; then
 else
   brew cask install homebrew/cask-fonts/font-jetbrains-mono
 fi
-brew install --HEAD universal-ctags/universal-ctags/universal-ctags
