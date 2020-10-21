@@ -1,6 +1,7 @@
 # See https://github.com/robbyrussell/oh-my-zsh/blob/master/templates/zshrc.zsh-template
 # This file is loaded after .zshenv
 
+ZSH_DISABLE_COMPFIX=true
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="cobalt2"
 

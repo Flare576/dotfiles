@@ -10,7 +10,7 @@ export PATH="/usr/local/bin:${PATH}"
 setopt PUSHDSILENT
 export KEYTIMEOUT=2
 export EDITOR=vim
-export CHEAT_CONFIG_PATH="$HOME/dotfiles/cheat/conf.yml"
+export CHEAT_CONFIG_PATH="$HOME/dotfiles/.cheat/conf.yml"
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
@@ -29,6 +29,7 @@ alias cat='bat'
 alias git='hub'
 alias lzy='lazydocker'
 alias lzye='vi /Users/flare576/Library/Application\ Support/jesseduffield/lazydocker/config.yml'
+alias plcat='plutil -convert xml1 -o -'
 
 function gs() {
   git submodule foreach $1

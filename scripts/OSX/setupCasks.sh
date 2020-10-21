@@ -2,14 +2,11 @@
 apps=(
   1password
   1password-cli
-  homebrew/cask-versions/docker-edge
-  dropbox
+  homebrew/docker
   postman
   firefox
-  iterm2
   launchbar
   slack
-  steam
   spotify
   vlc
   google-chrome

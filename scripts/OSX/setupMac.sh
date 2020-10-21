@@ -21,9 +21,6 @@ bash $HOME/dotfiles/scripts/setupHomebrew.sh
 # Install safety precautions around this repo
 bash $HOME/dotfiles/scripts/setupRepo.sh
 
-# Install Python and applications
-bash $HOME/dotfiles/scripts/setupPython.sh
-
 # Link dotFiles
 bash $HOME/dotfiles/scripts/setupLinks.sh
 
@@ -37,13 +34,10 @@ bash $HOME/dotfiles/scripts/setupGit.sh
 bash $HOME/dotfiles/scripts/setupOmz.sh
 
 # Setup application
-bash $HOME/dotfiles/scripts/setupCasks.sh
-
-# Configure iTerm2
-bash $HOME/dotfiles/scripts/setupIterm.sh
+bash $HOME/dotfiles/scripts/OSX/setupCasks.sh
 
 # Setup background and dock settings
-bash $HOME/dotfiles/scripts/setupDockAndSystem.sh
+bash $HOME/dotfiles/scripts/OSX/setupDockAndSystem.sh
 
 # Setup VIM
 bash $HOME/dotfiles/scripts/setupVim.sh

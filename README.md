@@ -4,19 +4,19 @@ I've also included a setup script, mostly for personal use, that will bring a br
 minimal messing around.
 
 ```
-bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupMac.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/OSX/setupMac.sh)"
 ```
 
 Or a new Mint Linux
 
 ```
-bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupMint.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/NIX/setupMint.sh)"
 ```
 
 Or a new Ubuntu Linux
 
 ```
-bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/setupUbuntu.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/NIX/setupUbuntu.sh)"
 ```
 If not setting up a new machine I `git clone` directly into `~` and run the script for the thing(s) I want to setup:
 
@@ -35,8 +35,7 @@ for details on what all comes with it!
 If I also want to install all the apps I use frequently, I'll run
 ```
 sh dotfiles/scripts/setupHomebrew.sh # Check the script for details
-sh dotfiles/scripts/setupPython.sh # Check the script for details
-sh dotfiles/scripts/setupCasks.sh # Check the script for details
+sh dotfiles/scripts/OSX/setupCasks.sh # Check the script for details
 ```
 
 # Sure man, but what do they DO?!
@@ -64,7 +63,7 @@ You can read each of the scripts for details of how/what _they_ do, but as far a
 
 There's a lot going on here, I know. Looking at all these lists is enough to make most folks close the browser tab, but bear with me for a moment.
 
-The most important part of program/tool is, in my opinion, getting around. For my configs, I've settled on a "vim-style" approach to this, which means using H, J, K, and L to move Left, Down, Up, and Right. Combining these movements with different modifiers makes up the bulk of getting around!
+The most important part of a program/tool is, in my opinion, getting around. For my configs, I've settled on a "vim-style" approach to this, which means using H, J, K, and L to move Left, Down, Up, and Right. Combining these movements with different modifiers makes up the bulk of getting around!
 
 |  Modifier  | App |         Notes            |
 |------------|------|-------------------------|
@@ -86,7 +85,7 @@ As a bonus: `_` and `|` plus the above modifiers also splits/creates the thing i
 - z.vim - The power of Z-script in Vim... not sure I like it yet
 - undotree - Makes traversing the undo tree not suck
 - vim-surround - easily change '' to "" to ` `, with `cs` then the thing that's there, and the thing you want
-  - (e.g. 'hello world' to `hello world`, do cs'\`)
+  - (e.g. 'hello world' to "hello world", do `cs'"`)
 
 #### Hand-picked values!
 See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file for line-by-line comments
@@ -199,6 +198,7 @@ The last thing I want to mention is that all of the views you see are 100% confi
 | jira mine | None | see a list of unresolved tickets in PROJECT with you as ASSIGNEE |
 | jira chrome | TicketID\* | Open ticket in Chrome |
 | jira link | None | copies the link to the global ticket to the Mac clipboard |
+| jira cookie | string | Hosted instances sometimes don't provide tokens; use sessions instead with daily cookies |
 | jira i | None | Inspect current global story/ticket for `jira` commands |
 | jira v | TicketID\* | View ticket details in `bat` if available, or `cat` otherwise |
 | jira e | TicketID\* | Edit(vi) |
@@ -218,8 +218,9 @@ The last thing I want to mention is that all of the views you see are 100% confi
 | vz | Edit(vi) .zshrc and .zshenv |
 | sz | Source .zshrc and .zshenv |
 | vd | edit(vi) `dotfiles` root dir |
+| plcat | OSX only: outputs human-readable contents of a `.plist` file |
 
-#### Kubernetes
+#### Kubernetes/Docker
 | Command | Params    | Result                                                        |
 |---------|-----------|---------------------------------------------------------------|
 | k       | see docs  | alias to `kubectl`, so whatever you pass to kubectl           |
@@ -228,28 +229,32 @@ The last thing I want to mention is that all of the views you see are 100% confi
 | kcon    | context   | alias to `kubectl config use-context`                         |
 | kcons   | none      | alias to `kubectl config get-context`                         |
 | kn      | namespace | alias to `kubectl config set-context --current --namespace`   |
+| lzy     | none      | opens lazydocker                                              |
 
 ### Tools
 
-Sometimes you just don't want to dig through a bunch of scripts and want to know what a person suggests. Here's what
-makes my life easier:
+Sometimes you just don't want to dig through a bunch of scripts and want to know what a person suggests. Here's what makes my life easier:
 
 1) Homebrew / Cask (https://brew.sh/)
-1) `bat` [replaces `cat`] (https://github.com/sharkdp/bat) †
+1) `vim` [grab the most recent version] (https://www.vim.org/) †
 1) `git` + `hub` [gitHub actions in your CLI] (https://hub.github.com/) †
+1) `the_silver_searcher` [Bettah than awk] (https://github.com/ggreer/the_silver_searcher) †
+1) `tmux` [panel/window manager in terminal] (https://github.com/tmux/tmux/wiki) †
+1) `bat` [replaces `cat`] (https://github.com/sharkdp/bat) †
+1) `1password` [More secure, cleaner interface] (https://1password.com) ††
+1) `launchbar` [Spotlight kinda sux] (https://www.obdev.at/products/launchbar/index.html) ††
+1) `slack` [Please don't make me use teams] (https://www.slack.com) ††
 1) `pipenv` [w/ python 3.7.2] (https://pipenv-fork.readthedocs.io/en/latest/) †
 1) `nvm` [99 problems, but node versions ain't one] (https://github.com/nvm-sh/nvm) †
-1) `the_silver_searcher` [Bettah than awk] (https://github.com/ggreer/the_silver_searcher) †
 1) ZSH [Bettah than bash] (https://www.zsh.org/) †
 1) `shellcheck` [static analysis on scripts] (https://www.shellcheck.net/) †
 1) `git-secrets` [enabled on this project] (https://github.com/awslabs/git-secrets) †
 1) `mas` [cli app store tool] (https://github.com/mas-cli/mas) †
-1) `vim` [grab the most recent version] (https://www.vim.org/) †
-1) `tmux` [panel/window manager in terminal] (https://github.com/tmux/tmux/wiki) †
 1) `cheat` [CLI Cheat sheets] (https://github.com/cheat/cheat) †
 1) `watch` [re-run commands on timer] (https://linux.die.net/man/1/watch) †
 1) `jq` [process JSON output] (https://stedolan.github.io/jq/) †
 1) `k9s` [CLI UI for K8s] (https://github.com/derailed/k9s) †
+1) `docker` [Container Manager] (https://www.docker.com) ††
 1) `lazydocker` [CLI UI for Docker] (https://github.com/jesseduffield/lazydocker) †
 1) All my Vim config; sorry, you're gonna have to read it for details.
 > † Installable with Homebrew
