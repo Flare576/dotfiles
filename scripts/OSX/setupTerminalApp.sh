@@ -1,4 +1,7 @@
 #!/bin/sh
+# To get this data, run
+# plist $HOME/Library/Preferences/com.apple.Terminal.plist
+# then find the key starting with `<key>Sweetness</key>`
 
 defaults write com.apple.Terminal "Window Settings" -dict-add Sweetness \
   '<dict>
@@ -311,7 +314,7 @@ defaults write com.apple.Terminal "Window Settings" -dict-add Sweetness \
 			AAAAAA2z
 			</data>
 			<key>UseBrightBold</key>
-			<false/>
+			<true/>
 			<key>keyMapBoundKeys</key>
 			<dict>
 				<key>#F739</key>
