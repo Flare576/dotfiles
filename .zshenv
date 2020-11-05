@@ -28,7 +28,7 @@ alias py='pipenv run python'
 alias cat='bat'
 alias git='hub'
 alias lzy='lazydocker'
-alias lzye='vi /Users/flare576/Library/Application\ Support/jesseduffield/lazydocker/config.yml'
+alias lzye='vi $HOME/Library/Application\ Support/jesseduffield/lazydocker/config.yml'
 alias plcat='plutil -convert xml1 -o -'
 
 function gs() {
@@ -98,6 +98,10 @@ function wweather() {
 }
 
 function svtop() {
+  if ! command -v npm; then
+    nvm install stable
+  fi
+
   if command -v vtop; then
     vtop
   else
