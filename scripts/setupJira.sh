@@ -15,6 +15,8 @@ if [[ $doit =~ ^[yY] ]] ; then
   read -p "What do you want to prefix your branches with (usually first name) " prefix
   read -p "If your shortname in Jira is different than you email, what is it? (blank for same) " shortuser
 
+  touch ${HOME}/dotfiles/.jira.d/.jira.issue
+
   if [ -z $shortuser ] ; then
     short=email
   fi
