@@ -172,6 +172,7 @@ nnoremap <silent> <leader>ws :%s/\s\+$//g<CR>
 " highlight last inserted text
 nnoremap gV `[v`]
 " Make right-side notes                 # like this
+" Highlight block, type note start column, then ,<Tab>
 vnoremap <leader><Tab> :<C-U>'<,'>call RightNote()<CR>
 function RightNote()
   if (v:count)
@@ -179,8 +180,8 @@ function RightNote()
   endif
 
   let @m=''
-  :execute "normal! ^f#l\"my$"
-  :execute "normal! " . g:startNote . "A \<Esc>d" . g:startNote . "\|A#\<Esc>\"mpA"
+  :execute "normal! ^t#l\"md$"
+  :execute "normal! " . g:startNote . "A \<Esc>d" . g:startNote . "\|A\<Esc>\"mp"
 endfunction
 
 " Jira green/red/orange text
