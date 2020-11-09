@@ -8,7 +8,7 @@ ZSH_THEME="cobalt2"
 #Setup NVM
 export NVM_COMPLETION=true  # Tab-completion
 export NVM_LAZY_LOAD=true   # Make it fast
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('gac')
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('gac' 'jira')
 
 plugins=(zsh-nvm git extract node npm yarn z zsh-better-npm-completion kubectl)
 
