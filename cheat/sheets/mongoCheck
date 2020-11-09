@@ -1,0 +1,8 @@
+# Will fail if dnspython is not installed, or the system canot be reached, or if pymongo version can't interpret mongodb+srv payload as shard addresses
+from pymongo import MongoClient
+client = MongoClient('mongodb+srv://<username>:<password>@<cluster>.<random>.mongodb.net');
+db = client.testing
+collection = db.test_collection
+table = collection.parties
+table.insert_one({"partyType": "westCoast", "unique": True, "willStop": False})
+

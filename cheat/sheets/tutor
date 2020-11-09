@@ -1,0 +1,27 @@
+# Important files
+Root Folders:
+  - source: {WGU/tutor}/tutor/templates
+  - dest: ~/Library/Application Support/tutor[-plugins]
+    note: files generated during 'tutor config save'
+Files:
+  - path: dest/mongodb_replicaset.yml
+    safeToEdit: True
+    use: Plugin for adding replica set value to mongo-parameterse
+  - path: source/build/opendex/Dockerfile
+    safeToEdit: True
+    use: Used to generate dest/env/build/openedx/Dockerfile
+  - path: dest/config.yml
+    safeToEdit: True
+    use: Holds values that feed into plugins (I think)
+  - path: dest/env/apps/openedx/settings/lms/development.py
+    safeToEdit: False
+    use: Output file from mongo_replicaset.yml and "common_all.py"
+  - path: source/apps/opendex/settings/partials/common_all.py
+    safeToEdit: False
+    use: This and the other files in this folder generate "settings" files in {dest}/env/apps/openedx/settings/lms/
+  - path: source/build/openedx/requirements/private.txt
+    safeToEdit: True
+    use: A Docker build will use this file to install dependencies. ONLY USED DURING 'tutor images build openedx' after 'tutor config save'
+  - path: source/build/openedx/requirements/private-sample.txt
+    safeToEdit: False
+    use: This file is a lie; it's literally an example with no real use.
