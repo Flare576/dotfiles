@@ -1,16 +1,17 @@
 #!/bin/bash
 apps=(
-  1password
-  1password-cli
-  boop
-  firefox
-  google-chrome
-  docker
-  launchbar
-  postman
-  slack
-  spotify
-  vlc
+  1password          # Password Manager!
+  1password-cli      # Still Password Manger... ON CLI!
+  boop               # Small app to let you do quick text/json/etc. tweeks
+  firefox            # I mean, why not!
+  google-chrome      # Like you don't know!
+  docker             # Seriously, it's Docker
+  launchbar          # Spotlight.... only not crap!
+  postman            # Wait a minute mr..... API manager!
+  slack              # An alternative to Microsoft Teams ;)
+  spotify            # Please your earballs!
+  trailer            # Manage Github projects from Notification area!
+  vlc                # For those rare times you need to watch something locally!
 )
 
 echo "Installing Homebrew Casks"
