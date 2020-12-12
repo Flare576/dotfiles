@@ -124,14 +124,27 @@ command!        TE Texplore
 nnoremap <leader>u :UndotreeToggle<CR>
 " TagBar
 nnoremap <leader>. :TagbarToggle<CR>
-" ZoomWin (fullscreen toggle)
-nnoremap <leader><Enter> <C-w>o
+" Zoom / Restore window. Stolen from https://github.com/markstory/vim-zoomwin/blob/master/plugin/zoomwin.vim
+function! s:ZoomToggle() abort
+  if exists('t:zoomed') && t:zoomed
+    execute t:zoom_winrestcmd
+    let t:zoomed = 0
+  else
+    let t:zoom_winrestcmd = winrestcmd()
+    resize
+    vertical resize
+    let t:zoomed = 1
+  endif
+endfunction
+
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <leader><Enter> :ZoomToggle<CR>
 
 " Note: intentional trailing space on these comamnds
 " open Silver Searcher - Close window with :ccl(ose)
 nnoremap <leader>a :Ag! 
 " Z for Vim!
-nnoremap <leader>z :Z 
+nnoremap <leader>z :Zc 
 
 " CtrlP settings
 let g:ctrlp_match_window = 'bottom,order:ttb'
