@@ -29,7 +29,7 @@ git clone https://github.com/terryma/vim-multiple-cursors.git
 # Better undotree
 git clone https://github.com/mbbill/undotree.git
 # Merge tool soooo good
-git clone git@github.com:samoshkin/vim-mergetool.git
+git clone https://github.com/samoshkin/vim-mergetool.git
 # tag support
 git clone https://github.com/ludovicchabant/vim-gutentags.git
 git clone https://github.com/majutsushi/tagbar.git
@@ -48,6 +48,7 @@ git clone https://github.com/vim-scripts/indenthtml.vim.git
 # Typescript
 git clone https://github.com/leafgarland/typescript-vim.git
 # Thesourus... does English count as syntax? ¯\_(ツ)_/¯ 
+echo "Downloading thesaurus..."
 thesDir="$XDG_DATA_HOME"
 [ -z "$thesDir" ] && thesDir="$HOME/.local/share"
 mkdir -p "$thesDir"
