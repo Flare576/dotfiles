@@ -1,4 +1,6 @@
 #!/bin/bash
+# takes 1 param: true to upgrade installed brews
+
 isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
 # Install Homebrew
 if test ! $(which brew); then
@@ -32,10 +34,27 @@ fi
 
 echo "Installing brews"
 brew update
-brew install ${brews[@]}
+for brew in "${brews[@]}"
+do
+  if brew ls --versions "$brew" >/dev/null; then
+    if [ "$1" == "true" ]; then
+      HOMEBREW_NO_AUTO_UPDATE=1 brew upgrade "$brew"
+    fi
+  else
+    HOMEBREW_NO_AUTO_UPDATE=1 brew install "$brew"
+  fi
+done
 
 echo "Grabbing Cheatsheets"
-git clone https://github.com/cheat/cheatsheets.git $HOME/dotfiles/.cheat.community/
+communityDir=$HOME/dotfiles/cheat/community
+
+if [ -d "$communityDir" ]; then
+  pushd "$communityDir"
+  git pull -f
+  popd
+else
+  git clone https://github.com/cheat/cheatsheets.git "$communityDir"
+fi
 
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 
