@@ -1,13 +1,11 @@
 #!/bin/bash
 echo "Linking .vimrc, setting up plugins"
-
+rm -rf "$HOME/.vim/bundle" "$HOME/.vim/autoload"
 ln -fs $HOME/dotfiles/.vimrc $HOME
-# Setup pathogen
-mkdir -p ~/.vim/autoload ~/.vim/bundle
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-cd ~/.vim/bundle
-pick
-
+# vim 8.0+ handles plugin loading
+plugins=~/.vim/pack/plugins/start/
+mkdir -p $plugins
+cd $plugins
 
 ############################## Theme ###########
 # Preferred Theme
@@ -49,3 +47,8 @@ git clone https://github.com/pangloss/vim-javascript.git
 git clone https://github.com/vim-scripts/indenthtml.vim.git
 # Typescript
 git clone https://github.com/leafgarland/typescript-vim.git
+# Thesourus... does English count as syntax? ¯\_(ツ)_/¯ 
+thesDir="$XDG_DATA_HOME"
+[ -z "$thesDir" ] && thesDir="$HOME/.local/share"
+mkdir -p "$thesDir"
+curl -sL -o "$thesDir/thesaurus.txt" http://www.gutenberg.org/files/3202/files/mthesaur.txt

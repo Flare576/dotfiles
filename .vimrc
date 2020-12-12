@@ -6,7 +6,7 @@
 "## Common
 "## Movement
 "## Sizing
-"## Others
+"## Other_mappings
 "# Plugins
 "# Diff_and_Merge
 "# Editing_Tricks
@@ -15,19 +15,20 @@
 "# Filetypes
 "## JavaScript
 "## TypeScript
-"## Others
+"## Other_filetypes
 "# References
 
 "############################## Settings ###########
 
 "########################## Configuration
-execute pathogen#infect()
 syntax enable
+let g:netrw_keepdir=0   " see :help netrw-c
 set shell=zsh           " bring ZShell config in
 let mapleader=","       " leader is comma
 set spelllang=en        " English for spelling!
 " New, better words!
 set spellfile=$HOME/dotfiles/en.utf-8.add
+set thesaurus+=$HOME/.local/share/thesaurus.txt
 
 "########################## Formatting
 set tabstop=2           " number of visual spaces per TAB
@@ -105,7 +106,7 @@ nnoremap <silent> < :exec "vertical resize -1"<CR>
 nnoremap <silent> + :exec "resize +1"<CR>
 nnoremap <silent> - :exec "resize -1"<CR>
 
-"########################## Others
+"########################## Other_mappings
 " Show count of last find
 nnoremap <leader>/ :%s///gn<CR>
 "############################## Plugins ###########
@@ -242,9 +243,9 @@ let g:tagbar_type_typescript = {
   \ 'sort' : 0
 \ }
 
-"########################## Others
+"########################## Other_filetypes
 autocmd Filetype markdown setlocal spell
-autocmd Filetype text setlocal linebreak spell
+autocmd Filetype text setlocal linebreak spell complete+=s wrap formatoptions=1 noexpandtab textwidth=79 formatoptions=qtc
 autocmd BufRead COMMIT_EDITMSG setlocal spell
 
 "############################## References ###########
