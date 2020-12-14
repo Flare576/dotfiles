@@ -41,7 +41,7 @@ sh dotfiles/scripts/OSX/setupCasks.sh # Check the script for details
 # Sure man, but what do they DO?!
 
 You can read each of the scripts for details of how/what _they_ do, but as far as what YOU can do, here's a breakdown:
-- [Hotkey Mentality](#Hotkey-Mentality)
+- [Hotkey Mentality](#hotkey-mentality)
 - [vimrc](#vim-config-galore)
   - [Lots of custom config](#hand-picked-values)
   - [Plugins](#pathogen-driven-plugins)
@@ -76,15 +76,18 @@ As a bonus: `_` and `|` plus the above modifiers also splits/creates the thing i
 
 ### vim config galore!
 
-#### pathogen-driven plugins
-- Badwolf - Beauty!
-- vim-json - Make JSON better!
-- typescript-vim - Make Typescript... less awful
-- ag.vim - Silver Searcher... IN VIM
-- ctrlp.vim - Fuzzy file finder!
-- z.vim - The power of Z-script in Vim... not sure I like it yet
-- undotree - Makes traversing the undo tree not suck
-- vim-surround - easily change '' to "" to ` `, with `cs` then the thing that's there, and the thing you want
+#### Vim v8 Plugins
+- [Badwolf](https://github.com/sjl/badwolf) - Beauty!
+- [vim-airline](https://github.com/vim-airline/vim-airline) - Fast and flexible status line
+- [vim-json](https://github.com/elzr/vim-json) - Make JSON better!
+- [typescript-vim](https://github.com/leafgarland/typescript-vim) - Make Typescript... less awful
+- [ag.vim](https://github.com/rking/ag.vim) - Silver Searcher... IN VIM
+- [ctrlp.vim](https://github.com/kien/ctrlp.vim) - Fuzzy file finder!
+- [z.vim](https://github.com/lingceng/z.vim) - The power of Z-script in Vim
+- [undotree](https://github.com/mbbill/undotree) - Makes traversing the undo tree not suck
+- [gutentags](https://github.com/ludovicchabant/vim-gutentags) + [tagabar](https://github.com/majutsushi/tagbar) - Index your source code and <Ctrl-]> your way to happiness
+- [MergeTool](https://github.com/samoshkin/vim-mergetool) - Makes `git mergetool` way more useful
+- [vim-surround]() - easily change '' to "" to ` `, with `cs` then the thing that's there, and the thing you want
   - (e.g. 'hello world' to "hello world", do `cs'"`)
 
 #### Hand-picked values!
@@ -93,7 +96,7 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 #### Daily hot keys!
 | Mode | Keys | Actions |
 |------|------|---------|
-| Visual | ,y | yank selected to mac clipboard |
+| Visual | ,y | yank selected to OSx clipboard |
 | Visual |,uq | Removes quotes from selected text
 | Normal | ,d | Diff current buffer against on-disk file (changes since last save)
 | Normal | ,D | Diffs visible windows against each other
@@ -105,33 +108,38 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Normal | ctrl + j, k, h, l | change focus between windows
 | Normal | ctrl + _ | split window horizontally
 | Normal | ctrl + \| | split window vertically
+| Normal | ,<Enter> | zoom in/out of buffer
 | Normal | H & L | Move between tabs
 | Normal | >, <, +, - | resize current window
 | Normal | gV | highlight last inserted text
 | Normal | ,u | Brings up "Super Undo"
 | Normal | ,h | set Vim PWD to current directory (set home)
 | Normal | ,a | fuzzy search (Silver Searcher) for files under `pwd`
+| Normal | ,z | Open commonly used folders in current buffer (see [Z](https://github.com/rupa/z))
 | Normal | ctrl+p | brings up file search under `pwd`
 | Normal | @y | converts "Describe Table" and converts to YAML (beta)
 | Visual | <count>,<Tab> | works on range, starts a # comment at column <count>
+| Normal | :VE | Open a new Vertical buffer in Explore mode
+| Normal | :HE | Open a new Horizontal buffer in Explore mode
+| Normal | :TE | Open a new Tab in Explore mode
 
 ##### Editing with _style_ in Jira
 
 | Mode | Keys | Actions |
 |------|------|---------|
-| Insert | 'jg | Starts a Green section
-| Insert | 'jr | Starts a Red section
-| Insert | 'jo | Starts an Orange section
+| Insert | ,jg | Starts a Green section
+| Insert | ,jr | Starts a Red section
+| Insert | ,jo | Starts an Orange section
 
 #### Dot file hot keys!
 | Mode | Keys | Actions |
 |------|------|---------|
-| Normal | ev | Edit .vimrc in new window
-| Normal | ez | Edit .zshrc in new window
-| Normal | ee | Edit .zshenv in new window
-| Normal | sv | Source .vimrc in open vim instance
-| Normal | ej | Edit .jira.d/config.yml in new window
-| Normal | ed | Edit dotfiles root folder in new window
+| Normal | ,ev | Edit .vimrc in new tab
+| Normal | ,ez | Edit .zshrc & .zshenv in new tab w/ split pane
+| Normal | ,et | Edit .tmux.conf in new tab
+| Normal | ,sv | Source .vimrc in open vim instance
+| Normal | ,ej | Edit .jira.d/config.yml in new tab
+| Normal | ,ed | Edit dotfiles root folder in new tab
 
 ### tmux hotkeys galore
 |  Mode   |    Keys   | Actions |
