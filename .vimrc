@@ -35,7 +35,8 @@ set tabstop=2           " number of visual spaces per TAB
 set softtabstop=2       " number of spaces in tab when editing
 set shiftwidth=2        " size of an "indent
 set expandtab           " tabs are spaces
-set showcmd             " Will display the command as it is typed
+set showcmd             " Show info like highlighted row count
+set noshowmode          " Hide mode, shown in airline
 set smarttab            " find next tabstop and insert spaces until it
 
 "########################## Look_and_Feel
@@ -256,9 +257,12 @@ let g:tagbar_type_typescript = {
   \ 'sort' : 0
 \ }
 
+
+
 "########################## Other_filetypes
 autocmd Filetype markdown setlocal spell
-autocmd Filetype text setlocal linebreak spell complete+=s wrap formatoptions=1 noexpandtab textwidth=79 formatoptions=qtc
+autocmd Filetype text setlocal linebreak spell complete+=s wrap formatoptions=1
+      \ noexpandtab textwidth=100 cc=100 formatoptions=qtc
 autocmd BufRead COMMIT_EDITMSG setlocal spell
 
 "############################## References ###########
@@ -268,3 +272,7 @@ autocmd BufRead COMMIT_EDITMSG setlocal spell
 "
 " Using counts in mappings
 " https://jdhao.github.io/2019/04/29/nvim_map_with_a_count/
+"
+" Status line/WordCount
+" https://cromwell-intl.com/open-source/vim-word-count.html
+" https://github.com/vim-airline/vim-airline

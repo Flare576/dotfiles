@@ -12,6 +12,8 @@ cd $plugins
 git clone https://github.com/sjl/badwolf.git
 # active/inactive color update
 git clone https://github.com/TaDaa/vimade
+# Status line gud
+git clone https://github.com/vim-airline/vim-airline
 
 ############################## Plugins ###########
 # Silver Searcher in Vim
