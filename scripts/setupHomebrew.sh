@@ -34,14 +34,15 @@ fi
 
 echo "Installing brews"
 brew update
-for brew in "${brews[@]}"
+for formula in "${brews[@]}"
 do
-  if brew ls --versions "$brew" >/dev/null; then
+  echo "Working on $formula"
+  if brew ls --versions "$formula" >/dev/null; then
     if [ "$1" == "true" ]; then
-      HOMEBREW_NO_AUTO_UPDATE=1 brew upgrade "$brew"
+      HOMEBREW_NO_AUTO_UPDATE=1 brew upgrade "$formula"
     fi
   else
-    HOMEBREW_NO_AUTO_UPDATE=1 brew install "$brew"
+    HOMEBREW_NO_AUTO_UPDATE=1 brew install "$formula"
   fi
 done
 
@@ -56,7 +57,15 @@ else
   git clone https://github.com/cheat/cheatsheets.git "$communityDir"
 fi
 
-brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+uctags="universal-ctags/universal-ctags/universal-ctags"
+
+if brew ls --versions "$uctags" >/dev/null; then
+  if [ "$1" == "true" ]; then
+    brew upgrade --fetch-HEAD universal-ctags/universal-ctags/universal-ctags
+  fi
+else
+  brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+fi
 
   # Jetbrains Mono is a great font for terminals; install it so it's available on this system
 if [ "$isLinux" -eq "1" ] ; then
