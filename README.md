@@ -100,7 +100,7 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Visual |,uq | Removes quotes from selected text
 | Normal | ,d | Diff current buffer against on-disk file (changes since last save)
 | Normal | ,D | Diffs visible windows against each other
-| Normal | ,<space> | turns off search highlighting
+| Normal | ,\<space> | turns off search highlighting
 | Normal | ,/ | Shows the count of your last search
 | Normal/Visual | j & k | move "visually" up and down, makes soft-wraps easier
 | Insert | jk | shortcut to Escape
@@ -108,7 +108,7 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Normal | ctrl + j, k, h, l | change focus between windows
 | Normal | ctrl + _ | split window horizontally
 | Normal | ctrl + \| | split window vertically
-| Normal | ,<Enter> | zoom in/out of buffer
+| Normal | ,\<Enter> | zoom in/out of buffer
 | Normal | H & L | Move between tabs
 | Normal | >, <, +, - | resize current window
 | Normal | gV | highlight last inserted text
@@ -118,7 +118,7 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Normal | ,z | Open commonly used folders in current buffer (see [Z](https://github.com/rupa/z))
 | Normal | ctrl+p | brings up file search under `pwd`
 | Normal | @y | converts "Describe Table" and converts to YAML (beta)
-| Visual | <count>,<Tab> | works on range, starts a # comment at column <count>
+| Visual | \<count>,\<Tab> | works on range, starts a # comment at column <count>
 | Normal | :VE | Open a new Vertical buffer in Explore mode
 | Normal | :HE | Open a new Horizontal buffer in Explore mode
 | Normal | :TE | Open a new Tab in Explore mode
