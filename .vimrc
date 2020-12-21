@@ -22,6 +22,7 @@
 
 "########################## Configuration
 syntax enable
+set exrc                " Allow project-specific .vimrc files THIS CAN BE DANGEROUS
 let g:netrw_keepdir=0   " see :help netrw-c
 set shell=zsh           " bring ZShell config in
 let mapleader=","       " leader is comma
@@ -55,6 +56,7 @@ set smartcase           " if you use upper-case, turn on Case Sensitive
 set hlsearch            " highlight matches
 set foldlevelstart=10   " open most folds by default
 set foldmethod=indent   " Auto-define folds by indentation
+set foldcolumn=2        " Show fold status by line numbers
 set splitbelow          " Open new split windows UNDER current window
 set splitright          " Open new vsplit windows RIGHT of current window
 set switchbuf=split     " open new splits when using :sb, :cc, etc. (or Ag results)
@@ -211,6 +213,7 @@ nnoremap <F5> :bufdo e<CR>
 nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>ez :tabnew ~/dotfiles/.zshrc<CR>:spl ~/dotfiles/.zshenv<CR>
+nnoremap <leader>et :tabnew ~/dotfiles/.tmux.config<CR>
 nnoremap <leader>ej :tabnew ~/dotfiles/.jira.d/config.yml<CR>
 nnoremap <leader>ed :tabnew ~/dotfiles<CR>
 
@@ -260,7 +263,7 @@ let g:tagbar_type_typescript = {
 
 
 "########################## Other_filetypes
-autocmd Filetype markdown setlocal spell
+autocmd Filetype markdown setlocal spell textwidth=100 cc=100
 autocmd Filetype text setlocal linebreak spell complete+=s wrap formatoptions=1
       \ noexpandtab textwidth=100 cc=100 formatoptions=qtc
 autocmd BufRead COMMIT_EDITMSG setlocal spell
