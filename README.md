@@ -70,7 +70,7 @@ The most important part of a program/tool is, in my opinion, getting around. For
 | Ctrl       | Vim  | Moves between *Buffers*
 | Shift      | Vim  | Moves between *Tabs*
 | Alt        | tmux | Moves between *panes*
-| Shift+Ctrl | tmux | Moves between *Windows*
+| Shift+Alt  | tmux | Moves between *Windows*
 
 As a bonus: `_` and `|` plus the above modifiers also splits/creates the thing it navigates horizontally or vertically!
 
@@ -94,34 +94,47 @@ As a bonus: `_` and `|` plus the above modifiers also splits/creates the thing i
 See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file for line-by-line comments
 
 #### Daily hot keys!
+
+Must-know & Navigation
+
 | Mode | Keys | Actions |
 |------|------|---------|
-| Visual | ,y | yank selected to OSx clipboard |
-| Visual |,uq | Removes quotes from selected text
-| Normal | ,d | Diff current buffer against on-disk file (changes since last save)
-| Normal | ,D | Diffs visible windows against each other
-| Normal | ,\<space> | turns off search highlighting
-| Normal | ,/ | Shows the count of your last search
-| Normal/Visual | j & k | move "visually" up and down, makes soft-wraps easier
 | Insert | jk | shortcut to Escape
+| Normal/Visual | j & k | move "visually" up and down, makes soft-wraps easier
 | Normal | B & E | shortcuts for `^` and `$`
 | Normal | ctrl + j, k, h, l | change focus between windows
+| Normal | H & L | Move between tabs
+| Normal | :VE | Open a new Vertical buffer in Explore mode
+| Normal | :HE | Open a new Horizontal buffer in Explore mode
+| Normal | :TE | Open a new Tab in Explore mode
 | Normal | ctrl + _ | split window horizontally
 | Normal | ctrl + \| | split window vertically
 | Normal | ,\<Enter> | zoom in/out of buffer
-| Normal | H & L | Move between tabs
 | Normal | >, <, +, - | resize current window
-| Normal | gV | highlight last inserted text
-| Normal | ,u | Brings up "Super Undo"
 | Normal | ,h | set Vim PWD to current directory (set home)
 | Normal | ,a | fuzzy search (Silver Searcher) for files under `pwd`
 | Normal | ,z | Open commonly used folders in current buffer (see [Z](https://github.com/rupa/z))
 | Normal | ctrl+p | brings up file search under `pwd`
+
+OSX Specific (editing)
+
+| Mode | Keys | Actions |
+|------|------|---------|
+| Visual | ,y | yank selected to OSx clipboard |
+| Visual |,uq | Removes quotes from selected text
+| Normal | ,\<space> | turns off search highlighting
+| Normal | ,d | Diff current buffer against on-disk file (changes since last save)
+| Normal | ,D | Diffs visible windows against each other
+| Normal | ,/ | Shows the count of your last search
+| Normal | gV | highlight last inserted text
+| Normal | ,u | Brings up "Super Undo"
+
+Situational
+
+| Mode | Keys | Actions |
+|------|------|---------|
 | Normal | @y | converts "Describe Table" and converts to YAML (beta)
 | Visual | \<count>,\<Tab> | works on range, starts a # comment at column <count>
-| Normal | :VE | Open a new Vertical buffer in Explore mode
-| Normal | :HE | Open a new Horizontal buffer in Explore mode
-| Normal | :TE | Open a new Tab in Explore mode
 
 ##### Editing with _style_ in Jira
 
