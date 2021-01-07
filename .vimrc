@@ -175,6 +175,14 @@ endfunction
 
 " enables Leader + y to do clipboard copy in visual mode (OSx)
 vnoremap <silent> <leader>y :<CR>:let @a=@" \| execute "normal! vgvy" \| let res=system("pbcopy", @") \| let @"=@a<CR>
+" enables Leader + y to do clipboard copy in visual mode (WSL)
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " default location
+if executable(s:clip)
+  augroup WSLYank
+    autocmd!
+    autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
+  augroup END
+end
 " enables Leader + h to set vim pwd on local buffer
 nnoremap <silent> <leader>h :lcd %:p:h<CR>
 " enables Leader + uq to remove quotes from selection
@@ -268,3 +276,6 @@ autocmd BufRead COMMIT_EDITMSG setlocal spell
 "
 " Using counts in mappings
 " https://jdhao.github.io/2019/04/29/nvim_map_with_a_count/
+"
+" WSL copy/paste trick!
+" https://superuser.com/questions/1291425/windows-subsystem-linux-make-vim-use-the-clipboard
