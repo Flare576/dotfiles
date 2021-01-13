@@ -80,6 +80,27 @@ custom-commands:
         default: \$JIRA_COMPONENT
     script: |-
       {{jira}} list -t ISuStRA --query "project={{args.PROJECT}} {{if not options.all}} and status NOT IN (\"Signoff\",\"Done\",\"Dead\",\"Sign Off\"){{end}} {{if options.component}} and component = \"{{options.component}}\"{{end}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee" -f "key,status,assignee,customfield_19359,customfield_19392,summary"
+  - name: find
+    aliases: ['f']
+    help: Find tickets with criteria
+    args:
+      - name: PROJECT
+        help: Filter on a Project & Component if set, defaults to \$JIRA_PROJECT
+        default: \$JIRA_PROJECT
+    options:
+      - name: project
+        short: p
+        help: Filter on a component, defaults to \$JIRA_PROJECT
+        default: $JIRA_S_PROJECT
+      - name: text
+        short: t
+        help: Search the text of the ticket for this value
+      - name: component
+        short: c
+        help: Filter on a component, defaults to \$JIRA_COMPONENT
+        default: $JIRA_S_COMPONENT
+    script: |-
+      {{jira}} list -t ISuStRA --query "createdDate < now(){{if not options.all}} and status IN (\"TO DO\",\"IN PROGRESS\",\"BLOCKED\",\"IN REVIEW\"){{end}}{{if options.project}} and project={{args.PROJECT}}{{end}}{{if options.component}} and component = \"{{options.component}}\"{{end}}{{if options.text}} and text ~ \"{{options.text}}\"{{end}} ORDER BY status,assignee" -f "key,status,assignee,customfield_19359,customfield_19392,summary"
   - name: sprint
     aliases: ['s']
     help: Shows stories in curent sprint
@@ -185,7 +206,7 @@ custom-commands:
       - name: ISSUE
         default: \$JIRA_ISSUE
     script: |
-      {{jira}} edit {{args.ISSUE}}
+      {{jira}} edit -t custom_edit1 {{args.ISSUE}}
   - name: c
     help: Comments on current JIRA_ISSUE if no ISSUE is provided
     args:
