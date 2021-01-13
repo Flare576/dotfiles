@@ -70,6 +70,7 @@ fi
   # Jetbrains Mono is a great font for terminals; install it so it's available on this system
 if [ "$isLinux" -eq "1" ] ; then
   # I don't remember what these are for, commenting out to see what breaks
+  # This is very likely for universal-ctags
   # sudo apt-get install python-setuptools
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
 else
