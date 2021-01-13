@@ -39,8 +39,7 @@ set showcmd             " Will display the command as it is typed
 set smarttab            " find next tabstop and insert spaces until it
 
 "########################## Look_and_Feel
-set t_Co=256            " compatibility with tmux: 256 colors
-colorscheme badwolf     " try it out
+source $HOME/dotfiles/themes/flare_vim
 " take BG from term/tmux
 hi Normal guibg=NONE ctermbg=NONE
 set number              " show line numbers

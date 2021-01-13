@@ -2,7 +2,10 @@
 # Secrets
 source $HOME/.doNotCommit
 
-export PATH="/usr/local/bin:${PATH}"
+export PATH="/home/linuxbrew/.linuxbrew/opt/python@3.8/libexec/bin:${PATH}"
+# export PATH="/usr/local/bin:${PATH}"
+# export PYTHONHOME="/usr/local/opt/python/libexec/bin"
+# export PYTHONHOME="/usr/bin/python3"
 # export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
 
 #bindkey -v
@@ -25,11 +28,34 @@ alias vt='vi ~/.tmux.conf -c "cd ~/dotfiles"'
 alias v='vi .'
 alias pi='pipenv'
 alias py='pipenv run python'
+alias python='echo "maybe try pi/py..."'
 alias cat='bat'
 alias git='hub'
 alias lzy='lazydocker'
 alias lzye='vi $HOME/Library/Application\ Support/jesseduffield/lazydocker/config.yml'
 alias plcat='plutil -convert xml1 -o -'
+
+function ftheme() {
+  # TODO: WSL, OSX, and Chromebook all handle this differently
+  wsltty_theme="$APPDATA\\wsltty\\themes"
+  wsltty_theme=${wsltty_theme/C:\\/\/mnt/c/}
+  wsltty_theme=${wsltty_theme//\\/\/}
+  if [[ $1 == "light" ]] ; then
+    ln -sf $HOME/dotfiles/themes/solarized-light_zsh $HOME/dotfiles/themes/flare_zsh
+    ln -sf $HOME/dotfiles/themes/solarized-light_tmux $HOME/dotfiles/themes/flare_tmux
+    ln -sf $HOME/dotfiles/themes/solarized-light_vim $HOME/dotfiles/themes/flare_vim
+    pushd "$wsltty_theme"
+    ln -sf solarized_light.minttyrc flare.minttyrc
+    popd
+  elif [[ $1 == dark ]] ; then
+    ln -sf $HOME/dotfiles/themes/solarized-dark_zsh $HOME/dotfiles/themes/flare_zsh
+    ln -sf $HOME/dotfiles/themes/solarized-dark_tmux $HOME/dotfiles/themes/flare_tmux
+    ln -sf $HOME/dotfiles/themes/solarized-dark_vim $HOME/dotfiles/themes/flare_vim
+    pushd "$wsltty_theme"
+    ln -sf solarized_dark.minttyrc flare.minttyrc
+    popd
+  fi
+}
 
 function gs() {
   git submodule foreach $1
