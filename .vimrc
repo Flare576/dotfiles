@@ -28,7 +28,7 @@ set shell=zsh           " bring ZShell config in
 let mapleader=","       " leader is comma
 set spelllang=en        " English for spelling!
 " New, better words!
-set spellfile=$HOME/dotfiles/en.utf-8.add
+set spellfile=$HOME/dotfiles/en.utf-8.add,$HOME/dotfiles/.doNotCommit.en.utf-8.add
 set thesaurus+=$HOME/.local/share/thesaurus.txt
 
 "########################## Formatting
