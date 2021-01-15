@@ -1,6 +1,6 @@
 # Finalize WSL
 
-During setup a new folder should have been created at C:\\flarescript_temp, and three files should have been downloaded:
+During setup a new folder should have been created at C:\\flarescript_temp, and two files should have been downloaded:
 
 - JetBrainsMono-Regular.ttf
 - wsltty-3.1.4.2-install-x86_64.exe (version may differ)
@@ -18,7 +18,9 @@ Once installed, you should see a new "Ubuntu Terminal %" entry in your start men
 
 After it loads, click the logo in the top-left, and choose `Options`.
 
-You'll begin in the *Looks* section; at the bottom, change "Cursor" to "Block"
+You'll begin in the *Looks* section:
+ - From the "Theme" dropdown, choose "flare.minttyrc"
+ - At the bottom, change "Cursor" to "Block"
 
 Next, click *Text* on the left, then the **Select** button next to the current font. In the following dialog, choose:
 

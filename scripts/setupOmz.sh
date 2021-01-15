@@ -5,8 +5,9 @@ echo "Setup Oh My Zshell"
 # Install and setup Oh My Zshell
 curl -sL http://install.ohmyz.sh | sh
 cd $HOME/.oh-my-zsh/themes
-curl -LSso cobalt2.zsh-theme https://raw.githubusercontent.com/wesbos/Cobalt2-iterm/master/cobalt2.zsh-theme
-cd $HOME/.oh-my-zsh/custom/plugins/
+ln -sf $HOME/dotfiles/themes/flare_zsh flare.zsh-theme
+# curl -LSso cobalt2.zsh-theme https://raw.githubusercontent.com/wesbos/Cobalt2-iterm/master/cobalt2.zsh-theme
+# cd $HOME/.oh-my-zsh/custom/plugins/
 
 # NVM and Node Optimizations
 git clone https://github.com/lukechilds/zsh-better-npm-completion
