@@ -36,24 +36,36 @@ alias lzye='vi $HOME/Library/Application\ Support/jesseduffield/lazydocker/confi
 alias plcat='plutil -convert xml1 -o -'
 
 function ftheme() {
-  # TODO: WSL, OSX, and Chromebook all handle this differently
+  [[ "$1" == "light" ]] && mode="light" || mode="dark"
+
+  # Universal parts [zsh, tmux, vim]
+  ln -sf "$HOME/dotfiles/themes/solarized-${mode}_zsh" "$HOME/dotfiles/themes/flare_zsh"
+  source "$HOME/dotfiles/themes/flare_zsh"
+
+  ln -sf "$HOME/dotfiles/themes/solarized-${mode}_tmux" "$HOME/dotfiles/themes/flare_tmux"
+  tmux source-file "$HOME/.tmux.conf" > /dev/null 2>&1
+
+  ln -sf "$HOME/dotfiles/themes/solarized-${mode}_vim" "$HOME/dotfiles/themes/flare_vim"
+  # I haven't found a way to update all vim sessions yet
+
+  # Terminal emulators for different machines I use
   wsltty_theme="$APPDATA\\wsltty\\themes"
   wsltty_theme=${wsltty_theme/C:\\/\/mnt/c/}
   wsltty_theme=${wsltty_theme//\\/\/}
-  if [[ $1 == "light" ]] ; then
-    ln -sf $HOME/dotfiles/themes/solarized-light_zsh $HOME/dotfiles/themes/flare_zsh
-    ln -sf $HOME/dotfiles/themes/solarized-light_tmux $HOME/dotfiles/themes/flare_tmux
-    ln -sf $HOME/dotfiles/themes/solarized-light_vim $HOME/dotfiles/themes/flare_vim
+  if [[ -d "$wsltty_theme" ]] ; then # WSL
     pushd "$wsltty_theme"
-    ln -sf solarized_light.minttyrc flare.minttyrc
+    ln -sf "solarized-${mode}.minttyrc" flare.minttyrc
     popd
-  elif [[ $1 == dark ]] ; then
-    ln -sf $HOME/dotfiles/themes/solarized-dark_zsh $HOME/dotfiles/themes/flare_zsh
-    ln -sf $HOME/dotfiles/themes/solarized-dark_tmux $HOME/dotfiles/themes/flare_tmux
-    ln -sf $HOME/dotfiles/themes/solarized-dark_vim $HOME/dotfiles/themes/flare_vim
-    pushd "$wsltty_theme"
-    ln -sf solarized_dark.minttyrc flare.minttyrc
-    popd
+  elif command -v defaults &> /dev/null ; then # OSX
+    [[ $mode == "light" ]] && title="Solarized Light" || title="Solarized Dark"
+    # Set new profile to startup
+    defaults write com.apple.Terminal "Startup Window Settings" "$title"
+    # Set new profile to default
+    defaults write com.apple.Terminal "Default Window Settings" "$title"
+    # Update active/existing windows
+    osascript "$HOME/dotfiles/scripts/OSX/themeOpenTerminals.scpt" "$title"
+  else # Chromebook
+    # Do whatever Chromebook/gnome(?) wants
   fi
 }
 
