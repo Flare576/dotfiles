@@ -1,14 +1,7 @@
 #
-# Cobalt2 Theme - https://github.com/wesbos/Cobalt2-iterm
+# Solarized Light Theme, based on Cobalt2 by Wes Bos
 #
-# # README
-#
-# In order for this theme to render correctly, you will need a
-# [Powerline-patched font](https://gist.github.com/1595572).
-##
-### Segment drawing
-# A few utility functions to make it easy and re-usable to draw segmented prompts
-
+# # README: See README.md
 source "$HOME/dotfiles/themes/solarized-core.zsh"
 
 FINAL_BG='015'

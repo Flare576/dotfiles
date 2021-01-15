@@ -38,15 +38,18 @@ alias plcat='plutil -convert xml1 -o -'
 function ftheme() {
   [[ "$1" == "light" ]] && mode="light" || mode="dark"
 
+  pushd "$HOME/dotfiles/themes"
   # Universal parts [zsh, tmux, vim]
-  ln -sf "$HOME/dotfiles/themes/solarized-${mode}_zsh" "$HOME/dotfiles/themes/flare_zsh"
-  source "$HOME/dotfiles/themes/flare_zsh"
+  ln -sf solarized-${mode}_zsh flare_zsh
+  source flare_zsh
 
-  ln -sf "$HOME/dotfiles/themes/solarized-${mode}_tmux" "$HOME/dotfiles/themes/flare_tmux"
+  ln -sf solarized-${mode}_tmux flare_tmux
   tmux source-file "$HOME/.tmux.conf" > /dev/null 2>&1
 
-  ln -sf "$HOME/dotfiles/themes/solarized-${mode}_vim" "$HOME/dotfiles/themes/flare_vim"
+  ln -sf solarized-${mode}_vim flare_vim
   # I haven't found a way to update all vim sessions yet
+
+  popd
 
   # Terminal emulators for different machines I use
   wsltty_theme="$APPDATA\\wsltty\\themes"

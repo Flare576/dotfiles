@@ -1,7 +1,7 @@
 #
 # Solarized Dark Theme, based on Cobalt2 by Wes Bos
 #
-# # README: See solarized-core
+# # README: See README.md
 source "$HOME/dotfiles/themes/solarized-core.zsh"
 
 FINAL_BG='008'
@@ -15,6 +15,7 @@ PATH_FG='010'
 PATH_BG='008'
 
 SYMBOL_BG='006'
+SYMBOL_FG='001'
 FAILED_ICON='✘'
 BACKGROUND_ICON='⚙'
 ALIAS_ICON='⚡'

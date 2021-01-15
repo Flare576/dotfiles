@@ -21,6 +21,7 @@ PATH_FG='010'
 PATH_BG='008'
 
 SYMBOL_BG='006'
+SYMBOL_FG='001'
 FAILED_ICON='✘'
 BACKGROUND_ICON='⚙'
 ALIAS_ICON='⚡'
@@ -109,11 +110,11 @@ prompt_dir() {
 prompt_status() {
   local symbols
   symbols=()
-  [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}$FAILED_ICON"
-  [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}$ALIAS_ICON"
-  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}$BACKGROUND_ICON"
+  [[ $UID -eq 0 ]] && symbols+="$ALIAS_ICON"
+  [[ $RETVAL -ne 0 ]] && symbols+="$FAILED_ICON"
+  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="$BACKGROUND_ICON"
 
-  [[ -n "$symbols" ]] && prompt_segment $SYMBOL_BG default "$symbols"
+  [[ -n "$symbols" ]] && prompt_segment $SYMBOL_BG $SYMBOL_FG "$symbols"
 }
 
 ## Main prompt
