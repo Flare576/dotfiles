@@ -1,3 +1,4 @@
+# yoinnked from https://superuser.com/questions/187591/os-x-terminal-command-to-change-color-themes
 on run argv
     tell application "Terminal"
         repeat with w from 1 to count windows
