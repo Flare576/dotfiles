@@ -34,43 +34,8 @@ alias git='hub'
 alias lzy='lazydocker'
 alias lzye='vi $HOME/Library/Application\ Support/jesseduffield/lazydocker/config.yml'
 alias plcat='plutil -convert xml1 -o -'
-
-function ftheme() {
-  [[ "$1" == "light" ]] && mode="light" || mode="dark"
-
-  pushd "$HOME/dotfiles/themes"
-  # Universal parts [zsh, tmux, vim]
-  ln -sf solarized-${mode}_zsh flare_zsh
-  source flare_zsh
-
-  ln -sf solarized-${mode}_tmux flare_tmux
-  tmux source-file "$HOME/.tmux.conf" > /dev/null 2>&1
-
-  ln -sf solarized-${mode}_vim flare_vim
-  # I haven't found a way to update all vim sessions yet
-
-  popd
-
-  # Terminal emulators for different machines I use
-  wsltty_theme="$APPDATA\\wsltty\\themes"
-  wsltty_theme=${wsltty_theme/C:\\/\/mnt/c/}
-  wsltty_theme=${wsltty_theme//\\/\/}
-  if [[ -d "$wsltty_theme" ]] ; then # WSL
-    pushd "$wsltty_theme"
-    ln -sf "solarized-${mode}.minttyrc" flare.minttyrc
-    popd
-  elif command -v defaults &> /dev/null ; then # OSX
-    [[ $mode == "light" ]] && title="Solarized Light" || title="Solarized Dark"
-    # Set new profile to startup
-    defaults write com.apple.Terminal "Startup Window Settings" "$title"
-    # Set new profile to default
-    defaults write com.apple.Terminal "Default Window Settings" "$title"
-    # Update active/existing windows
-    osascript "$HOME/dotfiles/scripts/OSX/themeOpenTerminals.scpt" "$title"
-  else # Chromebook
-    # Do whatever Chromebook/gnome(?) wants
-  fi
-}
+source "$HOME/dotfiles/scripts/switchTheme.sh"
+alias st="switchTheme"
 
 function gs() {
   git submodule foreach $1
