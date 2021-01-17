@@ -41,5 +41,6 @@ theme_target="$APPDATA\\wsltty\\themes"
 theme_target=${theme_target/C:\\/\/mnt/c/}
 theme_target=${theme_target//\\/\/}
 mkdir -p "$theme_target"
-cp "$HOME/dotfiles/themes/"*.minttyrc "$theme_target"
-ln -s "$theme_target/solarized_dark.minttyrc" "$theme_target/flare.mintty"
+cd "$theme_target"
+cp "$HOME/dotfiles/themes/"*.minttyrc .
+ln -s solarized_dark.minttyrc flare.mintty
