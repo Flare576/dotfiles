@@ -9,6 +9,8 @@ cd $plugins
 
 ############################## Theme ###########
 # Preferred Theme
+git clone https://github.com/altercation/vim-colors-solarized.git
+# Backup Theme
 git clone https://github.com/sjl/badwolf.git
 # active/inactive color update
 git clone https://github.com/TaDaa/vimade
