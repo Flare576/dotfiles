@@ -1,4 +1,5 @@
 #!/bin/bash
+# Used this to setup chromebook: https://kmyers.me/blog/chromeos/is-your-chromeos-linux-terminal-broken-why-not-replace-it-with-gnome-terminal/
 # the Gnome Terminal editor uses `dconf` command to control its behavior.
 # On a Chromebook, the file holding the "Database" is
 # $HOME/.config/dconf/user

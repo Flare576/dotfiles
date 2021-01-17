@@ -15,13 +15,17 @@ function switchTheme() {
   popd
 
   # Terminal emulators for different machines I use
-  wsltty_theme="$APPDATA\\wsltty\\themes"
-  wsltty_theme=${wsltty_theme/C:\\/\/mnt/c/}
-  wsltty_theme=${wsltty_theme//\\/\/}
-  if [[ -d "$wsltty_theme" ]] ; then # WSL
-    pushd "$wsltty_theme"
-    ln -sf "solarized-${mode}.minttyrc" flare.minttyrc
-    popd
+  if command -v mintheme &> /dev/null ; then # WSL
+    #Uses escape sequences, and tmux eats them unless you tell it not to
+    if [[ "$TERM" =~ "screen"* ]] && [ -n "$TMUX" ]; then
+     mintheme solarized-${mode}.minttyrc | sed \
+       -e 's///g' \
+       -e 's/^/Ptmux;/' \
+       -e 's/$/\\/' \
+       -e '1d'
+    else
+     mintheme solarized-${mode}.minttyrc | sed -e '1d'
+    fi
   elif command -v defaults &> /dev/null ; then # OSX
     [[ $mode == "light" ]] && title="Solarized Light" || title="Solarized Dark"
     # Set new profile to startup
