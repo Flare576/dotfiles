@@ -20,7 +20,9 @@ String
 
 String Matching
 [[ $doit =~ ^[yY] ]]
-[[ $passToke == "t"* ]]
+[[ $passToke == "t"* ]] # starts with t
+[[ $passToke == *"t" ]] # ends with t
+[[ $passToke == *"t"* ]] # t is in the string
 
 Combo
 [ $rock == "true" ] && [ $roll == "true" ]; then
