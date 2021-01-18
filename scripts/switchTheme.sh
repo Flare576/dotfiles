@@ -16,15 +16,15 @@ function switchTheme() {
 
   # Terminal emulators for different machines I use
   if command -v mintheme &> /dev/null ; then # WSL
-    #Uses escape sequences, and tmux eats them unless you tell it not to
-    if [[ "$TERM" =~ "screen"* ]] && [ -n "$TMUX" ]; then
-     mintheme solarized-${mode}.minttyrc | sed \
-       -e 's///g' \
-       -e 's/^/Ptmux;/' \
-       -e 's/$/\\/' \
-       -e '1d'
-    else
-     mintheme solarized-${mode}.minttyrc | sed -e '1d'
+    # https://github.com/mintty/utils/pull/2/files
+    # patch submitted to mintheme; remove check when accepted (or declined)
+    theme=$(mintheme --save solarized-${mode}.minttyrc | sed \
+      -e '2!d' \
+      -e 's/saved.\+''//')
+    if [[ theme != *"tmux"* ]] ; then # declined
+      echo $theme | sed -e 's/^/Ptmux;/'
+    else # accepted
+      echo $theme
     fi
   elif command -v defaults &> /dev/null ; then # OSX
     [[ $mode == "light" ]] && title="Solarized Light" || title="Solarized Dark"
