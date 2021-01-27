@@ -15,6 +15,7 @@
 "# Filetypes
 "## JavaScript
 "## TypeScript
+"## Python
 "## Other_filetypes
 "# References
 
@@ -275,9 +276,20 @@ let g:tagbar_type_typescript = {
 \ }
 
 
+"########################## Python
+autocmd BufRead python
+    \ setlocal tabstop=4
+    \ setlocal softtabstop=4
+    \ setlocal shiftwidth=4
+    \ setlocal textwidth=79
+    \ setlocal expandtab
+    \ setlocal autoindent
+    \ setlocal fileformat=unix
+
 
 "########################## Other_filetypes
 autocmd Filetype markdown setlocal spell textwidth=100 cc=100
+
 autocmd Filetype text setlocal linebreak spell complete+=s wrap formatoptions=1
       \ noexpandtab textwidth=100 cc=100 formatoptions=qtc
 autocmd BufRead COMMIT_EDITMSG setlocal spell

@@ -2,7 +2,7 @@
 # Secrets
 source $HOME/.doNotCommit
 
-export PATH="/home/linuxbrew/.linuxbrew/opt/python@3.8/libexec/bin:${PATH}"
+#export PATH="/home/linuxbrew/.linuxbrew/opt/python@3.8/libexec/bin:${PATH}"
 # export PATH="/usr/local/bin:${PATH}"
 # export PYTHONHOME="/usr/local/opt/python/libexec/bin"
 # export PYTHONHOME="/usr/bin/python3"
@@ -25,7 +25,7 @@ alias vt='vi ~/.tmux.conf -c "cd ~/dotfiles"'
 alias v='vi .'
 alias pi='pipenv'
 alias py='pipenv run python'
-alias python='echo "maybe try pi/py..."'
+# alias python='echo "maybe try pi/py..."'
 alias cat='bat'
 alias git='hub'
 alias lzy='lazydocker'
