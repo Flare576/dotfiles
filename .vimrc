@@ -40,15 +40,25 @@ set expandtab           " tabs are spaces
 set showcmd             " Show info like highlighted row count
 set noshowmode          " Hide mode, shown in airline
 set smarttab            " find next tabstop and insert spaces until it
+set nowrapscan          " If you want to start at the beginning, just `gg`
 
 "########################## Look_and_Feel
-let f_theme = '$HOME/dotfiles/themes/$FLARE_THEME/$FLARE_VIM_THEME'
-exec "source " expand(f_theme)
+exec "source $HOME/dotfiles/themes/$FLARE_THEME/$FLARE_VIM_THEME"
 augroup flare_theme
   au!
-  autocmd InsertEnter * exec "source " expand(f_theme)
-  autocmd InsertLeave * exec "source " expand(f_theme)
+  autocmd InsertEnter * call UpdateTheme()
+  autocmd InsertLeave * call UpdateTheme()
 augroup END
+
+function! UpdateTheme() abort
+  " Since system() calls a new shell, it will have the most recent env vars
+  let l:cur_theme = system("echo -n $FLARE_VIM_THEME")
+  if !exists('g:f_theme') || g:f_theme != l:cur_theme
+    let l:theme_name = system("echo -n $FLARE_THEME")
+    execute "source $HOME/dotfiles/themes/" . l:theme_name ."/" . l:cur_theme
+  endif
+  let g:f_theme = l:cur_theme
+endfunction
 
 " take BG from term/tmux
 hi Normal guibg=NONE ctermbg=NONE
@@ -72,12 +82,15 @@ set modeline            " Allows files to define some variables (e.g., filetype)
 set cc=120              " highlights characters over 120 width
 
 " Extra whitespace in yellow
-highlight ExtraWhitespace ctermbg=yellow ctermfg=white guibg=#592929 " Define color scheme
+highlight ExtraWhitespace ctermbg=red ctermfg=white guibg=red " Define color scheme
 match ExtraWhitespace /\s\+\%#\@<!$/ " Define match set
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/ " Run on Window enter
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/ " Run on insert enter (this plus next makes screen not flash)
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/ " Run on exiting Insert Mode (only trailing)
-autocmd BufWinLeave * call clearmatches() " Run on leaving window (Clear all the matches)
+augroup whitespace
+  au!
+  autocmd BufWinEnter * match ExtraWhitespace /\s\+$/ " Run on Window enter
+  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/ " Run on insert enter (this plus next makes screen not flash)
+  autocmd InsertLeave * match ExtraWhitespace /\s\+$/ " Run on exiting Insert Mode (only trailing)
+  autocmd BufWinLeave * call clearmatches() " Run on leaving window (Clear all the matches)
+augroup END
 
 "############################## Mappings ###########
 
@@ -119,6 +132,9 @@ nnoremap <silent> - :exec "resize -1"<CR>
 "########################## Other_mappings
 " Show count of last find
 nnoremap <leader>/ :%s///gn<CR>
+" Run current file with various commands
+" r[un] with [b]rowser, currently Chrome
+nnoremap <leader>rb :silent !chrome %<CR> :redraw!<CR>
 "############################## Plugins ###########
 
 " netrw can be a dick about <c-l>
@@ -149,12 +165,8 @@ endfunction
 
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <leader><Enter> :ZoomToggle<CR>
-
-" Note: intentional trailing space on these comamnds
-" open Silver Searcher - Close window with :ccl(ose)
-nnoremap <leader>a :Ag! 
-" Z for Vim!
-nnoremap <leader>z :Zc 
+nnoremap <leader>a :Ag! |" Silver Searcher in quick-fix window (close with :ccl)
+nnoremap <leader>z :Zc |" "Z" script for Vim, Zc to open in current buffer
 
 " CtrlP settings
 let g:ctrlp_match_window = 'bottom,order:ttb'
@@ -245,7 +257,7 @@ let @y=':%s/\v^\|\s*([^ ]+)\s*\|\s*([^ ]+)\s*\|\s*([^ ]+)\s*\|\s*([^ ]*)\s*\|\s*
 filetype indent on      " load filetype-specific indent files
 
 "########################## JavaScript
-autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 suffixesadd=.js,.jsx
+autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 suffixesadd=.js,.jsx
 autocmd Filetype javascript highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 autocmd Filetype javascript match OverLength /\%121v.\+/
 
@@ -311,3 +323,6 @@ autocmd BufRead COMMIT_EDITMSG setlocal spell
 "
 " Example of dynamic vs. static environment variables
 " https://vi.stackexchange.com/questions/16071/how-can-i-use-a-string-variables-for-filepath-in-vimscript-map-command
+"
+" Comments on mapping lines
+" https://stackoverflow.com/questions/24716804/inline-comments-in-vimrc-mappings
