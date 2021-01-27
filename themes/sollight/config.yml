@@ -1,0 +1,12 @@
+name: sollight
+gnome: ":6c28978a-af78-434e-a97f-b5c252a080fd"
+terminal: Solarized Light
+mintty: solarized-light.minttyrc
+tmux: solarized-light_tmux
+vim: solarized-light_vim
+zsh: solarized-light
+bat: Solarized (light)
+alias:
+  - light
+  - sollight
+  - test

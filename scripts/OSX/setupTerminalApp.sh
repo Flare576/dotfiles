@@ -8,10 +8,11 @@
 # Setting open Terminal windows information here:
 # https://superuser.com/questions/187591/os-x-terminal-command-to-change-color-themes
 
-themeFiles="$HOME/dotfiles/themes/*.terminal"
+themeFiles="$HOME/dotfiles/themes"/**/*.terminal
 for theme in $themeFiles; do
   [ -e "$theme" ] || continue
-  themeName=$(basename -s .terminal "$theme")
+  config=$(echo $theme | sed 's/\(.*\)\/.*.gnome/\1\/config')
+  themeName=$(yaml "$config" "['terminal']")
   bare=$(sed -n '/<dict>/,/<\/dict>/p' "$theme")
   echo "Importing $themeName Terminal Theme"
   defaults write com.apple.Terminal "Window Settings" -dict-add "$themeName" "$bare"

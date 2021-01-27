@@ -120,5 +120,15 @@ function wdate() {
   fwatch 1 prettyDate
 }
 
+function yaml() {
+    python3 -c "import yaml;print(yaml.safe_load(open('$1'))$2)"
+}
+
+function zsh_theme_refresh() {
+  source "$HOME/.doNotCommit.theme"
+  source "$ZSH/themes/$FLARE_ZSH_THEME.zsh-theme"
+}
+precmd_functions=(${precmd_functions[@]} zsh_theme_refresh)
+
 # kubectl shortcuts
 source $HOME/.zshrc.kubeHelper

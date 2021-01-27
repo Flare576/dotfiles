@@ -1,3 +1,22 @@
+# This folder
+
+Each sub-folder in this folder represents a _theme_. A theme consists of:
+
+* Terminal Themes
+  * `.terminal` for Terminal.app (OSX)
+  * `.minttyrc` for mintty/wsltty (WSL)
+  * `.gnome` for gnome (Chromebook)
+* Main applications
+  * *_tmux
+  * *_vim
+  * *_zsh
+* config file
+
+In addition to the core apps, `bat` can also be customized as long as you've loaded the theme to its
+cache!
+
+A theme's folder name must be the same as the `name` attribute in the config.
+
 # Colors
 
 It took me longer than I'd like to admit to grok colors in ZSH/terminals/tmux,

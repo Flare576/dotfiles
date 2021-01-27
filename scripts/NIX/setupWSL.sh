@@ -44,7 +44,7 @@ themes_dir="$HOME/dotfiles/themes"
 mkdir -p "$mintty_home/themes"
 pushd "$mintty_home" > /dev/null
 git clone "https://github.com/mintty/utils.git" &> /dev/null
-cp "$themes_dir/"*.minttyrc "$mintty_home/themes"
+cp "$themes_dir"/**/*.minttyrc "$mintty_home/themes"
 echo "Font=JetBrains Mono
 FontHeight=14
 FontWeight=400

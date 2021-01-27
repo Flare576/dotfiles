@@ -41,7 +41,14 @@ set noshowmode          " Hide mode, shown in airline
 set smarttab            " find next tabstop and insert spaces until it
 
 "########################## Look_and_Feel
-source $HOME/dotfiles/themes/flare_vim
+let f_theme = '$HOME/dotfiles/themes/$FLARE_THEME/$FLARE_VIM_THEME'
+exec "source " expand(f_theme)
+augroup flare_theme
+  au!
+  autocmd InsertEnter * exec "source " expand(f_theme)
+  autocmd InsertLeave * exec "source " expand(f_theme)
+augroup END
+
 " take BG from term/tmux
 hi Normal guibg=NONE ctermbg=NONE
 set number              " show line numbers
@@ -289,3 +296,6 @@ autocmd BufRead COMMIT_EDITMSG setlocal spell
 " Status line/WordCount
 " https://cromwell-intl.com/open-source/vim-word-count.html
 " https://github.com/vim-airline/vim-airline
+"
+" Example of dynamic vs. static environment variables
+" https://vi.stackexchange.com/questions/16071/how-can-i-use-a-string-variables-for-filepath-in-vimscript-map-command
