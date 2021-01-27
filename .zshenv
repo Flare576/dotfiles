@@ -8,10 +8,7 @@ export PATH="/home/linuxbrew/.linuxbrew/opt/python@3.8/libexec/bin:${PATH}"
 # export PYTHONHOME="/usr/bin/python3"
 # export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
 
-#bindkey -v
-#bindkey 'jk' vi-cmd-mode
 setopt PUSHDSILENT
-export KEYTIMEOUT=2
 export EDITOR=vim
 export CHEAT_CONFIG_PATH="$HOME/dotfiles/cheat/conf.yml"
 
@@ -64,12 +61,12 @@ function fwatch() {
 }
 
 function weather() {
+  tmux select-pane -P 'bg=#000000'
   if [ $(tput cols) -gt  "100" ] ; then
     curl -s "wttr.in/${MY_LOC_ZIP}?Q"
   else
     curl -s "wttr.in/${MY_LOC_ZIP}?0&Q"
   fi
-  echo
   TZ=America/Chicago date
 }
 
