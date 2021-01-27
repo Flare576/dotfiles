@@ -54,8 +54,15 @@ cheatpaths:
   # If you have personalized cheatsheets, list them last. They will take
   # precedence over the more global cheatsheets.
   - name: personal
-    path: ~/dotfiles/cheat/sheets
+    path: ~/dotfiles/cheat/personal
     tags: [ personal ]
+    readonly: false
+
+  # For cheat-sheets that may have client-specific details
+  # NEVER USE CHEAT FOR SECRETS OR OTHER CREDENTIALS
+  - name: private
+    path: ~/dotfiles/cheat/private
+    tags: [ personal, private ]
     readonly: false
 
   # While it requires no configuration here, it's also worth noting that
