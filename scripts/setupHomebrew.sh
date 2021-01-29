@@ -61,10 +61,13 @@ uctags="universal-ctags/universal-ctags/universal-ctags"
 
 if brew ls --versions "$uctags" >/dev/null; then
   if [ "$1" == "true" ]; then
-    brew upgrade --fetch-HEAD universal-ctags/universal-ctags/universal-ctags
+    brew upgrade --fetch-HEAD "$uctags"
   fi
 else
-  brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+  if [ "$isLinux" -eq "1" ] ; then
+    sudo apt-get install python-setuptools
+  fi
+  brew install --HEAD "$uctags"
 fi
 
   # Jetbrains Mono is a great font for terminals; install it so it's available on this system

@@ -13,8 +13,8 @@ if ! command -v brew &> /dev/null ; then
     if [[ "$iamroot" =~ "[yY]" ]] ; then
       abort "I am (g)root"
     fi
-    apt update
-    apt -y install build-essential curl file git
+    apt-get update
+    apt-get --no-install-recommends --no-install-suggests -y install build-essential curl file git
     bash -c "$(
       curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh |
       sed 's/"${EUID:-${UID}}" == "0"/"true" == "false"/'
@@ -27,7 +27,7 @@ if ! command -v brew &> /dev/null ; then
     if command -v brew &> /dev/null ; then
       apt -y install sudo
     fi
-    sudo apt -y install build-essential curl file git
+    sudo apt-get --no-install-recommends --no-install-suggests -y install build-essential curl file git
     echo "Installing Homebrew"
     yes '' | bash -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
     eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
