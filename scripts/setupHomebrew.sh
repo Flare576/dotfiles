@@ -65,7 +65,11 @@ if brew ls --versions "$uctags" >/dev/null; then
   fi
 else
   if [ "$isLinux" -eq "1" ] ; then
-    sudo apt-get install python-setuptools
+    if command -v sudo &> /dev/null ; then
+      sudo apt-get install python-setuptools
+    else
+      apt-get install python-setuptools
+    fi
   fi
   brew install --HEAD "$uctags"
 fi
