@@ -30,9 +30,9 @@ if ! command -v brew &> /dev/null ; then
     sudo apt-get --no-install-recommends --no-install-suggests -y install build-essential curl file git
     echo "Installing Homebrew"
     yes '' | bash -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-    echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
   fi
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
 fi
 
 # Pull the rest of the project

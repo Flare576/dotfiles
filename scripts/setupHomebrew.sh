@@ -15,6 +15,7 @@ brews=(
   pipenv
   bat
   cheat
+  git
   git-secrets
   hub
   nvm
@@ -29,7 +30,14 @@ brews=(
 )
 
 if [ "$isLinux" -ne "1" ] ; then
-  brews+=(cask git kubectx mas)
+  brews+=(cask kubectx mas)
+else
+  # without python-setuptools
+  if command -v sudo &> /dev/null ; then
+    sudo apt-get -y install libxml2-dev libyaml-de
+  else
+    apt-get -y install libxml2-dev libyaml-dev
+  fi
 fi
 
 echo "Installing brews"
@@ -63,15 +71,6 @@ if brew ls --versions "$uctags" >/dev/null; then
   if [ "$1" == "true" ]; then
     brew upgrade --fetch-HEAD "$uctags"
   fi
-else
-  if [ "$isLinux" -eq "1" ] ; then
-    if command -v sudo &> /dev/null ; then
-      sudo apt-get install python-setuptools
-    else
-      apt-get install python-setuptools
-    fi
-  fi
-  brew install --HEAD "$uctags"
 fi
 
   # Jetbrains Mono is a great font for terminals; install it so it's available on this system
