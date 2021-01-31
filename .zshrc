@@ -3,7 +3,7 @@
 
 ZSH_DISABLE_COMPFIX=true # Remove "Insecure directories and files"
 export ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="$FLARE_ZSH_THEME"
+[ -n "$FLARE_ZSH_THEME" ] && ZSH_THEME="$FLARE_ZSH_THEME"
 
 #Setup NVM
 export NVM_COMPLETION=true  # Tab-completion

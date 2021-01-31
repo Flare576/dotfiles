@@ -4,8 +4,15 @@ echo "Setup Oh My Zshell"
 
 # Install and setup Oh My Zshell
 curl -sL http://install.ohmyz.sh | sh
+tc="$HOME/.doNotCommit.theme"
+
+if ! grep -q "$tc" ${HOME}/dotfiles/.doNotCommit ; then
+  echo "[ -f \"$tc\" ] && source \"$tc\"" >> "${HOME}/dotfiles/.doNotCommit"
+fi
 cd "$HOME/.oh-my-zsh/themes"
 themes="$HOME/dotfiles/themes"
+command -v pip3 &> /dev/null && pip3 install pyaml
+
 for theme in "$themes"/**/*.zsh-theme; do
   ln -sf "$theme"
 done

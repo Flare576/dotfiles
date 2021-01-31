@@ -12,7 +12,7 @@ function switchTheme() {
     fi
     hasRun="true"
     name="$(yaml "$config" "['name']")"
-    themeExport="$HOME/dotfiles/.doNotCommit.theme"
+    themeExport="$HOME/.doNotCommit.theme"
     cat << EOF > $themeExport
 export FLARE_THEME="$name"
 export FLARE_VIM_THEME="$(yaml "$config" "['vim']")"
@@ -50,7 +50,7 @@ EOF
       symId=":6d940353-9091-4d32-b491-95a661527d08/"
       basePath="/org/gnome/terminal/legacy/profiles:"
       gnomeId="$(yaml "$config" "['gnome']")"
-      updateTo=$(dconf dump $basePath/$gnomeId | sed -e "s/visible-name='.*'/visible-name='Flare'/")
+      updateTo=$(dconf dump "$basePath/$gnomeId" | sed -e "s/visible-name='.*'/visible-name='Flare'/")
       echo "$updateTo" | dconf load $basePath/$symId
     fi
   done
