@@ -10,12 +10,13 @@ if ! command -v brew &> /dev/null ; then
   if [[ "${EUID:-${UID}}" == "0" ]]; then
     echo -n "You're [31mroot[39m right now... that OK? (y/n) "
     read iamroot
-    if [[ "$iamroot" =~ "[yY]" ]] ; then
+    if [[ ! "$iamroot" =~ ^[yY] ]] ; then
       abort "I am (g)root"
     fi
     apt-get update
+    export DEBIAN_FRONTEND=noninteractive
     apt-get --no-install-recommends --no-install-suggests -y install build-essential curl file git
-    bash -c "$(
+    yes '' | bash -c "$(
       curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh |
       sed 's/"${EUID:-${UID}}" == "0"/"true" == "false"/'
     )"

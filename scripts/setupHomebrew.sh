@@ -32,13 +32,22 @@ brews=(
 if [ "$isLinux" -ne "1" ] ; then
   brews+=(cask kubectx mas)
 else
-  # without python-setuptools
-  # note: these prompt for location information... disable?
-  if command -v sudo &> /dev/null ; then
-    sudo apt-get -y install libxml2-dev libyaml-dev
-  else
-    apt-get -y install libxml2-dev libyaml-dev
-  fi
+  # all of this because the current brew install can't find a dependency
+  pushd /tmp
+  prefix=$(brew install --HEAD universal-ctags/universal-ctags/universal-ctags |
+    sed -e 's/^.*\/configure --prefix=//' -e 'tx' -e 'd' -e ':x'
+  )
+  echo "hia\n\n\n$prefix\n\n\n"
+  git clone https://github.com/universal-ctags/ctags.git
+  pushd ctags
+  mkdir -p "$prefix"
+  ./autogen.sh
+  ./configure --prefix="$prefix"
+  make
+  make install
+  brew link universal-ctags/universal-ctags/universal-ctags
+  popd
+  popd
 fi
 
 echo "Installing brews"
