@@ -24,7 +24,7 @@ EOF
 
     # refresh current zsh and tmux
     source "$HOME/dotfiles/themes/$name/$FLARE_ZSH_THEME.zsh-theme"
-    tmux source-file "$HOME/dotfiles/themes/$FLARE_THEME/$FLARE_TMUX_THEME"
+    command -v tmux &> /dev/null && tmux source-file "$HOME/dotfiles/themes/$FLARE_THEME/$FLARE_TMUX_THEME"
     # vim and zsh are configured to watch for changes on updates
 
     # Terminal emulators for different machines I use
@@ -45,13 +45,13 @@ EOF
       defaults write com.apple.Terminal "Startup Window Settings" "$title"    # Set new profile to startup
       defaults write com.apple.Terminal "Default Window Settings" "$title"    # Set new profile to default
       osascript "$HOME/dotfiles/scripts/OSX/themeOpenTerminals.scpt" "$title" # Update active/existing windows
-    else # Chromebook
+    elif command -v dconf &> /dev/null ; then  # Chromebook
       # copy/paste desired theme over "current" theme (which should be "Flare")
       symId=":6d940353-9091-4d32-b491-95a661527d08/"
       basePath="/org/gnome/terminal/legacy/profiles:"
       gnomeId="$(yaml "$config" "['gnome']")"
       updateTo=$(dconf dump "$basePath/$gnomeId" | sed -e "s/visible-name='.*'/visible-name='Flare'/")
       echo "$updateTo" | dconf load $basePath/$symId
-    fi
+    fi # else we're probably not running a terminal emulator on this machine
   done
 }

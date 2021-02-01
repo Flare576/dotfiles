@@ -33,8 +33,9 @@ if [ "$isLinux" -ne "1" ] ; then
   brews+=(cask kubectx mas)
 else
   # without python-setuptools
+  # note: these prompt for location information... disable?
   if command -v sudo &> /dev/null ; then
-    sudo apt-get -y install libxml2-dev libyaml-de
+    sudo apt-get -y install libxml2-dev libyaml-dev
   else
     apt-get -y install libxml2-dev libyaml-dev
   fi
@@ -70,6 +71,8 @@ uctags="universal-ctags/universal-ctags/universal-ctags"
 if brew ls --versions "$uctags" >/dev/null; then
   if [ "$1" == "true" ]; then
     brew upgrade --fetch-HEAD "$uctags"
+  else
+    brew install --HEAD "$uctags"
   fi
 fi
 

@@ -7,12 +7,6 @@ plugins=~/.vim/pack/plugins/start/
 mkdir -p $plugins
 cd $plugins
 
-read -p "Minimal Vim? (y/N/a)" miniV
-if [[ $miniV == "y"* ]] ; then
-  exit
-fi
-checkAll
-
 function checkAll() {
   if [[ "$miniV $includeJS $includeTS $includePython $includeWriting" == *"a"* ]] ; then
     includeJS='y'
@@ -22,6 +16,11 @@ function checkAll() {
   fi
 }
 
+read -p "Minimal Vim? (y/N/a)" miniV
+if [[ $miniV == "y"* ]] ; then
+  exit
+fi
+checkAll
 
 echo "Syntax Plugin Options:"
 [ -z "$includeJS" ] && read -p "Include javascript? (y)es/(n)o/(a)ll: " includeJS
