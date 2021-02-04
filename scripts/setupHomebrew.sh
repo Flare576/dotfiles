@@ -1,6 +1,7 @@
 #!/bin/bash
 # takes 1 param: true to upgrade installed brews
 
+uctags="universal-ctags/universal-ctags/universal-ctags"
 isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
 # Install Homebrew
 if test ! $(which brew); then
@@ -32,22 +33,22 @@ brews=(
 if [ "$isLinux" -ne "1" ] ; then
   brews+=(cask kubectx mas)
 else
+  brew install --HEAD --without-xml $uctags
   # all of this because the current brew install can't find a dependency
-  pushd /tmp
-  prefix=$(brew install --HEAD universal-ctags/universal-ctags/universal-ctags |
-    sed -e 's/^.*\/configure --prefix=//' -e 'tx' -e 'd' -e ':x'
-  )
-  echo "hia\n\n\n$prefix\n\n\n"
-  git clone https://github.com/universal-ctags/ctags.git
-  pushd ctags
-  mkdir -p "$prefix"
-  ./autogen.sh
-  ./configure --prefix="$prefix"
-  make
-  make install
-  brew link universal-ctags/universal-ctags/universal-ctags
-  popd
-  popd
+  # pushd /tmp
+  # prefix=$(brew install --HEAD $uctags |
+  #   sed -e 's/^.*\/configure --prefix=//' -e 'tx' -e 'd' -e ':x'
+  # )
+  # git clone https://github.com/universal-ctags/ctags.git
+  # pushd ctags
+  # mkdir -p "$prefix"
+  # ./autogen.sh
+  # ./configure --prefix="$prefix"
+  # make
+  # make install
+  # brew link $uctags
+  # popd
+  # popd
 fi
 
 echo "Installing brews"
@@ -75,8 +76,6 @@ else
   git clone https://github.com/cheat/cheatsheets.git "$communityDir"
 fi
 
-uctags="universal-ctags/universal-ctags/universal-ctags"
-
 if brew ls --versions "$uctags" >/dev/null; then
   if [ "$1" == "true" ]; then
     brew upgrade --fetch-HEAD "$uctags"
@@ -85,11 +84,8 @@ if brew ls --versions "$uctags" >/dev/null; then
   fi
 fi
 
-  # Jetbrains Mono is a great font for terminals; install it so it's available on this system
+# Jetbrains Mono is a great font for terminals; install it so it's available on this system
 if [ "$isLinux" -eq "1" ] ; then
-  # I don't remember what these are for, commenting out to see what breaks
-  # This is very likely for universal-ctags
-  # sudo apt-get install python-setuptools
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
 else
   brew cask install homebrew/cask-fonts/font-jetbrains-mono
