@@ -1,2 +1,3 @@
 set background=dark
 colorscheme solarized
+let g:airline_solarized_dark_text = 1
