@@ -12,9 +12,7 @@ setopt PUSHDSILENT
 export EDITOR=vim
 export CHEAT_CONFIG_PATH="$HOME/dotfiles/cheat/conf.yml"
 
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+command -v pyenv >/dev/null 2>&1 && "$(pyenv init -)"
 
 alias chrome='open -a Google\ Chrome'
 alias vz='vi -o ~/.zshrc ~/.zshenv -c "cd ~"'
@@ -27,7 +25,7 @@ alias v='vi .'
 alias pi='pipenv'
 alias py='pipenv run python'
 # alias python='echo "maybe try pi/py..."'
-alias bat='batcat' # Some *nix systems needed a different name
+command -v bat > /dev/null 2>&1 || alias bat='batcat' # Some *nix systems needed a different name
 alias cat='bat'
 alias git='hub'
 alias lzy='lazydocker'
