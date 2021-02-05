@@ -16,7 +16,12 @@ function checkAll() {
   fi
 }
 
-read -p "Minimal Vim? (y/N/a)" miniV
+if [ -z "$1" ] ; then
+  read -p "Minimal Vim? (y/N/a)" miniV
+else
+  miniV='y'
+fi
+
 if [[ $miniV == "y"* ]] ; then
   exit
 fi

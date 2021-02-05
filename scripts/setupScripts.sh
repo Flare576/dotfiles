@@ -1,5 +1,5 @@
 #!/bin/bash
-read -p "Downloading useful scripts; enter Dir ($HOME/scripts) or 'skip' to skip: " dest
+[ -z "$1" ] && read -p "Downloading useful scripts; enter Dir ($HOME/scripts) or 'skip' to skip: " dest
 echo
 
 if [[ -z "$dest" ]] ; then
