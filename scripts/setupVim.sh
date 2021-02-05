@@ -8,7 +8,13 @@ mkdir -p $plugins
 cd $plugins
 
 function checkAll() {
-  if [[ "$miniV $includeJS $includeTS $includePython $includeWriting" == *"a"* ]] ; then
+  if [[ "$miniV" =~ ^[yY] ]] ; then
+    miniV='y'
+    includeJS='n'
+    includeTS='n'
+    includePython='n'
+    includeWriting='n'
+  elif [[ "$miniV $includeJS $includeTS $includePython $includeWriting" == *"a"* ]] ; then
     includeJS='y'
     includeTS='y'
     includePython='y'
@@ -21,13 +27,9 @@ if [ -z "$1" ] ; then
 else
   miniV='y'
 fi
-
-if [[ $miniV == "y"* ]] ; then
-  exit
-fi
 checkAll
 
-echo "Syntax Plugin Options:"
+[ "$miniV" == 'n' ] && echo "Syntax Plugin Options:"
 [ -z "$includeJS" ] && read -p "Include javascript? (y)es/(n)o/(a)ll: " includeJS
 checkAll
 [ -z "$includeTS" ] && read -p "Include typescript?  (y)es/(n)o/(a)ll: " includeTS

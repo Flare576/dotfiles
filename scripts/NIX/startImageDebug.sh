@@ -4,7 +4,23 @@
 # nvm: curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh -o install_nvm.sh
 
 # To make things fast, trying to avoid homebrew
-apt update;apt install -y curl zsh bat git/focal git-secrets hub silversearcher-ag vim jq
+# universal-ctags uses tzdata, which wants configuration info
+echo "tzdata tzdata/Areas select US
+tzdata tzdata/Zones/US select Central" | debconf-set-selections
+export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
+apt update;apt install -y \
+  curl \
+  zsh \
+  bat \
+  git/focal \
+  git-secrets \
+  hub \
+  silversearcher-ag \
+  vim \
+  jq \
+  tmux \
+  universal-ctags \
+  python3-pip
 
 # Pull the rest of the project
 cd $HOME

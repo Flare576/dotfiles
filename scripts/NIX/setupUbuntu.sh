@@ -15,17 +15,18 @@ if ! command -v brew &> /dev/null ; then
     fi
     apt-get update
     export DEBIAN_FRONTEND=noninteractive
-    apt-get --no-install-recommends --no-install-suggests -y install build-essential curl file git
+    apt-get --no-install-recommends --no-install-suggests -y install build-essential curl file git sudo
     yes '' | bash -c "$(
       curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh |
       sed 's/"${EUID:-${UID}}" == "0"/"true" == "false"/'
     )"
-    echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> /root/.profile
     eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> /root/.profile
+    echo 'source .profile' >> /root/.bashrc
   else
     echo "Installing Homebrew requirements"
     apt update
-    if command -v brew &> /dev/null ; then
+    if command -v sudo &> /dev/null ; then
       apt -y install sudo
     fi
     sudo apt-get --no-install-recommends --no-install-suggests -y install build-essential curl file git

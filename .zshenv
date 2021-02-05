@@ -27,6 +27,7 @@ alias v='vi .'
 alias pi='pipenv'
 alias py='pipenv run python'
 # alias python='echo "maybe try pi/py..."'
+alias bat='batcat' # Some *nix systems needed a different name
 alias cat='bat'
 alias git='hub'
 alias lzy='lazydocker'
@@ -34,6 +35,10 @@ alias lzye='vi $HOME/Library/Application\ Support/jesseduffield/lazydocker/confi
 alias plcat='plutil -convert xml1 -o -'
 source "$HOME/dotfiles/scripts/switchTheme.sh"
 alias st="switchTheme"
+
+function note() {
+  vi ~/.doNotCommit.folder/$1
+}
 
 function gs() {
   git submodule foreach $1

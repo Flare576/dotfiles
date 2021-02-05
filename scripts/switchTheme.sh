@@ -24,7 +24,7 @@ EOF
 
     # refresh current zsh and tmux
     source "$HOME/dotfiles/themes/$name/$FLARE_ZSH_THEME.zsh-theme"
-    command -v tmux &> /dev/null && tmux source-file "$HOME/dotfiles/themes/$FLARE_THEME/$FLARE_TMUX_THEME"
+    command -v tmux &> /dev/null && tmux source-file "$HOME/dotfiles/themes/$FLARE_THEME/$FLARE_TMUX_THEME" &> /dev/null
     # vim and zsh are configured to watch for changes on updates
 
     # Terminal emulators for different machines I use
