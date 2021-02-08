@@ -1,9 +1,9 @@
 #!/bin/bash
 isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
-echo "Setup Oh My Zshell"
+echo "Setting up Oh My Zshell, Tools, Themes, and Plugins for ZSH"
 
 # Install and setup Oh My Zshell
-curl -sL http://install.ohmyz.sh | sh
+curl -sL http://install.ohmyz.sh | bash &> /dev/null #the installer is pretty, tho! :(
 tc="$HOME/.doNotCommit.theme"
 
 if ! grep -q "$tc" ${HOME}/dotfiles/.doNotCommit ; then
@@ -11,7 +11,8 @@ if ! grep -q "$tc" ${HOME}/dotfiles/.doNotCommit ; then
 fi
 cd "$HOME/.oh-my-zsh/themes"
 themes="$HOME/dotfiles/themes"
-command -v pip3 &> /dev/null && pip3 install pyaml
+# Theme configs are in yaml
+command -v pip3 &> /dev/null && pip3 install --quiet pyaml
 
 for theme in "$themes"/**/*.zsh-theme; do
   ln -sf "$theme"
@@ -20,8 +21,8 @@ done
 cd "$HOME/.oh-my-zsh/custom/plugins/"
 
 # NVM and Node Optimizations
-git clone https://github.com/lukechilds/zsh-better-npm-completion
-git clone https://github.com/lukechilds/zsh-nvm
+git clone -q https://github.com/lukechilds/zsh-better-npm-completion
+git clone -q https://github.com/lukechilds/zsh-nvm
 
 # Sometimes Z doesn't setup its file
 touch "$HOME/.z"
@@ -30,6 +31,7 @@ ln -fs "$HOME/dotfiles/.zshrc" "$HOME"
 
 echo "Making Zsh default"
 if [ "$isLinux" -eq "1" ] ; then
+  # using sudo because most users can't (and shouldn't) direct-access /etc/shells
   which zsh | sudo tee -a /etc/shells
   chsh -s $(which zsh)
 else

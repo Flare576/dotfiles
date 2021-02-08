@@ -1,5 +1,5 @@
 #!/bin/bash
-[ -z "$1" ] && read -p "Downloading useful scripts; enter Dir ($HOME/scripts) or 'skip' to skip: " dest
+[ -z "$1" ] && read -p "Enter Dir for Flare Scripts ($HOME/scripts) or 'skip' to skip: " dest
 echo
 
 if [[ -z "$dest" ]] ; then
@@ -7,7 +7,7 @@ if [[ -z "$dest" ]] ; then
 fi
 
 if [[ "$dest" != "skip" ]] ; then
-  git clone https://github.com/flare576/scripts.git $dest
+  git clone -q https://github.com/flare576/scripts.git $dest
   sed -i'' -e 's/https:\/\/github.com\//git@github.com:/' $dest/.git/config
 
   config="${HOME}/dotfiles/.doNotCommit"

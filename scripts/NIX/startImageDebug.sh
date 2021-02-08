@@ -12,7 +12,7 @@ packages=(
   sudo
   zsh
   bat
-  git/focal
+  git
   git-secrets
   hub
   silversearcher-ag
@@ -31,14 +31,16 @@ echo "tzdata tzdata/Areas select US
 tzdata tzdata/Zones/US select Central" | debconf-set-selections
 
 apt update &> /dev/null
-apt install -y ${packages[@]} &> /dev/null
-
-which git
+for pack in ${packages[@]};
+do
+  echo "Installing $pack"
+  apt install -y $pack &> /dev/null
+done
 
 # Pull the rest of the project
 cd $HOME
 echo "Cloning dotfiles"
-git clone https://github.com/Flare576/dotfiles.git &> /dev/null
+git clone -q https://github.com/Flare576/dotfiles.git
 
 # Install safety precautions around this repo
 bash $HOME/dotfiles/scripts/setupRepo.sh
@@ -66,8 +68,6 @@ duration=$((ending - starting))
 seconds=$(( duration / sec ))
 millis=$(( (duration - (seconds * sec)) / 1000000 ))
 
-echo "
-
-[31;47m⏱  TIME ⏱ [0m
+echo "[31;47m⏱  TIME ⏱ [0m
 Finished in ${seconds}.${millis}s.
 Type [91;47mzsh[0m then either [93;47mst light[0m or [37;40mst dark[0m to get stated."

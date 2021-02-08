@@ -42,50 +42,82 @@ checkAll
 echo "Installing vim plugins"
 ############################## Theme ###########
 # Preferred Theme
-git clone https://github.com/altercation/vim-colors-solarized.git
-git clone https://github.com/vim-airline/vim-airline-themes.git
+echo "Cloning vim-colors-solarized"
+git clone -q https://github.com/altercation/vim-colors-solarized.git
+echo "Cloning vim-airline-themes"
+git clone -q https://github.com/vim-airline/vim-airline-themes.git
+
 # Backup Theme
-git clone https://github.com/sjl/badwolf.git
+echo "Cloning badwolf"
+git clone -q https://github.com/sjl/badwolf.git
+
 # active/inactive color update
-git clone https://github.com/TaDaa/vimade
+echo "Cloning vimade"
+git clone -q https://github.com/TaDaa/vimade.git
+
 # Status line gud
-git clone https://github.com/vim-airline/vim-airline
+echo "Cloning vim-airline"
+git clone -q https://github.com/vim-airline/vim-airline
 
 ############################## Plugins ###########
 # Silver Searcher in Vim
-git clone https://github.com/rking/ag.vim.git
-# CtrlP (file finder)
-git clone https://github.com/kien/ctrlp.vim.git
-# Allows diffing changes in current file/buffer
-git clone https://github.com/plytophogy/vim-diffchanges
-# Bring Z-power to Vim
-git clone https://github.com/lingceng/z.vim.git
-# Flip those surroundings!
-git clone https://github.com/tpope/vim-surround.git
-# Multi-cursor support
-# git clone https://github.com/terryma/vim-multiple-cursors.git
-# Better undotree
-git clone https://github.com/mbbill/undotree.git
-# Merge tool soooo good
-git clone https://github.com/samoshkin/vim-mergetool.git
-# tag support
-git clone https://github.com/ludovicchabant/vim-gutentags.git
-git clone https://github.com/majutsushi/tagbar.git
-# EditorConfig support (see https://editorconfig.org/)
-# git clone https://github.com/editorconfig/editorconfig-vim.git
+echo "Cloning ag.vim"
+git clone -q https://github.com/rking/ag.vim.git
 
+# CtrlP (file finder)
+echo "Cloning ctrlp.vim"
+git clone -q https://github.com/kien/ctrlp.vim.git
+
+# Allows diffing changes in current file/buffer
+echo "Cloning vim-diffchanges"
+git clone -q https://github.com/plytophogy/vim-diffchanges.git
+
+# Bring Z-power to Vim
+echo "Cloning z.vim"
+git clone -q https://github.com/lingceng/z.vim.git
+
+# Flip those surroundings!
+echo "Cloning vim-surround"
+git clone -q https://github.com/tpope/vim-surround.git
+
+# Multi-cursor support (for splits!
+git clone -q https://github.com/terryma/vim-multiple-cursors.git
+
+# Better undotree
+echo "Cloning undotree"
+git clone -q https://github.com/mbbill/undotree.git
+
+# Merge tool soooo good
+echo "Cloning vim-mergetool"
+git clone -q https://github.com/samoshkin/vim-mergetool.git
+
+# tag support
+echo "Cloning vim-gutentags"
+git clone -q https://github.com/ludovicchabant/vim-gutentags.git
+
+echo "Cloning tagbar"
+git clone -q https://github.com/majutsushi/tagbar.git
+
+# EditorConfig support (see https://editorconfig.org/)
+# git clone -q https://github.com/editorconfig/editorconfig-vim.git
 
 if [[ $includeJS == "y"* ]] ; then
   # JSX
-  git clone https://github.com/MaxMEllon/vim-jsx-pretty.git
+  echo "Cloning vim-jsx-pretty"
+  git clone -q https://github.com/MaxMEllon/vim-jsx-pretty.git
+
   # JSON
-  git clone https://github.com/elzr/vim-json.git
+   echo "Cloning vim-json"
+  git clone -q https://github.com/elzr/vim-json.git
   # Javascript
-  git clone https://github.com/pangloss/vim-javascript.git
+
+  echo "Cloning vim-javascript"
+  git clone -q https://github.com/pangloss/vim-javascript.git
 fi
 if [[ $includeTS == "y"* ]] ; then
   # Typescript
-  git clone https://github.com/leafgarland/typescript-vim.git
+  echo "Cloning typescript-vim"
+  git clone -q https://github.com/leafgarland/typescript-vim.git
 fi
 if [[ $includeWriting == "y"* ]] ; then
   echo "Downloading thesaurus..."
@@ -96,7 +128,10 @@ if [[ $includeWriting == "y"* ]] ; then
 fi
 if [[ $includePython == "y"* ]] ; then
   # Intelligent indentation handling
-  git clone https://github.com/vim-scripts/indentpython.vim.git
-  # Autocompletion for VIM
-  git clone https://github.com/davidhalter/jedi-vim.git
+  echo "Cloning indentpython.vim"
+  git clone -q https://github.com/vim-scripts/indentpython.vim.git
+
+  # Autocompletion for Python
+  echo "Cloning jedi-vim"
+  git clone -q https://github.com/davidhalter/jedi-vim.git
 fi
