@@ -4,8 +4,9 @@ echo "Setting up Oh My Zshell, Tools, Themes, and Plugins for ZSH"
 
 # Install and setup Oh My Zshell
 curl -sL http://install.ohmyz.sh | bash &> /dev/null #the installer is pretty, tho! :(
-tc="$HOME/.doNotCommit.theme"
 
+# Configure theme management
+tc="$HOME/.doNotCommit.theme"
 if ! grep -q "$tc" ${HOME}/dotfiles/.doNotCommit ; then
   echo "[ -f \"$tc\" ] && source \"$tc\"" >> "${HOME}/dotfiles/.doNotCommit"
 fi

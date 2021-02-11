@@ -218,6 +218,9 @@ nnoremap <leader><space> :nohlsearch<CR>
 nnoremap <silent> <leader>ws :%s/\s\+$//g<CR>
 " highlight last inserted text
 nnoremap gV `[v`]
+" Tab-Tab increases indent, Shift-Tab decreases
+inoremap <Tab><Tab> <c-t>
+inoremap <S-Tab> <c-d>
 " Make right-side notes                 # like this
 " Highlight block, type note start column, then ,<Tab>
 vnoremap <leader><Tab> :<C-U>'<,'>call RightNote()<CR>
@@ -257,7 +260,8 @@ let @p='OAOAI|jk:s/\v\s+\|/|/g:s/\v\|\s+/|/g:s/\v\|([^\|]*)/\1, /gI(jkExxa)
 let @y=':%s/\v^\|\s*([^ ]+)\s*\|\s*([^ ]+)\s*\|\s*([^ ]+)\s*\|\s*([^ ]*)\s*\|\s*([^ ]*)\s*\|\s*(\w[^\|]+|)\s+\|/  - field_name: \1\r    description:\r    type: \2\r    nullable: \3\r    key: \4\r    default: \5\r    extra: \6'
 
 "############################## Filetypes ###########
-filetype indent on      " load filetype-specific indent files
+" load filetype-specific indent files and plugins
+filetype indent plugin on
 
 "########################## JavaScript
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 suffixesadd=.js,.jsx
@@ -303,7 +307,7 @@ autocmd BufRead python
 
 
 "########################## Other_filetypes
-autocmd Filetype markdown setlocal spell textwidth=100 cc=100
+autocmd Filetype markdown setlocal spell textwidth=100 cc=100 conceallevel=3 formatoptions+=ro
 
 autocmd Filetype text setlocal linebreak spell complete+=s wrap formatoptions=1
       \ noexpandtab textwidth=100 cc=100 formatoptions=qtc

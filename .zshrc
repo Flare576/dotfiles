@@ -26,6 +26,8 @@ fi
 bindkey -v
 #same as my vim.... also, slower than .1ms
 bindkey jk vi-cmd-mode
+bindkey -M vicmd B vi-beginning-of-line
+bindkey -M vicmd E vi-end-of-line
 export KEYTIMEOUT=4
 
 # vim mapping removes up/down.... I like it, tho

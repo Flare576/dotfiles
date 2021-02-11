@@ -1,7 +1,11 @@
 # Flare's dotfiles
-Based on a lot of discoveries from [GitHub Does dotfiles](https://dotfiles.github.io/), this is my repo for my dotfiles.
-I've also included a setup script, mostly for personal use, that will bring a brand new Mac from stock to stylish with
-minimal messing around.
+*You may also be interested in [Flare's Scripts](https://github.com/Flare576/scripts), a collection
+of shell and NodeJS (check that project's readme!) scripts I use dozens of times an hour.*
+
+Based on a lot of discoveries from [GitHub Does dotfiles](https://dotfiles.github.io/), this is my
+repo for my dotfiles.  I've also included a setup script, mostly for personal use, that will bring a
+brand new Mac from stock to stylish with minimal messing around.
+
 
 ```
 bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/OSX/setupMac.sh)"
@@ -41,20 +45,27 @@ sh dotfiles/scripts/OSX/setupCasks.sh # Check the script for details
 # Sure man, but what do they DO?!
 
 You can read each of the scripts for details of how/what _they_ do, but as far as what YOU can do, here's a breakdown:
+
 - [Hotkey Mentality](#hotkey-mentality)
 - [vimrc](#vim-config-galore)
   - [Lots of custom config](#hand-picked-values)
   - [Plugins](#pathogen-driven-plugins)
   - [Hotkeys](#daily-hot-keys)
-  - [Vim + Jira Hotkeys](#editing-with-style-in-jira)
-  - [Quick-edit Hotkeys](#dot-file-hot-keys)
-- [tmux](#tmux-config-galore)
-- Jira Awesomeness
+    - [Must-Know & Navigation](#must-know--navigation)
+    - [Less Common](#less-common)
+    - [Situational](#situational)
+    - [Vim + Jira](#jira-colors)
+    - [Quick-Edit](#quick-edit)
+- [tmux](#tmux-hotkeys-galore)
+- [Jira Awesomeness](#i-want-that-jira-cli-awesomeness)
   - [Jira Setup](#i-want-that-jira-cli-awesomeness)
   - [Jira Commands](#jira)
-- [Zshell Hotkey commands](#zshell-hotkey-style-commands)
-  - [Kubernetes shortcuts](#kubernetes)
-- [Tooling Updates](#tools)
+- [Zshell](#zshell)
+  - [Hotkeys](#hotkeys)
+  - [Kubernetes/Docker](#kubernetesdocker)
+  - [vim-mode](#vimmode)
+- [Tools](#tools)
+    - [Theme Switching](#new-theme-switching)
 - [Some fun autocompletes](#setup-keyboard-replacements)
 
 ## What do I get?
@@ -95,12 +106,12 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 
 #### Daily hot keys!
 
-Must-know & Navigation
+##### Must-know & Navigation
 
 | Mode | Keys | Actions |
 |------|------|---------|
 | Insert | jk | shortcut to Escape
-| Normal/Visual | j & k | move "visually" up and down, makes soft-wraps easier
+| Normal/Visual | j/k/h/l | move "visually" up and down, makes soft-wraps easier
 | Normal | B & E | shortcuts for `^` and `$`
 | Normal | ctrl + j, k, h, l | change focus between windows
 | Normal | H & L | Move between tabs
@@ -110,20 +121,21 @@ Must-know & Navigation
 | Normal | ctrl + _ | split window horizontally
 | Normal | ctrl + \| | split window vertically
 | Normal | ,\<Enter> | zoom in/out of buffer
-| Normal | >, <, +, - | resize current window
+| Normal | >, &lt;, +, - | resize current window
 | Normal | ,h | set Vim PWD to current directory (set home)
 | Normal | ,a | fuzzy search (Silver Searcher) for files under `pwd`
 | Normal | ,z | Open commonly used folders in current buffer (see [Z](https://github.com/rupa/z))
 | Normal | ctrl+p | brings up file search under `pwd`
+| Visual | ,y | yank selected to OSx/WSL clipboard |
 
-OSX Specific (editing)
+##### Less Common
 
 | Mode | Keys | Actions |
 |------|------|---------|
-| Visual | ,y | yank selected to OSx clipboard |
 | Visual |,uq | Removes quotes from selected text
 | Normal | ,\<space> | turns off search highlighting
 | Normal | ,d | Diff current buffer against on-disk file (changes since last save)
+| Normal | ,dg | Diffs current buffer against git history
 | Normal | ,D | Diffs visible windows against each other
 | Normal | ,/ | Shows the count of your last search
 | Normal | gV | highlight last inserted text
@@ -138,7 +150,7 @@ OSX Specific (editing)
 | Normal | ,q | saves current session to /tmp/ongoing and exits
 | Normal | ,rb | [R]uns current file in [b]rowser (chrome by default)
 
-##### Editing with _style_ in Jira
+##### Jira Colors
 
 | Mode | Keys | Actions |
 |------|------|---------|
@@ -146,7 +158,8 @@ OSX Specific (editing)
 | Insert | ,jr | Starts a Red section
 | Insert | ,jo | Starts an Orange section
 
-#### Dot file hot keys!
+##### Quick-Edit
+
 | Mode | Keys | Actions |
 |------|------|---------|
 | Normal | ,ev | Edit .vimrc in new tab
@@ -156,7 +169,8 @@ OSX Specific (editing)
 | Normal | ,ej | Edit .jira.d/config.yml in new tab
 | Normal | ,ed | Edit dotfiles root folder in new tab
 
-### tmux hotkeys galore
+### tmux Hotkeys Galore
+
 |  Mode   |    Keys   | Actions |
 |---------|-----------|---------|
 | Default | Ma h, j, k, l  | Resize pane 2 units in given direction
@@ -192,6 +206,7 @@ Now comes the fun part. If everything is setup correctly, you can run `jira -h`
 You'll see the list of default commands (`help` through `session`), and then the ones I added.
 
 My day generally goes like this (assuming I'm on Project **ABC** with various ticket numbers)
+
 ```
 jira mine # See what I've been assigned
 jira s -w # s[print], Otherwise, I'll see what we have in the sprint I can snag
@@ -209,11 +224,14 @@ jira t -s "Whatever State" -m "I've done what I can!"```
 jira link
 ```
 
-The `r(eviewed)` command is a good example of combining several actions together if you want to add your own!
+The `r(eviewed)` command is a good example of combining several actions together if you want to add
+your own!
 
-The last thing I want to mention is that all of the views you see are 100% configurable; see the `.jira.d/templates` folder.
+The last thing I want to mention is that all of the views you see are 100% configurable; see the
+`.jira.d/templates` folder.
 
-#### Jira
+#### Jira Commands
+
 | Command | Params | Result |
 |---------|--------|--------|
 | jira w[orkon] | TicketID (e.g., PROJECT-123) | Set global story/ticket for `jira` commands |
@@ -234,15 +252,21 @@ The last thing I want to mention is that all of the views you see are 100% confi
 | jira r | [State], TicketID\* | Review ticket by Comment(vi) on ticket, Transition to provided state or "Signoff" by default (feel free to modify this to your preferred Post-QA stateand with your preferred review template) |
 > \*NOTE: If you don't provide a TicketID, the global story/ticket set by `jira w[orkon]` is used
 
-### Zshell hotkey-style commands
+### Zshell
 
-#### General
-| Command | Result |
-|---------|--------|
-| vz | Edit(vi) .zshrc and .zshenv |
-| sz | Source .zshrc and .zshenv |
-| vd | edit(vi) `dotfiles` root dir |
-| plcat | OSX only: outputs human-readable contents of a `.plist` file |
+#### Hotkeys
+| Command | Parms | Result |
+|---------|-------|--------|
+| vz | none | Edit(vi) .zshrc and .zshenv |
+| vd | none | Edit(vi) `dotfiles` root dir |
+| vv | none | Edit(vi) with `/tmp/ongoing` session |
+| vt | none | Edit(vi) with `/dotfiles/.tmux.conf` session |
+| vs | none | Edit(vi) `~/scripts` root dir |
+| sz | none | Source .zshrc and .zshenv |
+| plcat | .plist file | OSX only: outputs human-readable contents of a `.plist` file |
+| pi/py | various | runs `pipenv` and `pipenv run python` respectively
+
+> See also [Git Aliases](https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet#git)
 
 #### Kubernetes/Docker
 | Command | Params    | Result                                                        |
@@ -254,32 +278,74 @@ The last thing I want to mention is that all of the views you see are 100% confi
 | kcons   | none      | alias to `kubectl config get-context`                         |
 | kn      | namespace | alias to `kubectl config set-context --current --namespace`   |
 | lzy     | none      | opens lazydocker                                              |
+| lzye    | none      | edits lazydocker config file                                  |
+| dnuke   | none      | alias to `docker system prune --volumes -af`                  |
+
+> See also [kubectl](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/kubectl), [docker-compose](https://github.com/sroze/docker-compose-zsh-plugin), [docker-aliases](https://github.com/webyneter/docker-aliases) or just run `alias | grep docker` to see them all!
+
+#### vim-mode
+
+ZSH has a [command-line editor](http://zsh.sourceforge.net/Guide/zshguide04.html) functionality,
+which can be set to [vim-mode](http://stratus3d.com/blog/2017/10/26/better-vi-mode-in-zshell/) but
+defaults to `emacs`. It's pretty nice, but I've become used to some of the emacs features. To bring
+them back (and to make it act more like my vim), these changes were made
+
+| Key(s) | Mode  | Action |
+|--------|-------|--------|
+| jk     | viins | "Escapes" to vicmd mode
+| B      | vicmd | Jumps to front of line (imitate `^`)
+| E      | vicmd | Jumps to front of line (imitate `$`)
+| ↑ / ↓  | viins | Scrolls through previous commands (imitates emacs behavior)
+
 
 ### Tools
+
+#### \*\*NEW\*\* Theme Switching!
+
+I'd been using the same theme(s) for years and decided to take a look around and see what was
+available. Turns out there's a lot, and [a lot to learn](./themes/README.md).
+
+This package ships with Solarized Dark/Light themes, which you can flip between with
+
+```
+st [day, night, light, dark]
+```
+
+The script updates
+
+- Supported terminal emulators
+  - Terminal.app (OSX): *Script will switch any active windows, but new windows will have old style until application is restarted*
+  - gnome (Chromebook)
+  - mintty/wsltty (WSL)
+- vim: *Will update the next time you enter/exit `input` mode, and only that instance of vim*
+- zsh: *Will update after the next prompt refresh (generally after you enter/ctrl-c a command)*
+- bat
+
+#### Recommended
 
 Sometimes you just don't want to dig through a bunch of scripts and want to know what a person suggests. Here's what makes my life easier:
 
 1) Homebrew / Cask (https://brew.sh/)
-1) `vim` [grab the most recent version] (https://www.vim.org/) †
-1) `git` + `hub` [gitHub actions in your CLI] (https://hub.github.com/) †
-1) `the_silver_searcher` [Bettah than awk] (https://github.com/ggreer/the_silver_searcher) †
-1) `tmux` [panel/window manager in terminal] (https://github.com/tmux/tmux/wiki) †
-1) `bat` [replaces `cat`] (https://github.com/sharkdp/bat) †
-1) `1password` [More secure, cleaner interface] (https://1password.com) ††
-1) `launchbar` [Spotlight kinda sux] (https://www.obdev.at/products/launchbar/index.html) ††
-1) `slack` [Please don't make me use teams] (https://www.slack.com) ††
-1) `pipenv` [w/ python 3.7.2] (https://pipenv-fork.readthedocs.io/en/latest/) †
-1) `nvm` [99 problems, but node versions ain't one] (https://github.com/nvm-sh/nvm) †
-1) ZSH [Bettah than bash] (https://www.zsh.org/) †
-1) `shellcheck` [static analysis on scripts] (https://www.shellcheck.net/) †
-1) `git-secrets` [enabled on this project] (https://github.com/awslabs/git-secrets) †
-1) `mas` [cli app store tool] (https://github.com/mas-cli/mas) †
-1) `cheat` [CLI Cheat sheets] (https://github.com/cheat/cheat) †
-1) `watch` [re-run commands on timer] (https://linux.die.net/man/1/watch) †
-1) `jq` [process JSON output] (https://stedolan.github.io/jq/) †
-1) `k9s` [CLI UI for K8s] (https://github.com/derailed/k9s) †
-1) `docker` [Container Manager] (https://www.docker.com) ††
-1) `lazydocker` [CLI UI for Docker] (https://github.com/jesseduffield/lazydocker) †
+1) `vim` [grab the most recent version](https://www.vim.org/) †
+1) `git` + `hub` [gitHub actions in your CLI](https://hub.github.com/) †
+1) `the_silver_searcher` [Bettah than awk](https://github.com/ggreer/the_silver_searcher) †
+1) `tmux` [panel/window manager in terminal](https://github.com/tmux/tmux/wiki) †
+1) `bat` [replaces `cat`](https://github.com/sharkdp/bat) †
+1) `1password` [More secure, cleaner interface](https://1password.com) ††
+1) `launchbar` [Spotlight kinda sux](https://www.obdev.at/products/launchbar/index.html) ††
+1) `slack` [Please don't make me use teams](https://www.slack.com) ††
+1) `pipenv` [w/ python 3.7.2](https://pipenv-fork.readthedocs.io/en/latest/) †
+1) `nvm` [99 problems, but node versions ain't one](https://github.com/nvm-sh/nvm) †
+1) ZSH [Bettah than bash](https://www.zsh.org/) †
+1) `shellcheck` [static analysis on scripts](https://www.shellcheck.net/) †
+1) `git-secrets` [enabled on this project](https://github.com/awslabs/git-secrets) †
+1) `mas` [cli app store tool](https://github.com/mas-cli/mas) †
+1) `cheat` [CLI Cheat sheets](https://github.com/cheat/cheat) †
+1) `watch` [re-run commands on timer](https://linux.die.net/man/1/watch) †
+1) `jq` [process JSON output](https://stedolan.github.io/jq/) †
+1) `k9s` [CLI UI for K8s](https://github.com/derailed/k9s) †
+1) `docker` [Container Manager](https://www.docker.com) ††
+1) `lazydocker` [CLI UI for Docker](https://github.com/jesseduffield/lazydocker) †
 1) All my Vim config; sorry, you're gonna have to read it for details.
 > † Installable with Homebrew
 > †† Installable with Homebrew Cask

@@ -26,3 +26,6 @@ String Matching
 
 Combo
 [ $rock == "true" ] && [ $roll == "true" ]; then
+
+Invert
+! [ $allnight == "true" ]
