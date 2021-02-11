@@ -12,7 +12,7 @@ setopt PUSHDSILENT
 export EDITOR=vim
 export CHEAT_CONFIG_PATH="$HOME/dotfiles/cheat/conf.yml"
 
-command -v pyenv >/dev/null 2>&1 && "$(pyenv init -)"
+command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
 
 alias chrome='open -a Google\ Chrome'
 alias vz='vi -o ~/.zshrc ~/.zshenv -c "cd ~"'

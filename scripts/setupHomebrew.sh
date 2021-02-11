@@ -13,7 +13,8 @@ fi
 brews=(
   zsh
   python # must preceed vim
-  pipenv
+  pyenv # Handles Python venvs
+  pipenv # Handles pip dependencies, uses pyenv for pinned core python versions
   bat
   cheat
   git
