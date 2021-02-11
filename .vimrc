@@ -135,6 +135,9 @@ nnoremap <leader>/ :%s///gn<CR>
 " Run current file with various commands
 " r[un] with [b]rowser, currently Chrome
 nnoremap <leader>rb :silent !chrome %<CR> :redraw!<CR>
+" Save session to /tmp and exit
+nnoremap <leader>q :mks! /tmp/ongoing<CR> :qa<CR>
+
 "############################## Plugins ###########
 
 " netrw can be a dick about <c-l>

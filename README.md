@@ -129,12 +129,14 @@ OSX Specific (editing)
 | Normal | gV | highlight last inserted text
 | Normal | ,u | Brings up "Super Undo"
 
-Situational
+##### Situational
 
 | Mode | Keys | Actions |
 |------|------|---------|
 | Normal | @y | converts "Describe Table" and converts to YAML (beta)
 | Visual | \<count>,\<Tab> | works on range, starts a # comment at column <count>
+| Normal | ,q | saves current session to /tmp/ongoing and exits
+| Normal | ,rb | [R]uns current file in [b]rowser (chrome by default)
 
 ##### Editing with _style_ in Jira
 
@@ -166,6 +168,7 @@ Situational
 | Default | M +⇧ + :       | tmux command prompt
 | Default | C-k            | clear buffer
 | Default | M-Enter        | Maximize/Restore current pane
+| Default | Ma b           | Sends UbuntuQuickInstall script to pane (for containers!)
 
 ## I want that Jira CLI Awesomeness
 This script will get you all setup (assuming you cloned this project to ~/dotfiles)

@@ -18,11 +18,14 @@ for theme in "$themes"/**/*.zsh-theme; do
   ln -sf "$theme"
 done
 
+# one more and should probably consider zplug...
 cd "$HOME/.oh-my-zsh/custom/plugins/"
 
 # NVM and Node Optimizations
 git clone -q https://github.com/lukechilds/zsh-better-npm-completion
 git clone -q https://github.com/lukechilds/zsh-nvm
+# docker-aliases for... docker aliases
+git clone -q https://github.com/webyneter/docker-aliases
 
 # Sometimes Z doesn't setup its file
 touch "$HOME/.z"
