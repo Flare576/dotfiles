@@ -2,11 +2,7 @@
 # Secrets
 source $HOME/.doNotCommit
 
-#export PATH="/home/linuxbrew/.linuxbrew/opt/python@3.8/libexec/bin:${PATH}"
-# export PATH="/usr/local/bin:${PATH}"
-# export PYTHONHOME="/usr/local/opt/python/libexec/bin"
-# export PYTHONHOME="/usr/bin/python3"
-# export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
+#export PATH="/home/linuxbrew/.linuxbrew/opt/python@3.8/libexec/bin:${P
 
 setopt PUSHDSILENT
 export EDITOR=vim
