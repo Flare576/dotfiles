@@ -1,4 +1,6 @@
 # This file is loaded before .zshrc
+# Change "path" to an -a(rray) -U(nique) (special) type, prevents dup entries
+typeset -aU path
 # Secrets
 source $HOME/.doNotCommit
 
@@ -27,7 +29,7 @@ alias py='pipenv run python'
 # alias python='echo "maybe try pi/py..."'
 
 # Utilities
-command -v bat > /dev/null 2>&1 || alias bat='batcat' # Some *nix systems needed a different name
+command -v batcat > /dev/null && alias bat='batcat' # Some *nix systems needed a different name
 alias cat='bat'
 alias git='hub'
 alias c="cheat"
