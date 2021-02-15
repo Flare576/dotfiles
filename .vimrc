@@ -136,7 +136,20 @@ nnoremap <leader>/ :%s///gn<CR>
 " r[un] with [b]rowser, currently Chrome
 nnoremap <leader>rb :silent !chrome %<CR> :redraw!<CR>
 " Save session to /tmp and exit
-nnoremap <leader>q :mks! /tmp/ongoing<CR> :qa<CR>
+nnoremap <leader>q :call MakeRootSession()<CR> :qa<CR>
+function! MakeRootSession()
+  let git_dir = system("git rev-parse --show-toplevel")
+  " See if the command output starts with 'fatal' (if it does, not in a git repo)
+  let is_not_git_dir = matchstr(git_dir, '^fatal:.*')
+  " if git project, use that root for Sesion
+  if empty(is_not_git_dir)
+    let mysession = substitute(git_dir, '\n*$', "", "")
+  else
+    let mysession = %:p:h
+  endif
+  echo mysession
+  execute 'mksession! '. mysession . "/Session.vim"
+endfunction
 
 "############################## Plugins ###########
 
@@ -246,7 +259,7 @@ nnoremap <F5> :bufdo e<CR>
 nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>ez :tabnew ~/dotfiles/.zshrc<CR>:spl ~/dotfiles/.zshenv<CR>
-nnoremap <leader>et :tabnew ~/dotfiles/.tmux.config<CR>
+nnoremap <leader>et :tabnew ~/dotfiles/.tmux.conf<CR>
 nnoremap <leader>ej :tabnew ~/dotfiles/.jira.d/config.yml<CR>
 nnoremap <leader>ed :tabnew ~/dotfiles<CR>
 
@@ -333,3 +346,6 @@ autocmd BufRead COMMIT_EDITMSG setlocal spell
 "
 " Comments on mapping lines
 " https://stackoverflow.com/questions/24716804/inline-comments-in-vimrc-mappings
+"
+" vim working path
+" http://inlehmansterms.net/2014/09/04/sane-vim-working-directories/

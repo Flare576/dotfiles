@@ -2,52 +2,50 @@
 # Secrets
 source $HOME/.doNotCommit
 
-#export PATH="/home/linuxbrew/.linuxbrew/opt/python@3.8/libexec/bin:${PATH}"
-# export PATH="/usr/local/bin:${PATH}"
-# export PYTHONHOME="/usr/local/opt/python/libexec/bin"
-# export PYTHONHOME="/usr/bin/python3"
-# export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
-
 setopt PUSHDSILENT
 export EDITOR=vim
 export CHEAT_CONFIG_PATH="$HOME/dotfiles/cheat/conf.yml"
 
+# Initialize pyenv
 command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
 
-alias chrome='open -a Google\ Chrome'
+# Quick-edit configs
 alias vz='vi -o ~/.zshrc ~/.zshenv -c "cd ~"'
-alias sz='source ~/.zshrc && source ~/.zshenv'
 alias vd='vi ~/dotfiles -c "cd ~/dotfiles"'
 alias vs='vi ~/scripts -c "cd ~/scripts"'
 alias vt='vi ~/.tmux.conf -c "cd ~/dotfiles"'
-alias tm='tmux new-session'
 alias v='vi .'
-alias vv='vi -S /tmp/ongoing'
+alias vv='vi -S'
+
+alias chrome='open -a Google\ Chrome'
+alias sz='source ~/.zshrc && source ~/.zshenv'
+alias tm='tmux new-session'
+
 alias pi='pipenv'
 alias py='pipenv run python'
+# Leaving this as a reminder to never do this
 # alias python='echo "maybe try pi/py..."'
+
+# Utilities
 command -v bat > /dev/null 2>&1 || alias bat='batcat' # Some *nix systems needed a different name
 alias cat='bat'
 alias git='hub'
+alias c="cheat"
+alias cpl="cheat -t private -l"
+alias cpe="cheat -t private -e"
+alias note="cheat -t private -e"
+
 alias lzy='lazydocker'
-alias dnuke='docker system prune --volumes -af'
 alias lzye='vi $HOME/Library/Application\ Support/jesseduffield/lazydocker/config.yml'
+alias dnuke='docker system prune --volumes -af'
+
 alias plcat='plutil -convert xml1 -o -'
+
 source "$HOME/dotfiles/scripts/switchTheme.sh"
 alias st="switchTheme"
 
-function note() {
-  vi ~/.doNotCommit.folder/$1
-}
-
 function gs() {
   git submodule foreach $1
-}
-
-function gacp() {
-  git add .
-  git commit -m "$1"
-  git push -u
 }
 
 function fwatch() {
@@ -67,7 +65,6 @@ function fwatch() {
 }
 
 function weather() {
-  tmux select-pane -P 'bg=#000000'
   if [ $(tput cols) -gt  "100" ] ; then
     curl -s "wttr.in/${MY_LOC_ZIP}?Q"
   else
@@ -127,6 +124,7 @@ function yaml() {
   python3 -c "import yaml;print(yaml.safe_load(open('$1'))$2)"
 }
 
+# ZSH/OMZ "switchTheme" functionality to watch for changes to theme settings
 function zsh_theme_refresh() {
   [ -f "$HOME/.doNotCommit.theme" ] && source "$HOME/.doNotCommit.theme"
   [ -f "$ZSH/themes/$FLARE_ZSH_THEME.zsh-theme" ] && source "$ZSH/themes/$FLARE_ZSH_THEME.zsh-theme"

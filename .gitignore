@@ -2,6 +2,7 @@ node_modules
 *.swp
 *.swo
 *.orig
+Session.vim
 .doNotCommit*
 .gitconfig.personal
 .DS_Store
