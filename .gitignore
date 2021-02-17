@@ -10,6 +10,8 @@ Session.vim
 /.idea
 .jira.issue
 tags
+tags.lock
+tags.temp
 .vroom
 server.log
 cookies.js

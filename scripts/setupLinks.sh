@@ -20,3 +20,5 @@ echo "Linking .zshrc.kubeHelper"
 ln -fs $HOME/dotfiles/.zshrc.kubeHelper $HOME
 echo "Linking .tmux.conf"
 ln -fs $HOME/dotfiles/.tmux.conf $HOME
+echo "Linking cheat(sheets)"
+ln -fs $HOME/dotfiles/cheat $HOME

@@ -231,9 +231,8 @@ nnoremap <leader><space> :nohlsearch<CR>
 nnoremap <silent> <leader>ws :%s/\s\+$//g<CR>
 " highlight last inserted text
 nnoremap gV `[v`]
-" Tab-Tab increases indent, Shift-Tab decreases
-inoremap <Tab><Tab> <c-t>
-inoremap <S-Tab> <c-d>
+imap <Tab> <C-t>
+imap <S-Tab> <C-d>
 " Make right-side notes                 # like this
 " Highlight block, type note start column, then ,<Tab>
 vnoremap <leader><Tab> :<C-U>'<,'>call RightNote()<CR>

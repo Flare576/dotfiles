@@ -47,21 +47,21 @@ cheatpaths:
   # Once downloaded, ensure that 'path' below points to the location at which
   # you downloaded the community cheatsheets.
   - name: community
-    path: ~/dotfiles/cheat/community
+    path: ~/cheat/community
     tags: [ community ]
     readonly: true
 
   # If you have personalized cheatsheets, list them last. They will take
   # precedence over the more global cheatsheets.
   - name: personal
-    path: ~/dotfiles/cheat/personal
+    path: ~/cheat/personal
     tags: [ personal ]
     readonly: false
 
   # For cheat-sheets that may have client-specific details
   # NEVER USE CHEAT FOR SECRETS OR OTHER CREDENTIALS
   - name: private
-    path: ~/dotfiles/cheat/private
+    path: ~/cheat/private
     tags: [ personal, private ]
     readonly: false
 

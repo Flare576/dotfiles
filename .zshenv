@@ -6,7 +6,7 @@ source $HOME/.doNotCommit
 
 setopt PUSHDSILENT
 export EDITOR=vim
-export CHEAT_CONFIG_PATH="$HOME/dotfiles/cheat/conf.yml"
+export CHEAT_CONFIG_PATH="$HOME/cheat/conf.yml"
 
 # Initialize pyenv
 command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
