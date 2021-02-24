@@ -66,15 +66,17 @@ do
   fi
 done
 
-echo "Grabbing Cheatsheets"
+echo "Grabbing Cheatsheets and zsh tab completion"
 communityDir=$HOME/dotfiles/cheat/community
+zshTabComplete=$HOME/.oh_my_zsh/completions/cheat
 
 if [ -d "$communityDir" ]; then
-  pushd "$communityDir"
-  git pull -f
-  popd
+  pushd "$communityDir" && git pull -f && popd
+  pushd "$zshTabComplete" && git pull -f && popd
 else
   git clone https://github.com/cheat/cheatsheets.git "$communityDir"
+  git clone https://github.com/cheat/cheatsheets.git "$zshTabComplete"
+  ln -sf "$zshTabComplete/cheat/cheat.zsh" "$zshTabComplete/_cheat.zsh"
 fi
 
 if brew ls --versions "$uctags" >/dev/null; then
