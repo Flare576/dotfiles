@@ -22,16 +22,7 @@ if [[ $doit =~ ^[yY] ]] ; then
   fi
   url=$(echo $url | sed 's/https:\/\///')
 
-  config="${HOME}/dotfiles/.doNotCommit.jira"
-
-  if ! grep -q '.doNotCommit.jira' ${HOME}/dotfiles/.doNotCommit ; then
-    echo "source ${config}" >> ${HOME}/dotfiles/.doNotCommit
-  fi
-
-  if [ ! -f $config ] ; then
-    touch $config
-    ln -fs $config $HOME
-  fi
+  config="${HOME}/dotfiles/.doNotCommit.d/.doNotCommit.jira"
 
   cat<<END > ${config}
 export JIRA_API_TOKEN=${api_token}

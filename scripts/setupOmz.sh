@@ -6,10 +6,7 @@ echo "Setting up Oh My Zshell, Tools, Themes, and Plugins for ZSH"
 curl -sL http://install.ohmyz.sh | bash &> /dev/null #the installer is pretty, tho! :(
 
 # Configure theme management
-tc="$HOME/.doNotCommit.theme"
-if ! grep -q "$tc" ${HOME}/dotfiles/.doNotCommit ; then
-  echo "[ -f \"$tc\" ] && source \"$tc\"" >> "${HOME}/dotfiles/.doNotCommit"
-fi
+touch "$HOME/dotfiles/.doNotCommit.d/.doNotCommit.theme"
 cd "$HOME/.oh-my-zsh/themes"
 themes="$HOME/dotfiles/themes"
 # Theme configs are in yaml

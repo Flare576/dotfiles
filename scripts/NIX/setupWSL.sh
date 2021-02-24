@@ -38,7 +38,6 @@ curl -sL -o "$next_steps/$latestName" "$latestUrl"
 
 echo "Downloading/configuring mintty tools (so fresh) and themes (so clean)"
 mintty_home="$(wslpath $APPDATA)/mintty"
-script_config="$HOME/dotfiles/.doNotCommit"
 themes_dir="$HOME/dotfiles/themes"
 
 mkdir -p "$mintty_home/themes"
@@ -60,6 +59,5 @@ Term=xterm-256color
 ThemeFile=flare.minttyrc
 Columns=150" > "$mintty_home/config"
 
-if ! grep -q 'mintty' $script_config ; then
-  echo "PATH=$mintty_home/utils:\$PATH" >> "$script_config"
-fi
+# Add the utils to the path for theme changing
+echo "PATH=$mintty_home/utils:\$PATH" > "$HOME/dotfiles/.doNotCommit.d/.doNotCommit.wsl"

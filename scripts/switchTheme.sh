@@ -12,7 +12,7 @@ function switchTheme() {
     fi
     hasRun="true"
     name="$(yaml "$config" "['name']")"
-    themeExport="$HOME/.doNotCommit.theme"
+    themeExport="$HOME/dotfiles/.doNotCommit.d/.doNotCommit.theme"
     cat << EOF > $themeExport
 export FLARE_THEME="$name"
 export FLARE_VIM_THEME="$(yaml "$config" "['vim']")"

@@ -71,7 +71,7 @@ if [ $gitCount -gt 0 ] ; then
       domain=github.com-$userName
     else
       if [[ $passToke == "t"* ]] ; then
-        cat<<END >> $HOME/dotfiles/.doNotCommit
+        cat<<END >> $HOME/dotfiles/.doNotCommit.d/.doNotCommit.git
 export GITHUB_TOKEN=${password}
 END
       fi

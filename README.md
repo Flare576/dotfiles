@@ -27,16 +27,17 @@ If not setting up a new machine I `git clone` directly into `~` and run the scri
 ```
 sh dotfiles/scripts/setupRepo.sh # You should absoultey run this file to help prevent leaking secrets
 sh dotfiles/scripts/setupLinks.sh # Symlinks files to ~
-sh dotfiles/scripts/setupScripts.sh # pull scripts and sets up paths
+sh dotfiles/scripts/setupScripts.sh # pull scripts and sets up paths: see Flare57/scripts repo
 sh dotfiles/scripts/setupVim.sh # Yes, this sets up vim
 sh dotfiles/scripts/setupOmz.sh # Oh My Zshell goes deliciously with Zsh
 sh dotfiles/scripts/setupLocations.sh # `wdate` and `wweather` use location information
 ```
 
-> Note: `setupScripts.sh` also brings in [Flare576/scripts](https://github.com/Flare576/scripts); you should check there
-for details on what all comes with it!
+> A quick note about secrets and private info: This project has keeps sensitive information in a set
+of `.doNotCommit` files in the `$HOME/dotfiles/.doNotCommit.d` folder. They do not reside directly in `$HOME` because scripts in the `dotfiles` project can and do edit them.
 
 If I also want to install all the apps I use frequently, I'll run
+
 ```
 sh dotfiles/scripts/setupHomebrew.sh # Check the script for details
 sh dotfiles/scripts/OSX/setupCasks.sh # Check the script for details
@@ -198,8 +199,8 @@ You should have on-hand:
 - Main project name
 - your "Shortname" (the name you use when you type [~first.last]) or otherwise tag yourself in Jira
 
-The script will ask you for your information and write it to `~/dotfiles/.doNotCommit.jira`, then linking
-to it from your normal `.doNotCommit` file.
+The script will ask you for your information and write it to
+`~/dotfiles/.doNotCommit.d/.doNotCommit.jira`
 
 Now comes the fun part. If everything is setup correctly, you can run `jira -h`
 

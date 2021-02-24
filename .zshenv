@@ -2,7 +2,7 @@
 # Change "path" to an -a(rray) -U(nique) (special) type, prevents dup entries
 typeset -aU path
 # Secrets
-source $HOME/.doNotCommit
+for f in "$HOME/.doNotCommit.d"/.doNotCommit*; do [[ $f != *".sw"* ]] && source $f; done
 
 setopt PUSHDSILENT
 export EDITOR=vim
@@ -129,7 +129,8 @@ function yaml() {
 
 # ZSH/OMZ "switchTheme" functionality to watch for changes to theme settings
 function zsh_theme_refresh() {
-  [ -f "$HOME/.doNotCommit.theme" ] && source "$HOME/.doNotCommit.theme"
+  conf="$HOME/dotfiles/.doNotCommit.d/.doNotCommit.theme"
+  [ -f "$conf" ] && source "$conf"
   [ -f "$ZSH/themes/$FLARE_ZSH_THEME.zsh-theme" ] && source "$ZSH/themes/$FLARE_ZSH_THEME.zsh-theme"
 }
 precmd_functions=(${precmd_functions[@]} zsh_theme_refresh)

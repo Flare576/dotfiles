@@ -13,16 +13,8 @@ if [[ $doit =~ ^[yY] ]] ; then
   read -p "What is your remote location called? " remotename
   read -p "What is your remote location Timezone (See /usr/share/zoneinfo)? " remotetz
 
-  config="${HOME}/dotfiles/.doNotCommit.locations"
+  config="${HOME}/dotfiles/.doNotCommit.d/.doNotCommit.locations"
 
-  if ! grep -q '.doNotCommit.locations' ${HOME}/dotfiles/.doNotCommit ; then
-    echo "source ${config}" >> ${HOME}/dotfiles/.doNotCommit
-  fi
-
-  if [ ! -f $config ] ; then
-    touch $config
-    ln -fs $config $HOME
-  fi
   cat<<END > ${config}
 export MY_LOC_NAME=${myname}
 export MY_LOC_ZIP=${myzip}

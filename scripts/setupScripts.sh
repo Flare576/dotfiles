@@ -10,7 +10,7 @@ if [[ "$dest" != "skip" ]] ; then
   git clone -q https://github.com/flare576/scripts.git $dest
   sed -i'' -e 's/https:\/\/github.com\//git@github.com:/' $dest/.git/config
 
-  config="${HOME}/dotfiles/.doNotCommit"
+  config="${HOME}/dotfiles/.doNotCommit.d/.doNotCommit.scripts"
   cat<<END >> ${config}
 export FLARE_SCRIPTS="$dest"
 fpath=(\$FLARE_SCRIPTS/shell \$fpath)
