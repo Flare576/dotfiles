@@ -36,6 +36,7 @@ alias c="cheat"
 alias cpl="cheat -t private -l"
 alias cpe="cheat -t private -e"
 alias note="cheat -t private -e"
+alias notes="cheat -l -t private"
 
 alias lzy='lazydocker'
 alias lzye='vi $HOME/Library/Application\ Support/jesseduffield/lazydocker/config.yml'
@@ -96,7 +97,7 @@ function prettyDate() {
   now=$((similarCalS + secondsPassedZeroDay))
   quarentine=$((similarCalS + secondsPassedQuar))
 
-  cdate=$(date -r $now "+%a %b %e 0AC  %H:%M:%S")
+  cdate=$(date -r $now "+%a %b %e 1AC  %H:%M:%S")
   echo "$cdate"
   echo "Quarantine: $((secondsPassedQuar / 86400)) days"
 }
