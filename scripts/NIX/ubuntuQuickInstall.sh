@@ -30,11 +30,11 @@ export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
 echo "tzdata tzdata/Areas select US
 tzdata tzdata/Zones/US select Central" | debconf-set-selections
 
-apt update &> /dev/null
+apt-get update &> /dev/null
 for pack in ${packages[@]};
 do
   echo "Installing $pack"
-  apt install -y $pack &> /dev/null
+  apt-get install --no-install-recommends -y $pack &> /dev/null
 done
 
 # Pull the rest of the project
