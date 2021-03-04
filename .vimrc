@@ -54,6 +54,7 @@ function! UpdateTheme() abort
 endfunction
 
 call UpdateTheme()
+nnoremap <leader>t :let g:f_theme = '' <bar> call UpdateTheme()<CR>
 augroup flare_theme
   au!
   autocmd InsertEnter * call UpdateTheme()
@@ -145,7 +146,7 @@ function! MakeRootSession()
   if empty(is_not_git_dir)
     let mysession = substitute(git_dir, '\n*$', "", "")
   else
-    let mysession = %:p:h
+    let mysession = expand('%:p:h')
   endif
   echo mysession
   execute 'mksession! '. mysession . "/Session.vim"
@@ -199,7 +200,7 @@ nnoremap <silent> <leader>d :DiffChangesDiffToggle<CR>
 " Diff open windows
 nnoremap <silent> <leader>D :windo diffthis<CR>
 " Diff against git
-nnoremap <leader>dg :call GitDiff()<cr>
+nnoremap <leader>dg :call GitDiff()<CR>
 " Opens mergetool
 nmap <leader>mt <plug>(MergetoolToggle)
 
