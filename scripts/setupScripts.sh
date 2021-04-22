@@ -14,6 +14,6 @@ if [[ "$dest" != "skip" ]] ; then
   cat<<END >> ${config}
 export FLARE_SCRIPTS="$dest"
 fpath=(\$FLARE_SCRIPTS/shell \$fpath)
-export PATH="\$FLARE_SCRIPTS/shell:\$FLARE_SCRIPTS/js:\${PATH}"
+export PATH="\$FLARE_SCRIPTS/python:\$FLARE_SCRIPTS/shell:\$FLARE_SCRIPTS/js:\${PATH}"
 END
 fi
