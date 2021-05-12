@@ -1,3 +1,9 @@
+" "ARE YOU SERIOUS RIGHT MEOW?! 300+ LINES IN A VIM CONFIG?!"
+" Yeah, I know. I tried splitting it out into logical pieces and hated it; too
+" much time spent looking for the right file, and if you end up
+" searching/grepping anyway, why not just stick it all in the same file.
+" Here's an index, though!
+"
 "# Settings
 "## Configuration
 "## Foramtting
@@ -31,6 +37,7 @@ set spelllang=en        " English for spelling!
 " New, better words!
 set spellfile=$HOME/dotfiles/en.utf-8.add,$HOME/dotfiles/.doNotCommit.en.utf-8.add
 set thesaurus+=$HOME/.local/share/thesaurus.txt
+set timeoutlen=1000 ttimeoutlen=0
 
 "########################## Formatting
 set tabstop=2           " number of visual spaces per TAB
@@ -78,6 +85,8 @@ set foldcolumn=2        " Show fold status by line numbers
 set splitbelow          " Open new split windows UNDER current window
 set splitright          " Open new vsplit windows RIGHT of current window
 set switchbuf=split     " open new splits when using :sb, :cc, etc. (or Ag results)
+" on trial
+set switchbuf=useopen,usetab,uselast
 set backspace=2         " Same as indent, eol, start, allows backspace essentially anywhere in insert mode
 set modeline            " Allows files to define some variables (e.g., filetype)
 set cc=120              " highlights characters over 120 width
@@ -135,7 +144,7 @@ nnoremap <silent> - :exec "resize -1"<CR>
 nnoremap <leader>/ :%s///gn<CR>
 " Run current file with various commands
 " r[un] with [b]rowser, currently Chrome
-nnoremap <leader>rb :silent !chrome %<CR> :redraw!<CR>
+nnoremap <leader>rb :silent !firefox %<CR> :redraw!<CR>
 " Save session to /tmp and exit
 nnoremap <leader>q :call MakeRootSession()<CR> :qa<CR>
 function! MakeRootSession()
@@ -165,6 +174,7 @@ command!        TE Texplore
 
 " Super-undo
 nnoremap <leader>u :UndotreeToggle<CR>
+let g:undotree_SetFocusWhenToggle = 1
 " TagBar
 nnoremap <leader>. :TagbarToggle<CR>
 " Zoom / Restore window. Stolen from https://github.com/markstory/vim-zoomwin/blob/master/plugin/zoomwin.vim
@@ -182,6 +192,7 @@ endfunction
 
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <leader><Enter> :ZoomToggle<CR>
+" nnoremap <leader><Enter> :call Toggler('zoomed', 'let t:zoom_winrestcmd = winrestcmd();resize;vertical resize', ':call winrestcmd()')<CR>
 nnoremap <leader>a :Ag! |" Silver Searcher in quick-fix window (close with :ccl)
 nnoremap <leader>z :Zc |" "Z" script for Vim, Zc to open in current buffer
 
@@ -196,11 +207,12 @@ let g:html_indent_style1 = "inc"
 "############################## Diff_and_Merge ###########
 
 " Diff unsaved buffer against original
-nnoremap <silent> <leader>d :DiffChangesDiffToggle<CR>
-" Diff open windows
-nnoremap <silent> <leader>D :windo diffthis<CR>
+nnoremap <silent> <leader>dc :DiffChangesDiffToggle<CR>
 " Diff against git
 nnoremap <leader>dg :call GitDiff()<CR>
+" Diff open windows
+nnoremap <silent> <leader>do :call Toggler('windiff', ':windo diffthis', ":windo diffoff")<CR>
+
 " Opens mergetool
 nmap <leader>mt <plug>(MergetoolToggle)
 
@@ -208,6 +220,17 @@ function GitDiff()
     :silent write
     :silent execute '!git diff --color=always -- ' . expand('%:p') . ' | less --RAW-CONTROL-CHARS'
     :redraw!
+endfunction
+
+function! Toggler(vari, on_code, off_code) abort
+  let vis_pt = 't:' . a:vari
+  if exists('{vis_pt}') && {vis_pt}
+    execute a:off_code
+    let {vis_pt} = 0
+  else
+    execute a:on_code
+    let {vis_pt} = 1
+  endif
 endfunction
 
 "############################## Editing_Tricks  ###########
@@ -222,8 +245,6 @@ if executable(s:clip)
     autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
   augroup END
 end
-" enables Leader + h to set vim pwd on local buffer
-nnoremap <silent> <leader>h :lcd %:p:h<CR>
 " enables Leader + uq to remove quotes from selection
 vnoremap <leader>uq :s/\v"([^"]+)"/\1/g<CR>
 " enables Leader + [space] to clear search highlighting
@@ -309,6 +330,7 @@ let g:tagbar_type_typescript = {
 
 
 "########################## Python
+
 autocmd BufRead python
     \ setlocal tabstop=4
     \ setlocal softtabstop=4
@@ -318,6 +340,9 @@ autocmd BufRead python
     \ setlocal autoindent
     \ setlocal fileformat=unix
 
+" vim-jedi's tips can get in the way; turn them off temporarily
+autocmd FileType python imap <C-d> <ESC>:let g:jedi#show_call_signatures=0<CR>a
+autocmd InsertLeave * :let g:jedi#show_call_signatures=1
 
 "########################## Other_filetypes
 autocmd Filetype markdown setlocal spell textwidth=100 cc=100 conceallevel=3 formatoptions+=ro

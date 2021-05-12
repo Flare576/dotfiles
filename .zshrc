@@ -10,8 +10,8 @@ export NVM_COMPLETION=true  # Tab-completion
 export NVM_LAZY_LOAD=true   # Make it fast
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('gac' 'jira')
 
-#plugins=(vi-mode zsh-nvm git extract node npm yarn z zsh-better-npm-completion kubectl tmux)
-plugins=(vi-mode zsh-nvm git extract node npm yarn z zsh-better-npm-completion kubectl tmux docker-aliases docker-compose)
+#plugins=(aws vi-mode zsh-nvm git extract node npm yarn z zsh-better-npm-completion kubectl tmux)
+plugins=(aws vi-mode zsh-nvm git gh extract node npm yarn z zsh-better-npm-completion kubectl tmux docker-aliases docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 

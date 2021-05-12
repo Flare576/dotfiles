@@ -9,8 +9,9 @@ export EDITOR=vim
 export CHEAT_CONFIG_PATH="$HOME/cheat/conf.yml"
 
 # Initialize pyenv
-command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
-
+# command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
+## # temp
+## export PYTHONPATH=/usr/local/lib/python3.9/site-packages/
 # Quick-edit configs
 alias vz='vi -o ~/.zshrc ~/.zshenv -c "cd ~"'
 alias vd='vi ~/dotfiles -c "cd ~/dotfiles"'
@@ -18,8 +19,10 @@ alias vs='vi ~/scripts -c "cd ~/scripts"'
 alias vt='vi ~/.tmux.conf -c "cd ~/dotfiles"'
 alias v='vi .'
 alias vv='vi -S'
+function vw(){ vi $(which $1) }
 
 alias chrome='open -a Google\ Chrome'
+alias firefox='open -a Firefox'
 alias sz='source ~/.zshrc && source ~/.zshenv'
 alias tm='tmux new-session'
 
@@ -100,7 +103,13 @@ function prettyDate() {
 
   cdate=$(date -r $now "+%a %b %e 1AC  %H:%M:%S")
   echo "$cdate"
-  echo "Quarantine: $((secondsPassedQuar / 86400)) days"
+  ping -c 1 https://google.com &> /dev/null
+  if [ $? ]; then
+    echo "Netowork Status: ✅"
+  else
+    echo "Netowork Status: ❌"
+  fi
+  #echo "Quarantine: $((secondsPassedQuar / 86400)) days"
 }
 
 function wweather() {
@@ -136,5 +145,6 @@ function zsh_theme_refresh() {
 }
 precmd_functions=(${precmd_functions[@]} zsh_theme_refresh)
 
-# kubectl shortcuts
+# application shortcuts
 source $HOME/.zshrc.kubeHelper
+source $HOME/.zshrc.awsHelper
