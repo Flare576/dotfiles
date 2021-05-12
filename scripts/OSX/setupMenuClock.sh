@@ -1,4 +1,6 @@
 #!/bin/sh
+# See https://www.tech-otaku.com/mac/setting-the-date-and-time-format-for-the-macos-menu-bar-clock-using-terminal/
+# should be com.apple.menuextra.clock.plist,
 
 defaults write com.apple.Terminal "Window Settings" -dict-add Sweetness \
   '<dict>

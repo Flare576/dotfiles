@@ -1,4 +1,9 @@
 #!/bin/bash
+if [ "$1" == "delete" ]; then
+  rm -rf "$HOME/.vim" "$HOME/.vimrc"
+  return
+fi
+
 echo "Linking .vimrc, setting up plugins"
 rm -rf "$HOME/.vim/bundle" "$HOME/.vim/autoload"
 ln -fs $HOME/dotfiles/.vimrc $HOME

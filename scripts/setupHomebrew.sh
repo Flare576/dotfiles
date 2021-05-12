@@ -1,7 +1,7 @@
 #!/bin/bash
 # takes 1 param: true to upgrade installed brews
 
-uctags="universal-ctags/universal-ctags/universal-ctags"
+# uctags="universal-ctags/universal-ctags/universal-ctags"
 isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
 # Install Homebrew
 if test ! $(which brew); then
@@ -58,7 +58,7 @@ for formula in "${brews[@]}"
 do
   echo "Working on $formula"
   if brew ls --versions "$formula" >/dev/null; then
-    if [ "$1" == "true" ]; then
+    if [ "$1" == "update" ]; then
       HOMEBREW_NO_AUTO_UPDATE=1 brew upgrade "$formula"
     fi
   else
@@ -68,28 +68,35 @@ done
 
 echo "Grabbing Cheatsheets and zsh tab completion"
 communityDir=$HOME/dotfiles/cheat/community
-zshTabComplete=$HOME/.oh_my_zsh/completions/cheat
+zshTabComplete=$HOME/.oh-my-zsh/completions/cheat
 
 if [ -d "$communityDir" ]; then
   pushd "$communityDir" && git pull -f && popd
   pushd "$zshTabComplete" && git pull -f && popd
 else
   git clone https://github.com/cheat/cheatsheets.git "$communityDir"
-  git clone https://github.com/cheat/cheatsheets.git "$zshTabComplete"
+  git clone https://github.com/cheat/cheat.git "$zshTabComplete"
   ln -sf "$zshTabComplete/cheat/cheat.zsh" "$zshTabComplete/_cheat.zsh"
 fi
 
-if brew ls --versions "$uctags" >/dev/null; then
-  if [ "$1" == "true" ]; then
-    brew upgrade --fetch-HEAD "$uctags"
-  else
-    brew install --HEAD "$uctags"
+if brew ls --versions universal-ctags >/dev/null; then
+  if [ "$1" == "update" ]; then
+    brew upgrade --fetch-HEAD universal-ctags
   fi
+else
+  brew tap universal-ctags/universal-ctags
+  HOMEBREW_NO_AUTO_UPDATE=1 brew install --HEAD universal-ctags
 fi
 
 # Jetbrains Mono is a great font for terminals; install it so it's available on this system
 if [ "$isLinux" -eq "1" ] ; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
 else
-  brew cask install homebrew/cask-fonts/font-jetbrains-mono
+  if brew ls --versions homebrew/cask-fonts/font-jetbrains-mono >/dev/null; then
+    if [ "$1" == "update" ]; then
+      brew upgrade --cask homebrew/cask-fonts/font-jetbrains-mono
+    fi
+  else
+    brew install --cask homebrew/cask-fonts/font-jetbrains-mono
+  fi
 fi
