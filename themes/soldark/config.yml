@@ -6,6 +6,8 @@ tmux: solarized-dark_tmux
 vim: solarized-dark_vim
 zsh: solarized-dark
 bat: Solarized (dark)
+vscode: "Solarized Dark"
+firefox: "{24ab4f91-e91c-4c5b-868b-1c38c731695f}"
 alias:
   - dark
   - soldark

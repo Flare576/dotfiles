@@ -55,11 +55,11 @@ endfunction
 
 call UpdateTheme()
 nnoremap <leader>t :let g:f_theme = '' <bar> call UpdateTheme()<CR>
-augroup flare_theme
-  au!
-  autocmd InsertEnter * call UpdateTheme()
-  autocmd InsertLeave * call UpdateTheme()
-augroup END
+"augroup flare_theme
+"  au!
+"  autocmd InsertEnter * call UpdateTheme()
+"  autocmd InsertLeave * call UpdateTheme()
+"augroup END
 
 " take BG from term/tmux
 hi Normal guibg=NONE ctermbg=NONE

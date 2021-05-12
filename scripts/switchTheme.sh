@@ -18,6 +18,7 @@ export FLARE_THEME="$name"
 export FLARE_VIM_THEME="$(yaml "$config" "['vim']")"
 export FLARE_TMUX_THEME="$(yaml "$config" "['tmux']")"
 export FLARE_ZSH_THEME="$(yaml "$config" "['zsh']")"
+export FLARE_VSCODE_THEME="$(yaml "$config" "['vscode']")"
 export BAT_THEME="$(yaml "$config" "['bat']")"
 EOF
     source "$themeExport"
@@ -26,6 +27,12 @@ EOF
     source "$HOME/dotfiles/themes/$name/$FLARE_ZSH_THEME.zsh-theme"
     command -v tmux &> /dev/null && tmux source-file "$HOME/dotfiles/themes/$FLARE_THEME/$FLARE_TMUX_THEME" &> /dev/null
     # vim and zsh are configured to watch for changes on updates
+
+    # VSCode makes it pretty easy, so why not
+    if command -v Code &> /dev/null ; then
+      filename="$HOME/Library/Application Support/Code/User/settings.json"
+      sed -i "" -e "s/\"workbench.colorTheme\":.*/\"workbench.colorTheme\": \"$FLARE_VSCODE_THEME\"/" "$filename"
+    fi
 
     # Terminal emulators for different machines I use
     if command -v mintheme &> /dev/null ; then # WSL
