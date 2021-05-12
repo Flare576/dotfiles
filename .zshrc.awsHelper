@@ -1,0 +1,80 @@
+# AWS Params
+# AWS_ADFS_HOST=""
+# AWS_MAIN_PROFILE=""
+# AWS_DOCKER_PROFILE=""
+# AWS_DOCKER_SERVER=""
+# AWS_ROLE_ARN=""
+
+# Login to AWS ADFS
+awslogin () {
+  if [[ "$1" == *"h"* ]]; then
+    echo "$(basename "$0") [AWS_PROFILE]"
+    return 0
+  fi
+  [ -z "$1" ] && PROFILE="master"  || PROFILE="$1" 
+  aws-adfs login --profile=$PROFILE --adfs-host=$AWS_ADFS_HOST --ssl-verification --session-duration 14400 --no-sspi
+}
+
+# Auth w/ Docker via AWS
+awsdocker () {
+  if [[ "$1" == *"h"* ]]; then
+    echo "$(basename "$0") You must have AWS_DOCKER_PROFILE and AWS_DOCKER_SERVER set"
+    return 0
+  fi
+  aws ecr get-login-password --profile="$AWS_DOCKER_PROFILE" | docker login --username AWS --password-stdin "$AWS_DOCKER_SERVER"}
+
+# Get Secrets
+# Note: Set $AWS_PROFILE to avoid second arg: try `asp` from the "aws" oh-my-zsh plugin!
+awssecret () {
+  if [[ "$1" == *"h"* ]]; then
+    echo "$(basename "$0") AWS_SECRET_NAME [AWS_PROFILE]]"
+    return 0
+  fi
+  if [ -z "$1" ]; then
+    echo "Gotta tell me what secret you want"
+    return 1
+  fi
+  [ -z "$2" ] && PROFILE="$AWS_PROFILE"  || PROFILE="$2"
+  aws secretsmanager get-secret-value --profile "$PROFILE" --secret-id "$1"
+}
+
+awsparameter () {
+  if [[ "$1" == *"h"* ]]; then
+    echo "$(basename "$0") AWS_PARAMETER_NAME [AWS_PROFILE]]"
+    return 0
+  fi
+  if [ -z "$1" ]; then
+    echo "Gotta tell me what parameter you want"
+    return 1
+  fi
+  [ -z "$2" ] && PROFILE="$AWS_PROFILE"  || PROFILE="$2"
+  aws ssm get-parameter --profile "$PROFILE" --name "$1" --query 'Parameter.Value' --output text
+}
+
+# Get Keys
+awskeys () {
+  if [[ "$1" == *"h"* ]]; then
+    echo "$(basename "$0") [ARN [SESSION_NAME]]"
+    return 0
+  fi
+  [ -z "$1" ] && ARN="$AWS_ROLE_ARN"  || ARN="$1"
+  [ -z "$2" ] && SESSION_NAME="personal"  || SESSION_NAME="$2"
+  aws sts assume-role --role-arn $ARN --role-session-name "$SESSION_NAME" --profile "$AWS_MAIN_PROFILE"
+}
+
+# Get job states
+awsjobs () {
+  jobs=(
+  PDLA-LearningManagementOEX-CMS-ServiceDevelopmentPipeline
+  PDLA-LearningManagementOEX-CMS-ServiceMasterPipeline
+
+  PDLA-LearningManagementOEX-LMS-ServiceDevelopmentPipeline
+  PDLA-LearningManagementOEX-LMS-ServiceMasterPipeline
+)
+
+for job in "${jobs[@]}"
+do
+  jobStatus=$(aws codepipeline get-pipeline-state --profile=shared --name=${job} --output=json --query='stageStates[-1].latestExecution.status')
+  echo "$job: $jobStatus"
+done
+}
