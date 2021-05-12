@@ -62,7 +62,7 @@ cheatpaths:
   # NEVER USE CHEAT FOR SECRETS OR OTHER CREDENTIALS
   - name: private
     path: ~/cheat/private
-    tags: [ personal, private ]
+    tags: [ private, personal ]
     readonly: false
 
   # While it requires no configuration here, it's also worth noting that

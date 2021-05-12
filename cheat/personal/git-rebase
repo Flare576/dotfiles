@@ -1,0 +1,7 @@
+# make tmp branch off of <target>
+<target> $ git switch tmp
+# point <target> at HEAD of patchset
+tmp $ git branch -f <target> last_SHA-1_of_working_branch_range
+# get 'er done
+tmp $ git rebase -i --onto tmp <first_commit>~1 <target>
+

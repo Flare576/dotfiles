@@ -1,0 +1,70 @@
+# To start tmux:
+tmux (tm)
+
+# To detach from tmux:
+Ctrl-b d
+
+# To restore tmux session:
+tmux attach (ta)
+
+# To detach an already attached session (great if you are moving devices with different screen resolutions):
+tmux attach -d
+
+# To display session:
+tmux ls (tl)
+
+# To rename session:
+Ctrl-b $
+
+# To switch session:
+Ctrl-b s
+
+# To start a shared session:
+tmux -S /tmp/your_shared_session
+chmod 777 /tmp/your_shared_session
+
+# To help screen (Q to quit):
+Ctrl-b ?
+
+# To scroll in window:
+Ctrl-b PageUp/PageDown
+Ctrl-b [
+
+# To reload configuration file
+Ctrl-b : source-file /path/to/file (Ctrl-b r)
+
+# To create a window:
+Ctrl-b c (Ctrl+Shift |)
+
+# To go next window:
+Ctrl-b n (Ctrl+Shift K/L)
+
+# To destroy a window:
+Ctrl-b x
+
+# To switch between windows:
+Ctrl-b [0-9]
+Ctrl-b Arrows
+
+# To split windows horizontally:
+Ctrl-b % (Ctrl -)
+
+# To split windows vertically:
+Ctrl-b " (Ctrl \)
+
+# To swap windows:
+Ctrl-b :swap-window -s [0-9] -t [0-9]
+
+# Rename windows:
+Ctrl-b ,
+
+# Get size of pane
+Ctrl-b i
+
+# Apply pre-defined layouts
+C-a M-1        switch to even-horizontal layout
+C-a M-2        switch to even-vertical layout
+C-a M-3        switch to main-horizontal layout
+C-a M-4        switch to main-vertical layout
+C-a M-5        switch to tiled layout
+C-a space      switch to the next layout
