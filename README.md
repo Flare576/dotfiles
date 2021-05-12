@@ -6,7 +6,6 @@ Based on a lot of discoveries from [GitHub Does dotfiles](https://dotfiles.githu
 repo for my dotfiles.  I've also included a setup script, mostly for personal use, that will bring a
 brand new Mac from stock to stylish with minimal messing around.
 
-
 ```
 bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/OSX/setupMac.sh)"
 ```
@@ -33,8 +32,9 @@ sh dotfiles/scripts/setupOmz.sh # Oh My Zshell goes deliciously with Zsh
 sh dotfiles/scripts/setupLocations.sh # `wdate` and `wweather` use location information
 ```
 
-> A quick note about secrets and private info: This project has keeps sensitive information in a set
-of `.doNotCommit` files in the `$HOME/dotfiles/.doNotCommit.d` folder. They do not reside directly in `$HOME` because scripts in the `dotfiles` project can and do edit them.
+> A quick note about secrets and private info: This project recommends keeping sensitive information
+in a set of `.doNotCommit` files in the `$HOME/dotfiles/.doNotCommit.d` folder. They do not reside
+directly in `$HOME` because scripts in the `dotfiles` project can and do edit them.
 
 If I also want to install all the apps I use frequently, I'll run
 
@@ -45,7 +45,8 @@ sh dotfiles/scripts/OSX/setupCasks.sh # Check the script for details
 
 # Sure man, but what do they DO?!
 
-You can read each of the scripts for details of how/what _they_ do, but as far as what YOU can do, here's a breakdown:
+You can read each of the scripts for details of how/what _they_ do, but as far as what YOU can do,
+here's a breakdown:
 
 - [Hotkey Mentality](#hotkey-mentality)
 - [vimrc](#vim-config-galore)
@@ -73,9 +74,12 @@ You can read each of the scripts for details of how/what _they_ do, but as far a
 
 ### Hotkey Mentality
 
-There's a lot going on here, I know. Looking at all these lists is enough to make most folks close the browser tab, but bear with me for a moment.
+There's a lot going on here, I know. Looking at all these lists is enough to make most folks close
+the browser tab, but bear with me for a moment.
 
-The most important part of a program/tool is, in my opinion, getting around. For my configs, I've settled on a "vim-style" approach to this, which means using H, J, K, and L to move Left, Down, Up, and Right. Combining these movements with different modifiers makes up the bulk of getting around!
+The most important part of a program/tool is, in my opinion, getting around. For my configs, I've
+settled on a "vim-style" approach to this, which means using H, J, K, and L to move Left, Down, Up,
+and Right. Combining these movements with different modifiers makes up the bulk of getting around!
 
 |  Modifier  | App |         Notes            |
 |------------|------|-------------------------|
@@ -84,12 +88,13 @@ The most important part of a program/tool is, in my opinion, getting around. For
 | Alt        | tmux | Moves between *panes*
 | Shift+Alt  | tmux | Moves between *Windows*
 
-As a bonus: `_` and `|` plus the above modifiers also splits/creates the thing it navigates horizontally or vertically!
+As a bonus: `_` and `|` plus the above modifiers also splits/creates the thing it navigates
+horizontally or vertically!
 
 ### vim config galore!
 
 #### Vim v8 Plugins
-- [Badwolf](https://github.com/sjl/badwolf) - Beauty!
+- [Solarized](https://ethanschoonover.com/solarized/) - Beauty!
 - [vim-airline](https://github.com/vim-airline/vim-airline) - Fast and flexible status line
 - [vim-json](https://github.com/elzr/vim-json) - Make JSON better!
 - [typescript-vim](https://github.com/leafgarland/typescript-vim) - Make Typescript... less awful
@@ -123,11 +128,10 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Normal | ctrl + \| | split window vertically
 | Normal | ,\<Enter> | zoom in/out of buffer
 | Normal | >, &lt;, +, - | resize current window
-| Normal | ,h | set Vim PWD to current directory (set home)
 | Normal | ,a | fuzzy search (Silver Searcher) for files under `pwd`
 | Normal | ,z | Open commonly used folders in current buffer (see [Z](https://github.com/rupa/z))
 | Normal | ctrl+p | brings up file search under `pwd`
-| Visual | ,y | yank selected to OSx/WSL clipboard |
+| Visual | ,y | yank selected to OSx/WSL clipboard
 
 ##### Less Common
 
@@ -135,9 +139,9 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 |------|------|---------|
 | Visual |,uq | Removes quotes from selected text
 | Normal | ,\<space> | turns off search highlighting
-| Normal | ,d | Diff current buffer against on-disk file (changes since last save)
+| Normal | ,dc | Diff current buffer against on-disk file (changes since last save)
 | Normal | ,dg | Diffs current buffer against git history
-| Normal | ,D | Diffs visible windows against each other
+| Normal | ,do | Diffs "open" buffers against each other
 | Normal | ,/ | Shows the count of your last search
 | Normal | gV | highlight last inserted text
 | Normal | ,u | Brings up "Super Undo"
@@ -182,7 +186,7 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 | Default | M +⇧ + H, L    | Switch to window to the left/right
 | Default | M +⇧ + :       | tmux command prompt
 | Default | C-k            | clear buffer
-| Default | M-Enter        | Maximize/Restore current pane
+| Default | Ma Enter       | Maximize/Restore current pane
 | Default | Ma b           | Sends UbuntuQuickInstall script to pane (for containers!)
 
 ## I want that Jira CLI Awesomeness
@@ -196,6 +200,9 @@ You should have on-hand:
 - Emaill address in Jira
 - Jira base URL
 - Jira API token (see https://id.atlassian.com/manage/api-tokens)
+  - If your project uses Hosted without the [API Tokens For
+      Jira](https://marketplace.atlassian.com/apps/1221182/api-tokens-for-jira?hosting=server&tab=overview&utm_source=c),
+      you may still be able to use [Jira Cookies](#jira-cookies)
 - Main project name
 - your "Shortname" (the name you use when you type [~first.last]) or otherwise tag yourself in Jira
 
@@ -252,6 +259,29 @@ The last thing I want to mention is that all of the views you see are 100% confi
 | jira qa | TicketID\* | QA: Transition ticket to "Testing" and sets you as the Reviewer (feel free to modify this to your "QA" state) |
 | jira r | [State], TicketID\* | Review ticket by Comment(vi) on ticket, Transition to provided state or "Signoff" by default (feel free to modify this to your preferred Post-QA stateand with your preferred review template) |
 > \*NOTE: If you don't provide a TicketID, the global story/ticket set by `jira w[orkon]` is used
+
+#### Jira Cookies
+
+Don't use this unless you absolutely have to. Tokens are a secure, one-time-setup way of handling
+auth, but if your project is running a Hosted instance of Jira and can't/won't install [API Tokens
+For
+Jira](https://marketplace.atlassian.com/apps/1221182/api-tokens-for-jira?hosting=server&tab=overview&utm_source=c),
+then you may not have a choice.
+
+First, you'll need to get the cookie. Do this by:
+
+1. Logging into your Jira instance in a browser.
+1. Open Developer Tools
+1. Open any story/task/etc.
+1. Go to the Network tab of Developer Tools
+1. Find a call to "resources" and click it
+1. Scroll down to **REQUEST Headers** and find "Cookie"
+1. Copy the value (it may have several keys: you're gonna need all of them)
+1. Pop back over to the command line and type `jira cookie "<paste the cookie>"` - You'll need the
+   quotes.
+
+Try `jira sprint` and see if you get data. If you do, don't celebrate yet - you'll probably need to
+do this every day: the cookies expire, sometimes in hours. I know. Have a 🥃.
 
 ### Zshell
 
@@ -320,7 +350,8 @@ The script updates
   - mintty/wsltty (WSL)
 - vim: *Will update the next time you enter/exit `input` mode, and only that instance of vim*
 - zsh: *Will update after the next prompt refresh (generally after you enter/ctrl-c a command)*
-- bat
+- bat: Version > 0.12.1
+- tmux
 
 #### Recommended
 
