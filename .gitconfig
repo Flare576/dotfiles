@@ -34,3 +34,5 @@
 	autoStash = true
 [commit]
   template = ~/dotfiles/.gitcommit.md
+[init]
+	defaultBranch = main
