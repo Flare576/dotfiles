@@ -1,7 +1,8 @@
 #!/bin/bash
-if [ "$1" == "delete" ]; then
-  # could also read the .doNotCommit file, but good for a start
+if [[ "$1" == "delete" ]]; then
+  # Using $FLARE_SCRIPTS, but may want to read location from .doNotCommit
   rm -rf "$FLARE_SCRIPTS"
+  exit
 fi
 
 [ -z "$1" ] && read -p "Enter Dir for Flare Scripts ($HOME/scripts) or 'skip' to skip: " dest

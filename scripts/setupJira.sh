@@ -1,6 +1,11 @@
 #!/bin/bash
 # https://github.com/Netflix-Skunkworks/go-jira
-ln -sf $HOME/dotfiles/.jira.d $HOME
+
+if [[ "$1" == "delete" ]]; then
+  rm -rf "$HOME/.jira.d"
+  exit
+fi
+ln -sf "$HOME/dotfiles/.jira.d" "$HOME"
 brew install go-jira
 read -p "Are you actively working on JIRA instance? (Y/n)" doit
 echo

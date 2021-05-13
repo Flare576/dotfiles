@@ -12,14 +12,14 @@ links=(
   .cheat
 )
 
-if [ "$1" == "delete" ]; then
+if [ "$1" = "delete" ]; then
   echo "Removing symlinks"
   for link in "${links[@]}";
   do
     rm -rf "$HOME/$link"
   done
-  rm -rf "$HOME/.ctags.dir"
-  return
+  rm -rf "$HOME/.ctags.d"
+  exit
 fi
 
 echo "Setting up symlnks and creating placeholder files"

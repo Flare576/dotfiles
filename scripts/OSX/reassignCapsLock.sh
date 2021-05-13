@@ -3,8 +3,8 @@
 
 # Bug: if there's no other keyboard, the code to select a keyboard breaks the script
 # Probably a better way to do this...
-if [ "$1" == "delete" ]; then
-  return
+if [[ "$1" == "delete" ]]; then
+  exit
 fi
 echo "Attempting to use UI to set caps lock action..."
 

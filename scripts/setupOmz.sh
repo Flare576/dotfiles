@@ -1,16 +1,16 @@
 #!/bin/bash
 isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
 
-if [ "$1" == "delete" ]; then
+if [[ "$1" == "delete" ]]; then
   cd "$HOME"
-  rm -rf .oh-my-zsh .z
+  rm -rf .oh-my-zsh .z .zshrc .zshenv
   if [ "$isLinux" -eq "1" ] ; then
     chsh -s $(which bash)
-    sudo sed -i "" -e "d/\/zsh" "/etc/shells"
+    sudo sed -i"" -e "/\/zsh/d" "/etc/shells"
   else
     sudo dscl . -create /Users/$USER UserShell $(which bash)
   fi
-  return
+  exit
 fi
 
 echo "Setting up Oh My Zshell, Tools, Themes, and Plugins for ZSH"

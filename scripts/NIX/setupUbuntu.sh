@@ -22,7 +22,6 @@ if ! command -v brew &> /dev/null ; then
     )"
     eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
     echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> /root/.profile
-    echo 'source .profile' >> /root/.bashrc
   else
     echo "Installing Homebrew requirements"
     apt update

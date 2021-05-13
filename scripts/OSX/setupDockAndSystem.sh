@@ -11,7 +11,7 @@ dialogTab="3"
 initialRepeat=15
 keyRepeat=1
 smartQuotes='false'
-if [ "$1" == "delete" ]; then
+if [[ "$1" == "delete" ]]; then
   dockside="bottom"
   autoHide="false"
   hotCornerAction=0

@@ -58,7 +58,7 @@ for formula in "${brews[@]}"
 do
   echo "Working on $formula"
   if brew ls --versions "$formula" >/dev/null; then
-    if [ "$1" == "update" ]; then
+    if [[ "$1" == "update" ]]; then
       HOMEBREW_NO_AUTO_UPDATE=1 brew upgrade "$formula"
     fi
   else
@@ -80,7 +80,7 @@ else
 fi
 
 if brew ls --versions universal-ctags >/dev/null; then
-  if [ "$1" == "update" ]; then
+  if [[ "$1" == "update" ]]; then
     brew upgrade --fetch-HEAD universal-ctags
   fi
 else
@@ -93,7 +93,7 @@ if [ "$isLinux" -eq "1" ] ; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
 else
   if brew ls --versions homebrew/cask-fonts/font-jetbrains-mono >/dev/null; then
-    if [ "$1" == "update" ]; then
+    if [[ "$1" == "update" ]]; then
       brew upgrade --cask homebrew/cask-fonts/font-jetbrains-mono
     fi
   else

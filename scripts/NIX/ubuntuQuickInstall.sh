@@ -1,7 +1,7 @@
 #!/bin/bash
 # Make working on images suck less
 # from initial prompt:
-# apt update &> /dev/null;apt install -y curl &> /dev/null;bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/NIX/startImageDebug.sh)"
+# apt update &> /dev/null;apt install -y curl &> /dev/null;bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/scripts/NIX/startImageDebug.sh)"
 
 # nvm: curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.35.3/install.sh -o install_nvm.sh
 
