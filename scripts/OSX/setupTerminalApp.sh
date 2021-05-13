@@ -8,6 +8,13 @@
 # Setting open Terminal windows information here:
 # https://superuser.com/questions/187591/os-x-terminal-command-to-change-color-themes
 
+# we're not going to bother uninstalling the theme entries right now
+if [[ "$1" == "delete" ]]; then
+  defaults write com.apple.Terminal "Startup Window Settings" "Basic"
+  defaults write com.apple.Terminal "Default Window Settings" "Basic"
+  exit
+fi
+
 themeFiles="$HOME/dotfiles/themes"/**/*.terminal
 for theme in $themeFiles; do
   [ -e "$theme" ] || continue

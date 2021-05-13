@@ -1,4 +1,10 @@
 #!/bin/bash
+if [[ "$1" == "delete" ]]; then
+  echo "Removing ~/.vim/ and ~/.vimrc"
+  rm -rf "$HOME/.vim" "$HOME/.vimrc"
+  exit
+fi
+
 echo "Linking .vimrc, setting up plugins"
 rm -rf "$HOME/.vim/bundle" "$HOME/.vim/autoload"
 ln -fs $HOME/dotfiles/.vimrc $HOME
@@ -29,7 +35,7 @@ else
 fi
 checkAll
 
-[ "$miniV" == 'n' ] && echo "Syntax Plugin Options:"
+[[ "$miniV" == 'n' ]] && echo "Syntax Plugin Options:"
 [ -z "$includeJS" ] && read -p "Include javascript? (y)es/(n)o/(a)ll: " includeJS
 checkAll
 [ -z "$includeTS" ] && read -p "Include typescript?  (y)es/(n)o/(a)ll: " includeTS

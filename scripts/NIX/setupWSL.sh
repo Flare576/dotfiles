@@ -8,7 +8,7 @@ fi
 
 if [ ! -f "/etc/os-release" ] ; then
   read -p "It doesn't look like you're running Linux... Continue? (Y/n) " rusure
-  if [[ ! "$ursure" =~ ^[yY] ]] ; then
+  if [[ ! "$rusure" =~ ^[yY] ]] ; then
     exit
   fi
 fi

@@ -30,7 +30,7 @@ if [ $gitCount -gt 0 ] ; then
   eval "$(ssh-agent -s)" > /dev/null
   for i in $(seq 1 $gitCount); do
     read -p "GitHub Username $i: " userName
-    if [ "$userName" == "skip" ] ; then
+    if [[ "$userName" == "skip" ]] ; then
       continue
     fi
 

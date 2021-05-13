@@ -7,19 +7,19 @@ repo for my dotfiles.  I've also included a setup script, mostly for personal us
 brand new Mac from stock to stylish with minimal messing around.
 
 ```
-bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/OSX/setupMac.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/scripts/OSX/setupMac.sh)"
 ```
 
 Or a new Mint Linux
 
 ```
-bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/NIX/setupMint.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/scripts/NIX/setupMint.sh)"
 ```
 
 Or a new Ubuntu Linux
 
 ```
-bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/master/scripts/NIX/setupUbuntu.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/scripts/NIX/setupUbuntu.sh)"
 ```
 If not setting up a new machine I `git clone` directly into `~` and run the script for the thing(s) I want to setup:
 

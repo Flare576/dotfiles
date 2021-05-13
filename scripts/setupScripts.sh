@@ -1,4 +1,10 @@
 #!/bin/bash
+if [[ "$1" == "delete" ]]; then
+  # Using $FLARE_SCRIPTS, but may want to read location from .doNotCommit
+  rm -rf "$FLARE_SCRIPTS"
+  exit
+fi
+
 [ -z "$1" ] && read -p "Enter Dir for Flare Scripts ($HOME/scripts) or 'skip' to skip: " dest
 echo
 
@@ -14,6 +20,6 @@ if [[ "$dest" != "skip" ]] ; then
   cat<<END >> ${config}
 export FLARE_SCRIPTS="$dest"
 fpath=(\$FLARE_SCRIPTS/shell \$fpath)
-export PATH="\$FLARE_SCRIPTS/shell:\$FLARE_SCRIPTS/js:\${PATH}"
+export PATH="\$FLARE_SCRIPTS/shell:\$FLARE_SCRIPTS/js:\$FLARE_SCRIPTS/python:\${PATH}"
 END
 fi
