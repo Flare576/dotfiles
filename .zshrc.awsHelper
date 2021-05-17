@@ -11,7 +11,7 @@ awslogin () {
     echo "$(basename "$0") [AWS_PROFILE]"
     return 0
   fi
-  [ -z "$1" ] && PROFILE="master"  || PROFILE="$1" 
+  [ -z "$1" ] && PROFILE="master"  || PROFILE="$1"
   aws-adfs login --profile=$PROFILE --adfs-host=$AWS_ADFS_HOST --ssl-verification --session-duration 14400 --no-sspi
 }
 
@@ -65,16 +65,46 @@ awskeys () {
 # Get job states
 awsjobs () {
   jobs=(
-  PDLA-LearningManagementOEX-CMS-ServiceDevelopmentPipeline
-  PDLA-LearningManagementOEX-CMS-ServiceMasterPipeline
+    PDLA-LearningManagementOEX-LMS-ServiceDevelopmentPipeline
+    PDLA-LearningManagementOEX-CMS-ServiceDevelopmentPipeline
+    PDLA-LearningManagementOEX-RDSRDSDBDevelopmentPipeline
+    PDLA-LearningManagementOEXSharedInfraDevelopmentPipeline
+    PDLA-LearningManagementOEX-MongoDBDevelopmentPipeline
+    S3DevelopmentPipeline-ngp-pdla-oex-s3
+    PDLA-LearningManagementOEX-LMS-ServiceMasterPipeline
+    PDLA-LearningManagementOEX-CMS-ServiceMasterPipeline
+    PDLA-LearningManagementOEX-RDSRDSDBMasterPipeline
+    PDLA-LearningManagementOEXSharedInfraMasterPipeline
+    PDLA-LearningManagementOEX-MongoDBMasterPipeline
+    S3MainPipeline-ngp-pdla-oex-s3
+  )
 
-  PDLA-LearningManagementOEX-LMS-ServiceDevelopmentPipeline
-  PDLA-LearningManagementOEX-LMS-ServiceMasterPipeline
-)
+  for job in "${jobs[@]}"
+  do
+    latestNonSuccessful=$(
+      aws codepipeline get-pipeline-state --profile=shared --name="${job}" --output=json \
+        | jq '[.stageStates[] | select( .latestExecution.status != "Succeeded")][0] | try [.actionStates[] | select( .latestExecution.status != "Succeeded")][0] |"[35m\(.actionName)[0m \(.latestExecution.status) (\( if .latestExecution.lastStatusChange then .latestExecution.lastStatusChange | split(".")| { offset: (.[1][6:9] | tonumber), sec: (.[0] + "Z" | fromdate) } | now - .sec + ((.offset + 1) * 60 * 60) | (. / 60 | floor | tostring) + "m" + (. % 60 | tostring) + "s" else "" end))"'
+  )
+    latestNonSuccessful="${latestNonSuccessful%\"}"
+    latestNonSuccessful="${latestNonSuccessful#\"}"
+    tput el
+    if [ -z "$latestNonSuccessful" ]; then
+      print -P -- "✅ $BG[040]$FG[000]$job[0m"
+    elif [[ "$latestNonSuccessful" == *"Failed"* ]]; then
+      print -P -- "❌ $BG[009]$FG[000]$job[0m: $latestNonSuccessful"
+    else
+      print -P -- "⛴  $BG[226]$FG[000]$job[0m: $latestNonSuccessful"
+    fi
+  done
+}
 
-for job in "${jobs[@]}"
-do
-  jobStatus=$(aws codepipeline get-pipeline-state --profile=shared --name=${job} --output=json --query='stageStates[-1].latestExecution.status')
-  echo "$job: $jobStatus"
-done
+monitorjobs () {
+  clear
+  while true;
+  do
+    tput sc
+    awsjobs
+    sleep 20
+    tput rc
+  done
 }
