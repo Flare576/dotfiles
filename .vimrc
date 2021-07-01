@@ -253,8 +253,6 @@ nnoremap <leader><space> :nohlsearch<CR>
 nnoremap <silent> <leader>ws :%s/\s\+$//g<CR>
 " highlight last inserted text
 nnoremap gV `[v`]
-imap <Tab> <C-t>
-imap <S-Tab> <C-d>
 " Make right-side notes                 # like this
 " Highlight block, type note start column, then ,<Tab>
 vnoremap <leader><Tab> :<C-U>'<,'>call RightNote()<CR>
@@ -341,7 +339,7 @@ autocmd BufRead python
     \ setlocal fileformat=unix
 
 " vim-jedi's tips can get in the way; turn them off temporarily
-autocmd FileType python imap <C-d> <ESC>:let g:jedi#show_call_signatures=0<CR>a
+autocmd FileType python imap <C-j> <ESC>:let g:jedi#show_call_signatures=0<CR>a
 autocmd InsertLeave * :let g:jedi#show_call_signatures=1
 
 "########################## Other_filetypes
