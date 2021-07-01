@@ -31,6 +31,7 @@ brews=(
   lazydocker # Any project using straight Docker
   rpg-cli
   flare576/scripts/monitorjobs
+  flare576/scripts/git-clone
 )
 
 if [ "$isLinux" -ne "1" ] ; then

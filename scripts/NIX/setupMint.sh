@@ -28,9 +28,6 @@ bash $HOME/dotfiles/scripts/setupLinks.sh
 # Setup Scripts
 bash $HOME/dotfiles/scripts/setupScripts.sh
 
-# Setup GIT
-bash $HOME/dotfiles/scripts/setupGit.sh
-
 # Setup Oh-My-Zsh
 bash $HOME/dotfiles/scripts/setupOmz.sh
 
