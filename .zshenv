@@ -6,6 +6,7 @@ for f in "$HOME/.doNotCommit.d"/.doNotCommit*; do [[ $f != *".sw"* ]] && source 
 
 setopt PUSHDSILENT
 export EDITOR=vim
+export XDG_CONFIG_HOME="$HOME/.config" # https://wiki.archlinux.org/title/XDG_Base_Directory
 export CHEAT_CONFIG_PATH="$HOME/cheat/conf.yml"
 
 # Initialize pyenv
@@ -17,6 +18,7 @@ alias vz='vi -o ~/.zshrc ~/.zshenv -c "cd ~"'
 alias vd='vi ~/dotfiles -c "cd ~/dotfiles"'
 alias vs='vi ~/scripts -c "cd ~/scripts"'
 alias vt='vi ~/.tmux.conf -c "cd ~/dotfiles"'
+alias vc='vi ~/.config -c "cd ~/.config"'
 alias v='vi .'
 alias vv='vi -S'
 function vw(){ vi $(which $1) }
