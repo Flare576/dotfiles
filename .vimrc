@@ -56,6 +56,8 @@ function! UpdateTheme() abort
   if l:cur_theme != "" && (!exists('g:f_theme') || g:f_theme != l:cur_theme)
     let l:theme_name = system("echo -n $FLARE_THEME")
     execute "source $HOME/dotfiles/themes/" . l:theme_name ."/" . l:cur_theme
+    " take BG from term/tmux
+    hi Normal guibg=NONE ctermbg=NONE
   endif
   let g:f_theme = l:cur_theme
 endfunction
@@ -68,8 +70,6 @@ nnoremap <leader>t :let g:f_theme = '' <bar> call UpdateTheme()<CR>
 "  autocmd InsertLeave * call UpdateTheme()
 "augroup END
 
-" take BG from term/tmux
-hi Normal guibg=NONE ctermbg=NONE
 set number              " show line numbers
 set cursorline          " highlight current line
 set wildmenu            " visual autocomplete for command menu
