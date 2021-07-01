@@ -20,8 +20,10 @@ curl -sL http://install.ohmyz.sh | bash &> /dev/null #the installer is pretty, t
 
 # Configure theme management
 touch "$HOME/dotfiles/.doNotCommit.d/.doNotCommit.theme"
-cd "$HOME/.oh-my-zsh/themes"
+omzThemes="$HOME/.oh-my-zsh/themes"
 themes="$HOME/dotfiles/themes"
+mkdir -p "$omzThemes"
+cd "$omzThemes"
 # Theme configs are in yaml
 command -v pip3 &> /dev/null && pip3 install --quiet pyaml
 
@@ -30,6 +32,7 @@ for theme in "$themes"/**/*.zsh-theme; do
 done
 
 # one more and should probably consider zplug...
+mkdir -p "$HOME/.oh-my-zsh/custom/plugins/"
 cd "$HOME/.oh-my-zsh/custom/plugins/"
 
 # NVM and Node Optimizations

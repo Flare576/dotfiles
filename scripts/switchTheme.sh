@@ -18,7 +18,6 @@ export FLARE_THEME="$name"
 export FLARE_VIM_THEME="$(yaml "$config" "['vim']")"
 export FLARE_TMUX_THEME="$(yaml "$config" "['tmux']")"
 export FLARE_ZSH_THEME="$(yaml "$config" "['zsh']")"
-export FLARE_VSCODE_THEME="$(yaml "$config" "['vscode']")"
 export BAT_THEME="$(yaml "$config" "['bat']")"
 EOF
     source "$themeExport"
@@ -28,10 +27,18 @@ EOF
     command -v tmux &> /dev/null && tmux source-file "$HOME/dotfiles/themes/$FLARE_THEME/$FLARE_TMUX_THEME" &> /dev/null
     # vim and zsh are configured to watch for changes on updates
 
+    # cheat makes it pretty easy, so why not
+    if command -v cheat &> /dev/null ; then
+      cheat_theme="$(yaml "$config" "['cheat']")"
+      filename="$HOME/cheat/conf.yml"
+      sed -i "" -e "s/^style:.*/style: $cheat_theme/" "$filename"
+    fi
+
     # VSCode makes it pretty easy, so why not
     if command -v Code &> /dev/null ; then
+      code_theme="$(yaml "$config" "['vscode']")"
       filename="$HOME/Library/Application Support/Code/User/settings.json"
-      sed -i "" -e "s/\"workbench.colorTheme\":.*/\"workbench.colorTheme\": \"$FLARE_VSCODE_THEME\"/" "$filename"
+      sed -i "" -e "s/\"workbench.colorTheme\":.*/\"workbench.colorTheme\": \"$code_theme\"/" "$filename"
     fi
 
     # Terminal emulators for different machines I use
