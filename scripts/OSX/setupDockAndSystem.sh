@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 dockside="left"
 autoHide="true"
 hotCornerAction=5
@@ -59,9 +59,9 @@ defaults write -g KeyRepeat -int $keyRepeat # normal minimum is 2 (30 ms)
 # Disable SmartQuotes
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool $smartQuotes
 
-sh $HOME/dotfiles/scripts/OSX/reassignCapsLock.sh $1
-sh $HOME/dotfiles/scripts/OSX/setupTerminalApp.sh $1
-sh $HOME/dotfiles/scripts/OSX/setupMenuClock.sh $1
+bash $HOME/dotfiles/scripts/OSX/reassignCapsLock.sh $1
+bash $HOME/dotfiles/scripts/OSX/setupTerminalApp.sh $1
+bash $HOME/dotfiles/scripts/OSX/setupMenuClock.sh $1
 
 killall Finder
 killall Dock

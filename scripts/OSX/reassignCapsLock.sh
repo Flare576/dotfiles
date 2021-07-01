@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # "Inspired" by https://apple.stackexchange.com/a/122573
 
 # Bug: if there's no other keyboard, the code to select a keyboard breaks the script
