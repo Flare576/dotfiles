@@ -1,3 +1,7 @@
+# to get file contents
+var=$(<file)
+https://stackoverflow.com/questions/5057083/read-a-file-using-a-bash-script
+
 # To implement a for loop:
 for file in *; # or for entry in ${data[@]}
 do 
@@ -25,3 +29,7 @@ echo ${PIPESTATUS[0]}  # replace 0 with N
 
 # To create a lockfile:
 ( set -o noclobber; echo > my.lock ) || echo 'Failed to create lock file'
+
+Increment
+https://linuxize.com/post/bash-increment-decrement-variable/
+${myarr[$((i++))]}

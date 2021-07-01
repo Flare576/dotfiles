@@ -1,5 +1,7 @@
 Bash is strong, but silly
 https://tldp.org/LDP/abs/html/string-manipulation.html
+also
+https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html
 
 ${varname/substring/replacement}
     Replace first match of $substring with $replacement. [2]
@@ -15,5 +17,11 @@ ${varname:position}
 ${varname:position:length}
     Extracts $length characters of substring from $string at $position.
 
-Length of string
+${varname^pattern} # ^ for upper and , for lower
+    Upper-case first character in pattern match
+
+${varname^^pattern} # ^ for upper and , for lower
+    Upper-case every character in pattern match
+
 ${#varname}
+    Length of string

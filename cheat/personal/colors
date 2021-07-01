@@ -15,3 +15,6 @@ echo -e "\e[31mHello World\e[0m"
 echo -e "\x1B[31mHello World\e[0m"
 ```
 Stolen from https://askubuntu.com/questions/528928/how-to-do-underline-bold-italic-strikethrough-color-background-and-size-i
+
+Also see tput
+https://unix.stackexchange.com/questions/552845/tput-ed-is-empty
