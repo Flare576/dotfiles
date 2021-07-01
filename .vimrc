@@ -347,7 +347,25 @@ autocmd Filetype markdown setlocal spell textwidth=100 cc=100 conceallevel=3 for
 
 autocmd Filetype text setlocal linebreak spell complete+=s wrap formatoptions=1
       \ noexpandtab textwidth=100 cc=100 formatoptions=qtc
+      " See https://vim.fandom.com/wiki/Folding_for_plain_text_files_based_on_indentation
+      " Used in conjunction with https://github.com/obreitwi/vim-sort-folds to sort blocks
+      \ setlocal foldmethod=expr
+      \ setlocal foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum))
+      \ set foldtext=getline(v:foldstart)
+      \ set fillchars=fold:\ "(there's a space after that \)
+      \ highlight Folded ctermfg=DarkGreen ctermbg=Black
+
 autocmd BufRead COMMIT_EDITMSG setlocal spell
+
+
+"###### Hyper-aggressive "indent" folding
+" See https://vim.fandom.com/wiki/Folding_for_plain_text_files_based_on_indentation
+" Used in conjunction with https://github.com/obreitwi/vim-sort-folds to sort blocks
+"setlocal foldmethod=expr
+"setlocal foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum))
+"set foldtext=getline(v:foldstart)
+"set fillchars=fold:\ "(there's a space after that \)
+"highlight Folded ctermfg=DarkGreen ctermbg=Black
 
 "############################## References ###########
 " Functions guides
