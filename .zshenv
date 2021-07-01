@@ -50,7 +50,20 @@ alias plcat='plutil -convert xml1 -o -'
 
 source "$HOME/dotfiles/scripts/switchTheme.sh"
 alias st="switchTheme"
+alias rpg=rpg-cli
+function zz() {
+  dest=$(_z -e "$@" 2>&1)
+  rpg-cli cd "$dest"
+  cd "$(rpg-cli pwd)"
+}
 
+function cdd() {
+  builtin cd "$@"
+}
+function cd() {
+  rpg-cli cd "$@"
+  builtin cd "$(rpg-cli pwd)"
+}
 function gs() {
   git submodule foreach $1
 }
