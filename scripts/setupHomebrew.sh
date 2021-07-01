@@ -30,6 +30,7 @@ brews=(
   k9s # Any project using K8s
   lazydocker # Any project using straight Docker
   rpg-cli
+  flare576/scripts/monitorjobs
 )
 
 if [ "$isLinux" -ne "1" ] ; then
