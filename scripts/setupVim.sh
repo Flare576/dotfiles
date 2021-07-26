@@ -66,6 +66,10 @@ echo "Cloning vim-airline"
 git clone -q https://github.com/vim-airline/vim-airline
 
 ############################## Plugins ###########
+# Handle case, spelling, and replace without :'(
+echo "Cloning abolish.vim"
+git clone -q https://github.com/tpope/vim-abolish.git
+
 # Silver Searcher in Vim
 echo "Cloning ag.vim"
 git clone -q https://github.com/rking/ag.vim.git
