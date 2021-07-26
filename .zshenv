@@ -20,11 +20,13 @@ alias vs='vi ~/scripts -c "cd ~/scripts"'
 alias vt='vi ~/.tmux.conf -c "cd ~/dotfiles"'
 alias vc='vi ~/.config -c "cd ~/.config"'
 alias v='vi .'
+alias vk='vi ~/Projects/Personal/qmk_firmware/keyboards/sofle/keymaps/flare576/'
 alias vv='vi -S'
 function vw(){ vi $(which $1) }
 
 alias chrome='open -a Google\ Chrome'
 alias firefox='open -a Firefox'
+alias wat='watson'
 alias sz='source ~/.zshrc && source ~/.zshenv'
 alias tm='tmux new-session'
 
@@ -64,7 +66,11 @@ function cdd() {
 }
 function cd() {
   rpg-cli cd "$@"
+  rpg-cli ls
   builtin cd "$(rpg-cli pwd)"
+}
+function rup() {
+  rpg-cli use potion
 }
 function gs() {
   git submodule foreach $1
@@ -118,13 +124,7 @@ function prettyDate() {
 
   cdate=$(date -r $now "+%a %b %e 1AC  %H:%M:%S")
   echo "$cdate"
-  ping -c 1 https://google.com &> /dev/null
-  if [ $? ]; then
-    echo "Netowork Status: ✅"
-  else
-    echo "Netowork Status: ❌"
-  fi
-  #echo "Quarantine: $((secondsPassedQuar / 86400)) days"
+  echo "Quarantine: $((secondsPassedQuar / 86400)) days"
 }
 
 function wweather() {
