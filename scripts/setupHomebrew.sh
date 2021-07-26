@@ -27,11 +27,16 @@ brews=(
   vim
   watch
   jq
+  watson # Great time tracker
   k9s # Any project using K8s
   lazydocker # Any project using straight Docker
   rpg-cli
   flare576/scripts/monitorjobs
   flare576/scripts/git-clone
+  flare576/scripts/gac
+  flare576/scripts/dvol
+  flare576/scripts/newScript
+  flare576/scripts/vroom
 )
 
 if [ "$isLinux" -ne "1" ] ; then
