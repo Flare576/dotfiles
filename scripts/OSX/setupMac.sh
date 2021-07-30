@@ -45,6 +45,3 @@ bash $HOME/dotfiles/scripts/setupJira.sh
 # Force setup of apps
 open -a Spotify
 read -p "Once you setup Spotify, press enter."
-open -a Dropbox
-read -p "Once you setup Dropbox, press enter."
-
