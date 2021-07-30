@@ -2,7 +2,9 @@
 # Change "path" to an -a(rray) -U(nique) (special) type, prevents dup entries
 typeset -aU path
 # Secrets
-for f in "$HOME/.doNotCommit.d"/.doNotCommit*; do [[ $f != *".sw"* ]] && source $f; done
+if [ -d "$HOME/.doNotCommit.d" ]; then
+  for f in "$HOME/.doNotCommit.d"/.doNotCommit*; do [[ $f != *".sw"* ]] && source $f; done
+fi
 
 setopt PUSHDSILENT
 export EDITOR=vim
