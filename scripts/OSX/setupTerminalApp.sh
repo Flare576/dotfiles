@@ -15,10 +15,10 @@ if [[ "$1" == "delete" ]]; then
   exit
 fi
 
-themeFiles="$HOME/dotfiles/themes"/**/*.terminal
-for theme in $themeFiles; do
+for theme in $HOME/dotfiles/themes/**/*.terminal; do
+  echo "WHAT $theme"
   [ -e "$theme" ] || continue
-  config=$(echo $theme | sed 's/\(.*\)\/.*.gnome/\1\/config')
+  config="$(dirname "$theme")/config.yml"
   themeName=$(yaml "$config" "['terminal']")
   bare=$(sed -n '/<dict>/,/<\/dict>/p' "$theme")
   echo "Importing $themeName Terminal Theme"
