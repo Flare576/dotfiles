@@ -5,5 +5,9 @@ cd $HOME/dotfiles
 git secrets --install
 git secrets --register-aws
 
-echo "Ensuring dotfiles use ssh"
-sed -i'' -e 's/https:\/\/github.com\//git@github.com:/' $HOME/dotfiles/.git/config
+read -p "Setup git/dotfiles? (Y/n)" doit
+echo
+
+if [[ $doit =~ ^[yY] ]] ; then
+  clone -f
+fi

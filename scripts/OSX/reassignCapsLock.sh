@@ -1,13 +1,12 @@
 #!/bin/bash
 # "Inspired" by https://apple.stackexchange.com/a/122573
 
-# Bug: if there's no other keyboard, the code to select a keyboard breaks the script
-# Probably a better way to do this...
-# It's called custom firmware...
 if [[ "$1" == "delete" ]]; then
   exit
 fi
+
 echo "Attempting to use UI to set caps lock action..."
+read -p "Ensure no external keyboards are connected - Handle them separately."
 
 osascript -e '
 --reboot system preferences to make GUI state more predictable
@@ -39,46 +38,21 @@ tell application "System Events"
   keystroke space
   delay 0.1
 
-  --Select top keyboard
+  --Open drop-down and go to top
   keystroke space
-  repeat 3 times
+  delay 0.1
+  repeat 4 times
     key code 126 --up arrow
   end repeat
-  keystroke return
 
-  --Go through up to 3 keyboards (top of loop assumes you just selected a keyboard)
-  repeat 3 times
-    delay 0.1
-
-    --Select "Caps Lock" drop-down
-    keystroke tab
-    delay 0.5
-
-    --Open drop-down and go to top
-    keystroke space
-    delay 0.1
-    repeat 4 times
-      key code 126 --up arrow
-    end repeat
-
-    --Select "Option" option
-    repeat 2 times
-      key code 125 --down arrow
-    end repeat
-    delay 0.1
-
-    keystroke return
-    delay 0.1
-
-    -- Select next keyboard
-
-    keystroke tab using shift down
-    keystroke space
-    delay 0.1
+  --Select "Option" option
+  repeat 2 times
     key code 125 --down arrow
-    keystroke return
   end repeat
+  delay 0.1
 
+  keystroke return
+  delay 0.1
 
   --Commit changes! phew.
   keystroke return

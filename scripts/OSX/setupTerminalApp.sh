@@ -30,4 +30,4 @@ done
 defaults write com.apple.Terminal "Startup Window Settings" "$themeName"
 # Set new profile to default
 defaults write com.apple.Terminal "Default Window Settings" "$themeName"
-echo "You will need to restart Terminal; we edited its plist"
+echo "[36;41mYou will need to restart Terminal[0m; we edited its plist"
