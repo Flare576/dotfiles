@@ -1,0 +1,12 @@
+# see ~/dotfiles/.zshrc.awsHelper
+  # Login to AWS ADF - see ~/dotfiles/.zshrc.awsHelper
+  # Auth w/ Docker via AWS - see ~/dotfiles/.zshrc.awsHelper
+  # Get Secrets
+  # Get Keys
+
+# S3
+# SOURCE DESTINATION
+# S3 assets are prefixed with s3://{bucketname}/
+aws s3 cp --profile="$AWS_PROFILE" $1 $2
+# bucketname/{folder}
+aws s3 ls --profile="$AWS_PROOFILE" $1
