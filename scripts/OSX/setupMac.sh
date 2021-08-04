@@ -30,9 +30,6 @@ bash $HOME/dotfiles/scripts/setupScripts.sh
 # Setup Oh-My-Zsh
 bash $HOME/dotfiles/scripts/setupOmz.sh
 
-# Setup application
-bash $HOME/dotfiles/scripts/OSX/setupCasks.sh
-
 # Setup background and dock settings
 bash $HOME/dotfiles/scripts/OSX/setupDockAndSystem.sh
 
@@ -42,6 +39,5 @@ bash $HOME/dotfiles/scripts/setupVim.sh
 # Setup Jira
 bash $HOME/dotfiles/scripts/setupJira.sh
 
-# Force setup of apps
-open -a Spotify
-read -p "Once you setup Spotify, press enter."
+# Setup application
+bash $HOME/dotfiles/scripts/OSX/setupCasks.sh

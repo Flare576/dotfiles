@@ -15,4 +15,10 @@ apps=(
 )
 
 echo "Installing Homebrew Casks"
-brew install --cask --appdir="/Applications" ${apps[@]}
+brew install --cask ${apps[@]}
+
+# Force setup of apps
+open -a 1Password
+read -p "Once you setup 1Password, press enter."
+open -a Spotify
+read -p "Once you setup Spotify, press enter."
