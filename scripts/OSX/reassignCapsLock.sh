@@ -3,6 +3,7 @@
 
 # Bug: if there's no other keyboard, the code to select a keyboard breaks the script
 # Probably a better way to do this...
+# It's called custom firmware...
 if [[ "$1" == "delete" ]]; then
   exit
 fi

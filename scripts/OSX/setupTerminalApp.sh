@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/zsh
+# right now the script uses a `yaml` function located in my zsh profile, so it needs zsh
 # To get this data, run
 # plist $HOME/Library/Preferences/com.apple.Terminal.plist
 # then find the key starting with `<key>Sweetness</key>`

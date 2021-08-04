@@ -9,7 +9,7 @@ links=(
   .zshrc.kubeHelper
   .zshrc.awsHelper
   .tmux.conf
-  .cheat
+  cheat
 )
 
 if [ "$1" = "delete" ]; then

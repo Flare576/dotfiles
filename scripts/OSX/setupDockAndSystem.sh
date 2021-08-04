@@ -60,7 +60,7 @@ defaults write -g KeyRepeat -int $keyRepeat # normal minimum is 2 (30 ms)
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool $smartQuotes
 
 bash $HOME/dotfiles/scripts/OSX/reassignCapsLock.sh $1
-bash $HOME/dotfiles/scripts/OSX/setupTerminalApp.sh $1
+zsh $HOME/dotfiles/scripts/OSX/setupTerminalApp.sh $1
 bash $HOME/dotfiles/scripts/OSX/setupMenuClock.sh $1
 
 killall Finder

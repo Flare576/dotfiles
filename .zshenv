@@ -63,6 +63,23 @@ function zz() {
   cd "$(rpg-cli pwd)"
 }
 
+function sudoedit () {
+  protected_file="$1"
+  case $protected_file in
+    (*.*) extension=${protected_file##*.};;
+    (*)   extension="tmp";;
+  esac
+  editable_file="/tmp/$RANDOM.$extension"
+  sudo cp "$protected_file" "$editable_file"
+  sudo chown "$(whoami)" "$editable_file"
+  sudo chmod 600 "$editable_file"
+  $EDITOR "$editable_file"
+  if [ $? -eq 0 ]; then
+    sudo cp "$editable_file" "$protected_file"
+  fi
+  rm "$editable_file"
+}
+
 function cdd() {
   builtin cd "$@"
 }
