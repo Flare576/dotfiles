@@ -16,7 +16,7 @@ fi
 echo "Setting up Oh My Zshell, Tools, Themes, and Plugins for ZSH"
 
 # Install and setup Oh My Zshell
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &> /dev/null
 # Configure theme management
 touch "$HOME/dotfiles/.doNotCommit.d/.doNotCommit.theme"
 omzThemes="$HOME/.oh-my-zsh/themes"

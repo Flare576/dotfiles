@@ -63,7 +63,12 @@ git clone -q https://github.com/TaDaa/vimade.git
 
 # Status line gud
 echo "Cloning vim-airline"
-git clone -q https://github.com/vim-airline/vim-airline
+git clone -q https://github.com/vim-airline/vim-airline.git
+
+# SuperTab
+echo "Cloning SuperTab"
+git clone -q https://github.com/ervandew/supertab.git
+
 
 ############################## Plugins ###########
 # Handle case, spelling, and replace without :'(

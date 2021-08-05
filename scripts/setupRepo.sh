@@ -5,9 +5,11 @@ cd $HOME/dotfiles
 git secrets --install
 git secrets --register-aws
 
-read -p "Setup git/dotfiles? (Y/n)" doit
-echo
+if [ -z "$1" ]; then
+  read -p "Setup git/dotfiles? (Y/n)" doit
+  echo
 
-if [[ $doit =~ ^[yY] ]] ; then
-  clone -f
+  if [[ $doit =~ ^[yY] ]] ; then
+    clone -f
+  fi
 fi

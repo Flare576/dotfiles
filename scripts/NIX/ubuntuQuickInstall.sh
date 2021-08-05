@@ -43,7 +43,7 @@ echo "Cloning dotfiles"
 git clone -q https://github.com/Flare576/dotfiles.git
 
 # Install safety precautions around this repo
-bash $HOME/dotfiles/scripts/setupRepo.sh
+bash $HOME/dotfiles/scripts/setupRepo.sh 'true'
 
 # Link dotFiles
 echo "Linking dotfiles"

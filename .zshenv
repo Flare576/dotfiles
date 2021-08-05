@@ -84,9 +84,14 @@ function cdd() {
   builtin cd "$@"
 }
 function cd() {
-  rpg-cli cd "$@"
-  rpg-cli ls
-  builtin cd "$(rpg-cli pwd)"
+  # don't do if no rpg-cli like on ubuntu images
+  if command -v rpg-ci; then
+    rpg-cli cd "$@"
+    rpg-cli ls
+    builtin cd "$(rpg-cli pwd)"
+  else
+    builtin cd $@
+  fi
 }
 function rup() {
   rpg-cli use potion
