@@ -19,6 +19,10 @@ brew install --cask ${apps[@]}
 
 # Force setup of apps
 open -a 1Password
-read -p "Once you setup 1Password, press enter."
+brew install --cask ${apps[@]}
 open -a Spotify
 read -p "Once you setup Spotify, press enter."
+open -a Slack
+read -p "Once you setup Slack, press enter."
+open -a LaunchBar
+read -p "Once you setup LaunchBar, press enter."
