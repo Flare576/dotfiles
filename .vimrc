@@ -34,6 +34,8 @@ let g:netrw_keepdir=0   " see :help netrw-c
 set shell=zsh           " bring ZShell config in
 let mapleader=","       " leader is comma
 set spelllang=en        " English for spelling!
+" AG snags Shift+H, which breaks switching tabs while in quickfix
+let g:ag_apply_qmappings=0
 " New, better words!
 set spellfile=$HOME/dotfiles/en.utf-8.add,$HOME/dotfiles/.doNotCommit.en.utf-8.add
 set thesaurus+=$HOME/.local/share/thesaurus.txt
