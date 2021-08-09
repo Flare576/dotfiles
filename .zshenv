@@ -85,9 +85,8 @@ function cdd() {
 }
 function cd() {
   # don't do if no rpg-cli like on ubuntu images
-  if command -v rpg-ci; then
+  if command -v rpg-cli &> /dev/null; then
     rpg-cli cd "$@"
-    rpg-cli ls
     builtin cd "$(rpg-cli pwd)"
   else
     builtin cd $@
@@ -156,11 +155,11 @@ function wweather() {
 }
 
 function svtop() {
-  if ! command -v npm; then
+  if ! command -v npm &> /dev/null; then
     nvm install stable
   fi
 
-  if command -v vtop; then
+  if command -v vtop &> /dev/null; then
     vtop
   else
     npm i -g vtop
