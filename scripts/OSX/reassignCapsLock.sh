@@ -1,5 +1,6 @@
 #!/bin/bash
 # "Inspired" by https://apple.stackexchange.com/a/122573
+# problem: Figure out how to pre-authorize Terminal to do this
 
 if [[ "$1" == "delete" ]]; then
   exit
@@ -27,13 +28,14 @@ tell application "System Events"
   keystroke "keyboard"
   delay 1.0
   key code 36 --return
-  delay 1.0
+  delay 2.0
   keystroke tab
   delay 0.5
 
   --Open modifier keys submenu
   repeat 3 times
     keystroke tab using shift down
+    delay 0.5
   end repeat
   keystroke space
   delay 0.1
