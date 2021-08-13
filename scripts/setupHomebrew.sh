@@ -75,15 +75,11 @@ done
 
 echo "Grabbing Cheatsheets and zsh tab completion"
 communityDir=$HOME/dotfiles/cheat/community
-zshTabComplete=$HOME/.oh-my-zsh/completions/cheat
 
 if [ -d "$communityDir" ]; then
   pushd "$communityDir" && git pull -f && popd
-  pushd "$zshTabComplete" && git pull -f && popd
 else
   git clone https://github.com/cheat/cheatsheets.git "$communityDir"
-  git clone https://github.com/cheat/cheat.git "$zshTabComplete"
-  ln -sf "$zshTabComplete/cheat/cheat.zsh" "$zshTabComplete/_cheat.zsh"
 fi
 
 if brew ls --versions universal-ctags >/dev/null; then

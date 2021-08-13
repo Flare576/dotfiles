@@ -27,13 +27,14 @@ tell application "System Events"
   keystroke "keyboard"
   delay 1.0
   key code 36 --return
-  delay 1.0
+  delay 2.0
   keystroke tab
   delay 0.5
 
   --Open modifier keys submenu
   repeat 3 times
     keystroke tab using shift down
+    delay 0.5
   end repeat
   keystroke space
   delay 0.1

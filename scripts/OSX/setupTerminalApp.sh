@@ -17,9 +17,8 @@ if [[ "$1" == "delete" ]]; then
 fi
 
 for theme in $HOME/dotfiles/themes/**/*.terminal; do
-  echo "WHAT $theme"
-  [ -e "$theme" ] || continue
   config="$(dirname "$theme")/config.yml"
+  [ -e "$config" ] || continue
   themeName=$(yaml "$config" "['terminal']")
   bare=$(sed -n '/<dict>/,/<\/dict>/p' "$theme")
   echo "Importing $themeName Terminal Theme"
