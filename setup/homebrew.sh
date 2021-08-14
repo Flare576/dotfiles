@@ -1,7 +1,6 @@
 #!/bin/bash
 # takes 1 param: true to upgrade installed brews
 
-# uctags="universal-ctags/universal-ctags/universal-ctags"
 isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
 # Install Homebrew
 if test ! $(which brew); then
@@ -40,23 +39,6 @@ brews=(
 
 if [ "$isLinux" -ne "1" ] ; then
   brews+=(cask kubectx mas)
-else
-  brew install --HEAD --without-xml $uctags
-  # all of this because the current brew install can't find a dependency
-  # pushd /tmp
-  # prefix=$(brew install --HEAD $uctags |
-  #   sed -e 's/^.*\/configure --prefix=//' -e 'tx' -e 'd' -e ':x'
-  # )
-  # git clone https://github.com/universal-ctags/ctags.git
-  # pushd ctags
-  # mkdir -p "$prefix"
-  # ./autogen.sh
-  # ./configure --prefix="$prefix"
-  # make
-  # make install
-  # brew link $uctags
-  # popd
-  # popd
 fi
 
 echo "Installing brews"

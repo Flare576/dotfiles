@@ -29,4 +29,5 @@ done
 defaults write com.apple.Terminal "Startup Window Settings" "$themeName"
 # Set new profile to default
 defaults write com.apple.Terminal "Default Window Settings" "$themeName"
-echo "[36;41mYou will need to restart Terminal[0m; we edited its plist"
+divider="[41m[30m*[32m*[33m*[34m*[35m*[36m*[37m*[38m*[90m*[91m*[92m*[93m*[94m*[95m*[30m*[32m*[33m*[34m*[35m*[36m*[37m*[38m*[90m*[91m*[92m*[93m*[94m*[95m*[41m[30m*[32m*[33m*[34m*[35m*[0m"
+printf "\n${divider}\n[31mYOU WILL NEED TO RESTART TERMINAL[0m\nWe edited its plist\n${divider}\n"

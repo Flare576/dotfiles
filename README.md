@@ -7,7 +7,7 @@ repo for my dotfiles.  I've also included a setup script, mostly for personal us
 brand new Mac from stock to stylish with minimal messing around.
 
 ```
-bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/scripts/OSX/setupMac.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/setup/OSX/mac.sh)"
 ```
 
 Or a new Mint Linux
