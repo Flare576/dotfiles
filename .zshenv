@@ -56,12 +56,6 @@ alias plcat='plutil -convert xml1 -o -'
 
 source "$HOME/dotfiles/scripts/switchTheme.sh"
 alias st="switchTheme"
-alias rpg=rpg-cli
-function zz() {
-  dest=$(_z -e "$@" 2>&1)
-  rpg-cli cd "$dest"
-  cd "$(rpg-cli pwd)"
-}
 
 function sudoedit () {
   protected_file="$1"
@@ -80,9 +74,23 @@ function sudoedit () {
   rm "$editable_file"
 }
 
-function cdd() {
-  builtin cd "$@"
+# Fun RPG-CLI integrations
+alias rpg=rpg-cli
+function zz() {
+  dest=$(_z -e "$@" 2>&1)
+  rpg-cli cd "$dest"
+  cd "$(rpg-cli pwd)"
 }
+function ls() {
+  # don't do if no rpg-cli like on ubuntu images
+  if command -v rpg-cli &> /dev/null; then
+    # You're here isn't psychic, they only get to look in the current dir...
+    rpg-cli ls
+  fi
+  # but you are a dev, so I guess you can run normal command with params
+  command ls $@
+}
+# if something is on fire, don't forget about the -f flag for the RPG thing
 function cd() {
   # don't do if no rpg-cli like on ubuntu images
   if command -v rpg-cli &> /dev/null; then
@@ -95,6 +103,25 @@ function cd() {
 function rup() {
   rpg-cli use potion
 }
+function rb() {
+  rpg-cli battle
+}
+# make a new dungeon!! https://github.com/facundoolano/rpg-cli/blob/main/shell/README.md#arbitrary-dungeon-levels
+dn () {
+    current=$(basename $PWD)
+    number_re='^[0-9]+$'
+
+    if [[ $current =~ $number_re ]]; then
+        next=$(($current + 1))
+        command mkdir -p $next && cd $next && rpg ls
+    elif [[ -d 1 ]] ; then
+        cd 1 && rpg ls
+    else
+        command mkdir -p dungeon/1 && cd dungeon/1 && rpg ls
+    fi
+}
+# End RPG-cli integrations
+
 function gs() {
   git submodule foreach $1
 }
