@@ -40,7 +40,7 @@ bash $HOME/dotfiles/setup/scripts.sh
 bash $HOME/dotfiles/setup/vim.sh
 
 # Setup background and dock settings
-bash $HOME/dotfiles/setup/OSX/setupDockAndSystem.sh
+bash /Users/flare576/dotfiles/setup/OSX/systemSettings.sh
 
 # Setup Oh-My-Zsh
 bash $HOME/dotfiles/setup/omz.sh
@@ -49,4 +49,4 @@ bash $HOME/dotfiles/setup/omz.sh
 bash $HOME/dotfiles/setup/jira.sh
 
 # Setup application
-bash $HOME/dotfiles/setup/OSX/setupCasks.sh
+bash $HOME/dotfiles/setup/OSX/casks.sh
