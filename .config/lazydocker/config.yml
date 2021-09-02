@@ -1,0 +1,38 @@
+reporting: "off"
+# oS:
+  #openCommand: vi {{filename}}
+  #openLinkCommand: open {{link}}
+gui:
+  returnImmediately: true
+  wrapMainPanel: true
+customCommands:
+  containers:
+  - name: bash
+    attach: true
+    command: docker exec -it {{ .Container.ID }} /bin/bash
+    serviceNames: []
+  - name: zsh-
+    attach: true
+    command: docker exec -it {{ .Container.ID }} /bin/zsh
+    serviceNames: []
+  - name: maybe
+    attach: false
+    command: zsh -c "docker exec {{ .Container.Name }} mkdir -p /codebuild/output/src999 && docker cp /tmp/static/ngp-pdla-oex-lms {{ .Container.Name }}:/codebuild/output/src999/src"
+    serviceNames: []
+  images:
+  - name: run_bash
+    attach: true
+    command: docker run -it {{ .Image.ID }} /bin/bash
+    serviceNames: []
+  - name: spin_up
+    attach: false
+    command: docker run -td {{ .Image.ID }}
+    serviceNames: []
+  - name: run_bash_plus_docker
+    attach: true
+    command: docker run -v /var/run/docker.sock:/var/run/docker.sock -it {{ .Image.ID }} /bin/bash
+    serviceNames: []
+  - name: run_CMD
+    attach: false
+    command: docker run {{ .Image.ID }}
+    serviceNames: []

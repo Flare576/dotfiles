@@ -17,27 +17,13 @@ echo "Setting up Oh My Zshell, Tools, Themes, and Plugins for ZSH"
 
 # Install and setup Oh My Zshell
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &> /dev/null
-# Configure theme management
-touch "$HOME/dotfiles/.doNotCommit.d/.doNotCommit.theme"
-omzThemes="$HOME/.oh-my-zsh/themes"
-themes="$HOME/dotfiles/themes"
-mkdir -p "$omzThemes"
-cd "$omzThemes"
-# Theme configs are in yaml
-command -v pip3 &> /dev/null && pip3 install --quiet pyaml
-
-for theme in "$themes"/**/*.zsh-theme; do
-  ln -sf "$theme"
-done
 
 # Wish this was a real plugin
-zshTabComplete=$HOME/.oh-my-zsh/completions/cheat
-if [ -d "$zshTabComplete" ]; then
-  pushd "$zshTabComplete" && git pull -f && popd
-else
-  git clone https://github.com/cheat/cheat.git "$zshTabComplete"
-  ln -sf "$zshTabComplete/cheat/cheat.zsh" "$zshTabComplete/_cheat.zsh"
-fi
+zshComplete=$HOME/.oh-my-zsh/completions
+rm -rf /tmp/cheat &> /dev/null 
+git clone https://github.com/cheat/cheat.git /tmp/cheat
+mv /tmp/cheat/scripts/cheat.zsh $zshComplete/_cheat.zsh
+rm -rf /tmp/cheat &> /dev/null
 
 # one more and should probably consider zplug...
 mkdir -p "$HOME/.oh-my-zsh/custom/plugins/"
