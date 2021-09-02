@@ -52,25 +52,6 @@ set smarttab            " find next tabstop and insert spaces until it
 set nowrapscan          " If you want to start at the beginning, just `gg`
 
 "########################## Look_and_Feel
-function! UpdateTheme() abort
-  " Since system() calls a new shell, it will have the most recent env vars
-  let l:cur_theme = system("echo -n $FLARE_VIM_THEME")
-  if l:cur_theme != "" && (!exists('g:f_theme') || g:f_theme != l:cur_theme)
-    let l:theme_name = system("echo -n $FLARE_THEME")
-    execute "source $HOME/dotfiles/themes/" . l:theme_name ."/" . l:cur_theme
-    " take BG from term/tmux
-    hi Normal guibg=NONE ctermbg=NONE
-  endif
-  let g:f_theme = l:cur_theme
-endfunction
-
-call UpdateTheme()
-nnoremap <leader>t :let g:f_theme = '' <bar> call UpdateTheme()<CR>
-"augroup flare_theme
-"  au!
-"  autocmd InsertEnter * call UpdateTheme()
-"  autocmd InsertLeave * call UpdateTheme()
-"augroup END
 
 set number              " show line numbers
 set cursorline          " highlight current line

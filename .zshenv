@@ -5,6 +5,8 @@ typeset -aU path
 if [ -d "$HOME/.doNotCommit.d" ]; then
   for f in "$HOME/.doNotCommit.d"/.doNotCommit*; do [[ $f != *".sw"* ]] && source $f; done
 fi
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+source "$(/usr/local/bin/switch-theme)"
 
 setopt PUSHDSILENT
 export EDITOR=vim
@@ -51,11 +53,11 @@ alias lzy='lazydocker'
 alias lzye='vi $HOME/Library/Application\ Support/jesseduffield/lazydocker/config.yml'
 alias dclean='docker system prune --volumes -f'
 alias dnuke='docker system prune --volumes -af'
+alias dstop="osascript -e 'quit app \"Docker\"'"
+alias dstart="open -a Docker"
 
 alias plcat='plutil -convert xml1 -o -'
 
-source "$HOME/dotfiles/scripts/switchTheme.sh"
-alias st="switchTheme"
 
 function sudoedit () {
   protected_file="$1"
@@ -197,18 +199,6 @@ function svtop() {
 function wdate() {
   fwatch 1 prettyDate
 }
-
-function yaml() {
-  python3 -c "import yaml;print(yaml.safe_load(open('$1'))$2)"
-}
-
-# ZSH/OMZ "switchTheme" functionality to watch for changes to theme settings
-function zsh_theme_refresh() {
-  conf="$HOME/dotfiles/.doNotCommit.d/.doNotCommit.theme"
-  [ -f "$conf" ] && source "$conf"
-  [ -f "$ZSH/themes/$FLARE_ZSH_THEME.zsh-theme" ] && source "$ZSH/themes/$FLARE_ZSH_THEME.zsh-theme"
-}
-precmd_functions=(${precmd_functions[@]} zsh_theme_refresh)
 
 # application shortcuts
 source $HOME/.zshrc.kubeHelper

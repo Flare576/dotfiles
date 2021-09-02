@@ -35,6 +35,7 @@ brews=(
   flare576/scripts/dvol
   flare576/scripts/newScript
   flare576/scripts/vroom
+  flare576/scripts/switch-theme
 )
 
 if [ "$isLinux" -ne "1" ] ; then

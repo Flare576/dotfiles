@@ -1,6 +1,0 @@
-{{/* qa template */ -}}
-# issue: {{ .key }} - created: {{ .fields.created | age}} ago
-fields:
-   assignee:
-    name: {{ env.JIRA_USER }}
- 

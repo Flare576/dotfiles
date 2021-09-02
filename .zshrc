@@ -3,7 +3,7 @@
 
 ZSH_DISABLE_COMPFIX=true # Remove "Insecure directories and files"
 export ZSH=$HOME/.oh-my-zsh
-[ -n "$FLARE_ZSH_THEME" ] && ZSH_THEME="$FLARE_ZSH_THEME"
+# [ -n "$FLARE_ZSH_THEME" ] && ZSH_THEME="$FLARE_ZSH_THEME"
 
 plugins=(aws vi-mode git extract z kubectl tmux docker-aliases docker-compose zsh-nvm node npm yarn zsh-better-npm-completion)
 #Setup NVM
