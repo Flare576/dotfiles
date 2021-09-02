@@ -88,8 +88,8 @@ augroup END
 "############################## Mappings ###########
 
 "########################## Common
-" jk is escape
-inoremap jk <esc>
+" jk is a great "ESC", but new key layout means ESC is easier
+"inoremap jk <esc>
 
 "########################## Movement
 " move vertically by visual line

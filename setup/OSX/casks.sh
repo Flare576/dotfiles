@@ -12,6 +12,7 @@ apps=(
   spotify            # Please your earballs!
   trailer            # Manage Github projects from Notification area!
   vlc                # For those rare times you need to watch something locally!
+  visual-studio-code # For when you need an IDE
 )
 
 echo "Installing Homebrew Casks"

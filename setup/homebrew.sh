@@ -28,6 +28,7 @@ brews=(
   watson # Great time tracker
   k9s # Any project using K8s
   lazydocker # Any project using straight Docker
+  awscli
   rpg-cli
   flare576/scripts/monitorjobs
   flare576/scripts/git-clone
