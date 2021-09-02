@@ -108,8 +108,12 @@ function rup() {
 function rb() {
   rpg-cli battle
 }
+function re() {
+  rpg-cli use escape
+  builtin cd ~
+}
 # make a new dungeon!! https://github.com/facundoolano/rpg-cli/blob/main/shell/README.md#arbitrary-dungeon-levels
-dn () {
+function dn() {
     current=$(basename $PWD)
     number_re='^[0-9]+$'
 
