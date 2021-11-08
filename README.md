@@ -24,12 +24,11 @@ bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/sc
 If not setting up a new machine I `git clone` directly into `~` and run the script for the thing(s) I want to setup:
 
 ```
-sh dotfiles/scripts/setupRepo.sh # You should absoultey run this file to help prevent leaking secrets
-sh dotfiles/scripts/setupLinks.sh # Symlinks files to ~
-sh dotfiles/scripts/setupScripts.sh # pull scripts and sets up paths: see Flare57/scripts repo
-sh dotfiles/scripts/setupVim.sh # Yes, this sets up vim
-sh dotfiles/scripts/setupOmz.sh # Oh My Zshell goes deliciously with Zsh
-sh dotfiles/scripts/setupLocations.sh # `wdate` and `wweather` use location information
+sh dotfiles/setup/secureRepo.sh # You should absolutely run this file to help prevent leaking secrets
+sh dotfiles/setup/linkFiles.sh # Symlinks files to ~
+sh dotfiles/setup/scripts.sh # pull scripts and sets up paths: see Flare57/scripts repo
+sh dotfiles/setup/vim.sh # Yes, this sets up vim
+sh dotfiles/setup/omz.sh # Oh My Zshell goes deliciously with Zsh
 ```
 
 > A quick note about secrets and private info: This project recommends keeping sensitive information
@@ -39,8 +38,8 @@ directly in `$HOME` because scripts in the `dotfiles` project can and do edit th
 If I also want to install all the apps I use frequently, I'll run
 
 ```
-sh dotfiles/scripts/setupHomebrew.sh # Check the script for details
-sh dotfiles/scripts/OSX/setupCasks.sh # Check the script for details
+sh dotfiles/setup/homebrew.sh # Check the script for details
+sh dotfiles/setup/OSX/casks.sh # Check the script for details
 ```
 
 # Sure man, but what do they DO?!
@@ -193,7 +192,7 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 This script will get you all setup (assuming you cloned this project to ~/dotfiles)
 
 ```
-~/dotfiles/scripts/jiraSetup
+~/dotfiles/setup/jira.sh
 ```
 
 You should have on-hand:

@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Securing DotFiles repo"
 
-cd $HOME/dotfiles
-git secrets --install
-git secrets --register-aws
+pushd "$HOME/dotfiles"
+bash -c "$(curl -sSL https://thoughtworks.github.io/talisman/install.sh)" -- pre-commit
+popd
