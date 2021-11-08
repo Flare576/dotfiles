@@ -9,6 +9,12 @@ ${varname/substring/replacement}
 ${varname//substring/replacement}
     Replace all matches of $substring with $replacement.
 
+${varname##pattern}
+    Delete longest (% for shortest) leading match of pattern
+
+${varname%%pattern}
+    Delete longest (% for shortest) trailing match of pattern
+
 ${varname:position}
     Extracts substring from $string at $position.
     If the $string parameter is "*" or "@", then this extracts the positional parameters, starting at $position.
