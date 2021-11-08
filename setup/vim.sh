@@ -96,6 +96,7 @@ echo "Cloning vim-surround"
 git clone -q https://github.com/tpope/vim-surround.git
 
 # Multi-cursor support (for splits!
+echo "Cloning multiple-cursors"
 git clone -q https://github.com/terryma/vim-multiple-cursors.git
 
 # Better undotree
@@ -115,6 +116,10 @@ git clone -q https://github.com/majutsushi/tagbar.git
 
 # EditorConfig support (see https://editorconfig.org/)
 # git clone -q https://github.com/editorconfig/editorconfig-vim.git
+
+# better lists/bullets
+echo "Cloning bullets"
+git clone https://github.com/dkarter/bullets.vim.git
 
 if [[ $includeJS == "y"* ]] ; then
   # JSX
@@ -149,4 +154,6 @@ if [[ $includePython == "y"* ]] ; then
   # Autocompletion for Python
   echo "Cloning jedi-vim"
   git clone -q https://github.com/davidhalter/jedi-vim.git
+  echo "Installing jedi with pip3"
+  pip3 install jedi
 fi

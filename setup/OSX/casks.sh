@@ -19,7 +19,7 @@ echo "Installing Homebrew Casks"
 brew install --cask ${apps[@]}
 
 # Force setup of apps
-open -a 1Password
+open -a 1Password7
 read -p "Once you setup 1Password, press enter."
 open -a Firefox
 read -p "Once you setup Firefox, press enter."
