@@ -8,6 +8,7 @@ links=(
   .gitignore
   .zshrc.kubeHelper
   .zshrc.awsHelper
+  .zshrc.rpg
   .tmux.conf
   cheat
 # Link individual settings items; there will be ".config" files with secrets :/

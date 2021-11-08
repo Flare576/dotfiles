@@ -1,0 +1,66 @@
+# Fun RPG-CLI integrations
+alias rpg=rpg-cli
+alias quest="cat ~/.rpg/data| jq '.tombstones[0]'"
+function zz() {
+  dest=$(_z -e "$@" 2>&1)
+  rpg-cli cd "$dest"
+  cd "$(rpg-cli pwd)"
+}
+function ls() {
+  # don't do if no rpg-cli like on ubuntu images
+  if command -v rpg-cli &> /dev/null; then
+    # You're here isn't psychic, they only get to look in the current dir...
+    rpg-cli ls
+  fi
+  # but you are a dev, so I guess you can run normal command with params
+  command ls $@
+}
+# if something is on fire, don't forget about the -f flag for the RPG thing
+function cd() {
+  # don't do if no rpg-cli like on ubuntu images
+  if command -v rpg-cli &> /dev/null; then
+    rpg-cli cd "$@"
+    builtin cd "$(rpg-cli pwd)"
+  else
+    builtin cd $@
+  fi
+}
+function rup() {
+  rpg-cli use potion
+}
+function grind() {
+  # todo: if not in ~, should remember origin folder and use potions/ethers each outer loop (optionally)
+  [ -n "$1" ] && wee=$1 || wee=10
+  [ -n "$2" ] && woo=$2 || woo=2
+  for i in `seq 1 $wee`; do
+    for i in `seq 1 $woo`; do
+      dn
+    done
+    for i in `seq 0 $woo`; do
+      cd
+    done
+  done
+}
+function rb() {
+  rpg-cli battle
+}
+function re() {
+  rpg-cli use escape
+  builtin cd ~
+}
+# make a new dungeon!! https://github.com/facundoolano/rpg-cli/blob/main/shell/README.md#arbitrary-dungeon-levels
+function dn() {
+    current=$(basename $PWD)
+    number_re='^[0-9]+$'
+
+    if [[ $current =~ $number_re ]]; then
+        next=$(($current + 1))
+        command mkdir -p $next && cd $next && rpg ls
+    elif [[ -d 1 ]] ; then
+        cd 1 && rpg ls
+    else
+        command mkdir -p dungeon/1 && cd dungeon/1 && rpg ls
+    fi
+}
+# End RPG-cli integrations
+
