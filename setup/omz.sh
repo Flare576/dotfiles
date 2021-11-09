@@ -16,10 +16,11 @@ fi
 echo "Setting up Oh My Zshell, Tools, Themes, and Plugins for ZSH"
 
 # Install and setup Oh My Zshell
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &> /dev/null
+bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &> /dev/null
 
 # Wish this was a real plugin
 zshComplete=$HOME/.oh-my-zsh/completions
+mkdir -p $zshComplete
 rm -rf /tmp/cheat &> /dev/null 
 git clone https://github.com/cheat/cheat.git /tmp/cheat
 mv /tmp/cheat/scripts/cheat.zsh $zshComplete/_cheat.zsh
