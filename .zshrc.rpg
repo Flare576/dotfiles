@@ -28,6 +28,24 @@ function cd() {
 function rup() {
   rpg-cli use potion
 }
+function grind2() {
+  # todo: if not in ~, should remember origin folder and use potions/ethers each outer loop (optionally)
+  [ -n "$1" ] && wee=$1 || wee=10
+  [ -n "$2" ] && woo=$2 || woo=2
+  for i in `seq 1 $wee`; do
+    fol="quest_"$RANDOM
+    mkdir $fol
+    cd $fol
+    ls
+    for i in `seq 1 $woo`; do
+      dn
+    done
+    for i in `seq -1 $woo`; do
+      cd
+    done
+    rm -rf $fol
+  done
+}
 function grind() {
   # todo: if not in ~, should remember origin folder and use potions/ethers each outer loop (optionally)
   [ -n "$1" ] && wee=$1 || wee=10
@@ -59,7 +77,7 @@ function dn() {
     elif [[ -d 1 ]] ; then
         cd 1 && rpg ls
     else
-        command mkdir -p dungeon/1 && cd dungeon/1 && rpg ls
+        command mkdir -p dungeon/1 && cd dungeon && rpg ls && cd 1 && rpg ls
     fi
 }
 # End RPG-cli integrations

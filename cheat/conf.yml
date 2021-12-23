@@ -9,7 +9,7 @@ colorize: true
 # Options are available here:
 #   https://github.com/alecthomas/chroma/tree/master/styles
 # style: monokai
-style: solarized-light
+style: solarized-dark
 
 # Which 'chroma' "formatter" should be applied?
 # One of: "terminal", "terminal256", "terminal16m"
