@@ -16,7 +16,6 @@ brews=(
   bat
   cheat
   git
-  git-secrets
   hub
   nvm
   shellcheck

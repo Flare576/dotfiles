@@ -16,7 +16,9 @@ fi
 echo "Setting up Oh My Zshell, Tools, Themes, and Plugins for ZSH"
 
 # Install and setup Oh My Zshell
-bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &> /dev/null
+curl -o /tmp/omz-install.sh -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh &> /dev/null
+bash /tmp/omz-install.sh --unattended &> /dev/null
+rm /tmp/omz-install.sh &> /dev/null
 
 # Wish this was a real plugin
 zshComplete=$HOME/.oh-my-zsh/completions

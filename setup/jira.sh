@@ -6,8 +6,7 @@ if [[ "$1" == "delete" ]]; then
   exit
 fi
 ln -sf "$HOME/dotfiles/.jira.d" "$HOME"
-brew install go-jira
-brew install flare576/scripts/jiracookie
+brew install flare576/scripts/jira-cli
 read -p "Are you actively working on JIRA instance? (Y/n)" doit
 echo
 
