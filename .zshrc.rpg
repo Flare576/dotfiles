@@ -1,6 +1,58 @@
 # Fun RPG-CLI integrations
 alias rpg=rpg-cli
-alias quest="cat ~/.rpg/data| jq '.tombstones[0]'"
+alias quest="jq -r '.tombstones | keys_unsorted | first' ~/.rpg/data"
+alias quests="jq -r '.tombstones | keys_unsorted | length' ~/.rpg/data"
+alias clean_investigated="jq '.inspected = []' ~/.rpg/data > /tmp/cleanup; cp /tmp/cleanup ~/.rpg/data"
+function playself() {
+  while true; do
+    while [ $(quests) -lt 300 ]; do
+      print -n "\r6"
+      grind 100 6 > /dev/null
+
+      print -n "\r4"
+      grind 100 4 > /dev/null
+
+      print -n "\r"
+      quests
+    done
+    echo "questing"
+    while [ $(quests) -gt 50 ]; do
+      rpg-cli
+      quests
+      for i in `seq 1 25`; do
+        questmap > /dev/null
+      done
+    done
+    for i in `seq 1 400`; do
+      rpg-cli use potion &> /dev/null
+    done
+  done
+}
+function questmap() {
+  myquest=$(quest)
+  full="$HOME/${myquest:2}"
+  mkdir -p $full
+  deep=$(basename $full)
+  echo "$full"
+
+  if [ -z "$1" ]; then
+    quest=${${myquest:2}%%/*}
+    cd $quest
+    while [ -n "$(ls)" ]; do
+      dn
+    done
+
+    number_re='^[0-9]+$'
+    if [[ $deep =~ $number_re ]]; then
+      for i in `seq 0 $deep`; do
+        cd
+      done
+    fi
+    cd;cd;cd
+    rm -rf $quest
+  fi
+}
+
 function zz() {
   dest=$(_z -e "$@" 2>&1)
   rpg-cli cd "$dest"
@@ -28,40 +80,71 @@ function cd() {
 function rup() {
   rpg-cli use potion
 }
+function check_burn() {
+  if [[ "$1" == *"🔥"* ]]; then
+    echo "saving from burn"
+    rpg use remedy
+  elif [[ "$1" == *"poison"* ]]; then
+    echo "saving from poison"
+    rpg use remedy
+  fi
+}
+
 function grind2() {
   # todo: if not in ~, should remember origin folder and use potions/ethers each outer loop (optionally)
-  [ -n "$1" ] && wee=$1 || wee=10
-  [ -n "$2" ] && woo=$2 || woo=2
-  for i in `seq 1 $wee`; do
-    fol="quest_"$RANDOM
+  [ -n "$1" ] && iterations=$1 || iterations=10
+  [ -n "$2" ] && depth=$2 || depth=2
+  for i in `seq 1 $iterations`; do
+    fol="quest2_"$RANDOM
     mkdir $fol
     cd $fol
     ls
-    for i in `seq 1 $woo`; do
-      dn
+    for i in `seq 0 $depth`; do
+      dn | tee /tmp/catmeow
+      check_burn "$(</tmp/catmeow)"
+      cd $(rpg pwd)
     done
-    for i in `seq -1 $woo`; do
-      cd
+    for i in `seq -1 $depth`; do
+      cd | tee /tmp/catmeow
+      check_burn "$(</tmp/catmeow)"
+      cd $(rpg pwd)
     done
     rm -rf $fol
   done
 }
 function grind() {
   # todo: if not in ~, should remember origin folder and use potions/ethers each outer loop (optionally)
-  [ -n "$1" ] && wee=$1 || wee=10
-  [ -n "$2" ] && woo=$2 || woo=2
-  for i in `seq 1 $wee`; do
-    for i in `seq 1 $woo`; do
+  [ -n "$1" ] && iterations=$1 || iterations=10
+  [ -n "$2" ] && depth=$2 || depth=2
+  for i in `seq 1 $iterations`; do
+    fol="quest"$RANDOM"_"$RANDOM
+    mkdir $fol
+    cd $fol
+    ls
+    for i in `seq 0 $depth`; do
       dn
     done
-    for i in `seq 0 $woo`; do
+    for i in `seq -1 $depth`; do
       cd
     done
+    rm -rf $fol
   done
 }
 function rb() {
-  rpg-cli battle
+  [ -n "$1" ] && fights="$1" || fights=1
+  for i in `seq 1 $fights`; do
+    rpg-cli battle
+  done
 }
+function use_stones() {
+  for i in `seq 1 100`; do
+    rpg-cli use hp-stone > /dev/null
+    rpg-cli use mp-stone > /dev/null
+    rpg-cli use spd-stone > /dev/null
+    rpg-cli use str-stone > /dev/null
+  done
+}
+
 function re() {
   rpg-cli use escape
   builtin cd ~
@@ -77,7 +160,7 @@ function dn() {
     elif [[ -d 1 ]] ; then
         cd 1 && rpg ls
     else
-        command mkdir -p dungeon/1 && cd dungeon && rpg ls && cd 1 && rpg ls
+        command mkdir -p dungeon/1 && cd dungeon && rpg ls
     fi
 }
 # End RPG-cli integrations
