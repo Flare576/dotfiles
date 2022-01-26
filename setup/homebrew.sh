@@ -10,32 +10,32 @@ fi
 
 # Install Good Stuff
 brews=(
-  zsh
-  python # must preceed vim
-  pipenv # Handles pip dependencies, uses pyenv for pinned core python versions
-  bat
-  cheat
-  git
-  hub
-  nvm
-  shellcheck
-  tmux
-  the_silver_searcher
-  vim
-  watch
-  jq
-  watson # Great time tracker
-  k9s # Any project using K8s
-  lazydocker # Any project using straight Docker
-  awscli
-  rpg-cli
-  flare576/scripts/monitorjobs
-  flare576/scripts/git-clone
-  flare576/scripts/gac
-  flare576/scripts/dvol
-  flare576/scripts/newScript
-  flare576/scripts/vroom
-  flare576/scripts/switch-theme
+  zsh                             # Preferred shell
+  python                          # must preceed vim
+  pipenv                          # Handles pip dependencies, uses pyenv for pinned core python versions
+  bat                             # enhanced version of the cat command
+  cheat                           # provides cheat sheets for many commands, try 'cheat tar'
+  git                             # it's git
+  hub                             # overlay to git, adds github-specific calls/functionality
+  nvm                             # Node Version Manager - makes having mulitple projects easier
+  shellcheck                      # helps debugging/formatting shell scripts
+  tmux                            # terminal multi-panel/window tool
+  the_silver_searcher             # provides enhanced search support with 'ag'
+  vim                             # it's vim
+  watch                           # repeatedly call a command and monitor output
+  jq                              # work with JSON with a command-line query language
+  watson                          # Great time tracker
+  k9s                             # Any project using K8s
+  lazydocker                      # Any project using straight Docker
+  awscli                          # Amazon Web Service CLI
+  rpg-cli                         # A bit of fun for folder management
+  flare576/scripts/monitorjobs    # AWS-cli based job monitoring
+  flare576/scripts/git-clone      # Manage multiple git accounts for cloning projects
+  flare576/scripts/gac            # 'gac' git overlay for add/commit
+  flare576/scripts/dvol           # manage Docker Volumes outside of project docker-compose files
+  flare576/scripts/newScript      # facilitate creating new scripts in varius languages
+  flare576/scripts/vroom          # wrapper for 'make' command to start/manage project execution
+  flare576/scripts/switch-theme   # tool for changing tmux, vim, bat, zhs, etc. themes 
 )
 
 if [ "$isLinux" -ne "1" ] ; then
