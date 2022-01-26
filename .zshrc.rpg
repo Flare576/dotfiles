@@ -1,35 +1,52 @@
 # Fun RPG-CLI integrations
 alias rpg=rpg-cli
 alias quest="jq -r '.tombstones | keys_unsorted | first' ~/.rpg/data"
+alias quest_ez="jq -r '.tombstones | keys | sort_by(length) | first' ~/.rpg/data"
 alias quests="jq -r '.tombstones | keys_unsorted | length' ~/.rpg/data"
+alias seen="jq -r '.inspected | length' ~/.rpg/data"
 alias clean_investigated="jq '.inspected = []' ~/.rpg/data > /tmp/cleanup; cp /tmp/cleanup ~/.rpg/data"
 function playself() {
-  while true; do
+  for i in `seq 1 1`; do
     while [ $(quests) -lt 300 ]; do
-      print -n "\r6"
+      print -n "\rHeaded to level 6   "
       grind 100 6 > /dev/null
 
-      print -n "\r4"
+      print -n "\rHeaded to level 4   "
       grind 100 4 > /dev/null
 
-      print -n "\r"
-      quests
+      print "\rQuest Count: $(quests)    "
     done
     echo "questing"
     while [ $(quests) -gt 50 ]; do
-      rpg-cli
-      quests
+      print "\rQuest Count: $(quests)    "
       for i in `seq 1 25`; do
         questmap > /dev/null
       done
+      rpg-cli
+    done
+    while [ $(quests) -gt 0 ]; do
+      questmap > /dev/null
     done
     for i in `seq 1 400`; do
       rpg-cli use potion &> /dev/null
     done
+    rpg-cli
   done
+  rpg-cli class mage
+  grind 100 6 | grep -e "📦" -e "💀" -e "rng" -e "level"
+  grind 100 4 | grep -e "📦" -e "💀" -e "rng" -e "level"
+  rpg-cli
+  while [ $(quests) -gt 0 ]; do
+    questmap > /dev/null
+    use_stones 5
+  done
+  rpg-cli
+  use_stones 500
+  rpg-cli
+
 }
 function questmap() {
-  myquest=$(quest)
+  myquest=$(quest_ez)
   full="$HOME/${myquest:2}"
   mkdir -p $full
   deep=$(basename $full)
@@ -76,9 +93,6 @@ function cd() {
   else
     builtin cd $@
   fi
-}
-function rup() {
-  rpg-cli use potion
 }
 function check_burn() {
   if [[ "$1" == *"🔥"* ]]; then
@@ -137,16 +151,25 @@ function rb() {
   done
 }
 function use_stones() {
-  for i in `seq 1 100`; do
+  [ -n "$1" ] && qty="$1" || qty=100
+  for i in `seq 1 $qty`; do
     rpg-cli use hp-stone > /dev/null
     rpg-cli use mp-stone > /dev/null
     rpg-cli use spd-stone > /dev/null
     rpg-cli use str-stone > /dev/null
   done
 }
-
+function rup() {
+  [ -n "$1" ] && qty="$1" || qty=1
+  for i in `seq 1 $qty`; do
+    rpg-cli use potion
+  done
+}
 function re() {
-  rpg-cli use escape
+  [ -n "$1" ] && qty="$1" || qty=1
+  for i in `seq 1 $qty`; do
+    rpg-cli use escape
+  done
   builtin cd ~
 }
 # make a new dungeon!! https://github.com/facundoolano/rpg-cli/blob/main/shell/README.md#arbitrary-dungeon-levels
