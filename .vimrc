@@ -126,7 +126,7 @@ nnoremap <silent> - :exec "resize -1"<CR>
 " Show count of last find
 nnoremap <leader>/ :%s///gn<CR>
 " Run current file with various commands
-" r[un] with [b]rowser, currently Chrome
+" r[un] with [b]rowser, currently Firefox
 nnoremap <leader>rb :silent !firefox %<CR> :redraw!<CR>
 " Save session to /tmp and exit
 nnoremap <leader>q :call MakeRootSession()<CR> :qa<CR>
