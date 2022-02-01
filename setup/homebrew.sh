@@ -52,7 +52,7 @@ do
       HOMEBREW_NO_AUTO_UPDATE=1 brew upgrade "$formula"
     fi
   else
-    HOMEBREW_NO_AUTO_UPDATE=1 brew install "$formula"
+    HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_AUTO_UPDATE=1 brew install "$formula"
   fi
 done
 
