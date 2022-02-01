@@ -5,3 +5,6 @@ fileignoreconfig:
   checksum: e3f78a48ecdb3d604572111baf5422d100f263e6ad20b86d50e8126e36445e83
 - filename: cheat/*
   checksum: f5f609cca669e97213ebdf1b6d1aca19f2fa0edd4f9223579dfcd753cc4857b2
+- filename: .tmux.conf
+  checksum: ac70a628951174f9e1ba0e8800c9829d8bfd187d08d25a7448be2e0729c0a94c
+
