@@ -1,50 +1,120 @@
 # Fun RPG-CLI integrations
 alias rpg=rpg-cli
 alias quest="jq -r '.tombstones | keys_unsorted | first' ~/.rpg/data"
-alias quest_ez="jq -r '.tombstones | keys | sort_by(length) | first' ~/.rpg/data"
+alias quest_ez="jq -r '.tombstones | keys | sort_by(split(\"/\") | length) | first' ~/.rpg/data"
 alias quests="jq -r '.tombstones | keys_unsorted | length' ~/.rpg/data"
 alias seen="jq -r '.inspected | length' ~/.rpg/data"
 alias clean_investigated="jq '.inspected = []' ~/.rpg/data > /tmp/cleanup; cp /tmp/cleanup ~/.rpg/data"
+
+function seed_dungeon() {
+  [ -n "$1" ] && qty="$1" || qty=1000
+  while [ $(quests) -lt $qty ]; do
+    print -n "\rHeaded to level 4   "
+    grind 100 4 > /dev/null
+
+    print -n "\rHeaded to level 6   "
+    grind 100 6 > /dev/null
+
+    print "\rQuest Count: $(quests)    "
+  done
+  cp ~/.rpg/data ~/.rpg/seeded
+}
+
+function gear_up() {
+  rpg-cli use escape > /dev/null
+  rpg-cli buy shield
+  rpg-cli buy sword
+}
+
+
 function playself() {
-  for i in `seq 1 1`; do
-    while [ $(quests) -lt 300 ]; do
-      print -n "\rHeaded to level 6   "
-      grind 100 6 > /dev/null
-
-      print -n "\rHeaded to level 4   "
-      grind 100 4 > /dev/null
-
-      print "\rQuest Count: $(quests)    "
-    done
-    echo "questing"
-    while [ $(quests) -gt 50 ]; do
-      print "\rQuest Count: $(quests)    "
-      for i in `seq 1 25`; do
-        questmap > /dev/null
-      done
-      rpg-cli
-    done
-    while [ $(quests) -gt 0 ]; do
-      questmap > /dev/null
-    done
-    for i in `seq 1 400`; do
-      rpg-cli use potion &> /dev/null
-    done
+  seed_dungeon 3000
+  echo "Level up Thief"
+  rpg-cli class thief
+  grind 50 1 | grep -e "💀" -e "level"
+  echo "Prepping a Mage"
+  rpg-cli class mage
+  # grind 10 6 | grep -e "📦" -e "💀" -e "rng" -e "level"
+  echo "[31mKill old mage[0m"
+  grind 10 6 | grep -e "💀" -e "level"
+  echo "[31mTry to get a healthy mage to floor 1[0m"
+  grind 100 1 | grep -e "💀" -e "level"
+  gear_up
+  echo "[31mTry to get a healthy mage to floor 2[0m"
+  grind 100 2 | grep -e "💀" -e "level"
+  gear_up
+  echo "[31mTry to get a healthy mage to floor 3[0m"
+  grind 100 3 | grep -e "💀" -e "level"
+  gear_up
+  echo "[31mTry to get a healthy mage to floor 4[0m"
+  grind 25 4 | grep -e "💀" -e "level"
+  gear_up
+  rpg-cli
+  rm -rf dungeon
+  echo "questing"
+  while [ $(quests) -gt 1500 ]; do
+    inn 25
     rpg-cli
   done
-  rpg-cli class mage
-  grind 100 6 | grep -e "📦" -e "💀" -e "rng" -e "level"
-  grind 100 4 | grep -e "📦" -e "💀" -e "rng" -e "level"
-  rpg-cli
+  gear_up
   while [ $(quests) -gt 0 ]; do
-    questmap > /dev/null
-    use_stones 5
+    inn 25
+    rpg-cli
   done
-  rpg-cli
-  use_stones 500
-  rpg-cli
-
+  rpg-cli use double-rng
+  rpg-cli use spd-rng
+  # start grinding on floor 10
+  blood_bath 10 10
+  for i in `seq 1 100`; do
+    rpg-cli use lvl-stone > /dev/null
+  done
+  gear_up
+  blood_bath 50 20
+  gear_up
+  # maybe buy ethers?
+  blood_bath 70 20
+  gear_up
+  for i in `seq 1 99`; do
+    dn > /dev/null
+  done
+  rpg-cli use double-rng
+  rpg-cli use ruling-rng
+  rb 5
+  gear_up
+  rpg-cli buy diamond-ring
+  rb 5
+  cd .rpg
+  rb 50
 }
+
+function blood_bath() {
+  start=$1
+  floors=$2
+  for i in `seq 2 $start`; do
+    dn > /dev/null
+  done
+  for i in `seq 1 $floors`; do
+    dn > /dev/null
+    rpg-cli
+    rb 1000 | grep -e "💀" -e "level" 
+  done
+}
+
+function inn() {
+  [ -n "$1" ] && qty="$1" || qty=50
+  for i in `seq 1 $qty`; do
+    if [ $(quests) -gt 0 ]; then
+      quest_ez
+      questmap | grep -e "📦" -e "💀" -e "rng" -e "level" -e "🪦"
+      use_stones 2
+    else
+      echo "No more quests, adventurer"
+      break
+    fi
+  done
+  echo "$(quests) quests left"
+}
+
 function questmap() {
   myquest=$(quest_ez)
   full="$HOME/${myquest:2}"
@@ -187,4 +257,12 @@ function dn() {
     fi
 }
 # End RPG-cli integrations
+
+function count_stones() {
+  [ -z "$1" ] && file="$HOME/.rpg/seeded" || file="$1"
+  for type in Level Power Health Magic Speed; do
+    qty=$(jq -r ".tombstones" $file | grep -e "$type" | wc -l)
+    echo "$type: $qty"
+  done
+}
 
