@@ -79,12 +79,23 @@ function playself() {
   done
   rpg-cli use double-rng
   rpg-cli use ruling-rng
-  rb 5
+  fight_with "gorthaur"
+  rpg-cli use ruling-rng
+  rpg-cli use double-rng
   gear_up
   rpg-cli buy diamond-ring
-  rb 5
+  fight_with "shadow"
   cd .rpg
-  rb 50
+  fight_with "dev"
+  rpg-cli todo
+}
+
+function fight_with() {
+  result=""
+  while [ -z "$result" ]; do
+    fight="$(rb)"
+    result="$(rb | grep -e "$1")"
+  done
 }
 
 function blood_bath() {
