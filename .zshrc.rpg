@@ -1,6 +1,34 @@
 # Fun RPG-CLI integrations
 alias rpg=rpg-cli
-alias quest="cat ~/.rpg/data| jq '.tombstones[0]'"
+alias cdr="cd $(rpg-cli pwd)"
+alias quest_ez="jq -r '.tombstones | keys | sort_by(split(\"/\") | length) | first' ~/.rpg/data"
+alias quests="jq -r '.tombstones | keys_unsorted | length' ~/.rpg/data"
+
+function questmap() {
+  myquest=$(quest_ez)
+  full="$HOME/${myquest:2}"
+  mkdir -p $full
+  deep=$(basename $full)
+  echo "$full"
+
+  if [ -z "$1" ]; then
+    quest=${${myquest:2}%%/*}
+    cd $quest
+    while [ -n "$(ls)" ]; do
+      dn
+    done
+
+    number_re='^[0-9]+$'
+    if [[ $deep =~ $number_re ]]; then
+      for i in `seq 0 $deep`; do
+        cd
+      done
+    fi
+    cd;cd;cd
+    rm -rf $quest
+  fi
+}
+
 function zz() {
   dest=$(_z -e "$@" 2>&1)
   rpg-cli cd "$dest"
@@ -25,43 +53,38 @@ function cd() {
     builtin cd $@
   fi
 }
-function rup() {
-  rpg-cli use potion
-}
-function grind2() {
-  # todo: if not in ~, should remember origin folder and use potions/ethers each outer loop (optionally)
-  [ -n "$1" ] && wee=$1 || wee=10
-  [ -n "$2" ] && woo=$2 || woo=2
-  for i in `seq 1 $wee`; do
-    fol="quest_"$RANDOM
+function grind() {
+  [ -n "$1" ] && iterations=$1 || iterations=10
+  [ -n "$2" ] && depth=$2 || depth=2
+  for i in `seq 1 $iterations`; do
+    fol="quest2_"$RANDOM
     mkdir $fol
     cd $fol
     ls
-    for i in `seq 1 $woo`; do
+    for deeper in `seq 1 $depth`; do
       dn
     done
-    for i in `seq -1 $woo`; do
+    while [ "$(pwd)" != "$HOME" ]; do
       cd
     done
     rm -rf $fol
   done
 }
-function grind() {
-  # todo: if not in ~, should remember origin folder and use potions/ethers each outer loop (optionally)
-  [ -n "$1" ] && wee=$1 || wee=10
-  [ -n "$2" ] && woo=$2 || woo=2
-  for i in `seq 1 $wee`; do
-    for i in `seq 1 $woo`; do
-      dn
-    done
-    for i in `seq 0 $woo`; do
-      cd
-    done
+
+function rb() {
+  [ -n "$1" ] && fights="$1" || fights=1
+  for i in `seq 1 $fights`; do
+    rpg-cli battle
   done
 }
-function rb() {
-  rpg-cli battle
+
+function rup() {
+  [ -n "$1" ] && qty="$1" || qty=1
+  for i in `seq 1 $qty`; do
+    rpg-cli use potion
+  done
 }
+
 function re() {
   rpg-cli use escape
   builtin cd ~
@@ -81,4 +104,3 @@ function dn() {
     fi
 }
 # End RPG-cli integrations
-
