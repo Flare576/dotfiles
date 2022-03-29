@@ -75,10 +75,10 @@ set modeline            " Allows files to define some variables (e.g., filetype)
 set cc=120              " highlights characters over 120 width
 
 " Extra whitespace in yellow
-highlight ExtraWhitespace ctermbg=red ctermfg=white guibg=red " Define color scheme
-match ExtraWhitespace /\s\+\%#\@<!$/ " Define match set
+highlight ExtraWhitespace ctermbg=red ctermfg=white guibg=red
 augroup whitespace
   au!
+  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red ctermfg=white guibg=red " Define for color schemes
   autocmd BufWinEnter * match ExtraWhitespace /\s\+$/ " Run on Window enter
   autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/ " Run on insert enter (this plus next makes screen not flash)
   autocmd InsertLeave * match ExtraWhitespace /\s\+$/ " Run on exiting Insert Mode (only trailing)
