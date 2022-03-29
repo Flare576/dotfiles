@@ -1,0 +1,354 @@
+# Modeled after https://github.com/WGU-edu/PlatformServices-CloudFront-CICD
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Lorem Ipsum"
+Parameters:
+  InputOne:
+    Description: "Lorem Ipsum"
+    Type: "String"
+    Default: "value"
+
+Mappings:
+  AccountMap:
+    # prod
+    "123567890123":
+      Property1: "someProdValue"
+      Property2: "false"
+      ALBHostname: "internal-name-prodaccountid.us-west-2.elb.amazonaws.com"
+      DnsCidrIp: "123.23.0.0/16"
+      OriginAccessIdentity: "E1231231231231"
+      Certificate: "arn:aws:acm:us-east-1:111111111111:certificate/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    # stage
+    "098765432109":
+      Property1: "someStageValue"
+      Property2: "true"
+      ALBHostname: "internal-name-stageaccountid.us-west-2.elb.amazonaws.com"
+      DnsCidrIp: "124.23.0.0/16"
+      OriginAccessIdentity: "E1231231231232"
+      Certificate: "arn:aws:acm:us-east-1:222222222222:certificate/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    # development
+    "123123123123":
+      Property1: "someDevValue"
+      Property2: "true"
+      ALBHostname: "internal-name-devaccountid.us-west-2.elb.amazonaws.com"
+      DnsCidrIp: "125.23.0.0/16"
+      OriginAccessIdentity: "E1231231231233"
+      Certificate: "arn:aws:acm:us-east-1:333333333333:certificate/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  ResourcesMap:
+    ## ParameterStore data
+    Property1:
+      Name: "prop1_name"
+      Description: "Lorem Ipsum"
+    Property2:
+      Name: "prop2_name"
+      Description: "Lorem Ipsum"
+
+Conditions:
+  Property2Condition:
+    Fn::Equals:
+      - !FindInMap [AccountMap, !Ref "AWS::AccountId", Property2]
+      - true
+Resources:
+# Begin Parameter Store values
+  ParameterStoreExample:
+    Type: "AWS::SSM::Parameter"
+    Properties:
+      Type: "String"
+      Name: !Sub
+        - "${InputOne}${PropName}"
+        - { PropName: !FindInMap [ResourcesMap, Property1, Name] }
+      Value: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1]
+      Description: !FindInMap [ResourcesMap, Property1, Description]
+# End Parameter Store values
+
+  RecordSetExample:
+    Type: "AWS::Route53::RecordSet"
+    Properties:
+      HostedZoneId: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1]
+      Name: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1]
+      Type: "CNAME"
+      TTL: 60
+      ResourceRecords:
+        - !FindInMap [AccountMap, !Ref "AWS::AccountId", ALBHostname]
+
+  SecurityGroupExample:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupName: "Name"
+      GroupDescription: "Lorem Ipsum"
+      VpcId: !ImportValue VPC
+      SecurityGroupIngress:
+        - CidrIp: !FindInMap [AccountMap, !Ref "AWS::AccountId", DnsCidrIp]
+          IpProtocol: "udp"
+          FromPort: 9999
+          ToPort: 9999
+          Description: "Lorem Ipsum"
+        - CidrIp: !FindInMap [AccountMap, !Ref "AWS::AccountId", DnsCidrIp]
+          IpProtocol: "tcp"
+          FromPort: 9999
+          ToPort: 9999
+          Description: "Lorem Ipsum"
+        - CidrIp: "10.0.0.0/8"
+          IpProtocol: "tcp"
+          FromPort: 9999
+          ToPort: 9999
+          Description: "Lorem Ipsum"
+      SecurityGroupEgress:
+        - CidrIp: !FindInMap [AccountMap, !Ref "AWS::AccountId", DnsCidrIp]
+          IpProtocol: "tcp"
+          FromPort: 0
+          ToPort: 65535
+          Description: "open to egress"
+  SubnetGroupExample:
+    Type: "AWS::ElastiCache::SubnetGroup"
+    Properties:
+      CacheSubnetGroupName: "Name"
+      Description: "Lorem Ipsum"
+      SubnetIds:
+        - !ImportValue PrivateSubnet1
+        - !ImportValue PrivateSubnet2
+        - !ImportValue PrivateSubnet3
+
+  BucketExample:
+    Metadata:
+      cfn_nag:
+        rules_to_suppress:
+          - id: "FWGU0000043"
+            reason: "This an example of metadata"
+    Type: "AWS::S3::Bucket"
+    DeletionPolicy: "Retain"
+    UpdateReplacePolicy: "Retain"
+    Properties:
+      BucketName: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1]
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: "AES256"
+      Tags:
+        -
+          Key: "Key Name"
+          Value: "Lorem Ipsum"
+  BucketPolicyExample:
+    Type: "AWS::S3::BucketPolicy"
+    Properties:
+      Bucket: !Ref PublicCloudfrontBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Id: "PolicyForCloudFrontPrivateContent"
+        Statement:
+          - Sid: "Allow-OAI-Access-To-Bucket"
+            Effect: "Allow"
+            Principal:
+              AWS:
+                - "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity 12345123512345"
+            Action:
+              - "s3:GetObject"
+              - "s3:ListBucket"
+            Resource:
+              - !Sub
+                - "arn:aws:s3:::${S3BucketBase}"
+                - { S3BucketBase: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1] }
+              - !Sub
+                - "arn:aws:s3:::${S3BucketBase}/*"
+                - { S3BucketBase: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1] }
+          - Sid: "Deny insecure traffic"
+            Effect: "Deny"
+            Principal: "*"
+            Action: "*"
+            Resource:
+              - !Sub
+                - "arn:aws:s3:::${S3BucketBase}/*"
+                - { S3BucketBase: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1] }
+            Condition:
+              Bool:
+                "aws:SecureTransport": "false"
+          - Sid: "Allows iamrole to Manage Bucket if it is no longer needed"
+            Effect: "Allow"
+            Principal:
+              AWS: !Sub arn:aws:iam::${AWS::AccountId}:role/${InputOne}iamrole
+            Action:
+              - "s3:DeleteBucket"
+              - "s3:DeleteObject"
+              - "s3:GetObject"
+              - "s3:ListBucket"
+            Resource:
+              - !Sub
+                - "arn:aws:s3:::${S3BucketBase}"
+                - { S3BucketBase: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1] }
+              - !Sub
+                - "arn:aws:s3:::${S3BucketBase}/*"
+                - { S3BucketBase: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1] }
+          - Sid: "Allows iamrole2 to Manage Bucket if it is no longer needed if allowed"
+            Effect: !If
+              - Property2Condition
+              - "Allow"
+              - "Deny"
+            Principal:
+              AWS: !Sub arn:aws:iam::${AWS::AccountId}:role/${InputOne}iamrole2
+            Action:
+              - "s3:DeleteBucket"
+              - "s3:DeleteObject"
+              - "s3:PutObject"
+              - "s3:GetObject"
+              - "s3:ListBucket"
+            Resource:
+              - !Sub
+                - "arn:aws:s3:::${S3BucketBase}"
+                - { S3BucketBase: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1] }
+              - !Sub
+                - "arn:aws:s3:::${S3BucketBase}/*"
+                - { S3BucketBase: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1] }
+          - Sid: "Full Access Example"
+            Effect: "Allow"
+            Principal:
+              AWS: !Sub arn:aws:iam::${AWS::AccountId}:role/iamrolegod
+            Action:
+              - "s3:AbortMultipartUpload"
+              - "s3:DeleteObject"
+              - "s3:GetObject"
+              - "s3:ListBucket"
+              - "s3:PutLifecycleConfiguration"
+              - "s3:PutObject"
+              - "s3:PutObjectTagging"
+              - "s3:PutReplicationConfiguration"
+              - "s3:ReplicateDelete"
+              - "s3:ReplicateObject"
+              - "s3:ReplicateTags"
+              - "s3:RestoreObject"
+            Resource:
+              - !Sub
+                - "arn:aws:s3:::${S3BucketBase}"
+                - { S3BucketBase: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1] }
+              - !Sub
+                - "arn:aws:s3:::${S3BucketBase}/*"
+                - { S3BucketBase: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1] }
+  CloudfrontExample:
+    Type: "AWS::CloudFront::Distribution"
+    Properties:
+      DistributionConfig:
+        Comment: "Lorem Ipsum"
+        Aliases:
+          - !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1]
+        CacheBehaviors:
+          - AllowedMethods:
+              - "GET"
+              - "HEAD"
+              - "OPTIONS"
+            CachedMethods:
+              - "HEAD"
+              - "GET"
+              - "OPTIONS"
+            Compress: false
+            TargetOriginId: StaticOriginIdFromOriginsList
+            ForwardedValues:
+              QueryString: "true"
+              Cookies:
+                Forward: none
+            PathPattern: "/static/*"
+            ViewerProtocolPolicy: redirect-to-https
+        DefaultRootObject: ""
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - "GET"
+            - "HEAD"
+            - "OPTIONS"
+          CachedMethods:
+            - "HEAD"
+            - "GET"
+            - "OPTIONS"
+          Compress: false
+          TargetOriginId: S3OriginIdFromOriginsList
+          ForwardedValues:
+            QueryString: "false"
+            Cookies:
+              Forward: none
+          ViewerProtocolPolicy: https-only
+        Enabled: "true"
+        HttpVersion: http2
+        Logging:
+          IncludeCookies: "true"
+          Bucket: wgu-audit-cloudfront-logs.s3.amazonaws.com
+          Prefix: !FindInMap [AccountMap, !Ref "AWS::AccountId", S3BucketBase]
+        PriceClass: PriceClass_100
+        Origins:
+        - DomainName: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1]
+          Id: "OriginIdFromOriginsList"
+          OriginPath: ""
+          CustomOriginConfig:
+            HTTPSPort: 443
+            OriginProtocolPolicy: https-only
+            OriginSSLProtocols:
+              - "TLSv1.2"
+        - DomainName: !Sub
+            - "${S3BucketBase}.s3-us-west-2.amazonaws.com"
+            - { S3BucketBase: !FindInMap [AccountMap, !Ref "AWS::AccountId", Property1] }
+          Id: "S3OriginIdFromOriginsList"
+          OriginPath: ""
+          S3OriginConfig:
+              OriginAccessIdentity: !Join
+                -  ""
+                - - "origin-access-identity/cloudfront/"
+                  - !FindInMap [AccountMap, !Ref "AWS::AccountId", OriginAccessIdentity]
+        # AWS WAF Web ACL?
+        ViewerCertificate:
+          AcmCertificateArn: !FindInMap [AccountMap, !Ref "AWS::AccountId", Certificate]
+          MinimumProtocolVersion: "TLSv1.2_2018"
+          SslSupportMethod: "sni-only"
+
+  #### Task Role
+  RoleExample:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: "iamrolegod"
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service: "ecs-tasks.amazonaws.com"
+            Action: "sts:AssumeRole"
+      Policies:
+        - PolicyName: "PolicyExample"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action: "kms:Decrypt"
+                Resource: !ImportValue ImportableKMSKeyARN
+              - Effect: "Allow"
+                Action: "ssm:GetParameter"
+                Resource: !Join
+                  - ""
+                  - - "arn:aws:ssm:"
+                    - !Ref "AWS::Region"
+                    - ":"
+                    - !Ref "AWS::AccountId"
+                    - ":parameter/"
+                    - !Sub "${InputOne}/*"
+              - Effect: "Allow"
+                Action: "ssm:GetParametersByPath"
+                Resource: !Join
+                  - ""
+                  - - "arn:aws:ssm:"
+                    - !Ref "AWS::Region"
+                    - ":"
+                    - !Ref "AWS::AccountId"
+                    - ":parameter/"
+                    - !Sub "${InputOne}/*"
+              - Effect: "Allow"
+                Action: "secretsmanager:ListSecrets"
+                Resource: "*"
+              - Effect: "Allow"
+                Action: "secretsmanager:GetSecretValue"
+                Resource: !Join
+                  - ""
+                  - - "arn:aws:secretsmanager:"
+                    - !Ref "AWS::Region"
+                    - ":"
+                    - !Ref "AWS::AccountId"
+                    - ":secret:"
+                    - !Sub "/${InputOne}/*"
+
+# I don't actually know how this works
+Outputs:
+  OutputExample:
+    Description: "Lorem Ipsum"
+    Value: !GetAtt RoleExample.Name
