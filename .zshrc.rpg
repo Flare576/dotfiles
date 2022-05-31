@@ -1,6 +1,6 @@
 # Fun RPG-CLI integrations
 alias rpg=rpg-cli
-alias cdr="cd $(rpg-cli pwd)"
+alias cdr="cd \`rpg-cli pwd\`"
 alias quest_ez="jq -r '.tombstones | keys | sort_by(split(\"/\") | length) | first' ~/.rpg/data"
 alias quests="jq -r '.tombstones | keys_unsorted | length' ~/.rpg/data"
 
