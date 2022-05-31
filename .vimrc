@@ -123,6 +123,8 @@ nnoremap <silent> + :exec "resize +1"<CR>
 nnoremap <silent> - :exec "resize -1"<CR>
 
 "########################## Other_mappings
+" Insert 10 dashes
+nnoremap <leader>- 10i-<ESC>
 " Show count of last find
 nnoremap <leader>/ :%s///gn<CR>
 " Run current file with various commands
@@ -327,6 +329,7 @@ autocmd InsertLeave * :let g:jedi#show_call_signatures=1
 
 "########################## Other_filetypes
 autocmd Filetype markdown setlocal spell textwidth=100 cc=100 conceallevel=3 formatoptions+=ro
+autocmd BufNewFile,BufRead Dockerfile* set syntax=dockerfile
 
 autocmd Filetype text setlocal linebreak spell complete+=s wrap formatoptions=1
       \ noexpandtab textwidth=100 cc=100 formatoptions=qtc
