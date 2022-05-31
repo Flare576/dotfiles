@@ -1,0 +1,15 @@
+# In general:
+# Choose a meaningful starting point - see https://hub.docker.com
+FROM someImage as base
+# Install Stuff you know you'll need (Ubuntu-based images)
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    git \
+    vim \
+  && rm -rf /var/lib/apt/lists/*
+
+# Change layers after you do the stuff you can cache
+FROM base as project
+# Eventually copy only what you need to increase caching and decrease build time
+COPY src src

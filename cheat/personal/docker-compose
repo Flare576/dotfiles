@@ -1,0 +1,43 @@
+# MySQL images
+Map files into /docker-entrypoint-initdb.d/1.sql (increment file name) to auto-execute
+Need `environment.MYSQL_ROOT_PASSWORD` and `MYSQL_DATABASE`
+
+Tempalte:
+```
+version: "3"
+networks:
+  projectNameNetwork:
+services:
+  mysql:
+    image: mysql:5.7.32
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
+    restart: unless-stopped
+    volumes:
+      - "./resources/mysql.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./resources/local_mysql.sql:/docker-entrypoint-initdb.d/2.sql"
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "projectNameDB"
+    networks:
+      - projectNameNetwork
+  projectName:
+    image: projectName:latest
+    build:
+      context: .
+      target: project
+    restart: unless-stopped
+    volumes:
+      - ./src:/var/www/html/src
+    networks:
+      - projectNameNetwork
+    depends_on:
+      - mysql
+    ports:
+      - "8080:80"
+    expose:
+      - "80"
+```

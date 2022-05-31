@@ -1,0 +1,9 @@
+# For Java-based projects using maven
+# adjust the `11` to whatever Java version is in use
+FROM maven:3-openjdk-11
+
+COPY . .
+RUN mvn clean install
+ARG JAR_FILE=target/*.jar
+RUN cp ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
