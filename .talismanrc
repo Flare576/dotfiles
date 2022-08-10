@@ -1,6 +1,6 @@
 fileignoreconfig:
 - filename: .zshenv
-  checksum: 8a4c8726f3402977b96b35bc31ad554af0ec8058b615c0ca20a6e0e7241764b8
+  checksum: 84cf02ff8afb6b9920098063db0f1b587625c6e4e89bd6b18eb5201abad9bd0e
 - filename: README.md
   checksum: e3f78a48ecdb3d604572111baf5422d100f263e6ad20b86d50e8126e36445e83
 - filename: cheat/*

@@ -119,11 +119,7 @@ git clone -q https://github.com/majutsushi/tagbar.git
 
 # better lists/bullets
 echo "Cloning bullets"
-git clone https://github.com/dkarter/bullets.vim.git
-
-# Trailing Whitespace handling
-echo "Cloning bullets"
-git clone https://github.com/dkarter/bullets.vim.git
+git clone -q https://github.com/dkarter/bullets.vim.git
 
 if [[ $includeJS == "y"* ]] ; then
   # JSX

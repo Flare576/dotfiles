@@ -12,9 +12,10 @@ links=(
   .tmux.conf
   cheat
 # Link individual settings items; there will be ".config" files with secrets :/
-  .config/lazydocker
-  .config/git-clone
   .config/theme
+  .config/lazydocker
+  # Don't link this file - it has secrets
+  # .config/git-clone/config
 )
 
 if [ "$1" = "delete" ]; then

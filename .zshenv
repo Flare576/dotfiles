@@ -5,6 +5,8 @@ typeset -aU path
 if [ -d "$HOME/.doNotCommit.d" ]; then
   for f in "$HOME/.doNotCommit.d"/.doNotCommit*; do [[ $f != *".sw"* ]] && source $f; done
 fi
+# Apple Silicon Macs have new directory
+[ -f "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 source "$(switch-theme)"
 

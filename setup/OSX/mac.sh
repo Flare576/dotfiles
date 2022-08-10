@@ -6,6 +6,8 @@
 if test ! $(which brew); then
   echo "Installing Homebrew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  # Apple Silicon Macs have new directory
+  [ -f "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 echo "Installing git for project clone"
@@ -40,7 +42,7 @@ bash $HOME/dotfiles/setup/scripts.sh
 bash $HOME/dotfiles/setup/vim.sh
 
 # Setup background and dock settings
-bash /Users/flare576/dotfiles/setup/OSX/systemSettings.sh
+bash $HOME/dotfiles/setup/OSX/systemSettings.sh
 
 # Setup Oh-My-Zsh
 bash $HOME/dotfiles/setup/omz.sh

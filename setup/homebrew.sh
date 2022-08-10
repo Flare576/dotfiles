@@ -5,7 +5,7 @@ isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
 # Install Homebrew
 if test ! $(which brew); then
   echo "Installing Homebrew"
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
 # Install Good Stuff
@@ -39,7 +39,7 @@ brews=(
 )
 
 if [ "$isLinux" -ne "1" ] ; then
-  brews+=(cask kubectx mas)
+  brews+=(mas) # CLI for App Store on OSX
 fi
 
 echo "Installing brews"
