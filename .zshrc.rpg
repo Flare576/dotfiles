@@ -4,16 +4,25 @@ alias cdr="cd \`rpg-cli pwd\`"
 alias quest_ez="jq -r '.tombstones | keys | sort_by(split(\"/\") | length) | first' ~/.rpg/data"
 alias quests="jq -r '.tombstones | keys_unsorted | length' ~/.rpg/data"
 
+function quest() {
+  if [ -d "$questdir" ]; then
+    rm -rf "$questdir"
+  fi
+  echo "Your hero wanders into a nearby inn and finds a request for help. They go to the entrance."
+  questmap "stay"
+  cd $questdir
+}
+
 function questmap() {
   myquest=$(quest_ez)
   full="$HOME/${myquest:2}"
   mkdir -p $full
   deep=$(basename $full)
   echo "$full"
+  questdir=${${myquest:2}%%/*}
 
   if [ -z "$1" ]; then
-    quest=${${myquest:2}%%/*}
-    cd $quest
+    cd $questdir
     while [ -n "$(ls)" ]; do
       dn
     done
@@ -25,7 +34,7 @@ function questmap() {
       done
     fi
     cd;cd;cd
-    rm -rf $quest
+    rm -rf $questdir
   fi
 }
 
@@ -37,7 +46,7 @@ function zz() {
 function ls() {
   # don't do if no rpg-cli like on ubuntu images
   if command -v rpg-cli &> /dev/null; then
-    # You're here isn't psychic, they only get to look in the current dir...
+    # Your hero isn't psychic, they only get to look in the current dir...
     rpg-cli ls
   fi
   # but you are a dev, so I guess you can run normal command with params
