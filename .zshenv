@@ -1,13 +1,27 @@
 # This file is loaded before .zshrc
 # Change "path" to an -a(rray) -U(nique) (special) type, prevents dup entries
 typeset -aU path
+
+# OSX baseline paths (see note on path_helper at bottom of file)
+if [ -x /usr/libexec/path_helper ]; then
+	eval `/usr/libexec/path_helper -s`
+fi
+
 # Secrets
 if [ -d "$HOME/.doNotCommit.d" ]; then
   for f in "$HOME/.doNotCommit.d"/.doNotCommit*; do [[ $f != *".sw"* ]] && source $f; done
 fi
-# Apple Silicon Macs have new directory
-[ -f "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+
+if [ -f "/opt/homebrew/bin/brew" ]; then
+  # Apple Silicon Macs have new directory
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  # i86 homebrew
+  export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+fi
+
+# because it's never easy
+alias make=gmake
 source "$(switch-theme)"
 
 alias -g dateS="date '+%Y-%m-%dT%H-%M-%S'"
@@ -42,6 +56,7 @@ alias tm='tmux new-session'
 
 alias pi='pipenv'
 alias py='pipenv run python'
+alias brewup="$HOME/dotfiles/setup/homebrew.sh update"
 # Leaving this as a reminder to never do this
 # alias python='echo "maybe try pi/py..."'
 
@@ -93,3 +108,7 @@ personaldot="$HOME/personaldot/.zshenv"
 source $HOME/.zshrc.kubeHelper
 source $HOME/.zshrc.awsHelper
 source $HOME/.zshrc.rpg
+
+# OSX will use /etc/zshrc between this file and .zshenv - ignore the path changes
+# https://github.com/sorin-ionescu/prezto/issues/381
+FLARE_PATH="$PATH"

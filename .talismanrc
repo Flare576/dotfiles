@@ -1,13 +1,13 @@
 fileignoreconfig:
-- filename: .zshenv
-  checksum: 84cf02ff8afb6b9920098063db0f1b587625c6e4e89bd6b18eb5201abad9bd0e
 - filename: README.md
   checksum: e3f78a48ecdb3d604572111baf5422d100f263e6ad20b86d50e8126e36445e83
 - filename: cheat/*
   checksum: f5f609cca669e97213ebdf1b6d1aca19f2fa0edd4f9223579dfcd753cc4857b2
 - filename: .tmux.conf
   checksum: ac70a628951174f9e1ba0e8800c9829d8bfd187d08d25a7448be2e0729c0a94c
-- filename: .zshrc.rpg
-  checksum: fcc9c8c11c55bb0824f059a4bc3a4648353620812ce02e368ae96acd4e1d6880
+- filename: .zshenv
+  checksum: e324b5b2944c8ac2199b6c6857244156477f07fc0d8545b587a3346b163f1f62
+- filename: .zshrc
+  checksum: 798a0b225bee7ab5b6922ba678d87ce96cece25bbd46db696a5768385acceb9f
 - filename: cheat/personal/cloudformation
   checksum: 831a525cb7f160e45196a1a3fd0e75e53fa5422d6f92a8aa206167da7c8473e7

@@ -1,11 +1,12 @@
 # See https://github.com/robbyrussell/oh-my-zsh/blob/master/templates/zshrc.zsh-template
 # This file is loaded after .zshenv
+PATH="$FLARE_PATH"
 
 ZSH_DISABLE_COMPFIX=true # Remove "Insecure directories and files"
 export ZSH=$HOME/.oh-my-zsh
 # [ -n "$FLARE_ZSH_THEME" ] && ZSH_THEME="$FLARE_ZSH_THEME"
-
 plugins=(aws vi-mode git extract z kubectl tmux docker-aliases docker-compose zsh-nvm node npm yarn zsh-better-npm-completion)
+
 #Setup NVM
 export NVM_COMPLETION=true  # Tab-completion
 export NVM_LAZY_LOAD=true   # Make it fast
