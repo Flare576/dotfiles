@@ -41,6 +41,9 @@ bash $HOME/dotfiles/setup/scripts.sh
 # Setup VIM
 bash $HOME/dotfiles/setup/vim.sh
 
+# Setup tmux
+bash $HOME/dotfiles/setup/tmux.sh
+
 # Setup background and dock settings
 bash $HOME/dotfiles/setup/OSX/systemSettings.sh
 

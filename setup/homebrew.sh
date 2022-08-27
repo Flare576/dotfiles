@@ -18,7 +18,6 @@ brews=(
   hub                             # overlay to git, adds github-specific calls/functionality
   nvm                             # Node Version Manager - makes having mulitple projects easier
   shellcheck                      # helps debugging/formatting shell scripts
-  tmux                            # terminal multi-panel/window tool
   the_silver_searcher             # provides enhanced search support with 'ag'
   vim                             # it's vim
   watch                           # repeatedly call a command and monitor output

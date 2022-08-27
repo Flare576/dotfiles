@@ -64,5 +64,9 @@ bash $HOME/dotfiles/setup/omz.sh
 echo "Installing vim plugins"
 bash $HOME/dotfiles/setup/vim.sh 'true'
 
+# Setup tmux
+echo "Installing tmux"
+bash $HOME/dotfiles/setup/tmux.sh
+
 # Setup Jira
 bash $HOME/dotfiles/setup/jira.sh
