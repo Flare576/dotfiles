@@ -121,6 +121,9 @@ git clone -q https://github.com/majutsushi/tagbar.git
 echo "Cloning bullets"
 git clone -q https://github.com/dkarter/bullets.vim.git
 
+echo "Cloning Obsession"
+git clone -q https://github.com/tpope/vim-obsession
+
 if [[ $includeJS == "y"* ]] ; then
   # JSX
   echo "Cloning vim-jsx-pretty"
