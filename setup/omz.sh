@@ -1,53 +1,90 @@
 #!/bin/bash
 isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
 
+linkable=(
+  .zshenv
+  .zshrc
+  .zshrc.kubeHelper
+  .zshrc.awsHelper
+  .zshrc.rpg
+)
+
 if [[ "$1" == "delete" ]]; then
-  cd "$HOME"
-  rm -rf .oh-my-zsh .z .zshrc .zshenv
-  if [ "$isLinux" -eq "1" ] ; then
-    chsh -s $(which bash)
+  echo "Removing zsh symlinks"
+  for link in "${linkable[@]}";
+  do
+    rm -rf "$HOME/$link"
+  done
+
+  echo "Removing omz and z"
+  pushd $HOME &> /dev/null
+  rm -rf .oh-my-zsh .z &> /dev/null
+  popd &> /dev/null
+
+  if [ "$isLinux" -eq "1" ]; then
+    echo "Reverting to bash, removing zsh from shells listing"
+    chsh -s "$(which bash)"
     sudo sed -i"" -e "/\/zsh/d" "/etc/shells"
   else
-    sudo dscl . -create /Users/$USER UserShell $(which bash)
+    echo "Reverting to bash"
+    sudo dscl . -create "/Users/$USER" UserShell "$(which bash)"
+  fi
+
+  if ! command -v brew &> /dev/null ; then
+    echo "Uninstalling zsh"
+    brew uninstall zsh
   fi
   exit
 fi
 
+echo "Installing latest version of zsh"
+if ! command -v brew &> /dev/null ; then
+  HOMEBREW_NO_INSTALL_UPGRADE=0 brew install zsh
+fi
+
 echo "Setting up Oh My Zshell, Tools, Themes, and Plugins for ZSH"
 
-# Install and setup Oh My Zshell
+# Install and setup Oh My Zshell (saving to tmp allows --unattended)
 curl -o /tmp/omz-install.sh -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh &> /dev/null
 bash /tmp/omz-install.sh --unattended &> /dev/null
 rm /tmp/omz-install.sh &> /dev/null
 
-# Wish this was a real plugin
-zshComplete=$HOME/.oh-my-zsh/completions
-mkdir -p $zshComplete
-rm -rf /tmp/cheat &> /dev/null 
-git clone https://github.com/cheat/cheat.git /tmp/cheat
-mv /tmp/cheat/scripts/cheat.zsh $zshComplete/_cheat.zsh
-rm -rf /tmp/cheat &> /dev/null
-
-# one more and should probably consider zplug...
+echo "Installing Plugins"
 mkdir -p "$HOME/.oh-my-zsh/custom/plugins/"
-cd "$HOME/.oh-my-zsh/custom/plugins/"
+pushd "$HOME/.oh-my-zsh/custom/plugins/" &> /dev/null
 
 # NVM and Node Optimizations
+echo "Installing NPM Completion"
 git clone -q https://github.com/lukechilds/zsh-better-npm-completion
+echo "Installing NVM Completion"
 git clone -q https://github.com/lukechilds/zsh-nvm
-# docker-aliases for... docker aliases
+echo "Installing Docker Aliases"
 git clone -q https://github.com/webyneter/docker-aliases
+
+echo "Installing Cheat Completion"
+zshComplete=$HOME/.oh-my-zsh/completions
+mkdir -p $zshComplete
+rm -rf /tmp/cheat &> /dev/null
+git clone -q https://github.com/cheat/cheat.git /tmp/cheat
+mv /tmp/cheat/scripts/cheat.zsh $zshComplete/_cheat.zsh
+rm -rf /tmp/cheat &> /dev/null
+popd &> /dev/null
 
 # Sometimes Z doesn't setup its file
 touch "$HOME/.z"
 
-ln -fs "$HOME/dotfiles/.zshrc" "$HOME"
+for link in "${linkable[@]}";
+do
+  echo "Linking $link"
+  ln -fs "$HOME/dotfiles/$link" "$HOME/$link"
+done
 
 echo "Making Zsh default"
 if [ "$isLinux" -eq "1" ] ; then
   # using sudo because most users can't (and shouldn't) direct-access /etc/shells
   which zsh | sudo tee -a /etc/shells
-  chsh -s $(which zsh)
+  chsh -s "$(which zsh)"
 else
-  sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+  # dscl is an OSX tool that updates the same underlying system as 'chsh' and OSX doesn't require updating /etc/shells
+  sudo dscl . -create /Users/$USER UserShell "$(which zsh)"
 fi

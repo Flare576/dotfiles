@@ -10,7 +10,6 @@ fi
 
 # Install Good Stuff
 brews=(
-  zsh                             # Preferred shell
   python                          # must preceed vim
   pipenv                          # Handles pip dependencies, uses pyenv for pinned core python versions
   bat                             # enhanced version of the cat command
@@ -37,10 +36,6 @@ brews=(
   flare576/scripts/vroom          # wrapper for 'make' command to start/manage project execution
   flare576/scripts/switch-theme   # tool for changing tmux, vim, bat, zhs, etc. themes 
 )
-
-if [ "$isLinux" -ne "1" ] ; then
-  brews+=(mas) # CLI for App Store on OSX
-fi
 
 echo "Installing brews"
 brew update
