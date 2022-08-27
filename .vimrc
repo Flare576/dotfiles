@@ -72,6 +72,7 @@ set switchbuf=split     " open new splits when using :sb, :cc, etc. (or Ag resul
 set switchbuf=useopen,usetab,uselast
 set backspace=2         " Same as indent, eol, start, allows backspace essentially anywhere in insert mode
 set modeline            " Allows files to define some variables (e.g., filetype)
+set modelines=5         " Modelines need to be within 5 lines of top/bottom
 set cc=120              " highlights characters over 120 width
 
 " Extra whitespace in yellow
