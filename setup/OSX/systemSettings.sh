@@ -11,6 +11,7 @@ dialogTab="3"
 initialRepeat=15
 keyRepeat=1
 smartQuotes='false'
+scrollbars='WhenScrolling'
 if [[ "$1" == "delete" ]]; then
   dockside="bottom"
   autoHide="false"
@@ -24,6 +25,7 @@ if [[ "$1" == "delete" ]]; then
   initialRepeat=25
   keyRepeat=6
   smartQuotes='true'
+  scrollbars='Automatic'
 fi
 echo "Configuring Dock and System settings"
 
@@ -46,6 +48,8 @@ defaults write com.apple.finder AppleShowAllFiles $showAllFiles
 
 # Fix scroll direction
 defaults write -g com.apple.swipescrolldirection -bool $swipeScroll
+# Only show scrollbars when srolling (or Terminal's dimensions are wrong)
+defaults write NSGlobalDomain AppleShowScrollBars -string "$scrollbars"
 # Tap to click
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool $tapToClick
 # Enable battery icon in menu bar
