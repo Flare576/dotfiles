@@ -2,6 +2,7 @@
 apps=(
   1password          # Password Manager!
   1password-cli      # Still Password Manger... ON CLI!
+  azure-data-studio  # Great Database client
   boop               # Small app to let you do quick text/json/etc. tweeks
   firefox            # I mean, why not!
   google-chrome      # Like you don't know!
