@@ -18,6 +18,6 @@ if ! command -v brew &> /dev/null ; then
 fi
 
 echo "Install latest stable version of Python3"
-stable=$(pyenv install --list | grep -v '-' | grep -v 'b' | grep '^3' | tail -1)
+stable=$(pyenv install --list | grep -v '-' | grep -v 'b' | tr -d ' ' |  grep '^3' | tail -1)
 pyenv install $stable
 pyenv global $stable
