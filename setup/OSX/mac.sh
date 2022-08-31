@@ -20,14 +20,6 @@ git clone https://github.com/Flare576/dotfiles.git
 # Install Homebrew and applications
 bash $HOME/dotfiles/setup/homebrew.sh
 
-# You'll need passwords and stuff
-brew install --cask 1password
-# manual bits: setup 1password, git, jira, aws, spotify, firefox, slack, launchbar
-# sudo: omz/zsh, homebrew, docker, 
-# clone needs to be done for "fixing" dotfiles folder and fro getting personaldots
-# should be possilble
-
-
 # Install safety precautions around this repo
 bash $HOME/dotfiles/setup/secureRepo.sh
 
@@ -46,6 +38,9 @@ bash $HOME/dotfiles/setup/tmux.sh
 
 # Setup background and dock settings
 bash $HOME/dotfiles/setup/OSX/systemSettings.sh
+
+# Clean dock
+bash $HOME/dotfiles/setup/OSX/cleanDock.sh
 
 # Setup Oh-My-Zsh
 bash $HOME/dotfiles/setup/omz.sh
