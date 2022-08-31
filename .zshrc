@@ -43,3 +43,8 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 function zle-line-init zle-keymap-select {
   zle reset-prompt # We want to change the prompt when we enter/leave vim-mode keymap
 }
+
+# uses fzf to search history. Enter puts command on line but doesn't execute
+function h() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac --height "50%" | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
+}
