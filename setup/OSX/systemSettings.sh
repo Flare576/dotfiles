@@ -12,6 +12,7 @@ initialRepeat=15
 keyRepeat=1
 smartQuotes='false'
 scrollbars='WhenScrolling'
+showSound="true"
 if [[ "$1" == "delete" ]]; then
   dockside="bottom"
   autoHide="false"
@@ -26,6 +27,7 @@ if [[ "$1" == "delete" ]]; then
   keyRepeat=6
   smartQuotes='true'
   scrollbars='Automatic'
+  showShound="false"
 fi
 echo "Configuring Dock and System settings"
 
@@ -59,6 +61,8 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int $dialogTab
 # make repeating keys fast
 defaults write -g InitialKeyRepeat -int $initialRepeat # normal minimum is 15 (225 ms)
 defaults write -g KeyRepeat -int $keyRepeat # normal minimum is 2 (30 ms)
+# Show sound on menu bar at all times
+defaults write -g com.apple.controlcenter "NSStatusItem Visible Sound" -bool $showSound
 
 # Disable SmartQuotes
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool $smartQuotes

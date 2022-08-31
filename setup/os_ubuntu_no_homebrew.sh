@@ -16,7 +16,8 @@ packages=(
   vim
   jq
   tmux
-  python3-pip
+  pyenv
+  pipenv
   universal-ctags
 )
 
@@ -53,6 +54,9 @@ bash $HOME/dotfiles/setup/scripts.sh 'true'
 # Setup Oh-My-Zsh
 echo "Configuring ZSH"
 bash $HOME/dotfiles/setup/omz.sh
+
+# Setup Python
+bash $HOME/dotfiles/setup/python.sh
 
 # Setup tmux
 bash $HOME/dotfiles/setup/tmux.sh

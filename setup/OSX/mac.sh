@@ -50,6 +50,9 @@ bash $HOME/dotfiles/setup/OSX/systemSettings.sh
 # Setup Oh-My-Zsh
 bash $HOME/dotfiles/setup/omz.sh
 
+# Setup Python
+bash $HOME/dotfiles/setup/python.sh
+
 # Setup Jira
 bash $HOME/dotfiles/setup/jira.sh
 

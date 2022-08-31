@@ -31,9 +31,9 @@ export XDG_CONFIG_HOME="$HOME/.config" # https://wiki.archlinux.org/title/XDG_Ba
 export CHEAT_CONFIG_PATH="$HOME/cheat/conf.yml"
 
 # Initialize pyenv
-# command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
-## # temp
-## export PYTHONPATH=/usr/local/lib/python3.9/site-packages/
+# Monterey 12.3 stopped shipping python2 - using pyenv to manage installs
+command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
+
 # Quick-edit configs
 alias vz='vi -o ~/.zshrc ~/.zshenv -c "cd ~"'
 alias vd='vi ~/dotfiles -c "cd ~/dotfiles"'

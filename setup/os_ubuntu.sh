@@ -60,6 +60,9 @@ bash $HOME/dotfiles/setup/scripts.sh 'true'
 echo "Configuring ZSH"
 bash $HOME/dotfiles/setup/omz.sh
 
+# Setup Python
+bash $HOME/dotfiles/setup/python.sh
+
 # Setup VIM
 echo "Installing vim plugins"
 bash $HOME/dotfiles/setup/vim.sh 'true'

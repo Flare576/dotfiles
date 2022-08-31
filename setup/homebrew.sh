@@ -11,6 +11,7 @@ fi
 # Install Good Stuff
 brews=(
   python                          # must preceed vim
+  pyenv                           # Manages Python environments/versions
   pipenv                          # Handles pip dependencies, uses pyenv for pinned core python versions
   bat                             # enhanced version of the cat command
   cheat                           # provides cheat sheets for many commands, try 'cheat tar'
