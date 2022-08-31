@@ -68,7 +68,6 @@ defaults write -g com.apple.controlcenter "NSStatusItem Visible Sound" -bool $sh
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool $smartQuotes
 
 bash $HOME/dotfiles/setup/OSX/reassignCapsLock.sh $1
-zsh $HOME/dotfiles/setup/OSX/terminalApp.sh $1
 bash $HOME/dotfiles/setup/OSX/menuClock.sh $1
 
 killall Finder
