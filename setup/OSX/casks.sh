@@ -13,6 +13,7 @@ apps=(
   trailer            # Manage Github projects from Notification area!
   vlc                # For those rare times you need to watch something locally!
   visual-studio-code # For when you need an IDE
+  zoom               # You know you're going to need it
 )
 
 echo "Installing Homebrew Casks"
