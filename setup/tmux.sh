@@ -11,8 +11,10 @@ if [[ "$1" == "delete" ]]; then
 fi
 
 echo "Installing latest version of tmux"
-if ! command -v brew &> /dev/null ; then
+if command -v brew &> /dev/null ; then
   HOMEBREW_NO_INSTALL_UPGRADE=0 brew install tmux
+else
+  echo "Homebrew not found"
 fi
 
 echo "Linking .tmux.conf, setting up plugins"

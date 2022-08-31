@@ -13,8 +13,10 @@ if [[ "$1" == "delete" ]]; then
 fi
 
 echo "Installing latest version of pyenv and pipenv"
-if ! command -v brew &> /dev/null ; then
+if command -v brew &> /dev/null ; then
   HOMEBREW_NO_INSTALL_UPGRADE=0 brew install pipenv pyenv
+else
+  echo "Homebrew not found"
 fi
 
 echo "Install latest stable version of Python3"

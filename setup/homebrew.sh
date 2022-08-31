@@ -15,6 +15,7 @@ brews=(
   pipenv                          # Handles pip dependencies, uses pyenv for pinned core python versions
   bat                             # enhanced version of the cat command
   cheat                           # provides cheat sheets for many commands, try 'cheat tar'
+  fzf                             # FuzzyFind lets you search through piped-in data (useful with history)
   git                             # it's git
   hub                             # overlay to git, adds github-specific calls/functionality
   nvm                             # Node Version Manager - makes having mulitple projects easier

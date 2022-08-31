@@ -38,8 +38,10 @@ if [[ "$1" == "delete" ]]; then
 fi
 
 echo "Installing latest version of zsh"
-if ! command -v brew &> /dev/null ; then
+if command -v brew &> /dev/null ; then
   HOMEBREW_NO_INSTALL_UPGRADE=0 brew install zsh
+else
+  echo "Homebrew not found"
 fi
 
 echo "Setting up Oh My Zshell, Tools, Themes, and Plugins for ZSH"
