@@ -18,10 +18,6 @@ fi
 
 echo "Don't say I didn't give you a chance"
 
-brew remove --force $(brew list --formula)
-brew remove --cask --force $(brew list)
-
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall.sh)"
 cd $HOME
 
 # For now, not altering setupGit.sh as it's configured to also be stand-alone; just nuke the certs above
@@ -37,5 +33,9 @@ bash $HOME/dotfiles/setup/linkFiles.sh "delete"
 
 rm -rf dotfiles .ssh cheat personaldot
 
+brew remove --force $(brew list --formula)
+brew remove --cask --force $(brew list)
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall.sh)"
 # Note: Linux will need to remove JetBrains font; not installed via homebrew
 
