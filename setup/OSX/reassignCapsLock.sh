@@ -7,8 +7,12 @@ fi
 
 echo "Attempting to use UI to set caps lock action..."
 read -p "Ensure no external keyboards are connected - Handle them separately."
+update_settings
+read -p "If there was an error, open System Preferences - Security & Privacy -> Privacy -> Accessibility and add Terminal"
+update_settings
 
-osascript -e '
+function update_settings () {
+  osascript -e '
 --reboot system preferences to make GUI state more predictable
 tell application "System Preferences"
   quit
@@ -58,3 +62,4 @@ tell application "System Events"
   --Commit changes! phew.
   keystroke return
 end tell'
+}
