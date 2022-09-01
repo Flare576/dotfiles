@@ -18,7 +18,7 @@ if [[ "$1" == "delete" ]]; then
 
   echo "Removing omz and z"
   pushd $HOME &> /dev/null
-  rm -rf .oh-my-zsh .z &> /dev/null
+  rm -rf .oh-my-zsh .z .zcomp* &> /dev/null
   popd &> /dev/null
 
   if [ "$isLinux" -eq "1" ]; then
