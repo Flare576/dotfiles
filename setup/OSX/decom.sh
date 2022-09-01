@@ -31,6 +31,7 @@ bash $HOME/dotfiles/setup/vim.sh "delete"
 bash $HOME/dotfiles/setup/scripts.sh "delete"
 bash $HOME/dotfiles/setup/linkFiles.sh "delete"
 
+[ -f "$HOME/personaldot/setup/decom.sh" ] && bash $HOME/personaldot/setup/decom.sh
 rm -rf dotfiles .ssh cheat personaldot .config
 
 brew remove --force $(brew list --formula)
