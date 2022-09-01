@@ -21,7 +21,7 @@ echo "Installing Homebrew Casks"
 for cask in "${casks[@]}"
 do
   echo "Working on $cask"
-  brew install --cask "$formula"
+  brew install --cask "$cask"
 done
 
 # Force setup of apps
