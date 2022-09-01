@@ -1,6 +1,10 @@
 #!/bin/bash
 # This script is designed to remove custom/personal items from a mac, undoing the original dotfiles install.
 
+if ! command -v brew &> /dev/null ; then
+  echo "Run this where brew is available to clean everything."
+  exit
+fi
 read -p "Are you sure you want to delete all your stuff? (Y/n)" doit
 
 if ! [[ $doit =~ ^[yY] ]] ; then

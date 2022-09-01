@@ -5,9 +5,11 @@ if [[ "$1" == "delete" ]]; then
   rootdir="$(pyenv root)"
   echo "Removing $rootdir"
   rm -rf "$rootdir"
-  if ! command -v brew &> /dev/null ; then
+  if command -v brew &> /dev/null ; then
     echo "Uninstalling pyenv and pipenv"
     brew uninstall pyenv pipenv &> /dev/null
+  else
+    echo "Homebrew not found"
   fi
   exit
 fi

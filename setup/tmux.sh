@@ -3,9 +3,11 @@
 if [[ "$1" == "delete" ]]; then
   echo "Removing ~/.tmux/ and ~/.tmux.conf"
   rm -rf "$HOME/.tmux" "$HOME/.tmux.conf"
-  if ! command -v brew &> /dev/null ; then
+  if command -v brew &> /dev/null ; then
     echo "Uninstalling tmux"
     brew uninstall tmux &> /dev/null
+else
+  echo "Homebrew not found"
   fi
   exit
 fi
