@@ -1,5 +1,5 @@
 #!/bin/bash
-apps=(
+casks=(
   1password          # Password Manager!
   1password-cli      # Still Password Manger... ON CLI!
   azure-data-studio  # Great Database client
@@ -18,7 +18,11 @@ apps=(
 )
 
 echo "Installing Homebrew Casks"
-brew install --cask ${apps[@]}
+for cask in "${casks[@]}"
+do
+  echo "Working on $cask"
+  brew install --cask "$formula"
+done
 
 # Force setup of apps
 open -a "1Password"
