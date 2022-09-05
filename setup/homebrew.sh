@@ -1,16 +1,41 @@
 #!/bin/bash
-# takes 1 param: true to upgrade installed brews
+usage="Installs brews I use frequently. Pass any string as an argument to allow upgrading.
+
+-h  Print this help
+-m  Minimal - skip 'work' items."
+
+while getopts ':hm' option; do
+  case "$option" in
+    h) echo "$usage"
+      exit
+      ;;
+    m) minimal="true"
+      ;;
+  esac
+done
+shift $((OPTIND -1))
 
 isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
 # Install Homebrew
 if test ! $(which brew); then
+  if [ "$isLinux" -eq "1" ]; then
+    echo "Installing Homebrew requirements"
+    apt update
+    command -v sudo &> /dev/null && apt -y install sudo
+    sudo apt --no-install-recommends --no-install-suggests -y install build-essential ca-certificates curl file git
+  fi
+
   echo "Installing Homebrew"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  yes '' | bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+  if [ "$isLinux" -eq "1" ]; then
+    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+  fi
 fi
 
 # Install Good Stuff
 brews=(
-  python                          # must preceed vim
   pyenv                           # Manages Python environments/versions
   pipenv                          # Handles pip dependencies, uses pyenv for pinned core python versions
   bat                             # enhanced version of the cat command
@@ -24,10 +49,6 @@ brews=(
   vim                             # it's vim
   watch                           # repeatedly call a command and monitor output
   jq                              # work with JSON with a command-line query language
-  watson                          # Great time tracker
-  k9s                             # Any project using K8s
-  lazydocker                      # Any project using straight Docker
-  awscli                          # Amazon Web Service CLI
   rpg-cli                         # A bit of fun for folder management
   flare576/scripts/monitorjobs    # AWS-cli based job monitoring
   flare576/scripts/git-clone      # Manage multiple git accounts for cloning projects
@@ -35,8 +56,17 @@ brews=(
   flare576/scripts/dvol           # manage Docker Volumes outside of project docker-compose files
   flare576/scripts/newScript      # facilitate creating new scripts in varius languages
   flare576/scripts/vroom          # wrapper for 'make' command to start/manage project execution
-  flare576/scripts/switch-theme   # tool for changing tmux, vim, bat, zhs, etc. themes 
+  flare576/scripts/switch-theme   # tool for changing tmux, vim, bat, zhs, etc. themes
 )
+
+if [ -z "$minimal" ]; then
+  brews+=(
+  watson                          # Great time tracker
+  k9s                             # Any project using K8s
+  lazydocker                      # Any project using straight Docker
+  awscli                          # Amazon Web Service CLI
+)
+fi
 
 echo "Installing brews"
 brew update
