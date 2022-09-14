@@ -2,6 +2,8 @@ Bash is strong, but silly
 https://tldp.org/LDP/abs/html/string-manipulation.html
 also
 https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html
+also Bash RegEx
+https://stackoverflow.com/questions/1891797/capturing-groups-from-a-grep-regex
 
 ${varname/substring/replacement}
     Replace first match of $substring with $replacement. [2]
