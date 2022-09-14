@@ -287,32 +287,25 @@ autocmd Filetype javascript highlight OverLength ctermbg=red ctermfg=white guibg
 autocmd Filetype javascript match OverLength /\%121v.\+/
 
 "########################## TypeScript
-" If you get errors, run the following command:
-" npm install --global git+https://github.com/Perlence/tstags.git
 autocmd Filetype typescript setlocal ts=2 sw=2 sts=0 suffixesadd=.ts,.tsx
 autocmd Filetype typescript highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 autocmd Filetype typescript match OverLength /\%121v.\+/
 
-let g:tagbar_type_typescript = {
-  \ 'ctagsbin' : 'tstags',
-  \ 'ctagsargs' : '-f-',
+" TSX files get mapped as typescriptreact
+let g:tagbar_type_typescriptreact = {
+  \ 'ctagstype': 'typescript',
   \ 'kinds': [
-    \ 'e:enums:0:1',
-    \ 'f:function:0:1',
-    \ 't:typealias:0:1',
-    \ 'M:Module:0:1',
-    \ 'I:import:0:1',
-    \ 'i:interface:0:1',
-    \ 'C:class:0:1',
-    \ 'm:method:0:1',
-    \ 'p:property:0:1',
-    \ 'v:variable:0:1',
-    \ 'c:const:0:1',
-  \ ],
-  \ 'sort' : 0
+    \ 'c:classes',
+    \ 'C:const',
+    \ 'n:modules',
+    \ 'f:functions',
+    \ 'v:variables',
+    \ 'v:varlambdas',
+    \ 'm:members',
+    \ 'i:interfaces',
+    \ 'e:enums',
+  \ ]
 \ }
-
-
 "########################## Python
 
 autocmd BufRead python

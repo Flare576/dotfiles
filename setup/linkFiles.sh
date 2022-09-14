@@ -9,6 +9,7 @@ links=(
   cheat
 # Link individual settings items; there will be ".config" files with secrets :/
   .config/lazydocker
+  .config/ctags
   # Don't link this file - it has secrets
   # .config/git-clone/config
 )
@@ -19,7 +20,6 @@ if [ "$1" = "delete" ]; then
   do
     rm -rf "$HOME/$link"
   done
-  rm -rf "$HOME/.ctags.d"
   exit
 fi
 
@@ -34,6 +34,3 @@ do
   echo "Linking $link"
   ln -fs "$HOME/dotfiles/$link" "$HOME/$link"
 done
-
-echo "Linking .ctags.dir"
-ln -fs "$HOME/dotfiles/.ctags.dir" "$HOME"/.ctags.d
