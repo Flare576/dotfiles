@@ -6,8 +6,8 @@ if [[ "$1" == "delete" ]]; then
   if command -v brew &> /dev/null ; then
     echo "Uninstalling tmux"
     brew uninstall tmux &> /dev/null
-else
-  echo "Homebrew not found"
+  else
+    echo "Homebrew not found"
   fi
   exit
 fi
