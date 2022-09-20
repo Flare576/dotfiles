@@ -65,7 +65,7 @@ bash $HOME/dotfiles/setup/python.sh
 
 # Setup VIM
 echo "Installing vim plugins"
-bash $HOME/dotfiles/setup/vim.sh 'true'
+bash $HOME/dotfiles/setup/vim.sh -m
 
 # Setup tmux
 echo "Installing tmux"

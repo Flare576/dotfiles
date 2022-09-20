@@ -63,7 +63,7 @@ bash $HOME/dotfiles/setup/tmux.sh
 
 # Setup VIM
 echo "Installing vim plugins"
-bash $HOME/dotfiles/setup/vim.sh 'true'
+bash $HOME/dotfiles/setup/vim.sh -m
 
 # Finish with a CTA!
 ending=$(date +%s%N)
