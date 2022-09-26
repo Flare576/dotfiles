@@ -26,13 +26,8 @@ cd $HOME
 
 # For now, not altering setupGit.sh as it's configured to also be stand-alone; just nuke the certs above
 
-bash $HOME/dotfiles/setup/jira.sh "delete"
-bash $HOME/dotfiles/setup/python.sh "delete"
-bash $HOME/dotfiles/setup/omz.sh "delete"
 bash /Users/flare576/dotfiles/setup/OSX/systemSettings.sh "delete"
-bash $HOME/dotfiles/setup/tmux.sh "delete"
-bash $HOME/dotfiles/setup/vim.sh -d
-bash $HOME/dotfiles/setup/scripts.sh "delete"
+bash $HOME/dotfiles/setup/APPS/set_work.sh -d
 bash $HOME/dotfiles/setup/linkFiles.sh "delete"
 
 [ -f "$HOME/personaldot/setup/decom.sh" ] && bash $HOME/personaldot/setup/decom.sh

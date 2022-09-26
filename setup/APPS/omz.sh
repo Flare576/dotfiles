@@ -1,5 +1,31 @@
 #!/bin/bash
-isLinux=0; [ -f "/etc/os-release" ] && isLinux=1
+source "$(dirname "$0")/../utils.sh"
+usage="$(basename "$0") [-hvd]
+Links dotfile configs and installs or updates zsh, omz, and plugins by default.
+ZSH is an alternative shell to bash that supports many more features, plugins, and other niceties.
+OMZ (oh my zsh) is a customization framework for Zsh
+Options:
+  -h Show this help
+  -v Display version
+  -d Unlink files and Uninstall zsh/omz/plugins
+"
+
+while getopts ':hvadm' option; do
+  case "$option" in
+    h) echo "$usage"
+      exit
+      ;;
+    v) echo "$VERSION"
+      exit
+      ;;
+    d) doDestroy="true"
+      ;;
+    *) echo "Unknown Option '$option', exiting"
+      exit
+      ;;
+  esac
+done
+shift $((OPTIND -1))
 
 linkable=(
   .zshenv
@@ -9,19 +35,19 @@ linkable=(
   .zshrc.rpg
 )
 
-if [[ "$1" == "delete" ]]; then
+if [ "$doDestroy" == "true" ]; then
   echo "Removing zsh symlinks"
   for link in "${linkable[@]}";
   do
-    rm -rf "$HOME/$link"
+    rm -rf "$HOME/${link:?}"
   done
 
   echo "Removing omz and z"
-  pushd $HOME &> /dev/null
+  pushd "$HOME" &> /dev/null || exit
   rm -rf .oh-my-zsh .z .zcomp* &> /dev/null
-  popd &> /dev/null
+  popd &> /dev/null || exit
 
-  if [ "$isLinux" -eq "1" ]; then
+  if [ "$isLinux" -eq "true" ]; then
     echo "Reverting to bash, removing zsh from shells listing"
     chsh -s "$(which bash)"
     sudo sed -i"" -e "/\/zsh/d" "/etc/shells"
@@ -30,21 +56,11 @@ if [[ "$1" == "delete" ]]; then
     sudo dscl . -create "/Users/$USER" UserShell "$(which bash)"
   fi
 
-  if command -v brew &> /dev/null ; then
-    echo "Uninstalling zsh"
-    brew uninstall zsh
-  else
-    echo "Homebrew not found"
-  fi
+  dotRemove zsh
   exit
 fi
 
-echo "Installing latest version of zsh"
-if command -v brew &> /dev/null ; then
-  HOMEBREW_NO_INSTALL_UPGRADE=0 brew install zsh
-else
-  echo "Homebrew not found"
-fi
+dotInstall zsh
 
 echo "Setting up Oh My Zshell, Tools, Themes, and Plugins for ZSH"
 
@@ -55,24 +71,21 @@ rm /tmp/omz-install.sh &> /dev/null
 
 echo "Installing Plugins"
 mkdir -p "$HOME/.oh-my-zsh/custom/plugins/"
-pushd "$HOME/.oh-my-zsh/custom/plugins/" &> /dev/null
+pushd "$HOME/.oh-my-zsh/custom/plugins/" &> /dev/null || exit
 
 # NVM and Node Optimizations
-echo "Installing NPM Completion"
-git clone -q https://github.com/lukechilds/zsh-better-npm-completion
-echo "Installing NVM Completion"
-git clone -q https://github.com/lukechilds/zsh-nvm
-echo "Installing Docker Aliases"
-git clone -q https://github.com/webyneter/docker-aliases
+cloneOrUpdateGit lukechilds/zsh-better-npm-completion
+cloneOrUpdateGit lukechilds/zsh-nvm
+cloneOrUpdateGit webyneter/docker-aliases
 
 echo "Installing Cheat Completion"
-zshComplete=$HOME/.oh-my-zsh/completions
-mkdir -p $zshComplete
+zshComplete="$HOME/.oh-my-zsh/completions"
+mkdir -p "$zshComplete"
 rm -rf /tmp/cheat &> /dev/null
 git clone -q https://github.com/cheat/cheat.git /tmp/cheat
-mv /tmp/cheat/scripts/cheat.zsh $zshComplete/_cheat.zsh
+mv /tmp/cheat/scripts/cheat.zsh "$zshComplete/_cheat.zsh"
 rm -rf /tmp/cheat &> /dev/null
-popd &> /dev/null
+popd &> /dev/null || exit
 
 # Sometimes Z doesn't setup its file
 touch "$HOME/.z"
@@ -84,11 +97,11 @@ do
 done
 
 echo "Making Zsh default"
-if [ "$isLinux" -eq "1" ] ; then
+if [ "$isLinux" == "true" ] ; then
   # using sudo because most users can't (and shouldn't) direct-access /etc/shells
   which zsh | sudo tee -a /etc/shells
   chsh -s "$(which zsh)"
 else
   # dscl is an OSX tool that updates the same underlying system as 'chsh' and OSX doesn't require updating /etc/shells
-  sudo dscl . -create /Users/$USER UserShell "$(which zsh)"
+  sudo dscl . -create "/Users/$USER" UserShell "$(which zsh)"
 fi

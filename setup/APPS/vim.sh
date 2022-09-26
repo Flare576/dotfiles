@@ -1,6 +1,8 @@
 #!/bin/bash
-version=2.0.0 # maybe need global setup scripts version?
-usage="Installs or updates vim and plugins by default.
+source "$(dirname "$0")/../utils.sh"
+usage="$(basename "$0") [-hvadm]
+Links dotfile configs and installs or updates vim and plugins by default.
+Vim is a command-line text editor that frustrates git users.
 Options:
   -h Show this help
   -v Display version
@@ -14,7 +16,7 @@ while getopts ':hvadm' option; do
     h) echo "$usage"
       exit
       ;;
-    v) echo "$version"
+    v) echo "$VERSION"
       exit
       ;;
     a) allPlugins="true"
@@ -37,9 +39,10 @@ if [ -n "$check" ] && [ "$check" != "true" ]; then
   exit
 fi
 
-if [[ "$doDestroy" == "true" ]]; then
-  echo "Removing ~/.vim/ and ~/.vimrc"
-  rm -rf "$HOME/.vim" "$HOME/.vimrc"
+if [ "$doDestroy" == "true" ]; then
+  dotRemove vim
+  echo "Removing vim plugins"
+  rm -rf "$HOME/.vim"
   exit
 fi
 
@@ -79,6 +82,8 @@ py=(
   "davidhalter/jedi-vim"           # Does a lot with Python
 )
 
+dotInstall vim
+
 echo "Linking .vimrc, setting up plugins"
 rm -rf "$HOME/.vim/bundle" "$HOME/.vim/autoload"
 ln -fs "$HOME/dotfiles/.vimrc" "$HOME"
@@ -86,6 +91,12 @@ ln -fs "$HOME/dotfiles/.vimrc" "$HOME"
 plugins="$HOME/.vim/pack/plugins/start/"
 mkdir -p "$plugins"
 pushd "$plugins" &> /dev/null || exit
+
+function vimInstall() {
+  cloneOrUpdateGit "$1"
+  project="${1#*/}"
+  vim -u NONE -c "helptags $project/doc" -c q
+}
 
 function checkAll() {
   if [[ "$miniV" =~ ^[yY] ]] ; then
@@ -99,20 +110,6 @@ function checkAll() {
     includeTS='y'
     includePython='y'
     includeWriting='y'
-  fi
-}
-
-function handlePlugin() {
-  project="${1#*/}"
-  if [ -d "$project" ]; then
-    echo "Updating $project"
-    pushd "$project" &> /dev/null || exit
-    git pull
-    popd &> /dev/null || exit
-  else
-    echo "Cloning $project"
-    git clone -q "https://github.com/$1"
-    vim -u NONE -c "helptags $project/doc" -c q
   fi
 }
 
@@ -138,24 +135,24 @@ checkAll
 echo "Installing vim plugins"
 ############################## Theme ###########
 for item in "${theme[@]}"; do
-  handlePlugin "$item"
+  vimInstall "$item"
 done
 
 ############################## Functionality ###########
 for item in "${functionality[@]}"; do
-  handlePlugin "$item"
+  vimInstall "$item"
 done
 
 ############################## Syntax ###########
 if [[ $includeJS == "y"* ]] ; then
   for item in "${js[@]}"; do
-    handlePlugin "$item"
+    vimInstall "$item"
   done
 fi
 
 if [[ $includeTS == "y"* ]] ; then
   for item in "${ts[@]}"; do
-    handlePlugin "$item"
+    vimInstall "$item"
   done
 fi
 
@@ -171,7 +168,7 @@ fi
 
 if [[ $includePython == "y"* ]] ; then
   for item in "${py[@]}"; do
-    handlePlugin "$item"
+    vimInstall "$item"
   done
   echo "Installing jedi with pip3"
   pip3 install jedi

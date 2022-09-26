@@ -17,24 +17,11 @@ brew install git
 cd $HOME
 git clone https://github.com/Flare576/dotfiles.git
 
-# Install Homebrew and applications
-bash $HOME/dotfiles/setup/homebrew.sh
-
 # Install safety precautions around this repo
 bash $HOME/dotfiles/setup/secureRepo.sh
 
 # Link dotFiles
 bash $HOME/dotfiles/setup/linkFiles.sh
-
-# Setup Scripts
-# this is now only jiraCookies, mmb, gmb
-bash $HOME/dotfiles/setup/scripts.sh
-
-# Setup VIM
-bash $HOME/dotfiles/setup/vim.sh
-
-# Setup tmux
-bash $HOME/dotfiles/setup/tmux.sh
 
 # Setup background and dock settings
 bash $HOME/dotfiles/setup/OSX/systemSettings.sh
@@ -42,14 +29,9 @@ bash $HOME/dotfiles/setup/OSX/systemSettings.sh
 # Clean dock
 bash $HOME/dotfiles/setup/OSX/cleanDock.sh
 
-# Setup Oh-My-Zsh
-bash $HOME/dotfiles/setup/omz.sh
-
-# Setup Python
-bash $HOME/dotfiles/setup/python.sh
-
-# Setup Jira
-bash $HOME/dotfiles/setup/jira.sh
+# Install applications
+bash $HOME/dotfiles/setup/APPS/set_core.sh
+bash $HOME/dotfiles/setup/APPS/set_work.sh
 
 # Setup application
 bash $HOME/dotfiles/setup/OSX/casks.sh

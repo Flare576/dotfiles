@@ -10,9 +10,6 @@ fi
 
 # Install Good Stuff
 brews=(
-  python                          # must preceed vim
-  pyenv                           # Manages Python environments/versions
-  pipenv                          # Handles pip dependencies, uses pyenv for pinned core python versions
   bat                             # enhanced version of the cat command
   cheat                           # provides cheat sheets for many commands, try 'cheat tar'
   fzf                             # FuzzyFind lets you search through piped-in data (useful with history)
@@ -21,7 +18,7 @@ brews=(
   nvm                             # Node Version Manager - makes having mulitple projects easier
   shellcheck                      # helps debugging/formatting shell scripts
   the_silver_searcher             # provides enhanced search support with 'ag'
-  vim                             # it's vim
+  universal-ctags                 # generates indexes used by vim for "intellisense"-like features
   watch                           # repeatedly call a command and monitor output
   jq                              # work with JSON with a command-line query language
   watson                          # Great time tracker
@@ -29,13 +26,6 @@ brews=(
   lazydocker                      # Any project using straight Docker
   awscli                          # Amazon Web Service CLI
   rpg-cli                         # A bit of fun for folder management
-  flare576/scripts/monitorjobs    # AWS-cli based job monitoring
-  flare576/scripts/git-clone      # Manage multiple git accounts for cloning projects
-  flare576/scripts/gac            # 'gac' git overlay for add/commit
-  flare576/scripts/dvol           # manage Docker Volumes outside of project docker-compose files
-  flare576/scripts/newScript      # facilitate creating new scripts in varius languages
-  flare576/scripts/vroom          # wrapper for 'make' command to start/manage project execution
-  flare576/scripts/switch-theme   # tool for changing tmux, vim, bat, zhs, etc. themes 
 )
 
 echo "Installing brews"
@@ -52,6 +42,10 @@ do
   fi
 done
 
+#TODO check terminal plist for themes and call switch-theme -s if not found
+#TODO ... but that only works for osx :/ keep thinkning
+#TODO add that sort of check to the setup script and just always call it here!
+
 echo "Grabbing Cheatsheets and zsh tab completion"
 communityDir=$HOME/dotfiles/cheat/community
 
@@ -59,15 +53,6 @@ if [ -d "$communityDir" ]; then
   pushd "$communityDir" && git pull -f && popd
 else
   git clone https://github.com/cheat/cheatsheets.git "$communityDir"
-fi
-
-if brew ls --versions universal-ctags >/dev/null; then
-  if [[ "$1" == "update" ]]; then
-    brew upgrade --fetch-HEAD universal-ctags
-  fi
-else
-  brew tap universal-ctags/universal-ctags
-  HOMEBREW_NO_AUTO_UPDATE=1 brew install --HEAD universal-ctags
 fi
 
 # Jetbrains Mono is a great font for terminals; install it so it's available on this system

@@ -5,8 +5,6 @@ links=(
   .gitconfig.personal
   .gitconfig
   .gitignore
-  .tmux.conf
-  cheat
 # Link individual settings items; there will be ".config" files with secrets :/
   .config/lazydocker
   .config/ctags
