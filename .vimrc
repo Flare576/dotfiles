@@ -290,6 +290,9 @@ autocmd Filetype javascript match OverLength /\%121v.\+/
 autocmd Filetype typescript setlocal ts=2 sw=2 sts=0 suffixesadd=.ts,.tsx
 autocmd Filetype typescript highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 autocmd Filetype typescript match OverLength /\%121v.\+/
+autocmd Filetype typescriptreact setlocal ts=4 sw=4 sts=0 suffixesadd=.ts,.tsx
+autocmd Filetype typescriptreact highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+autocmd Filetype typescriptreact match OverLength /\%121v.\+/
 
 " TSX files get mapped as typescriptreact
 let g:tagbar_type_typescriptreact = {
