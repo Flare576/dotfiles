@@ -39,7 +39,7 @@ function questmap() {
 }
 
 function zz() {
-  dest=$(_z -e "$@" 2>&1)
+  dest=$(z -e "$@" 2>&1)
   rpg-cli cd "$dest"
   cd "$(rpg-cli pwd)"
 }
