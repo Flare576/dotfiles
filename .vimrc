@@ -73,6 +73,7 @@ set switchbuf=useopen,usetab,uselast
 set backspace=2         " Same as indent, eol, start, allows backspace essentially anywhere in insert mode
 set modeline            " Allows files to define some variables (e.g., filetype)
 set modelines=5         " Modelines need to be within 5 lines of top/bottom
+set textwidth=120       " auto-formatter (gq) width
 set cc=120              " highlights characters over 120 width
 
 " Extra whitespace in yellow
@@ -253,9 +254,9 @@ function RightNote()
 endfunction
 
 " Jira green/red/orange text
-map <silent> <leader>jg E:setlocal indentkeys-=<:><CR>a {color:#14892c}{color}jk7h:setlocal indentkeys+=<:><CR>a
-map <silent> <leader>jr E:setlocal indentkeys-=<:><CR>a {color:#d04437}{color}jk7h:setlocal indentkeys+=<:><CR>a
-map <silent> <leader>jo E:setlocal indentkeys-=<:><CR>a {color:#f79232}{color}jk7h:setlocal indentkeys+=<:><CR>a
+map <silent> <leader>jg E:setlocal indentkeys-=<:><CR>a {color:#14892c}{color}<Esc>7h:setlocal indentkeys+=<:><CR>a
+map <silent> <leader>jr E:setlocal indentkeys-=<:><CR>a {color:#d04437}{color}<Esc>7h:setlocal indentkeys+=<:><CR>a
+map <silent> <leader>jo E:setlocal indentkeys-=<:><CR>a {color:#f79232}{color}<Esc>7h:setlocal indentkeys+=<:><CR>a
 
 " F5 does :e on each buffer, basically a "safe" refresh
 nnoremap <F5> :bufdo e<CR>

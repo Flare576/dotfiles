@@ -11,3 +11,5 @@ fileignoreconfig:
   checksum: 0098e4094d1644944f92ebfb37c7153f7f4150716857009c2774d82dacf83a4a
 - filename: cheat/personal/cloudformation
   checksum: 831a525cb7f160e45196a1a3fd0e75e53fa5422d6f92a8aa206167da7c8473e7
+- filename: .vimrc
+  checksum: 5573157c45c54bb7170d930032f6800a30bde1371ee8a01e0f22ea5fdcd77fbe
