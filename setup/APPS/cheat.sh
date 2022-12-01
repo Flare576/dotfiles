@@ -30,7 +30,7 @@ if [ "$doDestroy" == "true" ]; then
   echo "Removing ~/cheat"
   rm -rf "$HOME/cheat"
   if ! dotRemove cheat "manual"; then
-    rm "$(which cheat)"
+    rm /usr/local/bin/cheat
   fi
   exit
 fi
