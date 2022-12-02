@@ -15,7 +15,7 @@ applications=(
 )
 
 usage="$(basename "$0") [-hvmd]
-Installs tools I want on every machine I work on: ${applications[@]}
+Installs tools I want on every personal I work on: ${applications[@]}
 Options:
   -h Show this help
   -v Display version

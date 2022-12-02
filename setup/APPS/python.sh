@@ -1,6 +1,6 @@
 #!/bin/bash
 source "$(dirname "$0")/../utils.sh"
-usage="$(basename "$0") [-hvdt]
+usage="$(basename "$0") [-hvdtu]
 By default, installs python3. With -t, installs pyenv/pipenv and uses pyenv to install python3.
 Pyenv is a set of scripts which manage active/available versions of Python
 Pipenv is a set of tools that manages project dependencies of Python projects
@@ -9,9 +9,10 @@ Options:
   -v Display version
   -t Installs pyenv, pipenv, and python3 with pyenv
   -d Uninstall Pyenv, Pipenv, and probably your local python install
+  -u Update if installed
 "
 
-while getopts ':hvadmt' option; do
+while getopts ':hvdtu' option; do
   case "$option" in
     h) echo "$usage"
       exit
@@ -22,6 +23,8 @@ while getopts ':hvadmt' option; do
     d) doDestroy="true"
       ;;
     t) useTools="true"
+      ;;
+    u) doUpdate="true"
       ;;
     *) echo "Unknown Option '$option', exiting"
       exit
@@ -44,6 +47,10 @@ if [ "$doDestroy" == "true" ]; then
   else
     dotRemove python3
   fi
+  exit
+fi
+
+if [ "$doUpdate" == "true" ] && ! command -v python3; then
   exit
 fi
 

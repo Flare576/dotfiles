@@ -1,15 +1,16 @@
 #!/bin/bash
 source "$(dirname "$0")/utils.sh"
-usage="$(basename "$0") [-hvad] [location]
+usage="$(basename "$0") [-hvdu] [location]
 Installs scripts I've written. Some are setup as homebrew formula, some are
 collected in a generic project. If no path is provided, installs to ~/scripts
 Options:
   -h Show this help
   -v Display version
   -d Unlink files and Uninstall zsh/omz/plugins
+  -u Update if installed
 "
 
-while getopts ':hvadm' option; do
+while getopts ':hvdu' option; do
   case "$option" in
     h) echo "$usage"
       exit
@@ -18,6 +19,8 @@ while getopts ':hvadm' option; do
       exit
       ;;
     d) doDestroy="true"
+      ;;
+    u) doUpdate="true"
       ;;
     *) echo "Unknown Option '$option', exiting"
       exit
@@ -48,6 +51,10 @@ if [ "$doDestroy" == "true" ]; then
   # TODO: Uncomment this before commit, finish the removal stuff
   # rm -rf "$FLARE_SCRIPTS"
   # rm -rf "$config"
+  exit
+fi
+
+if [ "$doUpdate" == "true" ] && ! [ -d "$INSTALL" ]; then
   exit
 fi
 

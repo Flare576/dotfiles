@@ -1,13 +1,14 @@
 #!/bin/bash
 source "$(dirname "$0")/../utils.sh"
-usage="$(basename "$0") [-hvd]
+usage="$(basename "$0") [-hvdu]
 Links dotfile configs and installs/updates Tmux and associated plugins.
 Tmux, or Terminal Multiplexer, lets you setup windows and panes in a terminal session, similar to iTerm but for any terminal emulator.
   -h Show this help
   -v Display version
-  -d Uninstall tmux/plugins
+  -d Uninstall
+  -u Update if installed
 "
-while getopts ':hvd' option; do
+while getopts ':hvdu' option; do
   case "$option" in
     h) echo "$usage"
       exit
@@ -16,6 +17,8 @@ while getopts ':hvd' option; do
       exit
       ;;
     d) doDestroy="true"
+      ;;
+    u) doUpdate="true"
       ;;
     *) echo "Unknown Option '$option', exiting"
       exit
@@ -28,6 +31,10 @@ if [ "$doDestroy" == "true" ]; then
   echo "Removing ~/.tmux/ and ~/.tmux.conf"
   rm -rf "$HOME/.tmux" "$HOME/.tmux.conf"
   dotRemove tmux
+  exit
+fi
+
+if [ "$doUpdate" == "true" ] && ! command -v tmux; then
   exit
 fi
 

@@ -30,8 +30,7 @@ bash $HOME/dotfiles/setup/OSX/systemSettings.sh
 bash $HOME/dotfiles/setup/OSX/cleanDock.sh
 
 # Install applications
-bash $HOME/dotfiles/setup/APPS/set_core.sh
-bash $HOME/dotfiles/setup/APPS/set_work.sh
+bash $HOME/dotfiles/setup/installer.sh -p "work"
 
 # Setup application
 bash $HOME/dotfiles/setup/OSX/casks.sh

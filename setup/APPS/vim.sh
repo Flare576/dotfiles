@@ -1,17 +1,18 @@
 #!/bin/bash
 source "$(dirname "$0")/../utils.sh"
-usage="$(basename "$0") [-hvadm]
+usage="$(basename "$0") [-hvadmu]
 Links dotfile configs and installs or updates vim and plugins by default.
 Vim is a command-line text editor that frustrates git users.
 Options:
   -h Show this help
   -v Display version
   -a Installs all plugins (unattended mode)
-  -d Uninstall Vim/plugins
+  -d Uninstall
   -m Only install/update vim and theme/functionality plugins
+  -u Update if installed
 "
 
-while getopts ':hvadm' option; do
+while getopts ':hvadmu' option; do
   case "$option" in
     h) echo "$usage"
       exit
@@ -25,6 +26,8 @@ while getopts ':hvadm' option; do
       ;;
     m) minimal="true"
       ;;
+    u) doUpdate="true"
+      ;;
     *) echo "Unknown Option '$option', exiting"
       exit
       ;;
@@ -32,10 +35,10 @@ while getopts ':hvadm' option; do
 done
 shift $((OPTIND -1))
 
-check="$allPlugins$doDestroy$minimal"
+check="$allPlugins$doDestroy$minimal$doUpdate"
 
 if [ -n "$check" ] && [ "$check" != "true" ]; then
-  echo "-a, -d, and -m are mutually exclusive; use one only"
+  echo "-a, -d, -m, and -u are mutually exclusive; use one only"
   exit
 fi
 
@@ -43,6 +46,21 @@ if [ "$doDestroy" == "true" ]; then
   dotRemove vim
   echo "Removing vim plugins"
   rm -rf "$HOME/.vim"
+
+  thesDir="$XDG_DATA_HOME"
+  [ -z "$thesDir" ] && thesDir="$HOME/.local/share"
+  if [ -f "$thesDir/thesaurus.txt" ]; then
+    echo "Deleting thesaurus..."
+    rm -rf "$thesDir/thesaurus.txt"
+  fi
+
+  if [ -n "$(pip3 --disable-pip-version-check list | grep jedi)" ]; then
+    pip3 uninstall -y jedi
+  fi
+  exit
+fi
+
+if [ "$doUpdate" == "true" ] && ! command -v vim; then
   exit
 fi
 
@@ -93,8 +111,9 @@ mkdir -p "$plugins"
 pushd "$plugins" &> /dev/null || exit
 
 function vimInstall() {
-  cloneOrUpdateGit "$1"
   project="${1#*/}"
+  [ "$doUpdate" == "true" ] && ! [ -d "$project" ] && return
+  cloneOrUpdateGit "$1"
   vim -u NONE -c "helptags $project/doc" -c q
 }
 
@@ -117,7 +136,7 @@ if [ -z "$check" ] ; then
   read -rp "Minimal Vim? (y)es/(n)o/(a)ll: " miniV
 elif [ "$minimal" == "true" ]; then
   miniV='y'
-elif [ "$allPlugins" == "true" ]; then
+elif [ "$allPlugins$doUpdate" == "true" ]; then
   miniV='a'
 fi
 checkAll

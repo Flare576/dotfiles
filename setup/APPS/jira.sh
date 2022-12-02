@@ -1,16 +1,16 @@
 #!/bin/bash
 # https://github.com/Netflix-Skunkworks/go-jira
 source "$(dirname "$0")/../utils.sh"
-communityDir=$HOME/dotfiles/cheat/community
 
-usage="$(basename "$0") [-hvd]
-Links Cheat configs and Installs/Upgrades Cheat and community cheat sheets.
-Cheat is a tool that prints out notes you've taken (or borrowed) about commands, tools, etc. - try 'cheat tar'
+usage="$(basename "$0") [-hvdu]
+Links Jira configs and Installs/Upgrades Go-Jira.
+Go-Jira is a CLI for Atlassian's Jira project management system.
   -h Show this help
   -v Display version
-  -d Uninstall cheat
+  -d Uninstall
+  -u Update if installed
 "
-while getopts ':hvd' option; do
+while getopts ':hvdu' option; do
   case "$option" in
     h) echo "$usage"
       exit
@@ -19,6 +19,8 @@ while getopts ':hvd' option; do
       exit
       ;;
     d) doDestroy="true"
+      ;;
+    d) doUpdate="true"
       ;;
     *) echo "Unknown Option '$option', exiting"
       exit
@@ -32,6 +34,10 @@ if [ "$doDestroy" == "true" ]; then
   if ! dotRemove flare576/scripts/jira-cli "manual"; then
     rm /usr/local/bin/jira
   fi
+  exit
+fi
+
+if [ "$doUpdate" == "true" ] && ! command -v jira; then
   exit
 fi
 

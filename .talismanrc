@@ -6,7 +6,7 @@ fileignoreconfig:
 - filename: .tmux.conf
   checksum: ac70a628951174f9e1ba0e8800c9829d8bfd187d08d25a7448be2e0729c0a94c
 - filename: .zshenv
-  checksum: 56f255e208bbc0775c16e03ef2af54408f48f19c8ad1fc421ef42b63f9d62701
+  checksum: cbd15acf9cad0110ef0dbd9b57dd5c7e1aa87f36bc212e59c2f226ddcce277f3
 - filename: .zshrc
   checksum: 0098e4094d1644944f92ebfb37c7153f7f4150716857009c2774d82dacf83a4a
 - filename: cheat/personal/cloudformation

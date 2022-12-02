@@ -38,7 +38,7 @@ function dotInstall() {
 
   if command -v brew &> /dev/null ; then
     echo "Installing latest version of $brewPackage"
-    HOMEBREW_NO_INSTALL_UPGRADE=0 brew install "$brewPackage"
+    brew install "$brewPackage"
   elif command -v apt-get &> /dev/null ; then
     [ "$linuxPackage" == "manual" ] && return 1
     echo "Installing latest version of $linuxPackage"

@@ -1,14 +1,15 @@
 #!/bin/bash
 source "$(dirname "$0")/../utils.sh"
 
-usage="$(basename "$0") [-hvd]
+usage="$(basename "$0") [-hvdu]
 Installs/Updates NVM
 NVM is the Node Version Manager
   -h Show this help
   -v Display version
-  -d Uninstall NVM
+  -d Uninstall
+  -u Update if installed
 "
-while getopts ':hvd' option; do
+while getopts ':hvdu' option; do
   case "$option" in
     h) echo "$usage"
       exit
@@ -17,6 +18,8 @@ while getopts ':hvd' option; do
       exit
       ;;
     d) doDestroy="true"
+      ;;
+    u) doUpdate="true"
       ;;
     *) echo "Unknown Option '$option', exiting"
       exit
@@ -30,6 +33,10 @@ if [ "$doDestroy" == "true" ]; then
     echo "Removing ~/.nvm"
     rm -rf "$HOME/.nvm"
   fi
+  exit
+fi
+
+if [ "$doUpdate" == "true" ] && ! command -v nvm; then
   exit
 fi
 

@@ -2,14 +2,15 @@
 source "$(dirname "$0")/../utils.sh"
 communityDir=$HOME/dotfiles/cheat/community
 
-usage="$(basename "$0") [-hvd]
+usage="$(basename "$0") [-hvdu]
 Links Cheat configs and Installs/Upgrades Cheat and community cheat sheets.
 Cheat is a tool that prints out notes you've taken (or borrowed) about commands, tools, etc. - try 'cheat tar'
   -h Show this help
   -v Display version
-  -d Uninstall cheat
+  -d Uninstall
+  -u Update if installed
 "
-while getopts ':hvd' option; do
+while getopts ':hvdu' option; do
   case "$option" in
     h) echo "$usage"
       exit
@@ -18,6 +19,8 @@ while getopts ':hvd' option; do
       exit
       ;;
     d) doDestroy="true"
+      ;;
+    u) doUpdate="true"
       ;;
     *) echo "Unknown Option '$option', exiting"
       exit
@@ -32,6 +35,10 @@ if [ "$doDestroy" == "true" ]; then
   if ! dotRemove cheat "manual"; then
     rm /usr/local/bin/cheat
   fi
+  exit
+fi
+
+if [ "$doUpdate" == "true" ] && ! command -v cheat; then
   exit
 fi
 

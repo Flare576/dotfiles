@@ -1,6 +1,6 @@
 #!/bin/bash
 source "$(dirname "$0")/../utils.sh"
-usage="$(basename "$0") [-hvd]
+usage="$(basename "$0") [-hvdu]
 Links dotfile configs and installs or updates zsh, omz, and plugins by default.
 ZSH is an alternative shell to bash that supports many more features, plugins, and other niceties.
 OMZ (oh my zsh) is a customization framework for Zsh
@@ -8,9 +8,10 @@ Options:
   -h Show this help
   -v Display version
   -d Unlink files and Uninstall zsh/omz/plugins
+  -u Update if installed
 "
 
-while getopts ':hvadm' option; do
+while getopts ':hvdu' option; do
   case "$option" in
     h) echo "$usage"
       exit
@@ -19,6 +20,8 @@ while getopts ':hvadm' option; do
       exit
       ;;
     d) doDestroy="true"
+      ;;
+    u) doUpdate="true"
       ;;
     *) echo "Unknown Option '$option', exiting"
       exit
@@ -60,6 +63,10 @@ if [ "$doDestroy" == "true" ]; then
   exit
 fi
 
+if [ "$doUpdate" == "true" ] && ! command -v omz; then
+  exit
+fi
+
 dotInstall zsh
 
 echo "Setting up Oh My Zshell, Tools, Themes, and Plugins for ZSH"
@@ -96,12 +103,14 @@ do
   ln -fs "$HOME/dotfiles/$link" "$HOME/$link"
 done
 
-echo "Making Zsh default"
-if [ "$isLinux" == "true" ] ; then
-  # using sudo because most users can't (and shouldn't) direct-access /etc/shells
-  which zsh | sudo tee -a /etc/shells
-  chsh -s "$(which zsh)"
-else
-  # dscl is an OSX tool that updates the same underlying system as 'chsh' and OSX doesn't require updating /etc/shells
-  sudo dscl . -create "/Users/$USER" UserShell "$(which zsh)"
+if [ -z "$doUpdate" ]; then
+  echo "Making Zsh default"
+  if [ "$isLinux" == "true" ] ; then
+    # using sudo because most users can't (and shouldn't) direct-access /etc/shells
+    which zsh | sudo tee -a /etc/shells
+    chsh -s "$(which zsh)"
+  else
+    # dscl is an OSX tool that updates the same underlying system as 'chsh' and OSX doesn't require updating /etc/shells
+    sudo dscl . -create "/Users/$USER" UserShell "$(which zsh)"
+  fi
 fi
