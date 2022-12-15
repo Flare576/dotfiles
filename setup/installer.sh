@@ -95,7 +95,7 @@ Options:
   -v Display version
   -p Profile name [all, work, personal, remote]
   -m Install minimal versions of tools/apps
-  -d Unlink files and Uninstall zsh/omz/plugins
+  -d Unlink files and Uninstall tools/apps
   -u Update installed applications
 "
 

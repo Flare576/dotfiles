@@ -26,9 +26,9 @@ cd $HOME
 
 # For now, not altering setupGit.sh as it's configured to also be stand-alone; just nuke the certs above
 
-bash /Users/flare576/dotfiles/setup/OSX/systemSettings.sh "delete"
-bash $HOME/dotfiles/setup/APPS/set_work.sh -d
-bash $HOME/dotfiles/setup/linkFiles.sh "delete"
+bash /Users/flare576/dotfiles/setup/OSX/systemSettings.sh -d
+bash $HOME/dotfiles/setup/installer.sh -d
+bash $HOME/dotfiles/setup/linkFiles.sh -d
 
 [ -f "$HOME/personaldot/setup/decom.sh" ] && bash $HOME/personaldot/setup/decom.sh
 rm -rf dotfiles .ssh cheat personaldot .config

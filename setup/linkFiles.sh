@@ -1,4 +1,37 @@
 #!/bin/bash
+source "$(dirname "$0")/../utils.sh"
+
+usage="$(basename "$0") [-hvdu]
+Sets up simlinks for tools/processes not explicitly handled in the APPS/* scripts.
+
+- ~/.doNotCommit.d
+- ~/.gitconfig.personal
+- ~/.gitconfig
+- ~/.gitignore
+- ~/.config/lazydocker
+- ~/.config/ctags
+
+  -h Show this help
+  -v Display version
+  -d Uninstall
+"
+while getopts ':hvd' option; do
+  case "$option" in
+    h) echo "$usage"
+      exit
+      ;;
+    v) echo "$VERSION"
+      exit
+      ;;
+    d) doDestroy="true"
+      ;;
+    *) echo "Unknown Option '$option', exiting"
+      exit
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
 # Setup other symlinks
 links=(
   .doNotCommit.d
@@ -12,7 +45,7 @@ links=(
   # .config/git-clone/config
 )
 
-if [ "$1" = "delete" ]; then
+if [ "$doDestroy" == "true" ]; then
   echo "Removing symlinks"
   for link in "${links[@]}";
   do
