@@ -50,7 +50,7 @@ if [ "$doDestroy" == "true" ]; then
   rm -rf .oh-my-zsh .z .zcomp* &> /dev/null
   popd &> /dev/null || exit
 
-  if [ "$isLinux" -eq "true" ]; then
+  if [ "$isLinux" == "true" ]; then
     echo "Reverting to bash, removing zsh from shells listing"
     chsh -s "$(which bash)"
     sudo sed -i"" -e "/\/zsh/d" "/etc/shells"
