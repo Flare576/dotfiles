@@ -26,7 +26,7 @@ cd $HOME
 
 # For now, not altering setupGit.sh as it's configured to also be stand-alone; just nuke the certs above
 
-bash /Users/flare576/dotfiles/setup/OSX/systemSettings.sh -d
+bash $HOME/dotfiles/setup/OSX/systemSettings.sh -d
 bash $HOME/dotfiles/setup/installer.sh -d
 bash $HOME/dotfiles/setup/linkFiles.sh -d
 
