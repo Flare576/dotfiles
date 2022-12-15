@@ -33,7 +33,7 @@ bash $HOME/dotfiles/setup/linkFiles.sh -d
 [ -f "$HOME/personaldot/setup/decom.sh" ] && bash $HOME/personaldot/setup/decom.sh
 rm -rf dotfiles .ssh cheat personaldot .config
 
-brew remove --force $(brew list --formula)
+brew remove --force --ignore-dependencies $(brew list --formula)
 brew remove --cask --force $(brew list)
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall.sh)"
