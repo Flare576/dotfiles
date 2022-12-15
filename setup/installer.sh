@@ -167,7 +167,6 @@ done
 params="$minimal $doDestroy $doUpdate"
 for script in "${scripted[@]}"
 do
-  echo "calling with $params"
     bash "$HOME/dotfiles/setup/APPS/$script" $params
 done
 
