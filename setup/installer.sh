@@ -164,10 +164,11 @@ do
   fi
 done
 
-params="$minimal $doDelete $doUpdate"
+params="$minimal $doDestroy $doUpdate"
 for script in "${scripted[@]}"
 do
-    bash "$HOME/dotfiles/setup/APPS/$script" "$params"
+  echo "calling with $params"
+    bash "$HOME/dotfiles/setup/APPS/$script" $params
 done
 
 # Jetbrains Mono is a great font for terminals; install it so it's available on this system
