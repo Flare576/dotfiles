@@ -1,5 +1,5 @@
 #!/bin/bash
-source "$(dirname "$0")/utils.sh"
+source "$(dirname "$0")/../utils.sh"
 usage="$(basename "$0") [-hvdu] [location]
 Installs scripts I've written. Some are setup as homebrew formula, some are
 collected in a generic project. If no path is provided, installs to ~/scripts
