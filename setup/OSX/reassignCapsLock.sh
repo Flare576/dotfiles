@@ -1,5 +1,6 @@
 #!/bin/bash
 # "Inspired" by https://apple.stackexchange.com/a/122573
+# Ventura changes how this is done https://support.apple.com/guide/mac-help/change-the-behavior-of-the-modifier-keys-mchlp1011/mac
 
 if [[ "$1" == "delete" ]]; then
   exit
