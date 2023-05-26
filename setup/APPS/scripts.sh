@@ -6,7 +6,7 @@ collected in a generic project. If no path is provided, installs to ~/scripts
 Options:
   -h Show this help
   -v Display version
-  -d Unlink files and Uninstall zsh/omz/plugins
+  -d Deletes local repo and uninstalls scripts
   -u Update if installed
 "
 
@@ -39,7 +39,7 @@ brews=(
   flare576/scripts/switch-theme   # tool for changing tmux, vim, bat, zhs, etc. themes
 )
 
-config="$HOME/dotfiles/.doNotCommit.d/.doNotCommit.scripts2"
+config="$HOME/dotfiles/.doNotCommit.d/.doNotCommit.scripts"
 INSTALL="$HOME/scripts"
 if [ -n "$1" ]; then
   INSTALL="$1"
@@ -48,9 +48,14 @@ elif [ -n "$FLARE_SCRIPTS" ]; then
 fi
 
 if [ "$doDestroy" == "true" ]; then
-  # TODO: Uncomment this before commit, finish the removal stuff
-  # rm -rf "$FLARE_SCRIPTS"
-  # rm -rf "$config"
+  if test $(which brew); then
+    for formula in "${brews[@]}"
+    do
+      dotRemove "$formula"
+    done
+  fi
+  rm -rf "$FLARE_SCRIPTS"
+  rm -rf "$config"
   exit
 fi
 
