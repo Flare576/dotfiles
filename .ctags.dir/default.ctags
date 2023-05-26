@@ -1,6 +1,0 @@
---exclude=node_modules
---exclude=coverage
---exclude=codecoverage
---exclude=dist
---exclude=js
---exclude=__tests__

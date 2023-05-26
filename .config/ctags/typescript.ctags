@@ -1,0 +1,2 @@
+# typescriptreact files don't get included by default
+--map-TypeScript=+.tsx

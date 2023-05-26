@@ -1,4 +1,46 @@
 #!/bin/bash
+source "$(dirname "$0")/../utils.sh"
+
+usage="$(basename "$0") [-hvdu]
+By default, makes several changes to system settings. With -d, resets to 'original' settings.
+
+ - Move dock from bottom to left
+ - Adds hot-corner screen saver to bottom left
+ - Enables showing hidden folders in Finder
+ - Shows all files in Finder
+ - Disable 'Swipe to scroll'
+ - Enable 'Tap to click'
+ - Enable showing battery percent in staus bar (broken)
+ - Allow tabbing in dialog boxes
+ - Set hold-to-repeat time for keys from 25 to 15
+ - Set repeat rate from 6 to 1
+ - Disable Smart-Quotes
+ - Set show-scrollbars from 'Automatic' to 'WhenScrolling'
+ - Display sound icon in status bar by default
+
+  -h Show this help
+  -v Display version
+  -d Revert changes
+"
+while getopts ':hvdu' option; do
+  case "$option" in
+    h) echo "$usage"
+      exit
+      ;;
+    v) echo "$VERSION"
+      exit
+      ;;
+    d) doDestroy="true"
+      ;;
+    u) doUpdate="true"
+      ;;
+    *) echo "Unknown Option '$option', exiting"
+      exit
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
 dockside="left"
 autoHide="true"
 hotCornerAction=5
@@ -13,7 +55,7 @@ keyRepeat=1
 smartQuotes='false'
 scrollbars='WhenScrolling'
 showSound="true"
-if [[ "$1" == "delete" ]]; then
+if [ "$doDestroy" == "true" ]; then
   dockside="bottom"
   autoHide="false"
   hotCornerAction=0

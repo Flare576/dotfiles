@@ -56,8 +56,7 @@ alias tm='tmux new-session'
 
 alias pi='pipenv'
 alias py='pipenv run python'
-# TODO: make this command call other scripts to update (tmux, vim, jira, omz, casks?)
-alias brewup="$HOME/dotfiles/setup/homebrew.sh update"
+alias sysup="$HOME/dotfiles/setup/installer.sh -u"
 # Leaving this as a reminder to never do this
 # alias python='echo "maybe try pi/py..."'
 

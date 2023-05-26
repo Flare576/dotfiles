@@ -73,6 +73,7 @@ set switchbuf=useopen,usetab,uselast
 set backspace=2         " Same as indent, eol, start, allows backspace essentially anywhere in insert mode
 set modeline            " Allows files to define some variables (e.g., filetype)
 set modelines=5         " Modelines need to be within 5 lines of top/bottom
+set textwidth=120       " auto-formatter (gq) width
 set cc=120              " highlights characters over 120 width
 
 " Extra whitespace in yellow
@@ -253,9 +254,9 @@ function RightNote()
 endfunction
 
 " Jira green/red/orange text
-map <silent> <leader>jg E:setlocal indentkeys-=<:><CR>a {color:#14892c}{color}jk7h:setlocal indentkeys+=<:><CR>a
-map <silent> <leader>jr E:setlocal indentkeys-=<:><CR>a {color:#d04437}{color}jk7h:setlocal indentkeys+=<:><CR>a
-map <silent> <leader>jo E:setlocal indentkeys-=<:><CR>a {color:#f79232}{color}jk7h:setlocal indentkeys+=<:><CR>a
+map <silent> <leader>jg E:setlocal indentkeys-=<:><CR>a {color:#14892c}{color}<Esc>7h:setlocal indentkeys+=<:><CR>a
+map <silent> <leader>jr E:setlocal indentkeys-=<:><CR>a {color:#d04437}{color}<Esc>7h:setlocal indentkeys+=<:><CR>a
+map <silent> <leader>jo E:setlocal indentkeys-=<:><CR>a {color:#f79232}{color}<Esc>7h:setlocal indentkeys+=<:><CR>a
 
 " F5 does :e on each buffer, basically a "safe" refresh
 nnoremap <F5> :bufdo e<CR>
@@ -265,7 +266,7 @@ nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>ez :tabnew ~/dotfiles/.zshrc<CR>:spl ~/dotfiles/.zshenv<CR>
 nnoremap <leader>et :tabnew ~/dotfiles/.tmux.conf<CR>
-nnoremap <leader>ej :tabnew ~/dotfiles/.jira.d/config.yml<CR>
+nnoremap <leader>ej :tabnew ~/.jira.d/config.yml<CR>
 nnoremap <leader>ed :tabnew ~/dotfiles<CR>
 
 "############################## Macros ###########
@@ -287,32 +288,28 @@ autocmd Filetype javascript highlight OverLength ctermbg=red ctermfg=white guibg
 autocmd Filetype javascript match OverLength /\%121v.\+/
 
 "########################## TypeScript
-" If you get errors, run the following command:
-" npm install --global git+https://github.com/Perlence/tstags.git
 autocmd Filetype typescript setlocal ts=2 sw=2 sts=0 suffixesadd=.ts,.tsx
 autocmd Filetype typescript highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 autocmd Filetype typescript match OverLength /\%121v.\+/
+autocmd Filetype typescriptreact setlocal ts=4 sw=4 sts=0 suffixesadd=.ts,.tsx
+autocmd Filetype typescriptreact highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+autocmd Filetype typescriptreact match OverLength /\%121v.\+/
 
-let g:tagbar_type_typescript = {
-  \ 'ctagsbin' : 'tstags',
-  \ 'ctagsargs' : '-f-',
+" TSX files get mapped as typescriptreact
+let g:tagbar_type_typescriptreact = {
+  \ 'ctagstype': 'typescript',
   \ 'kinds': [
-    \ 'e:enums:0:1',
-    \ 'f:function:0:1',
-    \ 't:typealias:0:1',
-    \ 'M:Module:0:1',
-    \ 'I:import:0:1',
-    \ 'i:interface:0:1',
-    \ 'C:class:0:1',
-    \ 'm:method:0:1',
-    \ 'p:property:0:1',
-    \ 'v:variable:0:1',
-    \ 'c:const:0:1',
-  \ ],
-  \ 'sort' : 0
+    \ 'c:classes',
+    \ 'C:const',
+    \ 'n:modules',
+    \ 'f:functions',
+    \ 'v:variables',
+    \ 'v:varlambdas',
+    \ 'm:members',
+    \ 'i:interfaces',
+    \ 'e:enums',
+  \ ]
 \ }
-
-
 "########################## Python
 
 autocmd BufRead python
