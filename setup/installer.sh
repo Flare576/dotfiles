@@ -147,13 +147,9 @@ do
       "the_silver_searcher")
         command -v ag && dotInstall "$app" "silversearcher-ag"
         ;;
-      *) dotInstall "$app"
+      *) command -v "$app" && dotInstall "$app"
         ;;
     esac
-    if command -v "$app"; then
-      echo "found app"
-      dotInstall "$app"
-    fi
   else # Install
     case "$app" in
       "the_silver_searcher") dotInstall "$app" "silversearcher-ag"
