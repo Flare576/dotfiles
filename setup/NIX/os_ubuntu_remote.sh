@@ -1,7 +1,7 @@
 #!/bin/bash
 # Make working on images suck less - make them feel like $HOME. Only expectation is that curl was used to retrieve script
 # from initial prompt:
-# apt-get update &> /dev/null;apt-get install -y --no-install-recommends ca-certificates curl &> /dev/null;bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/setup/os_ubuntu_no_homebrew.sh)"
+# apt-get update &> /dev/null;apt-get install -y --no-install-recommends ca-certificates curl &> /dev/null;bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/setup/NIX/os_ubuntu_remote.sh)"
 
 starting=$(date +%s%N)
 apt-get update &> /dev/null
@@ -11,7 +11,7 @@ apt-get install -y git sudo &> /dev/null
 # Pull the rest of the project
 cd $HOME
 echo "Cloning dotfiles"
-# git clone -q https://github.com/Flare576/dotfiles.git
+git clone -q https://github.com/Flare576/dotfiles.git
 
 # Install safety precautions around this repo
 bash $HOME/dotfiles/setup/secureRepo.sh
@@ -21,7 +21,7 @@ echo "Linking dotfiles"
 bash $HOME/dotfiles/setup/linkFiles.sh
 
 # Setup Apps
-bash $HOME/dotfiles/setup/APPS/set_core.sh -m
+bash $HOME/dotfiles/setup/installer.sh -p remote -m
 
 # Finish with a CTA!
 ending=$(date +%s%N)
