@@ -266,7 +266,7 @@ nnoremap <leader>ev :tabnew $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>ez :tabnew ~/dotfiles/.zshrc<CR>:spl ~/dotfiles/.zshenv<CR>
 nnoremap <leader>et :tabnew ~/dotfiles/.tmux.conf<CR>
-nnoremap <leader>ej :tabnew ~/dotfiles/.jira.d/config.yml<CR>
+nnoremap <leader>ej :tabnew ~/.jira.d/config.yml<CR>
 nnoremap <leader>ed :tabnew ~/dotfiles<CR>
 
 "############################## Macros ###########
