@@ -36,6 +36,7 @@ shift $((OPTIND -1))
 if [ "$doDestroy" == "true" ]; then
   echo "Removing ~/cheat"
   rm -rf "$HOME/cheat"
+  rm -rf "$communityDir"
   if ! dotRemove cheat "manual"; then
     rm /usr/local/bin/cheat
   fi

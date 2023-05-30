@@ -46,11 +46,14 @@ if [ "$doDestroy" == "true" ]; then
   echo "Removing vim plugins"
   rm -rf "$HOME/.vim"
 
+  echo "Removing vimrc"
+  rm -f "$HOME/.vimrc"
+
   thesDir="$XDG_DATA_HOME"
   [ -z "$thesDir" ] && thesDir="$HOME/.local/share"
   if [ -f "$thesDir/thesaurus.txt" ]; then
     echo "Deleting thesaurus..."
-    rm -rf "$thesDir/thesaurus.txt"
+    rm -f "$thesDir/thesaurus.txt"
   fi
 
   if [ -n "$(pip3 --disable-pip-version-check list | grep jedi)" ]; then
