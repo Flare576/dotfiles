@@ -78,11 +78,15 @@ personal_scripted=(
 
 remote_simple=(
   bat
+  git
+  hub
+  jq
   the_silver_searcher
   universal-ctags
 )
 remote_scripted=(
   cheat.sh
+  omz.sh
   scripts.sh
   tmux.sh
   vim.sh
