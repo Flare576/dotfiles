@@ -175,8 +175,10 @@ if [ -n "$doDestroy" ]; then
     brew uninstall --cask homebrew/cask-fonts/font-jetbrains-mono
   fi
 else
-  if [ "$isLinux" == "true" ] && [ "$profile" != "remote" ]; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+  if [ "$isLinux" == "true" ]; then
+    if [ "$profile" != "remote" ]; then
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+    fi
   elif [[ "$1" == "update" ]]; then
     if brew ls --versions homebrew/cask-fonts/font-jetbrains-mono >/dev/null; then
       brew upgrade --cask homebrew/cask-fonts/font-jetbrains-mono
