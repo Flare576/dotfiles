@@ -9,8 +9,7 @@ Options:
   -d Deletes local repo and uninstalls scripts
   -u Update if installed
 "
-
-while getopts ':hvdu' option; do
+while getopts ':hvadmu' option; do
   case "$option" in
     h) echo "$usage"
       exit
@@ -21,6 +20,10 @@ while getopts ':hvdu' option; do
     d) doDestroy="true"
       ;;
     u) doUpdate="true"
+      ;;
+    a) echo "Ignoring -a, no all settings"
+      ;;
+    m) echo "Ignoring -m, no minimal settings"
       ;;
     *) echo "Unknown Option '$option', exiting"
       exit

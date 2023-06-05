@@ -11,7 +11,6 @@ Options:
   -m Only install/update vim and theme/functionality plugins
   -u Update if installed
 "
-
 while getopts ':hvadmu' option; do
   case "$option" in
     h) echo "$usage"

@@ -92,18 +92,19 @@ remote_scripted=(
   vim.sh
 )
 
-usage="$(basename "$0") [-hvmd]
+usage="$(basename "$0") [-hvamdpu]
 Installs tools/applications based on -p Profile
 Options:
   -h Show this help
   -v Display version
   -p Profile name [all, work, personal, remote]
+  -a Install all features of tools/apps
   -m Install minimal versions of tools/apps
   -d Unlink files and Uninstall tools/apps
   -u Update installed applications
 "
 
-while getopts ':hvdmp:u' option; do
+while getopts ':hvadmp:u' option; do
   case "$option" in
     h) echo "$usage"
       exit
@@ -112,6 +113,8 @@ while getopts ':hvdmp:u' option; do
       exit
       ;;
     d) doDestroy="-d"
+      ;;
+    a) all="-a"
       ;;
     m) minimal="-m"
       ;;
@@ -164,7 +167,7 @@ do
   fi
 done
 
-params="$minimal $doDestroy $doUpdate"
+params="$all $minimal $doDestroy $doUpdate"
 for script in "${scripted[@]}"
 do
     bash "$HOME/dotfiles/setup/APPS/$script" $params

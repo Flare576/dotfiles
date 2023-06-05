@@ -7,12 +7,11 @@ Pipenv is a set of tools that manages project dependencies of Python projects
 Options:
   -h Show this help
   -v Display version
-  -t Installs pyenv, pipenv, and python3 with pyenv
+  -a Installs pyenv, pipenv, and python3 with pyenv
   -d Uninstall Pyenv, Pipenv, and probably your local python install
   -u Update if installed
 "
-
-while getopts ':hvdtu' option; do
+while getopts ':hvadmu' option; do
   case "$option" in
     h) echo "$usage"
       exit
@@ -22,9 +21,11 @@ while getopts ':hvdtu' option; do
       ;;
     d) doDestroy="true"
       ;;
-    t) useTools="true"
+    a) doAll="true"
       ;;
     u) doUpdate="true"
+      ;;
+    m) echo "Ignoring -m, no minimal settings"
       ;;
     *) echo "Unknown Option '$option', exiting"
       exit
@@ -54,7 +55,7 @@ if [ "$doUpdate" == "true" ] && ! command -v python3; then
   exit
 fi
 
-if [ "$useTools" == "true" ]; then
+if [ "$doAll" == "true" ]; then
   if ! dotInstall pyenv "manual"; then
     echo "Installing Python build dependencies"
     sudo apt-get update -qq;
