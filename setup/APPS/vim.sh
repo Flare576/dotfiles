@@ -27,7 +27,7 @@ while getopts ':hvadmu' option; do
       ;;
     u) doUpdate="true"
       ;;
-    *) echo "Unknown Option '$option', exiting"
+    *) echo "Unknown Option '$OPTARG', exiting"
       exit
       ;;
   esac

@@ -25,7 +25,7 @@ while getopts ':hvadmu' option; do
       ;;
     m) echo "Ignoring -m, no minimal settings"
       ;;
-    *) echo "Unknown Option '$option', exiting"
+    *) echo "Unknown Option '$OPTARG', exiting"
       exit
       ;;
   esac
