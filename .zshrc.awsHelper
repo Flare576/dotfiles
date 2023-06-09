@@ -7,7 +7,7 @@
 
 # Login to AWS ADFS
 awslogin () {
-  if [[ "$1" == *"h"* ]]; then
+  if [[ "$1" == "-h" ]]; then
     echo "$(basename "$0") [AWS_PROFILE]"
     return 0
   fi
@@ -17,7 +17,7 @@ awslogin () {
 
 # Auth w/ Docker via AWS
 awsdocker () {
-  if [[ "$1" == *"h"* ]]; then
+  if [[ "$1" == "-h" ]]; then
     echo "$(basename "$0") You must have AWS_DOCKER_PROFILE and AWS_DOCKER_SERVER set"
     return 0
   fi
@@ -26,8 +26,8 @@ awsdocker () {
 # Get Secrets
 # Note: Set $AWS_PROFILE to avoid second arg: try `asp` from the "aws" oh-my-zsh plugin!
 awssecret () {
-  if [[ "$1" == *"h"* ]]; then
-    echo "$(basename "$0") AWS_SECRET_NAME [AWS_PROFILE]]"
+  if [[ "$1" == "-h" ]]; then
+    echo "$(basename "$0") AWS_SECRET_NAME [AWS_PROFILE]"
     return 0
   fi
   if [ -z "$1" ]; then
@@ -39,8 +39,8 @@ awssecret () {
 }
 
 awsparameter () {
-  if [[ "$1" == *"h"* ]]; then
-    echo "$(basename "$0") AWS_PARAMETER_NAME [AWS_PROFILE]]"
+  if [[ "$1" == "-h" ]]; then
+    echo "$(basename "$0") AWS_PARAMETER_NAME [AWS_PROFILE]"
     return 0
   fi
   if [ -z "$1" ]; then
@@ -53,7 +53,7 @@ awsparameter () {
 
 # Get Keys
 awskeys () {
-  if [[ "$1" == *"h"* ]]; then
+  if [[ "$1" == "-h" ]]; then
     echo "$(basename "$0") [ARN [SESSION_NAME]]"
     return 0
   fi
