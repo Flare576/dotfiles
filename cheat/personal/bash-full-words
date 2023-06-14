@@ -1,0 +1,27 @@
+#!/bin/bash
+# Based on https://stackoverflow.com/questions/22025793/using-getopts-to-pick-up-whole-word-flags
+
+while [ $# -gt 0 ] ; do
+  case $1 in
+    -s | --state) S="$2"
+      shift 2
+      ;;
+    -u | --user) U="$2"
+      shift 2
+      ;;
+    -a | --aarg) A="$2"
+      shift 2
+      ;;
+    -b | --barg) B="$2"
+      shift 2
+      ;;
+    -* ) echo "Unknown Option $1, exiting"
+      exit
+      ;;
+    * ) # End of options
+      break
+      ;;
+  esac
+done
+
+echo $S $U, $A $B $@
