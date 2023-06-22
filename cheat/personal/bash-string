@@ -5,8 +5,10 @@ https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.htm
 also Bash RegEx
 https://stackoverflow.com/questions/1891797/capturing-groups-from-a-grep-regex
 
-: ${varname:=value}
-    Set varname equal to value if varname doesn't already have a value (i.e., default value): note leading colon
+Default Values
+: ${varname:=value} # Set varname equal to value if unset or null: note leading colon
+varname="${VARIABLE:=default}" # Set varname AND VARIABLE equal to value if VARIABLE unset or null
+varname="${VARIABLE:-default}" # Set varname equal to value if VARAIBLE unset or null
 
 ${varname/substring/replacement}
     Replace first match of $substring with $replacement. [2]
