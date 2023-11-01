@@ -1,5 +1,5 @@
 #!/bin/bash
-source "$(dirname "$0")/../utils.sh"
+source "$(dirname "$0")/utils.sh"
 
 usage="$(basename "$0") [-hvdu]
 Sets up simlinks for tools/processes not explicitly handled in the APPS/* scripts.
