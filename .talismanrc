@@ -13,3 +13,5 @@ fileignoreconfig:
   checksum: 831a525cb7f160e45196a1a3fd0e75e53fa5422d6f92a8aa206167da7c8473e7
 - filename: .vimrc
   checksum: 5573157c45c54bb7170d930032f6800a30bde1371ee8a01e0f22ea5fdcd77fbe
+- filename: cheat/personal/tunnel
+  checksum: 009ffd671c734ea95e0e5055129697bc32780081313e708d00a17ca1b226f90e

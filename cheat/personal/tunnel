@@ -1,0 +1,49 @@
+# .ssh/config
+
+Host name-of-host
+  IdentityFile ~/.ssh/path-to-host-cert.pem
+  User ec2-user
+  ProxyCommand ssh -i ~/.ssh/path-to-bastion-cert.pem ec2-user@ec2-bastion-public-dns.us-west-2.compute.amazonaws.com -W
+%h:%p
+  HostName host.private.ip.address
+
+# dotfiles
+
+##### SSH Cert for tunnel
+PROJECT_CERT_FILE=~/.ssh/path-to-bastion-cert.pem
+
+##### Postgres
+PROJECT_PSQL_PROD_HOST="endpoint_URL"
+
+alias projectpgprod="projectpsql $PROJECT_PSQL_PROD_HOST postgres"
+
+# $1 - host
+# $2 - port
+function project_start_ssh_tunnel {
+  # https://stackoverflow.com/questions/67494107/how-do-i-properly-open-a-ssh-tunnel-in-the-background
+  # -M "Master" mode for sharing
+  # -N No remote command
+  # -S socket file for later
+  # -f go to background
+  # -i permission file
+  ssh \
+    -M \
+    -N \
+    -S /tmp/tunnel.socket \
+    -o "ExitOnForwardFailure yes" \
+    -f \
+    -i $PROJECT_CERT_FILE \
+    -L $2:$1:$2 \
+    ec2-user@ec2-bastion-public-dns.us-west-2.compute.amazonaws.com &> /tmp/tunnel.log
+}
+
+function projectpsql {
+  project_start_ssh_tunnel $1 5432
+  # Limitation: this uses ~/.pgpass, which means there can only be 1 entry for "localhost"+<user_name> right now
+  if [ -n "$3" ]; then
+    psql --host=localhost --username=$2 --dbname=$3
+  else
+    psql --host=localhost --username=$2
+  fi
+  kill_ssh_tunnel $1
+}
