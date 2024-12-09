@@ -109,8 +109,10 @@ done
 if [ -z "$doUpdate" ]; then
   echo "Making Zsh default"
   if [ "$isLinux" == "true" ] ; then
-    # using sudo because most users can't (and shouldn't) direct-access /etc/shells
-    which zsh | sudo tee -a /etc/shells
+    if grep -vq "zsh" /etc/shells; then
+      # using sudo because most users can't (and shouldn't) direct-access /etc/shells
+      which zsh | sudo tee -a /etc/shells
+    fi
     chsh -s "$(which zsh)"
   else
     # dscl is an OSX tool that updates the same underlying system as 'chsh' and OSX doesn't require updating /etc/shells
