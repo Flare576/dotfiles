@@ -1,7 +1,7 @@
 #!/bin/bash
 source "$(dirname "$0")/../utils.sh"
-usage="$(basename "$0") [-hvdtu]
-By default, installs python3. With -t, installs pyenv/pipenv and uses pyenv to install python3.
+usage="$(basename "$0") [-hvadu]
+By default, installs python3. With -a, installs pyenv/pipenv and uses pyenv to install python3.
 Pyenv is a set of scripts which manage active/available versions of Python
 Pipenv is a set of tools that manages project dependencies of Python projects
 Options:
