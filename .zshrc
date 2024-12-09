@@ -2,10 +2,9 @@
 # This file is loaded after .zshenv
 PATH="$FLARE_PATH"
 
-ZSH_DISABLE_COMPFIX=true # Remove "Insecure directories and files"
 export ZSH=$HOME/.oh-my-zsh
-# [ -n "$FLARE_ZSH_THEME" ] && ZSH_THEME="$FLARE_ZSH_THEME"
-plugins=(aws vi-mode git extract z kubectl tmux docker-aliases docker-compose zsh-nvm node npm yarn zsh-better-npm-completion)
+# Removed due to lack of use: aws, kubectl, docker-aliases, docker-compose, node, npm, yarn
+plugins=(vi-mode git extract z tmux zsh-nvm zsh-better-npm-completion)
 
 #Setup NVM
 export NVM_COMPLETION=true  # Tab-completion
@@ -24,7 +23,6 @@ fi
 # vim zsh
 bindkey -v
 #same as my vim.... also, slower than .1ms
-bindkey jk vi-cmd-mode
 bindkey -M vicmd B vi-beginning-of-line
 bindkey -M vicmd E vi-end-of-line
 export KEYTIMEOUT=3
