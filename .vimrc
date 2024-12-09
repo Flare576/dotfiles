@@ -76,7 +76,9 @@ set modelines=5         " Modelines need to be within 5 lines of top/bottom
 set textwidth=120       " auto-formatter (gq) width
 set cc=120              " highlights characters over 120 width
 
-" Extra whitespace in yellow
+" White text on maroon in search highlight (default difficult to read)
+highlight Search ctermbg=5 ctermfg=white
+" Extra whitespace in red
 highlight ExtraWhitespace ctermbg=red ctermfg=white guibg=red
 augroup whitespace
   au!
@@ -327,13 +329,13 @@ autocmd FileType python imap <C-j> <ESC>:let g:jedi#show_call_signatures=0<CR>a
 autocmd InsertLeave * :let g:jedi#show_call_signatures=1
 
 "########################## Other_filetypes
-autocmd Filetype markdown setlocal spell textwidth=100 cc=100 conceallevel=3 formatoptions+=ro
+autocmd Filetype markdown setlocal spell linebreak textwidth=0 cc=0 conceallevel=3 formatoptions+=ro
 autocmd BufNewFile,BufRead Dockerfile* set syntax=dockerfile
 
-autocmd Filetype text setlocal linebreak spell complete+=s wrap formatoptions=1
-      \ noexpandtab textwidth=100 cc=100 formatoptions=qtc
-      " See https://vim.fandom.com/wiki/Folding_for_plain_text_files_based_on_indentation
-      " Used in conjunction with https://github.com/obreitwi/vim-sort-folds to sort blocks
+" See https://vim.fandom.com/wiki/Folding_for_plain_text_files_based_on_indentation
+" Used in conjunction with https://github.com/obreitwi/vim-sort-folds to sort blocks
+autocmd Filetype text setlocal linebreak spell complete+=s wrap
+      \ noexpandtab textwidth=0 cc=0 formatoptions=qtc1
       \ setlocal foldmethod=expr
       \ setlocal foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum))
       \ set foldtext=getline(v:foldstart)
@@ -341,7 +343,6 @@ autocmd Filetype text setlocal linebreak spell complete+=s wrap formatoptions=1
       \ highlight Folded ctermfg=DarkGreen ctermbg=Black
 
 autocmd BufRead COMMIT_EDITMSG setlocal spell
-
 
 "###### Hyper-aggressive "indent" folding
 " See https://vim.fandom.com/wiki/Folding_for_plain_text_files_based_on_indentation
