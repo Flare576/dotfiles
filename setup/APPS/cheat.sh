@@ -51,8 +51,15 @@ if ! dotInstall cheat "manual"; then
   DLURL=$(latestGit "cheat/cheat" "cheat-linux-amd64.gz")
   curl -sL ${DLURL} -o /tmp/cheat-linux-amd64.gz \
   && gunzip /tmp/cheat-linux-amd64.gz \
-  && chmod +x /tmp/cheat-linux-amd64 \
-  && mv /tmp/cheat-linux-amd64 /usr/local/bin/cheat
+  && chmod +x /tmp/cheat-linux-amd64
+
+  if command -v steamos-readonly &> /dev/null ; then
+    sudo steamos-readonly disable
+    sudo mv /tmp/cheat-linux-amd64 /usr/local/bin/cheat
+    sudo steamos-readonly enable
+  else
+    mv /tmp/cheat-linux-amd64 /usr/local/bin/cheat
+  fi
 fi
 
 echo "Linking cheat and updating community sheets"

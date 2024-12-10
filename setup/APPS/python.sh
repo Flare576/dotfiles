@@ -57,15 +57,29 @@ fi
 
 if [ "$doAll" == "true" ]; then
   if ! dotInstall pyenv "manual"; then
-    echo "Installing Python build dependencies"
-    sudo apt-get update -qq;
-    sudo apt-get install -qqq make build-essential libssl-dev zlib1g-dev \
-      libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
-      libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-    echo "Installing latest version of pyenv"
-    curl https://pyenv.run | bash &> /dev/null
+    if command -v apt-get &> /dev/null ; then
+      echo "Installing Python build dependencies"
+      sudo apt-get update -qq;
+      sudo apt-get install -qqq make build-essential libssl-dev zlib1g-dev \
+        libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+        libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+      echo "Installing latest version of pyenv"
+      curl https://pyenv.run | bash &> /dev/null
+    elif command -v pacman &> /dev/null ; then
+      dotInstall "pyenv"
+    else
+      echo "Unsure how to install"
+    fi
   fi
-  dotInstall pipenv
+  if ! dotInstall pipenv "manual"; then
+    if command -v apt-get &> /dev/null ; then
+      dotInstall "pipenv"
+    elif command -v pacman &> /dev/null ; then
+      dotInstall "python-pipenv"
+    else
+      echo "Unsure how to install"
+    fi
+  fi
 
   echo "Install latest stable version of Python3"
   stable=$(pyenv install --list | grep -v '-' | grep -v 'b' | tr -d ' ' |  grep '^3' | tail -1)
