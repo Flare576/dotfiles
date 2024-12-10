@@ -81,12 +81,13 @@ rm /tmp/omz-install.sh &> /dev/null
 
 echo "Installing Plugins"
 mkdir -p "$HOME/.oh-my-zsh/custom/plugins/"
-pushd "$HOME/.oh-my-zsh/custom/plugins/" &> /dev/null || exit
 
 # NVM and Node Optimizations
+pushd "$HOME/.oh-my-zsh/custom/plugins/" &> /dev/null || exit
 cloneOrUpdateGit lukechilds/zsh-better-npm-completion
 cloneOrUpdateGit lukechilds/zsh-nvm
 cloneOrUpdateGit webyneter/docker-aliases
+popd &> /dev/null || exit
 
 echo "Installing Cheat Completion"
 zshComplete="$HOME/.oh-my-zsh/completions"
@@ -95,7 +96,6 @@ rm -rf /tmp/cheat &> /dev/null
 git clone -q https://github.com/cheat/cheat.git /tmp/cheat
 mv /tmp/cheat/scripts/cheat.zsh "$zshComplete/_cheat.zsh"
 rm -rf /tmp/cheat &> /dev/null
-popd &> /dev/null || exit
 
 # Sometimes Z doesn't setup its file
 touch "$HOME/.z"
@@ -108,14 +108,15 @@ done
 
 if [ -z "$doUpdate" ]; then
   echo "Making Zsh default"
+  loc="$(which zsh)"
   if [ "$isLinux" == "true" ] ; then
-    if grep -vq "zsh" /etc/shells; then
+    if grep -vq "$loc" /etc/shells; then
       # using sudo because most users can't (and shouldn't) direct-access /etc/shells
-      which zsh | sudo tee -a /etc/shells
+      echo "$loc" | sudo tee -a /etc/shells
     fi
-    chsh -s "$(which zsh)"
+    chsh -s "$loc"
   else
     # dscl is an OSX tool that updates the same underlying system as 'chsh' and OSX doesn't require updating /etc/shells
-    sudo dscl . -create "/Users/$USER" UserShell "$(which zsh)"
+    sudo dscl . -create "/Users/$USER" UserShell "$loc"
   fi
 fi

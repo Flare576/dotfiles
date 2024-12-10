@@ -35,6 +35,7 @@ export CHEAT_CONFIG_PATH="$HOME/cheat/conf.yml"
 command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
 
 # Quick-edit configs
+alias vi="vim"
 alias vz='vi -o ~/.zshrc ~/.zshenv -c "cd ~"'
 alias vd='vi ~/dotfiles -c "cd ~/dotfiles"'
 alias vs='vi ~/scripts -c "cd ~/scripts"'
@@ -105,9 +106,9 @@ personaldot="$HOME/personaldot/.zshenv"
 [ -f "$personaldot" ] && source "$personaldot"
 
 # application shortcuts
-source $HOME/.zshrc.kubeHelper
-source $HOME/.zshrc.awsHelper
-source $HOME/.zshrc.rpg
+[ -f $HOME/.zshrc.kubeHelper ] && source $HOME/.zshrc.kubeHelper
+[ -f $HOME/.zshrc.awsHelper ] && source $HOME/.zshrc.awsHelper
+[ -f $HOME/.zshrc.rpg ] && source $HOME/.zshrc.rpg
 
 # OSX will use /etc/zshrc between this file and .zshenv - ignore the path changes
 # https://github.com/sorin-ionescu/prezto/issues/381

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Make working on images suck less - make them feel like $HOME. Only expectation is that curl was used to retrieve script
 # from initial prompt:
-# apt-get update &> /dev/null;apt-get install -y --no-install-recommends ca-certificates curl &> /dev/null;bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/setup/NIX/os_ubuntu_remote.sh)"
+# apt-get update &> /dev/null;apt-get install -y --no-install-recommends ca-certificates curl &> /dev/null;bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/setup/NIX/ubuntu_remote.sh)"
 
 starting=$(date +%s%N)
 apt-get update &> /dev/null

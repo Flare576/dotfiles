@@ -82,7 +82,7 @@ fpath=(\$FLARE_SCRIPTS/bin \$fpath)
 export PATH="\$FLARE_SCRIPTS/bin:\${PATH}"
 END
 
-if test $(which brew); then
+if command -v brew &> /dev/null ; then
   echo "Installing scripts"
   for formula in "${brews[@]}"
   do

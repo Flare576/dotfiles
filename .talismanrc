@@ -6,7 +6,7 @@ fileignoreconfig:
 - filename: .tmux.conf
   checksum: 8848a416d8fde0eff4acc2143e8becb6b76d0ade558d9738e5e2ba02360d6c69
 - filename: .zshenv
-  checksum: cbd15acf9cad0110ef0dbd9b57dd5c7e1aa87f36bc212e59c2f226ddcce277f3
+  checksum: 246f5268c7f212c581530b1cd62aa50d293681413aa6b813b02aeea266ff3ce9
 - filename: .zshrc
   checksum: 3dfe357c725d68f2b02a53e08d3ac7e9e877e69babfe728bbf2f92e12822abd2
 - filename: cheat/personal/cloudformation
@@ -15,3 +15,5 @@ fileignoreconfig:
   checksum: 5573157c45c54bb7170d930032f6800a30bde1371ee8a01e0f22ea5fdcd77fbe
 - filename: cheat/personal/tunnel
   checksum: 009ffd671c734ea95e0e5055129697bc32780081313e708d00a17ca1b226f90e
+- filename: setup/NIX/steamdeck.sh
+  checksum: 39600e716ab345a91003a06b6657c2ee483434e104bfede82694250235f4156a
