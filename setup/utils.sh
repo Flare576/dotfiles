@@ -27,6 +27,12 @@ function dotRemove() {
     [ "$linuxPackage" == "manual" ] && return 1
     echo "Uninstalling $linuxPackage"
     apt-get remove -qqq "$linuxPackage"
+  elif command -v pacman &> /dev/null ; then
+    [ "$linuxPackage" == "manual" ] && return 1
+    echo "Uninstalling $linuxPackage"
+    command -v steamos-readonly &> /dev/null && sudo steamos-readonly disable
+    sudo pacman -R --noconfirm "$linuxPackage" > /dev/null
+    command -v steamos-readonly &> /dev/null && sudo steamos-readonly enable
   else
     echo "Unsure how to uninstall"
   fi
@@ -44,6 +50,13 @@ function dotInstall() {
     echo "Installing latest version of $linuxPackage"
     apt-get update -qq;
     apt-get install -qqq --no-install-recommends "$linuxPackage"
+  elif command -v pacman &> /dev/null ; then
+    [ "$linuxPackage" == "manual" ] && return 1
+    echo "Installing latest version of $linuxPackage"
+    command -v steamos-readonly &> /dev/null && sudo steamos-readonly disable
+    sudo pacman -Syq > /dev/null
+    sudo pacman -S --noconfirm "$linuxPackage" > /dev/null
+    command -v steamos-readonly &> /dev/null && sudo steamos-readonly enable
   else
     echo "Unsure how to install"
   fi
