@@ -10,16 +10,16 @@ brand new Mac from stock to stylish with minimal messing around.
 bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/setup/OSX/mac.sh)"
 ```
 
-Or a new Mint Linux
+Or a new Steam Deck
 
 ```
-bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/scripts/NIX/setupMint.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/setup/NIX/steamdeck.sh)"
 ```
 
 Or a new Ubuntu Linux
 
 ```
-bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/scripts/NIX/setupUbuntu.sh)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/Flare576/dotfiles/main/setup/NIX/ubuntu.sh)"
 ```
 If not setting up a new machine I `git clone` directly into `~` and run the script for the thing(s) I want to setup:
 
@@ -115,7 +115,6 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 
 | Mode | Keys | Actions |
 |------|------|---------|
-| Insert | jk | shortcut to Escape
 | Normal/Visual | j/k/h/l | move "visually" up and down, makes soft-wraps easier
 | Normal | B & E | shortcuts for `^` and `$`
 | Normal | ctrl + j, k, h, l | change focus between windows
@@ -166,10 +165,10 @@ See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file 
 
 | Mode | Keys | Actions |
 |------|------|---------|
+| Normal | ,sv | Source .vimrc in open vim instance
 | Normal | ,ev | Edit .vimrc in new tab
 | Normal | ,ez | Edit .zshrc & .zshenv in new tab w/ split pane
 | Normal | ,et | Edit .tmux.conf in new tab
-| Normal | ,sv | Source .vimrc in open vim instance
 | Normal | ,ej | Edit .jira.d/config.yml in new tab
 | Normal | ,ed | Edit dotfiles root folder in new tab
 
@@ -261,7 +260,7 @@ Sometimes you just don't want to dig through a bunch of scripts and want to know
 1) ZSH [Bettah than bash](https://www.zsh.org/) †
 1) `shellcheck` [static analysis on scripts](https://www.shellcheck.net/) †
 1) `git-secrets` [enabled on this project](https://github.com/awslabs/git-secrets) †
-1) `mas` [cli app store tool](https://github.com/mas-cli/mas) †
+1) `mas` [CLI app store tool](https://github.com/mas-cli/mas) †
 1) `cheat` [CLI Cheat sheets](https://github.com/cheat/cheat) †
 1) `watch` [re-run commands on timer](https://linux.die.net/man/1/watch) †
 1) `jq` [process JSON output](https://stedolan.github.io/jq/) †
