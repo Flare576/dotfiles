@@ -13,10 +13,10 @@ all_simple=(
   lazydocker           # Any project using straight Docker
   rpg-cli              # A bit of fun for folder management
   shellcheck           # helps debugging/formatting shell scripts
-  the_silver_searcher  # provides enhanced search support with 'ag'
   universal-ctags      # generates indexes used by vim for "intellisense"-like features
   watch                # repeatedly call a command and monitor output
   watson               # Great time tracker
+  samba                # Shared Directories for Linux
 )
 all_scripted=(
   cheat.sh
@@ -24,6 +24,7 @@ all_scripted=(
   omz.sh
   python.sh
   scripts.sh
+  silversearcher.sh
   tmux.sh
   vim.sh
 )
@@ -40,7 +41,6 @@ work_simple=(
   lazydocker
   rpg-cli
   shellcheck
-  the_silver_searcher
   universal-ctags
   watch
   watson
@@ -51,6 +51,7 @@ work_scripted=(
   omz.sh
   python.sh
   scripts.sh
+  silversearcher.sh
   tmux.sh
   vim.sh
 )
@@ -60,7 +61,6 @@ personal_simple=(
   git
   hub
   shellcheck
-  the_silver_searcher
   universal-ctags
   watch
   jq
@@ -71,33 +71,49 @@ personal_scripted=(
   omz.sh
   python.sh
   scripts.sh
+  silversearcher.sh
   jira.sh
   tmux.sh
   vim.sh
 )
-
+steamdeck_simple=(
+  bat
+  git
+  hub
+  jq
+  rpg-cli
+  universal-ctags
+)
+steamdeck_scripted=(
+  cheat.sh
+  omz.sh
+  scripts.sh
+  silversearcher.sh
+  tmux.sh
+  vim.sh
+)
 remote_simple=(
   bat
   git
   hub
   jq
-  the_silver_searcher
   universal-ctags
 )
 remote_scripted=(
   cheat.sh
   omz.sh
   scripts.sh
+  silversearcher.sh
   tmux.sh
   vim.sh
 )
 
-usage="$(basename "$0") [-hvamdpu]
-Installs tools/applications based on -p Profile
+usage="$(basename "$0") [-hvamdpu] app
+Installs tools/applications based on -p Profile or provided app.
 Options:
   -h Show this help
   -v Display version
-  -p Profile name [all, work, personal, remote]
+  -p Profile name [all, work, personal, remote, steamdeck]
   -a Install all features of tools/apps
   -m Install minimal versions of tools/apps
   -d Unlink files and Uninstall tools/apps
@@ -131,12 +147,17 @@ shift $((OPTIND -1))
 
 : ${profile:="all"}
 
+target="$1"
+
 if [ "$profile" == "work" ]; then
   simple=("${work_simple[@]}")
   scripted=("${work_scripted[@]}")
 elif [ "$profile" == "personal" ]; then
   simple=("${personal_simple[@]}")
   scripted=("${personal_scripted[@]}")
+elif [ "$profile" == "steamdeck" ]; then
+  simple=("${steamdeck_simple[@]}")
+  scripted=("${steamdeck_scripted[@]}")
 elif [ "$profile" == "remote" ]; then
   simple=("${remote_simple[@]}")
   scripted=("${remote_scripted[@]}")
@@ -147,6 +168,7 @@ fi
 
 for app in "${simple[@]}"
 do
+  [ -n "$target" ] && [ "$target" != "$app" ] && continue
   if [ -n "$doDestroy" ]; then
    dotRemove "$app"
   elif [ -n "$doUpdate" ]; then
@@ -170,18 +192,19 @@ done
 params="$all $minimal $doDestroy $doUpdate"
 for script in "${scripted[@]}"
 do
-    bash "$HOME/dotfiles/setup/APPS/$script" $params
+  [ -n "$target" ] && [ "$target.sh" != "$script" ] && continue
+  bash "$HOME/dotfiles/setup/APPS/$script" $params
 done
 
 # Jetbrains Mono is a great font for terminals; install it so it's available on this system
-if [ -n "$doDestroy" ]; then
+if [ -z "$target" ] && [ -n "$doDestroy" ]; then
   # not really sure how to uninstall from Linux...
   if [ "$isLinux" == "true" ] ; then
     echo "We can pretend I uninstalled Jetbrains font..."
   elif brew ls --versions homebrew/cask-fonts/font-jetbrains-mono >/dev/null; then
     brew uninstall --cask homebrew/cask-fonts/font-jetbrains-mono
   fi
-else
+elif [ -z "$target" ]; then
   if [ "$isLinux" == "true" ]; then
     if [ "$profile" != "remote" ]; then
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
