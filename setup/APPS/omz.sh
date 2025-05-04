@@ -36,9 +36,10 @@ shift $((OPTIND -1))
 linkable=(
   .zshenv
   .zshrc
-  .zshrc.kubeHelper
-  .zshrc.awsHelper
-  .zshrc.rpg
+  .zshenv.kube
+  .zshenv.aws
+  .zshenv.rpg
+  .zshenv.llm
 )
 
 if [ "$doDestroy" == "true" ]; then

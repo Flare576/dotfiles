@@ -1,0 +1,11 @@
+# emulate smartcat (https://github.com/efugier/smartcat)
+sc () {
+  [ ! -t 0 ] && input=$(cat)
+  if [[ "$1" == "-r" ]]; then
+    shift
+    echo "$input"
+    echo -n "$input" | llm -t cat $@
+  else
+    echo -n "$input" | llm -t cat $@
+  fi
+}

@@ -89,11 +89,54 @@ augroup whitespace
   autocmd BufWinLeave * call clearmatches() " Run on leaving window (Clear all the matches)
 augroup END
 
+"########################## Airline Customization
+
+function! ByteCount()
+  let l:bytecount = line2byte(line('$') + 1)
+  if l:bytecount <= 0
+    return ' B:1'
+  endif
+  let l:bytecount -= 1
+
+  if l:bytecount < 1024
+    return printf(' B:%d', l:bytecount)
+  elseif l:bytecount < 1024 * 1024
+    return printf(' B:%.1fk', l:bytecount / 1024.0)
+  elseif l:bytecount < 1024 * 1024 * 1024
+    return printf(' B:%.1fM', l:bytecount / (1024.0 * 1024))
+  else
+    return printf(' B:%.1fG', l:bytecount / (1024.0 * 1024 * 1024))
+  endif
+endfunction
+
+augroup AirlineCustom
+  autocmd!
+  autocmd User AirlineAfterInit call airline#parts#define_function('bytecount', 'ByteCount')
+  autocmd User AirlineAfterInit call s:append_to_airline_section_z()
+augroup END
+
+function! s:append_to_airline_section_z()
+  " Get existing z section if defined, otherwise use default parts
+  let l:orig = get(g:, 'airline_section_z', airline#section#create_right(['%3p%%', '%l:%c']))
+
+  " If it's a List, append; if String, create a List first
+  if type(l:orig) == type([])
+    let l:newz = add(copy(l:orig), 'bytecount')
+  else
+    let l:newz = [l:orig, 'bytecount']
+  endif
+
+  let g:airline_section_z = airline#section#create_right(l:newz)
+endfunction
+
 "############################## Mappings ###########
 
 "########################## Common
-" jk is a great "ESC", but new key layout means ESC is easier
-"inoremap jk <esc>
+" Use QT to close all open buffers in a tab
+command QT :tabclose
+" Invoke the SMART CAT
+nnoremap <leader>sc :'<,'>!sc
+xnoremap <leader>sc :!sc
 
 "########################## Movement
 " move vertically by visual line
@@ -158,7 +201,7 @@ endfunction
 nmap <c-a-r> <Plug>NetrwRefresh
 " Apparently :E only works by default because there's only one command that starts with E... fix that
 command! -bang  E Explore<bang>
-command!        VE Vexplore!
+command!        VE Vexplore
 command!        HE Hexplore
 command!        TE Texplore
 
@@ -334,13 +377,17 @@ autocmd BufNewFile,BufRead Dockerfile* set syntax=dockerfile
 
 " See https://vim.fandom.com/wiki/Folding_for_plain_text_files_based_on_indentation
 " Used in conjunction with https://github.com/obreitwi/vim-sort-folds to sort blocks
-autocmd Filetype text setlocal linebreak spell complete+=s wrap
-      \ noexpandtab textwidth=0 cc=0 formatoptions=qtc1
-      \ setlocal foldmethod=expr
-      \ setlocal foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum))
-      \ set foldtext=getline(v:foldstart)
-      \ set fillchars=fold:\ "(there's a space after that \)
-      \ highlight Folded ctermfg=DarkGreen ctermbg=Black
+function! SetupTextFiletype()
+  setlocal linebreak spell complete+=s wrap
+  setlocal noexpandtab textwidth=0 colorcolumn=0 formatoptions=qtc1
+  setlocal foldmethod=expr
+  setlocal foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum))
+  setlocal foldtext=getline(v:foldstart)
+  set fillchars=fold:\ 
+  highlight Folded ctermfg=DarkGreen ctermbg=Black
+endfunction
+
+autocmd FileType text call SetupTextFiletype()
 
 autocmd BufRead COMMIT_EDITMSG setlocal spell
 

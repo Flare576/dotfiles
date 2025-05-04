@@ -9,7 +9,7 @@ plugins=(vi-mode git extract z tmux zsh-nvm zsh-better-npm-completion)
 #Setup NVM
 export NVM_COMPLETION=true  # Tab-completion
 export NVM_LAZY_LOAD=true   # Make it fast
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('gac' 'jira')
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('gac' 'jira' 'vroom')
 
 source $ZSH/oh-my-zsh.sh
 

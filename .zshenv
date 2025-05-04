@@ -75,7 +75,7 @@ alias lzy='lazydocker'
 alias lzye='vi $HOME/Library/Application\ Support/jesseduffield/lazydocker/config.yml'
 alias dclean='docker system prune --volumes -f'
 alias dnuke='docker system prune --volumes -af'
-alias dstop="osascript -e 'quit app \"Docker\"'"
+alias dstop="osascript -e 'quit app \"Docker Desktop\"'"
 alias dstart="open -a Docker"
 
 alias plcat='plutil -convert xml1 -o -'
@@ -106,9 +106,9 @@ personaldot="$HOME/personaldot/.zshenv"
 [ -f "$personaldot" ] && source "$personaldot"
 
 # application shortcuts
-[ -f $HOME/.zshrc.kubeHelper ] && source $HOME/.zshrc.kubeHelper
-[ -f $HOME/.zshrc.awsHelper ] && source $HOME/.zshrc.awsHelper
-[ -f $HOME/.zshrc.rpg ] && source $HOME/.zshrc.rpg
+[ -f $HOME/.zshenv.llm ] && source $HOME/.zshenv.llm
+[ -f $HOME/.zshenv.aws ] && source $HOME/.zshenv.aws
+[ -f $HOME/.zshenv.rpg ] && source $HOME/.zshenv.rpg
 
 # OSX will use /etc/zshrc between this file and .zshenv - ignore the path changes
 # https://github.com/sorin-ionescu/prezto/issues/381
