@@ -3,6 +3,7 @@
   excludesfile = ~/.gitignore
 [push]
 	default = current
+	autoSetupRemote = true
 [alias]
 	cleanhouse = ! echo "Deleting old branches" && git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
   d = difftool

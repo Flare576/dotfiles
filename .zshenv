@@ -75,7 +75,7 @@ alias lzy='lazydocker'
 alias lzye='vi $HOME/Library/Application\ Support/jesseduffield/lazydocker/config.yml'
 alias dclean='docker system prune --volumes -f'
 alias dnuke='docker system prune --volumes -af'
-alias dstop="osascript -e 'quit app \"Docker\"'"
+alias dstop="osascript -e 'quit app \"Docker Desktop\"'"
 alias dstart="open -a Docker"
 
 alias plcat='plutil -convert xml1 -o -'
