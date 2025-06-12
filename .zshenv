@@ -20,8 +20,8 @@ else
   export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 fi
 
-# because it's never easy
-alias make=gmake
+# because it's never easy, if system has gmake, use it
+command -v gmake &> /dev/null && alias make=gmake
 source "$(switch-theme)"
 
 alias -g dateS="date '+%Y-%m-%dT%H-%M-%S'"
