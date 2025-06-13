@@ -1,4 +1,8 @@
 #!/bin/bash
+# If you just updated SteamOS, you'll **probably** need to run this script again.
+# I'm trying to get it setup so that pacman installs to $HOME so you don't need to re-install apps, but it's
+# Iterative becuse I can't really format my Steam Deck
+#
 # This script is designed to setup a new Steam Deck from scratch. If you just want pieces of my dot files, check the
 # Setup Scripts referenced here or read the Project ReadMe!
 #
@@ -7,20 +11,47 @@ cd $HOME
 git clone https://github.com/Flare576/dotfiles.git
 
 # Install safety precautions around this repo
-bash $HOME/dotfiles/setup/secureRepo.sh
+#bash $HOME/dotfiles/setup/secureRepo.sh
 
 # Configure Pacman
 echo "Configuring Pacman"
+export USERROOT="$HOME/.root"
+mkdir -p "$USERROOT/etc"
+mkdir -p "$USERROOT/var/lib/pacman"
+
+# Copy the pacman config file from the original system
+pacman_conf="$USERROOT/etc/pacman.conf"
+cp /etc/pacman.conf "$pacman_conf"
+
+# Create the keyring directory
+gpgdir="$USERROOT/etc/pacman.d/gnupg"
+mkdir -p "$gpgdir"
+
+# Initialize the keyring
+sudo pacman-key --gpgdir "$gpgdir" --conf "$pacman_conf" --init
+
+# Populate the keyring
+sudo pacman-key --gpgdir "$gpgdir" --conf "$pacman_conf" --populate archlinux
+sudo pacman-key --gpgdir "$gpgdir" --conf "$pacman_conf" --populate holo
+
 sudo steamos-readonly disable
-sudo pacman-key --init > /dev/null
-sudo pacman-key --populate archlinux > /dev/null
-sudo pacman-key --populate holo > /dev/null
-sudo pacman -Sy > /dev/null
+sudo pacman -r $USERROOT --gpgdir $USERROOT/etc/pacman.d/gnupg -Sy
+sudo pacman -r $USERROOT --gpgdir $USERROOT/etc/pacman.d/gnupg -S coreutils tar less findutils diffutils grep sed gawk util-linux procps-ng
 sudo steamos-readonly enable
 
-# Install Applications
-bash $HOME/dotfiles/setup/installer.sh -p steamdeck
+  bash $HOME/dotfiles/setup/installer.sh -p steamdeck
+  # We DON'T want to default to zsh - we want deck to launch to bash
+  bash $HOME/dotfiles/setup/installer.sh -m omz
 
-# Link dotFiles
-echo "Linking dotfiles"
-bash $HOME/dotfiles/setup/linkFiles.sh
+# Pass in "init" to wire up the homedir links/paths/etc.
+if [ "$1" != "update" ]; then
+  # Link dotFiles
+  echo "Linking dotfiles"
+  bash $HOME/dotfiles/setup/linkFiles.sh
+
+  cat > ~/.doNotCommit.d/.doNotCommit.steamdeck <<EOF
+export USERROOT="\$HOME/.root"
+export PATH=\$PATH:"\$USERROOT/usr/bin"
+export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:"\$USERROOT/lib":"\$USERROOT/lib64"
+EOF
+fi
