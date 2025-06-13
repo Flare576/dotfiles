@@ -1,11 +1,12 @@
 #!/bin/bash
 source "$(dirname "$0")/../utils.sh"
-usage="$(basename "$0") [-hvdu]
+usage="$(basename "$0") [-hmvdu]
 Links dotfile configs and installs or updates zsh, omz, and plugins by default.
 ZSH is an alternative shell to bash that supports many more features, plugins, and other niceties.
 OMZ (oh my zsh) is a customization framework for Zsh
 Options:
   -h Show this help
+  -m Minimal install, skips setting default shell
   -v Display version
   -d Unlink files and Uninstall zsh/omz/plugins
   -u Update if installed
@@ -24,7 +25,7 @@ while getopts ':hvadmu' option; do
       ;;
     a) echo "Ignoring -a, no all settings"
       ;;
-    m) echo "Ignoring -m, no minimal settings"
+    m) minimal="true"
       ;;
     *) echo "Unknown Option '$OPTARG', exiting"
       exit
@@ -106,7 +107,8 @@ do
   ln -fs "$HOME/dotfiles/$link" "$HOME/$link"
 done
 
-if [ -z "$doUpdate" ]; then
+# if "doUpdate" is true, or "minimal" is true, DON'T make zsh default
+if [ -z "$doUpdate" ] && [ -z "$minimal" ]; then
   echo "Making Zsh default"
   loc="$(which zsh)"
   if [ "$isLinux" == "true" ] ; then
