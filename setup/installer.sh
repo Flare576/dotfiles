@@ -17,6 +17,8 @@ all_simple=(
   watch                # repeatedly call a command and monitor output
   watson               # Great time tracker
   samba                # Shared Directories for Linux
+  lftp                 # For deploying website
+  make                 # Steam Deck doesn't have make somehow
 )
 all_scripted=(
   cheat.sh
@@ -83,10 +85,12 @@ steamdeck_simple=(
   jq
   rpg-cli
   universal-ctags
+  lftp
+  make
 )
 steamdeck_scripted=(
   cheat.sh
-  omz.sh
+  # omz.sh # this should be installed, but needs to be called with -m
   scripts.sh
   silversearcher.sh
   tmux.sh
