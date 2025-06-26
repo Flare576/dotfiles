@@ -134,6 +134,9 @@ endfunction
 "########################## Common
 " Use QT to close all open buffers in a tab
 command QT :tabclose
+" Invoke the SMART CAT
+nnoremap <leader>sc :'<,'>!sc
+xnoremap <leader>sc :!sc
 
 "########################## Movement
 " move vertically by visual line
