@@ -8,7 +8,7 @@ fileignoreconfig:
 - filename: .zshenv
   checksum: bcacaf19562d996b515dadbbef745082a245bb2781962adc0a50a255d3717a8d
 - filename: .zshenv.llm
-  checksum: 60e53ea92dad16d5c8bb55f7dfd92ad9c438aeb50aaf9bde6fc06546bc02a195
+  checksum: 94df27dc8b4c8fd68e31517dbef3eb3185bb518ceca1122fe2ff45b8f8c2830e
 - filename: .zshrc
   checksum: 7404acca40efebe5b1b6b729a78d9ae5470b8e7565e280bae75be0d0fe599f68
 - filename: .zshrc

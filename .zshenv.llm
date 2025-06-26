@@ -1,11 +1,33 @@
 # emulate smartcat (https://github.com/efugier/smartcat)
+# Note: This assumes you've
+# - installed the `llm` tool
+# - created a 'sc' template via llm ... --save sc
+# - put the `-t [other template]` and `-r` arguments before any other (like -c)
 sc () {
   [ ! -t 0 ] && input=$(cat)
-  if [[ "$1" == "-r" ]]; then
-    shift
+  template="sc"
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -t)
+        template="$2"
+        shift 2
+        ;;
+      -r)
+        repeat_back="true"
+        shift
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+
+  if [ -n "$repeat_back" ]; then
     echo "$input"
-    echo -n "$input" | llm -t cat $@
+    echo -n "$input" | llm -t "$template" "$@"
   else
-    echo -n "$input" | llm -t cat $@
+    echo -n "$input" | llm -t "$template" "$@"
   fi
 }
+
