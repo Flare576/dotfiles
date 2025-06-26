@@ -8,7 +8,10 @@
 #
 # Pull the rest of the project
 cd $HOME
-git clone https://github.com/Flare576/dotfiles.git
+if [ ! -d dotfiles ]; then
+  init="true"
+  git clone https://github.com/Flare576/dotfiles.git
+fi
 
 # Install safety precautions around this repo
 #bash $HOME/dotfiles/setup/secureRepo.sh
@@ -36,15 +39,14 @@ sudo pacman-key --gpgdir "$gpgdir" --conf "$pacman_conf" --populate holo
 
 sudo steamos-readonly disable
 sudo pacman -r $USERROOT --gpgdir $USERROOT/etc/pacman.d/gnupg -Sy
-sudo pacman -r $USERROOT --gpgdir $USERROOT/etc/pacman.d/gnupg -S coreutils tar less findutils diffutils grep sed gawk util-linux procps-ng
+sudo pacman -r $USERROOT --gpgdir $USERROOT/etc/pacman.d/gnupg -S coreutils tar less findutils diffutils grep sed gawk util-linux procps-ng base-devel
 sudo steamos-readonly enable
 
-  bash $HOME/dotfiles/setup/installer.sh -p steamdeck
-  # We DON'T want to default to zsh - we want deck to launch to bash
-  bash $HOME/dotfiles/setup/installer.sh -m omz
+# Probably should just install yay here... TBD
+# Oh, but need to figure out how to do makepkg install to pacman's --root
 
 # Pass in "init" to wire up the homedir links/paths/etc.
-if [ "$1" != "update" ]; then
+if [ -n "$init" ]; then
   # Link dotFiles
   echo "Linking dotfiles"
   bash $HOME/dotfiles/setup/linkFiles.sh
@@ -54,4 +56,17 @@ export USERROOT="\$HOME/.root"
 export PATH=\$PATH:"\$USERROOT/usr/bin"
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:"\$USERROOT/lib":"\$USERROOT/lib64"
 EOF
+  bash $HOME/dotfiles/setup/installer.sh -p steamdeck
+  # We DON'T want to default to zsh - we want deck to launch to bash
+  bash $HOME/dotfiles/setup/installer.sh -m omz
+  # Leaving a note - installing shellcheck required
+  # clone https://aur.archlinux.org/shellcheck-bin.git
+  # cd shellcheck-bin
+  # makepkg -s
+  # and then opening the tar that got created/downloaded, and dropping the exec into my path
+else
+  # Just update
+  bash $HOME/dotfiles/setup/installer.sh -u -p steamdeck
+  # We DON'T want to default to zsh - we want deck to launch to bash
+  bash $HOME/dotfiles/setup/installer.sh -u -m omz
 fi

@@ -268,7 +268,7 @@ Sometimes you just don't want to dig through a bunch of scripts and want to know
 1) `docker` [Container Manager](https://www.docker.com) ††
 1) `lazydocker` [CLI UI for Docker](https://github.com/jesseduffield/lazydocker) †
 1) All my Vim config; sorry, you're gonna have to read it for details.
-> † Installable with Homebrew
+> † Installable with Homebrew  
 > †† Installable with Homebrew Cask
 
 # Setup keyboard replacements

@@ -112,7 +112,7 @@ remote_scripted=(
   vim.sh
 )
 
-usage="$(basename "$0") [-hvamdpu] app
+usage="$(basename "$0") [-hfvamdpu] app
 Installs tools/applications based on -p Profile or provided app.
 Options:
   -h Show this help
@@ -120,11 +120,12 @@ Options:
   -p Profile name [all, work, personal, remote, steamdeck]
   -a Install all features of tools/apps
   -m Install minimal versions of tools/apps
+  -f Force a simple install regardless of profile/list
   -d Unlink files and Uninstall tools/apps
   -u Update installed applications
 "
 
-while getopts ':hvadmp:u' option; do
+while getopts ':hfvadmp:u' option; do
   case "$option" in
     h) echo "$usage"
       exit
@@ -140,6 +141,8 @@ while getopts ':hvadmp:u' option; do
       ;;
     p) profile="$OPTARG"
       ;;
+    f) force="true"
+      ;;
     u) doUpdate="-u"
       ;;
     *) echo "Unknown Option '$option', exiting"
@@ -152,6 +155,21 @@ shift $((OPTIND -1))
 : ${profile:="all"}
 
 target="$1"
+
+if [ -n "$force" ]; then
+  if [ -n "$doUpdate" ]; then
+    if command -v "$target"; then
+      echo "Attempting blind update"
+      dotInstall "$target"
+    else
+      echo "Can't update what's not installed"
+    fi
+  else
+    echo "Attempting blind install"
+    dotInstall "$target"
+  fi
+  exit
+fi
 
 if [ "$profile" == "work" ]; then
   simple=("${work_simple[@]}")
