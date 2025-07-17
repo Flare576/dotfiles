@@ -6,9 +6,9 @@ fileignoreconfig:
 - filename: .tmux.conf
   checksum: 8848a416d8fde0eff4acc2143e8becb6b76d0ade558d9738e5e2ba02360d6c69
 - filename: .zshenv
-  checksum: bcacaf19562d996b515dadbbef745082a245bb2781962adc0a50a255d3717a8d
+  checksum: b4fe97397736de5a63e3b77710c2f68f48313887770a1f800a6fd45f205b7f0d
 - filename: .zshenv.llm
-  checksum: 94df27dc8b4c8fd68e31517dbef3eb3185bb518ceca1122fe2ff45b8f8c2830e
+  checksum: dc9caf197b53f5c03bb69ab79ca1db5ab81d1cb0bb737167426113947f3de28b
 - filename: .zshrc
   checksum: 7404acca40efebe5b1b6b729a78d9ae5470b8e7565e280bae75be0d0fe599f68
 - filename: .zshrc

@@ -10,6 +10,7 @@
 "## Look_and_Feel
 "# Mappings
 "## Common
+"## LLM / AI
 "## Movement
 "## Sizing
 "## Other_mappings
@@ -134,9 +135,17 @@ endfunction
 "########################## Common
 " Use QT to close all open buffers in a tab
 command QT :tabclose
-" Invoke the SMART CAT
-nnoremap <leader>sc :'<,'>!sc
-xnoremap <leader>sc :!sc
+
+"########################## LLM / AI
+nnoremap <leader>llm :r !llm
+xnoremap <leader>llm :!llm
+
+" 'SC' stands for 'SmartCat', which ships with a great prompt for CLI coding assistance
+" I stole it and created a template for 'llm'
+nnoremap <leader>sc :r !llm -t sc 
+nnoremap <leader>scr :r !llmr -t sc 
+xnoremap <leader>sc :!llm -t sc 
+xnoremap <leader>scr :!llmr -t sc 
 
 "########################## Movement
 " move vertically by visual line
