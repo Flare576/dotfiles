@@ -1,72 +1,75 @@
 #!/bin/bash
-# If you just updated SteamOS, you'll **probably** need to run this script again.
-# I'm trying to get it setup so that pacman installs to $HOME so you don't need to re-install apps, but it's
-# Iterative becuse I can't really format my Steam Deck
-#
 # This script is designed to setup a new Steam Deck from scratch. If you just want pieces of my dot files, check the
 # Setup Scripts referenced here or read the Project ReadMe!
 #
+# Explanation
+# 1. Clone flare576/dotfiles to $HOME
+# 2. Link 'dotfiles' (.zshrc, .zshenv, etc.) from $HOME into **dotfiles**
+# 3. distrobox comes pre-installed as of SteamOS 3.5, but the script checks for it anyway and installs from flatpak
+# 4. If no container
+#   a. Create archlinux:latest
+#   b. Update pacman
+#   c. Install basic needs
+#   d. Export "ZSH" to host
+#   e. Install steamdeck profile apps
+# 5. If container already exists
+#   a. Update pacman
+#   b. Update/Install basic needs
+#   c. Update steamdeck profile apps
+#
+# After, open Konsole, type `zsh`, and you'll be in the issolated container. Try calling tmux next!
+
 # Pull the rest of the project
 cd $HOME
 if [ ! -d dotfiles ]; then
-  init="true"
+  echo "Cloning flare576/dotfiles locally"
   git clone https://github.com/Flare576/dotfiles.git
+  echo "Setting up Talisman as git hook"
+  # Install safety precautions around this repo
+  bash $HOME/dotfiles/setup/secureRepo.sh
 fi
 
-# Install safety precautions around this repo
-#bash $HOME/dotfiles/setup/secureRepo.sh
+# `linkFiles` intelligently detects existing links/files, so you can run it every time
+echo "Linking dotfiles"
+bash $HOME/dotfiles/setup/linkFiles.sh
 
-# Configure Pacman
-echo "Configuring Pacman"
-export USERROOT="$HOME/.root"
-mkdir -p "$USERROOT/etc"
-mkdir -p "$USERROOT/var/lib/pacman"
+echo "Verifying Distrobox"
 
-# Copy the pacman config file from the original system
-pacman_conf="$USERROOT/etc/pacman.conf"
-cp /etc/pacman.conf "$pacman_conf"
+export DOT_CONTAINER="dot_utils"
 
-# Create the keyring directory
-gpgdir="$USERROOT/etc/pacman.d/gnupg"
-mkdir -p "$gpgdir"
+if ! command -v distrobox &> /dev/null; then
+  echo "Installing distrobox"
+  flatpak install -y --noninteractive flathub org.distrobox.Distrobox
+fi
 
-# Initialize the keyring
-sudo pacman-key --gpgdir "$gpgdir" --conf "$pacman_conf" --init
+echo "Verifying '$DOT_CONTAINER' container"
 
-# Populate the keyring
-sudo pacman-key --gpgdir "$gpgdir" --conf "$pacman_conf" --populate archlinux
-sudo pacman-key --gpgdir "$gpgdir" --conf "$pacman_conf" --populate holo
+CORE="coreutils tar less findutils diffutils grep sed gawk util-linux procps-ng base-devel git xclip zsh"
 
-sudo steamos-readonly disable
-sudo pacman -r $USERROOT --gpgdir $USERROOT/etc/pacman.d/gnupg -Sy
-sudo pacman -r $USERROOT --gpgdir $USERROOT/etc/pacman.d/gnupg -S coreutils tar less findutils diffutils grep sed gawk util-linux procps-ng base-devel
-sudo steamos-readonly enable
-
-# Probably should just install yay here... TBD
-# Oh, but need to figure out how to do makepkg install to pacman's --root
-
-# Pass in "init" to wire up the homedir links/paths/etc.
-if [ -n "$init" ]; then
-  # Link dotFiles
-  echo "Linking dotfiles"
-  bash $HOME/dotfiles/setup/linkFiles.sh
-
-  cat > ~/.doNotCommit.d/.doNotCommit.steamdeck <<EOF
-export USERROOT="\$HOME/.root"
-export PATH=\$PATH:"\$USERROOT/usr/bin"
-export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:"\$USERROOT/lib":"\$USERROOT/lib64"
-EOF
-  bash $HOME/dotfiles/setup/installer.sh -p steamdeck
-  # We DON'T want to default to zsh - we want deck to launch to bash
-  bash $HOME/dotfiles/setup/installer.sh -m omz
-  # Leaving a note - installing shellcheck required
-  # clone https://aur.archlinux.org/shellcheck-bin.git
-  # cd shellcheck-bin
-  # makepkg -s
-  # and then opening the tar that got created/downloaded, and dropping the exec into my path
+if ! distrobox list | grep -q "$DOT_CONTAINER"; then
+  echo "Creating distrobox container '$DOT_CONTAINER'..."
+  distrobox create --name "$DOT_CONTAINER" --image archlinux:latest
+  echo "Initializing '$DOT_CONTAINER'"
+  distrobox enter "$DOT_CONTAINER" -- \
+    bash -c '
+      sudo pacman -Syu --noconfirm
+      sudo pacman -S --noconfirm '"$CORE"'
+      # Wire up zsh as the entry point
+      distrobox-export --bin "/usr/bin/zsh"
+      bash $HOME/dotfiles/setup/installer.sh -p steamdeck
+    '
+  # May need to write the location that distrobox exports to to .bashrc
+  echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
+  echo "Done! You may need to open a new Konsole window"
 else
-  # Just update
-  bash $HOME/dotfiles/setup/installer.sh -u -p steamdeck
-  # We DON'T want to default to zsh - we want deck to launch to bash
-  bash $HOME/dotfiles/setup/installer.sh -u -m omz
+  echo "Updating '$DOT_CONTAINER'..."
+  distrobox enter "$DOT_CONTAINER" -- \
+    bash -c '
+      sudo pacman -Syu --noconfirm
+      # Base Utils
+      sudo pacman -S --noconfirm '"$CORE"'
+
+      bash $HOME/dotfiles/setup/installer.sh -u -p steamdeck
+    '
 fi
+

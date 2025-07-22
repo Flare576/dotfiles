@@ -1,14 +1,16 @@
 #!/bin/bash
 source "$(dirname "$0")/../utils.sh"
 usage="$(basename "$0") [-hvadu]
-By default, installs python3. With -a, installs pyenv/pipenv and uses pyenv to install python3.
-Pyenv is a set of scripts which manage active/available versions of Python
-Pipenv is a set of tools that manages project dependencies of Python projects
+By default, uses local python3 to setup 'pydot' venv and links it to .doNotCommit structure.
+If no Python3 instance, exits with error
+With -a, installs pyenv/pipenv and uses pyenv to install python3.
+- Pyenv is a set of scripts which manage active/available versions of Python
+- Pipenv is a set of tools that manages project dependencies of Python projects
 Options:
   -h Show this help
   -v Display version
   -a Installs pyenv, pipenv, and python3 with pyenv
-  -d Uninstall Pyenv, Pipenv, and probably your local python install
+  -d Uninstall Pyenv, Pipenv, and clear 'pydot' env
   -u Update if installed
 "
 while getopts ':hvadmu' option; do
@@ -23,9 +25,9 @@ while getopts ':hvadmu' option; do
       ;;
     a) doAll="true"
       ;;
-    u) doUpdate="true"
-      ;;
     m) echo "Ignoring -m, no minimal settings"
+      ;;
+    u) doUpdate="true"
       ;;
     *) echo "Unknown Option '$OPTARG', exiting"
       exit
@@ -34,9 +36,16 @@ while getopts ':hvadmu' option; do
 done
 shift $((OPTIND -1))
 
+if [ -z "$doAll" ] && ! command -v python3 &> /dev/null; then
+  echo "No Python3 found" >&2;
+  exit 1
+fi
+activator="$HOME/.doNotCommit.d/.doNotCommit.pydot"
+v_env="$HOME/pydot"
+
 if [ "$doDestroy" == "true" ]; then
-  # TODO: manage removing pipenv files once I start using it
   if command -v pyenv &> /dev/null ; then
+    # TODO: manage removing pipenv files once I start using it
     rootdir="$(pyenv root)"
     echo "Removing $rootdir"
     rm -rf "$rootdir"
@@ -46,7 +55,11 @@ if [ "$doDestroy" == "true" ]; then
     fi
     dotRemove pipenv
   else
-    dotRemove python3
+    echo "Deactivating and destroying virtual env and activator"
+    deactivate
+    rm -rf "$v_env"
+    rm "$activator"
+    exit
   fi
   exit
 fi
@@ -86,5 +99,15 @@ if [ "$doAll" == "true" ]; then
   pyenv install "$stable"
   pyenv global "$stable"
 else
-  dotInstall python3
+  if [ "$doUpdate" == "true" ]; then
+    pip install --upgrade pip
+    exit
+  fi
+  # Setup a generic virtual env and add it to .doNotCommit structure
+  if [ -d "$v_env" ]; then
+    echo "$v_env already exists, skipping creation"
+  else
+    python -m venv "$v_env"
+    ln -sf "$v_env/bin/activate" "$activator"
+  fi
 fi

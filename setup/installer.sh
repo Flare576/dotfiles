@@ -29,6 +29,7 @@ all_scripted=(
   silversearcher.sh
   tmux.sh
   vim.sh
+  llm.sh
 )
 
 # Each should be a subset of all
@@ -56,6 +57,7 @@ work_scripted=(
   silversearcher.sh
   tmux.sh
   vim.sh
+  llm.sh
 )
 personal_simple=(
   bat
@@ -77,6 +79,7 @@ personal_scripted=(
   jira.sh
   tmux.sh
   vim.sh
+  llm.sh
 )
 steamdeck_simple=(
   bat
@@ -90,11 +93,13 @@ steamdeck_simple=(
 )
 steamdeck_scripted=(
   cheat.sh
-  # omz.sh # this should be installed, but needs to be called with -m
+  omz.sh
+  python.sh
   scripts.sh
   silversearcher.sh
   tmux.sh
   vim.sh
+  llm.sh
 )
 remote_simple=(
   bat
@@ -228,7 +233,7 @@ if [ -z "$target" ] && [ -n "$doDestroy" ]; then
   fi
 elif [ -z "$target" ]; then
   if [ "$isLinux" == "true" ]; then
-    if [ "$profile" != "remote" ]; then
+    if [ "$profile" != "remote" ] && [ "$profile" != "steamdeck" ]; then
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
     fi
   elif [[ "$1" == "update" ]]; then

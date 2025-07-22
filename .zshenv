@@ -64,7 +64,7 @@ alias sysup="$HOME/dotfiles/setup/installer.sh -u"
 
 # Utilities
 command -v batcat > /dev/null && alias bat='batcat' # Some *nix systems needed a different name
-alias cat='bat'
+command -v bat &> /dev/null && alias cat='bat'      # Just for safety in case bat is missing
 alias git='hub'
 alias c="cheat"
 alias cpl="cheat -t private -l"

@@ -1,5 +1,5 @@
 # This file defines some common functions used throughout the setup scripts and defines the global version of the scripts
-VERSION=2.0.1
+VERSION=3.0.0
 isLinux=0; [ -f "/etc/os-release" ] && isLinux="true"
 
 function cloneOrUpdateGit() {
@@ -27,12 +27,10 @@ function dotRemove() {
     [ "$linuxPackage" == "manual" ] && return 1
     echo "Uninstalling $linuxPackage"
     apt-get remove -qqq "$linuxPackage"
-  elif command -v pacman &> /dev/null ; then
+  elif [ -n "$CONTAINER_ID" ]; then
     [ "$linuxPackage" == "manual" ] && return 1
     echo "Uninstalling $linuxPackage"
-    command -v steamos-readonly &> /dev/null && sudo steamos-readonly disable
-    sudo pacman -r $USERROOT --gpgdir $USERROOT/etc/pacman.d/gnupg -R --noconfirm "$linuxPackage" > /dev/null
-    command -v steamos-readonly &> /dev/null && sudo steamos-readonly enable
+    sudo pacman -R --noconfirm "$linuxPackage"
   else
     echo "Unsure how to uninstall"
   fi
@@ -50,13 +48,11 @@ function dotInstall() {
     echo "Installing latest version of $linuxPackage"
     apt-get update -qq;
     apt-get install -qqq --no-install-recommends "$linuxPackage"
-  elif command -v pacman &> /dev/null ; then
+  elif [ -n "$CONTAINER_ID" ]; then
     [ "$linuxPackage" == "manual" ] && return 1
     echo "Installing latest version of $linuxPackage"
-    command -v steamos-readonly &> /dev/null && sudo steamos-readonly disable
-    sudo pacman -r $USERROOT --gpgdir $USERROOT/etc/pacman.d/gnupg -Syq > /dev/null
-    sudo pacman -r $USERROOT --gpgdir $USERROOT/etc/pacman.d/gnupg -S --noconfirm "$linuxPackage" > /dev/null
-    command -v steamos-readonly &> /dev/null && sudo steamos-readonly enable
+    sudo pacman -Syu --noconfirm
+    sudo pacman -S --noconfirm $linuxPackage
   else
     echo "Unsure how to install"
   fi
