@@ -277,16 +277,16 @@ endfunction
 
 "############################## Editing_Tricks  ###########
 
-" enables Leader + y to do clipboard copy in visual mode (OSx)
-vnoremap <silent> <leader>y :<CR>:let @a=@" \| execute "normal! vgvy" \| let res=system("pbcopy", @") \| let @"=@a<CR>
-" enables Leader + y to do clipboard copy in visual mode (WSL)
-let s:clip = '/mnt/c/Windows/System32/clip.exe'  " default location
-if executable(s:clip)
-  augroup WSLYank
-    autocmd!
-    autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
-  augroup END
-end
+" Check if Vim was compiled with clipboard support
+if has('clipboard')
+  " Visual mode: Leader + y to copy to system clipboard
+  vnoremap <silent> <leader>y "+y
+
+  " Normal/Visual mode: Leader + p to paste from system clipboard
+  nnoremap <silent> <leader>p "+p
+  vnoremap <silent> <leader>p "+p
+endif
+
 " enables Leader + uq to remove quotes from selection
 vnoremap <leader>uq :s/\v"([^"]+)"/\1/g<CR>
 " enables Leader + [space] to clear search highlighting

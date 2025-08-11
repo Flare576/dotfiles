@@ -42,7 +42,7 @@ if [ -n "$check" ] && [ "$check" != "true" ]; then
 fi
 
 if [ "$doDestroy" == "true" ]; then
-  dotRemove vim
+  dotRemove vim gvim
   echo "Removing vim plugins"
   rm -rf "$HOME/.vim"
 
@@ -102,7 +102,7 @@ py=(
   "davidhalter/jedi-vim"           # Does a lot with Python
 )
 
-dotInstall vim
+dotInstall vim gvim
 
 echo "Linking .vimrc, setting up plugins"
 rm -rf "$HOME/.vim/bundle" "$HOME/.vim/autoload"
