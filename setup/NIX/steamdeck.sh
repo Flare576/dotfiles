@@ -44,7 +44,7 @@ fi
 
 echo "Verifying '$DOT_CONTAINER' container"
 
-CORE="coreutils tar less findutils diffutils grep sed gawk util-linux procps-ng base-devel git xclip zsh"
+CORE="coreutils tar less findutils diffutils grep sed gawk util-linux procps-ng base-devel git zsh"
 
 if ! distrobox list | grep -q "$DOT_CONTAINER"; then
   echo "Creating distrobox container '$DOT_CONTAINER'..."
@@ -57,9 +57,15 @@ if ! distrobox list | grep -q "$DOT_CONTAINER"; then
       # Wire up zsh as the entry point
       distrobox-export --bin "/usr/bin/zsh"
       bash $HOME/dotfiles/setup/installer.sh -p steamdeck
+      # Setup yay
+      git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-bin
+      cd /tmp/yay-bin
+      makepkg -si
     '
   # May need to write the location that distrobox exports to to .bashrc
-  echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
+  if ! grep -q 'export PATH="$HOME/.local/bin:$PATH"' "$HOME/.bashrc"; then
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
+  fi
   echo "Done! You may need to open a new Konsole window"
 else
   echo "Updating '$DOT_CONTAINER'..."
@@ -68,8 +74,9 @@ else
       sudo pacman -Syu --noconfirm
       # Base Utils
       sudo pacman -S --noconfirm '"$CORE"'
+      # update yay apps
+      yay
 
       bash $HOME/dotfiles/setup/installer.sh -u -p steamdeck
     '
 fi
-
