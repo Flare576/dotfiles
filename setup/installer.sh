@@ -28,7 +28,7 @@ all_scripted=(
   scripts.sh
   silversearcher.sh
   tmux.sh
-  vim.sh
+  vim.sh               # Python deps need pip for Jedi - must come after python
   llm.sh
 )
 

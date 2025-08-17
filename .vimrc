@@ -39,7 +39,11 @@ set spelllang=en        " English for spelling!
 let g:ag_apply_qmappings=0
 " New, better words!
 set spellfile=$HOME/dotfiles/en.utf-8.add,$HOME/dotfiles/.doNotCommit.en.utf-8.add
+" We map <leader>k to a thesaurus tool in the Plugins section
 set thesaurus+=$HOME/.local/share/thesaurus.txt
+" Shift+K in Normal and Visual (with words selected) run this command
+" My Dotfiles setup dict as an alias to sdcv
+set keywordprg=dict
 set timeoutlen=1000 ttimeoutlen=0
 
 "########################## Formatting
@@ -245,6 +249,16 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
+
+" Limit to local thesaurus only
+let g:tq_enabled_backends=["mthesaur_txt"]
+" Point to our normal file
+let g:tq_mthesaur_file=&thesaurus
+" Limit the secondary lists to 5 items
+let g:tq_truncation_on_syno_list_size = 5
+" use <leader>k, a mirror of K for lookup
+nnoremap <leader>k :ThesaurusQueryReplaceCurrentWord<CR>
+vnoremap <leader>k y:ThesaurusQueryReplace <C-r>"<CR>
 
 "############################## Diff_and_Merge ###########
 

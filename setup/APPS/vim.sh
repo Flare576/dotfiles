@@ -35,6 +35,7 @@ done
 shift $((OPTIND -1))
 
 check="$allPlugins$doDestroy$minimal$doUpdate"
+config="$HOME/.doNotCommit.d/.doNotCommit.vim"
 
 if [ -n "$check" ] && [ "$check" != "true" ]; then
   echo "-a, -d, -m, and -u are mutually exclusive; use one only"
@@ -49,11 +50,21 @@ if [ "$doDestroy" == "true" ]; then
   echo "Removing vimrc"
   rm -f "$HOME/.vimrc"
 
-  thesDir="$XDG_DATA_HOME"
-  [ -z "$thesDir" ] && thesDir="$HOME/.local/share"
-  if [ -f "$thesDir/thesaurus.txt" ]; then
+  echo "Removing vim shortcuts"
+  rm -f "$config"
+
+  engDir="$XDG_DATA_HOME"
+  [ -z "$engDir" ] && engDir="$HOME/.local/share"
+  if [ -f "$engDir/thesaurus.txt" ]; then
     echo "Deleting thesaurus..."
-    rm -f "$thesDir/thesaurus.txt"
+    rm -f "$engDir/thesaurus.txt"
+  fi
+  if [ -f "$engDir/stardict/CIDE-2.4.2" ]; then
+    echo "Deleting dictionary..."
+    rm -rf "$engDir/CIDE-2.4.2"
+  fi
+  if command -v sdcv &> /dev/null; then
+    dotRemove sdcv
   fi
 
   if [ -n "$(pip3 --disable-pip-version-check list | grep jedi)" ]; then
@@ -101,6 +112,10 @@ py=(
   "vim-scripts/indentpython.vim"   # PEP8 indentation
   "davidhalter/jedi-vim"           # Does a lot with Python
 )
+write=(
+  "Ron89/thesaurus_query.vim"      # Brings sanity to thesaurus
+)
+
 
 dotInstall vim gvim
 
@@ -178,13 +193,22 @@ if [[ $includeTS == "y"* ]] ; then
 fi
 
 if [[ $includeWriting == "y"* ]] ; then
-  thesDir="$XDG_DATA_HOME"
-  [ -z "$thesDir" ] && thesDir="$HOME/.local/share"
-  if [ ! -f "$thesDir/thesaurus.txt" ]; then
-    echo "Downloading thesaurus..."
-    mkdir -p "$thesDir"
-    curl -sL -o "$thesDir/thesaurus.txt" http://www.gutenberg.org/files/3202/files/mthesaur.txt
-  fi
+  for item in "${write[@]}"; do
+    vimInstall "$item"
+  done
+  dotInstall sdcv
+  engDir="$XDG_DATA_HOME"
+  [ -z "$engDir" ] && engDir="$HOME/.local/share"
+
+  mkdir -p "$engDir/stardict"
+
+  echo "Downloading thesaurus..."
+  curl -sL -o "$engDir/thesaurus.txt" https://flare576.com/files/mthesaur.txt
+
+  echo "Downloading dictionary..."
+  curl -sL -o "/tmp/CIDE.tar.gz" https://flare576.com/files/CIDE-2.4.2.tar.gz
+  tar -xvzf "/tmp/CIDE.tar.gz" -C "$engDir/stardict/"
+  rm "/tmp/CIDE.tar.gz"
 fi
 
 if [[ $includePython == "y"* ]] ; then
@@ -192,5 +216,29 @@ if [[ $includePython == "y"* ]] ; then
     vimInstall "$item"
   done
   echo "Installing jedi with pip3"
+  if ! command -v pip3 &> /dev/null; then
+    echo "Attempting to activate venv"
+    source ~/.doNotCommit.d/.doNotCommit.pydot
+  fi
   pip3 install jedi
 fi
+
+echo "Setting up shortcuts"
+
+cat<<END > ${config}
+export EDITOR=vim
+
+# Quick-edit configs
+alias vi="vim"
+alias vz='vi -o ~/.zshrc ~/.zshenv -c "cd ~"'
+alias vd='vi ~/dotfiles -c "cd ~/dotfiles"'
+alias vs='vi ~/scripts -c "cd ~/scripts"'
+alias vt='vi ~/.tmux.conf -c "cd ~/dotfiles"'
+alias vc='vi ~/.config -c "cd ~/.config"'
+alias v='vi .'
+alias vv='vi -S'
+
+function vw(){ vi $(which $1) }
+
+alias dict='sdcv -2 ~/.local/share/stardict'
+END

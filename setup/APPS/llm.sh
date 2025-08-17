@@ -71,6 +71,7 @@ else
       cat<<END > ${config}
 export LLM_GEMINI_KEY=$gemini_key
 export LLM_USER_PATH="\$HOME/.config/llm"
+alias vl='vi ~/.config/llm -c "cd ~/.config/llm"'
 END
     fi
   fi
