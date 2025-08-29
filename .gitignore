@@ -21,3 +21,9 @@ cheat/community
 cheat/private
 .env*
 talisman_reports
+
+# A lot of AI-related files SHOULD be source controlled, but not all
+CLAUDE.local.md
+AGENTS.local.md
+.claude/settings.local.json
+.claude/plans

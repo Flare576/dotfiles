@@ -190,7 +190,7 @@ nnoremap <leader>/ :%s///gn<CR>
 " Run current file with various commands
 " r[un] with [b]rowser, currently Firefox
 nnoremap <leader>rb :silent !firefox %<CR> :redraw!<CR>
-nnoremap <leader>rm :silent !macdown %<CR> :redraw!<CR>
+nnoremap <leader>rm :silent !code %<CR> :redraw!<CR>
 " Save session to /tmp and exit
 nnoremap <leader>q :call MakeRootSession()<CR> :qa<CR>
 function! MakeRootSession()
