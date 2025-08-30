@@ -215,8 +215,8 @@ if [[ $includePython == "y"* ]] ; then
   for item in "${py[@]}"; do
     vimInstall "$item"
   done
-  echo "Installing jedi with pip3"
-  if ! command -v pip3 &> /dev/null; then
+  echo "Installing jedi with pip"
+  if ! command -v pip &> /dev/null; then
     echo "Attempting to activate venv"
     source ~/.doNotCommit.d/.doNotCommit.pydot
   fi
@@ -238,7 +238,7 @@ alias vc='vi ~/.config -c "cd ~/.config"'
 alias v='vi .'
 alias vv='vi -S'
 
-function vw(){ vi $(which $1) }
+function vw(){ vi \$(which \$1) }
 
 alias dict='sdcv -2 ~/.local/share/stardict'
 END

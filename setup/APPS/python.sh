@@ -107,7 +107,14 @@ else
   if [ -d "$v_env" ]; then
     echo "$v_env already exists, skipping creation"
   else
-    python -m venv "$v_env"
+    if command -v python &> /dev/null; then
+      python -m venv "$v_env" || python3 -m venv "$v_env"
+    elif command -v python3 &> /dev/null; then
+      python3 -m venv "$v_env"
+    else
+      echo 'No Python Found; are you missing your snake?'
+      exit
+    fi
     ln -sf "$v_env/bin/activate" "$activator"
   fi
 fi
