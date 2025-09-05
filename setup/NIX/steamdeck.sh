@@ -44,7 +44,7 @@ fi
 
 echo "Verifying '$DOT_CONTAINER' container"
 
-CORE="coreutils tar less findutils diffutils grep sed gawk util-linux procps-ng base-devel git zsh"
+CORE="coreutils tar less findutils diffutils grep sed gawk util-linux procps-ng base-devel git zsh xclip"
 
 if ! distrobox list | grep -q "$DOT_CONTAINER"; then
   echo "Creating distrobox container '$DOT_CONTAINER'..."
