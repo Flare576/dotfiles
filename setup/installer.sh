@@ -7,6 +7,7 @@ all_simple=(
   bat                  # enhanced version of the cat command
   fzf                  # FuzzyFind lets you search through piped-in data (useful with history)
   git                  # it's git
+  gh                   # github's cli tool for everything not in git
   graphviz             # For PlantUML
   hub                  # overlay to git, adds github-specific calls/functionality
   jq                   # work with JSON with a command-line query language
@@ -41,6 +42,7 @@ work_simple=(
   bat
   fzf
   git
+  gh
   graphviz
   hub
   jq
@@ -66,6 +68,7 @@ work_scripted=(
 personal_simple=(
   bat
   fzf
+  gh
   git
   graphviz
   hub
@@ -88,6 +91,7 @@ personal_scripted=(
 )
 steamdeck_simple=(
   bat
+  gh
   git
   graphviz
   hub

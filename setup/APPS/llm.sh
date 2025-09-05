@@ -55,7 +55,7 @@ fi
 
 if ! dotInstall llm "manual"; then
   echo "Setting up llm"
-  pip install llm
+  uv tool install llm
 fi
 
 if [ "$doUpdate" == "true" ]; then
