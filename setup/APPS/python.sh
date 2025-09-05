@@ -36,6 +36,9 @@ while getopts ':hvadmu' option; do
 done
 shift $((OPTIND -1))
 
+echo "Don't use this script, just use uv."
+exit 0
+
 if [ -z "$doAll" ] && ! command -v python3 &> /dev/null; then
   echo "No Python3 found" >&2;
   exit 1

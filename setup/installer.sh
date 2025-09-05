@@ -19,12 +19,13 @@ all_simple=(
   samba                # Shared Directories for Linux
   lftp                 # For deploying website
   make                 # Steam Deck doesn't have make somehow
+  uv                   # Python tool kit
 )
 all_scripted=(
   cheat.sh
   jira.sh
   omz.sh
-  python.sh
+  # python.sh          # Sunset, don't worry about global python, use uv
   scripts.sh
   silversearcher.sh
   tmux.sh
@@ -47,12 +48,12 @@ work_simple=(
   universal-ctags
   watch
   watson
+  uv
 )
 work_scripted=(
   cheat.sh
   jira.sh
   omz.sh
-  python.sh
   scripts.sh
   silversearcher.sh
   tmux.sh
@@ -69,11 +70,11 @@ personal_simple=(
   watch
   jq
   rpg-cli
+  uv
 )
 personal_scripted=(
   cheat.sh
   omz.sh
-  python.sh
   scripts.sh
   silversearcher.sh
   jira.sh
@@ -90,11 +91,11 @@ steamdeck_simple=(
   universal-ctags
   lftp
   make
+  uv
 )
 steamdeck_scripted=(
   cheat.sh
   omz.sh
-  python.sh
   scripts.sh
   silversearcher.sh
   tmux.sh
@@ -203,12 +204,17 @@ do
       "the_silver_searcher")
         command -v ag && dotInstall "$app" "silversearcher-ag"
         ;;
+      "uv")
+        command -v uv && dotInstall "$app" "python-uv"
+        ;;
       *) command -v "$app" && dotInstall "$app"
         ;;
     esac
   else # Install
     case "$app" in
       "the_silver_searcher") dotInstall "$app" "silversearcher-ag"
+        ;;
+      "uv") dotInstall "$app" "python-uv"
         ;;
       *) dotInstall "$app"
         ;;

@@ -215,12 +215,8 @@ if [[ $includePython == "y"* ]] ; then
   for item in "${py[@]}"; do
     vimInstall "$item"
   done
-  echo "Installing jedi with pip"
-  if ! command -v pip &> /dev/null; then
-    echo "Attempting to activate venv"
-    source ~/.doNotCommit.d/.doNotCommit.pydot
-  fi
-  pip3 install jedi
+  echo "Installing jedi with uv"
+  uv tool install jedi
 fi
 
 echo "Setting up shortcuts"
