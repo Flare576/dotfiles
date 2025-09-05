@@ -7,8 +7,10 @@ all_simple=(
   bat                  # enhanced version of the cat command
   fzf                  # FuzzyFind lets you search through piped-in data (useful with history)
   git                  # it's git
+  graphviz             # For PlantUML
   hub                  # overlay to git, adds github-specific calls/functionality
   jq                   # work with JSON with a command-line query language
+  jre-openjdk          # Steam Deck needs java
   k9s                  # Any project using K8s
   lazydocker           # Any project using straight Docker
   rpg-cli              # A bit of fun for folder management
@@ -39,6 +41,7 @@ work_simple=(
   bat
   fzf
   git
+  graphviz
   hub
   jq
   k9s
@@ -64,6 +67,7 @@ personal_simple=(
   bat
   fzf
   git
+  graphviz
   hub
   shellcheck
   universal-ctags
@@ -85,7 +89,9 @@ personal_scripted=(
 steamdeck_simple=(
   bat
   git
+  graphviz
   hub
+  jre-openjdk
   jq
   rpg-cli
   universal-ctags
