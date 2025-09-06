@@ -7,6 +7,7 @@ all_simple=(
   bat                  # enhanced version of the cat command
   fzf                  # FuzzyFind lets you search through piped-in data (useful with history)
   git                  # it's git
+  "npm:git-gac"        # make git a little easier
   gh                   # github's cli tool for everything not in git
   graphviz             # For PlantUML
   hub                  # overlay to git, adds github-specific calls/functionality
@@ -22,17 +23,15 @@ all_simple=(
   samba                # Shared Directories for Linux
   lftp                 # For deploying website
   make                 # Steam Deck doesn't have make somehow
-  uv                   # Python tool kit
 )
 all_scripted=(
   cheat.sh
   jira.sh
   omz.sh
-  # python.sh          # Sunset, don't worry about global python, use uv
   scripts.sh
   silversearcher.sh
   tmux.sh
-  vim.sh               # Python deps need pip for Jedi - must come after python
+  vim.sh
   llm.sh
 )
 
@@ -42,6 +41,7 @@ work_simple=(
   bat
   fzf
   git
+  "npm:git-gac"
   gh
   graphviz
   hub
@@ -53,7 +53,6 @@ work_simple=(
   universal-ctags
   watch
   watson
-  uv
 )
 work_scripted=(
   cheat.sh
@@ -70,6 +69,7 @@ personal_simple=(
   fzf
   gh
   git
+  "npm:git-gac"
   graphviz
   hub
   shellcheck
@@ -77,7 +77,6 @@ personal_simple=(
   watch
   jq
   rpg-cli
-  uv
 )
 personal_scripted=(
   cheat.sh
@@ -93,6 +92,7 @@ steamdeck_simple=(
   bat
   gh
   git
+  "npm:git-gac"
   graphviz
   hub
   jre-openjdk
@@ -101,7 +101,6 @@ steamdeck_simple=(
   universal-ctags
   lftp
   make
-  uv
 )
 steamdeck_scripted=(
   cheat.sh
@@ -115,6 +114,7 @@ steamdeck_scripted=(
 remote_simple=(
   bat
   git
+  "npm:git-gac"
   hub
   jq
   universal-ctags
@@ -168,7 +168,35 @@ while getopts ':hfvadmp:u' option; do
 done
 shift $((OPTIND -1))
 
-: ${profile:="all"}
+if [ -z "$profile" ]; then
+  echo "You don't want to install everything, trust me..."
+  exit 1
+fi
+
+# Handle app ecosystems, like python and NodeJS
+NVM_DIR="${NVM_DIR:-"$HOME/.nvm"}"
+# NOTE: "Destroy" is handled after the rest of the script because individual apps might have their own cleanup
+if [ -z "$doDestroy" ]; then # Install / Update
+  echo "Installing / Updating uv and Python Ecosystem"
+  if ! command -v uv &> /dev/null; then
+     dotInstall "uv" "manual" || curl -LsSf https://astral.sh/uv/install.sh | sh
+   else
+    uv self update
+  fi
+
+  # Technically, omz-nvm will install NVM on first load, but it also uses whats there
+  # Don't use the install script, though - it adds lines to your profile
+  echo "Installing / Updating  NVM and NodeJS Ecosystem"
+  mkdir -p "$NVM_DIR"
+  pushd "$NVM_DIR" &> /dev/null || exit
+  if ! [ -d ".git" ]; then
+    git clone https://github.com/nvm-sh/nvm.git .
+  else
+    git pull
+  fi
+  source "nvm.sh"
+  popd &> /dev/null || exit
+fi
 
 target="$1"
 
@@ -208,22 +236,11 @@ for app in "${simple[@]}"
 do
   [ -n "$target" ] && [ "$target" != "$app" ] && continue
   if [ -n "$doDestroy" ]; then
-    case "$app" in
-      "uv")
-          uv cache clean
-          rm -r "$(uv python dir)"
-          rm -r "$(uv tool dir)"
-        ;;
-      *) dotRemove "$app"
-        ;;
-    esac
+    dotRemove "$app"
   elif [ -n "$doUpdate" ]; then
     case "$app" in
       "the_silver_searcher")
         command -v ag && dotInstall "$app" "silversearcher-ag"
-        ;;
-      "uv")
-        command -v uv && dotInstall "$app" "manual" || uv self update
         ;;
       *) command -v "$app" && dotInstall "$app"
         ;;
@@ -231,8 +248,6 @@ do
   else # Install
     case "$app" in
       "the_silver_searcher") dotInstall "$app" "silversearcher-ag"
-        ;;
-      "uv") dotInstall "$app" "manual" || curl -LsSf https://astral.sh/uv/install.sh | sh
         ;;
       *) dotInstall "$app"
         ;;
@@ -259,6 +274,9 @@ elif [ -z "$target" ]; then
   if [ "$isLinux" == "true" ]; then
     # TODO - I do want this on my steam deck, but I don't know if it needs distrobox-host-exec or not yet
     if [ "$profile" != "remote" ] && [ "$profile" != "steamdeck" ]; then
+      if ! command unzip &> /dev/null; then
+        dotInstall unzip
+      fi
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
     fi
   elif [[ "$1" == "update" ]]; then
@@ -270,3 +288,14 @@ elif [ -z "$target" ]; then
   fi
 fi
 
+# NOTE: "Destroy" is handled after the rest of the script because individual apps might have their own cleanup
+if [ -n "$doDestroy" ]; then
+  echo "Removing uv and Python ecosystem"
+  uv cache clean
+  rm -rf "$(uv python dir)"
+  rm -rf "$(uv tool dir)"
+
+  echo "Removing NVM and NodeJS ecosystem"
+  nvm unload
+  rm -rf "$NVM_DIR"
+fi

@@ -31,6 +31,5 @@ apt-get install -y --no-install-recommends "$CORE" &> /dev/null
 echo "Linking dotfiles"
 bash $HOME/dotfiles/setup/linkFiles.sh
 
-# Install Applications
-bash $HOME/dotfiles/setup/installer.sh -p personal
-
+# Install Applications - the flags are to prevent prompts
+DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC bash $HOME/dotfiles/setup/installer.sh -p personal

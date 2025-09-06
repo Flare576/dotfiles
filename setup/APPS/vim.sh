@@ -43,7 +43,10 @@ if [ -n "$check" ] && [ "$check" != "true" ]; then
 fi
 
 if [ "$doDestroy" == "true" ]; then
-  dotRemove vim gvim
+  if ! dotRemove vim gvim; then
+    # Some flavors of linux don't have gvim (might just be arch)
+    dotRemove vim
+  fi
   echo "Removing vim plugins"
   rm -rf "$HOME/.vim"
 
@@ -67,8 +70,8 @@ if [ "$doDestroy" == "true" ]; then
     dotRemove sdcv
   fi
 
-  if [ -n "$(pip3 --disable-pip-version-check list | grep jedi)" ]; then
-    pip3 uninstall -y jedi
+  if command jedi &> /dev/null; then
+    dotRemove "python:jedi"
   fi
   exit
 fi
@@ -218,8 +221,9 @@ if [[ $includePython == "y"* ]] ; then
   for item in "${py[@]}"; do
     vimInstall "$item"
   done
-  echo "Installing jedi with uv"
-  uv tool install jedi
+  pushd "jedi-vim" &> /dev/null || exit
+  git submodule update --init --recursive
+  popd &> /dev/null || exit
 fi
 
 echo "Setting up shortcuts"

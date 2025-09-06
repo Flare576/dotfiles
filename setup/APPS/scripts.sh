@@ -90,7 +90,3 @@ if command -v brew &> /dev/null ; then
 else
   echo 'export PATH="$FLARE_SCRIPTS/nonbrew:$PATH"' >> "$config"
 fi
-
-# Install NPM-based tools
-# NVM / NPM are controlled via OMZ, so load ZSH
-zsh -c "npm install -g git-gac"

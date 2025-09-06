@@ -1,3 +1,4 @@
+# vim: set ft=bash :
 # This file defines some common functions used throughout the setup scripts and defines the global version of the scripts
 VERSION=3.1.0
 isLinux=0; [ -f "/etc/os-release" ] && isLinux="true"
@@ -16,45 +17,80 @@ function cloneOrUpdateGit() {
   fi
 }
 
+# Extending to support ecosystems
 function dotRemove() {
-  brewPackage="$1"
-  [ -n "$2" ] && linuxPackage="$2" || linuxPackage="$brewPackage"
-
-  if command -v brew &> /dev/null ; then
-    echo "Uninstalling $brewPackage"
-    brew uninstall "$brewPackage"
-  elif command -v apt-get &> /dev/null ; then
-    [ "$linuxPackage" == "manual" ] && return 1
-    echo "Uninstalling $linuxPackage"
-    apt-get remove -qqq "$linuxPackage"
-  elif [ -n "$CONTAINER_ID" ]; then
-    [ "$linuxPackage" == "manual" ] && return 1
-    echo "Uninstalling $linuxPackage"
-    sudo pacman -R --noconfirm "$linuxPackage"
+  if [[ "$1" == *:* ]]; then
+    IFS=':' read -ra pieces <<< "$1"
+    eco="${pieces[0]}"
+    package="${pieces[1]}"
+    echo "Uninstalling $package"
+    if [ "$eco" == "python" ]; then
+      uv tool uninstall "$package"
+    elif [ "$eco" == "npm" ]; then
+      npm uninstall -g "$package"
+    fi
   else
-    echo "Unsure how to uninstall"
+    brewPackage="$1"
+    [ -n "$2" ] && linuxPackage="$2" || linuxPackage="$brewPackage"
+
+    if command -v brew &> /dev/null ; then
+      echo "Uninstalling $brewPackage"
+      brew uninstall "$brewPackage"
+    elif command -v apt-get &> /dev/null ; then
+      [ "$linuxPackage" == "manual" ] && return 1
+      echo "Uninstalling $linuxPackage"
+      apt-get remove -qqq "$linuxPackage"
+    elif [ -n "$CONTAINER_ID" ]; then
+      [ "$linuxPackage" == "manual" ] && return 1
+      echo "Uninstalling $linuxPackage"
+      sudo pacman -R --noconfirm "$linuxPackage"
+    else
+      echo "Unsure how to uninstall"
+    fi
   fi
 }
 
 function dotInstall() {
-  brewPackage="$1"
-  [ -n "$2" ] && linuxPackage="$2" || linuxPackage="$brewPackage"
-
-  if command -v brew &> /dev/null ; then
-    echo "Installing latest version of $brewPackage"
-    brew install "$brewPackage"
-  elif command -v apt-get &> /dev/null ; then
-    [ "$linuxPackage" == "manual" ] && return 1
-    echo "Installing latest version of $linuxPackage"
-    apt-get update -qq;
-    apt-get install -qqq --no-install-recommends "$linuxPackage"
-  elif [ -n "$CONTAINER_ID" ]; then
-    [ "$linuxPackage" == "manual" ] && return 1
-    echo "Installing latest version of $linuxPackage"
-    sudo pacman -Syu --noconfirm
-    sudo pacman -S --noconfirm $linuxPackage
+  if [[ "$1" == *:* ]]; then
+    IFS=':' read -ra pieces <<< "$1"
+    eco="${pieces[0]}"
+    package="${pieces[1]}"
+    if [ "$eco" == "python" ]; then
+      echo "Installing latest version of $package with uv"
+      command -v uv &> /dev/null || . "$HOME/.local/bin/env"
+      if command -v "$package" &> /dev/null; then
+        uv tool upgrade "$package"
+      else
+        uv tool install "$package"
+      fi
+    elif [ "$eco" == "npm" ]; then
+      echo "Installing latest version of $package with npm"
+      if ! command -v npm &> /dev/null; then
+        NVM_DIR="${NVM_DIR:-~/.nvm}"
+        . "$NVM_DIR/nvm.sh"
+      fi
+      npm install -g "$package"
+    fi
   else
-    echo "Unsure how to install"
+    brewPackage="$1"
+    [ -n "$2" ] && linuxPackage="$2" || linuxPackage="$brewPackage"
+
+    if command -v brew &> /dev/null ; then
+      echo "Installing latest version of $brewPackage"
+      brew install "$brewPackage"
+    elif command -v apt-get &> /dev/null ; then
+      [ "$linuxPackage" == "manual" ] && return 1
+      echo "Installing latest version of $linuxPackage"
+      apt-get update -qq;
+      apt-get install -qqq --no-install-recommends "$linuxPackage"
+    elif [ -n "$CONTAINER_ID" ]; then
+      [ "$linuxPackage" == "manual" ] && return 1
+      echo "Installing latest version of $linuxPackage"
+      sudo pacman -Syu --noconfirm
+      sudo pacman -S --noconfirm $linuxPackage
+    else
+      echo "Unsure how to install"
+    fi
   fi
 }
 

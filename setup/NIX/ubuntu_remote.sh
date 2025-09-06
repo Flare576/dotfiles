@@ -5,23 +5,34 @@
 
 starting=$(date +%s%N)
 apt-get update &> /dev/null
-# Install git to pull down dotfiles repo, sudo because not every system needs it
-apt-get install -y git sudo &> /dev/null
+# Install git to pull down dotfiles repo
+apt-get install -y git &> /dev/null
 
 # Pull the rest of the project
 cd $HOME
-echo "Cloning dotfiles"
-git clone -q https://github.com/Flare576/dotfiles.git
 
-# Install safety precautions around this repo
-bash $HOME/dotfiles/setup/secureRepo.sh
+if [ ! -d dotfiles ]; then
+  if ! command -v git &> /dev/null; then
+    echo "Installing git for project clone"
+    apt-get install -y --no-install-recommends git
+  fi
+  # Pull the rest of the project
+  git clone https://github.com/Flare576/dotfiles.git
+
+  pushd dotfiles
+  git pull; git switch add-npm-scripts
+  popd
+
+  # Install safety precautions around this repo
+  bash $HOME/dotfiles/setup/secureRepo.sh
+fi
 
 # Link dotFiles
 echo "Linking dotfiles"
 bash $HOME/dotfiles/setup/linkFiles.sh
 
-# Setup Apps
-bash $HOME/dotfiles/setup/installer.sh -p remote -m
+# Install Applications - the flags are to prevent prompts
+DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC bash $HOME/dotfiles/setup/installer.sh -p remote -m
 
 # Finish with a CTA!
 ending=$(date +%s%N)
