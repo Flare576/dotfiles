@@ -4,7 +4,7 @@ fileignoreconfig:
 - filename: cheat/*
   checksum: f5f609cca669e97213ebdf1b6d1aca19f2fa0edd4f9223579dfcd753cc4857b2
 - filename: .tmux.conf
-  checksum: 8848a416d8fde0eff4acc2143e8becb6b76d0ade558d9738e5e2ba02360d6c69
+  checksum: 04a58c73d8f01ff9c2636536921ee05bf26256c0142c0400323875e185857d56
 - filename: .zshenv
   checksum: b4fe97397736de5a63e3b77710c2f68f48313887770a1f800a6fd45f205b7f0d
 - filename: .zshenv.llm

@@ -117,7 +117,10 @@ write=(
 )
 
 
-dotInstall vim gvim
+if ! dotInstall vim gvim; then
+  # Some flavors of linux don't have gvim (might just be arch)
+  dotInstall vim
+fi
 
 echo "Linking .vimrc, setting up plugins"
 rm -rf "$HOME/.vim/bundle" "$HOME/.vim/autoload"
