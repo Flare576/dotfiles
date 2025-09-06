@@ -14,10 +14,6 @@ if [ ! -d dotfiles ]; then
   # Pull the rest of the project
   git clone https://github.com/Flare576/dotfiles.git
 
-  pushd dotfiles
-  git pull; git switch add-npm-scripts
-  popd
-
   # Install safety precautions around this repo
   bash $HOME/dotfiles/setup/secureRepo.sh
 fi

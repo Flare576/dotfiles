@@ -195,6 +195,7 @@ if [ -z "$doDestroy" ]; then # Install / Update
     git pull
   fi
   source "nvm.sh"
+  nvm install stable
   popd &> /dev/null || exit
 fi
 

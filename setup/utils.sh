@@ -1,6 +1,8 @@
-# vim: set ft=bash :
+#!/bin/bash
 # This file defines some common functions used throughout the setup scripts and defines the global version of the scripts
-VERSION=3.1.0
+# shellcheck disable=SC2034
+VERSION=3.2.0
+# shellcheck disable=SC2034
 isLinux=0; [ -f "/etc/os-release" ] && isLinux="true"
 
 function cloneOrUpdateGit() {
@@ -57,6 +59,7 @@ function dotInstall() {
     package="${pieces[1]}"
     if [ "$eco" == "python" ]; then
       echo "Installing latest version of $package with uv"
+      # shellcheck disable=SC1091
       command -v uv &> /dev/null || . "$HOME/.local/bin/env"
       if command -v "$package" &> /dev/null; then
         uv tool upgrade "$package"
@@ -66,7 +69,8 @@ function dotInstall() {
     elif [ "$eco" == "npm" ]; then
       echo "Installing latest version of $package with npm"
       if ! command -v npm &> /dev/null; then
-        NVM_DIR="${NVM_DIR:-~/.nvm}"
+        NVM_DIR="${NVM_DIR:-"$HOME/.nvm"}"
+        # shellcheck disable=SC1091
         . "$NVM_DIR/nvm.sh"
       fi
       npm install -g "$package"
@@ -87,7 +91,7 @@ function dotInstall() {
       [ "$linuxPackage" == "manual" ] && return 1
       echo "Installing latest version of $linuxPackage"
       sudo pacman -Syu --noconfirm
-      sudo pacman -S --noconfirm $linuxPackage
+      sudo pacman -S --noconfirm "$linuxPackage"
     else
       echo "Unsure how to install"
     fi
@@ -98,5 +102,5 @@ function dotInstall() {
 function latestGit() {
   repository="$1" # should be user/project formatted
   filter="$2" # artifact to look for
-  echo "$(curl --silent "https://api.github.com/repos/$repository/releases/latest" | jq -r '.assets[].browser_download_url' | grep "$filter")"
+  curl --silent "https://api.github.com/repos/$repository/releases/latest" | jq -r '.assets[].browser_download_url' | grep "$filter"
 }

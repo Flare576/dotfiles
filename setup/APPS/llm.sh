@@ -61,9 +61,9 @@ else
     llm install llm-gemini
     if [ ! -f "$config" ]; then
       echo "Please provide Gemini API key. It will be stored in .doNotCommit.llm"
-      read -s gemini_key
-      cat<<END > ${config}
-export LLM_GEMINI_KEY=$gemini_key
+      read -rs gemini_key
+      cat<<END > "${config}"
+export LLM_GEMINI_KEY="$gemini_key"
 export LLM_USER_PATH="\$HOME/.config/llm"
 alias vl='vi ~/.config/llm -c "cd ~/.config/llm"'
 END

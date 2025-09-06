@@ -50,7 +50,7 @@ elif [ -n "$FLARE_SCRIPTS" ]; then
 fi
 
 if [ "$doDestroy" == "true" ]; then
-  if test $(which brew); then
+  if command -v brew &> /dev/null; then
     for formula in "${brews[@]}"
     do
       dotRemove "$formula"
@@ -67,14 +67,14 @@ fi
 
 echo "Cloning/Updating scripts in $INSTALL"
 if [ ! -d "$INSTALL" ]; then
-  git clone --recurse-submodules -q https://github.com/flare576/scripts.git $INSTALL
+  git clone --recurse-submodules -q https://github.com/flare576/scripts.git "$INSTALL"
 fi
 
 pushd "$INSTALL" &> /dev/null || exit
 git pull --recurse-submodules
 
 echo "Ensuring $config is up-to-date"
-cat<<END > ${config}
+cat<<END > "${config}"
 export FLARE_SCRIPTS="$INSTALL"
 # fpath controls zsh auto-completion config locations
 fpath=(\$FLARE_SCRIPTS/bin \$fpath)
@@ -88,5 +88,6 @@ if command -v brew &> /dev/null ; then
     dotInstall "$formula"
   done
 else
+  #shellcheck disable=SC2016
   echo 'export PATH="$FLARE_SCRIPTS/nonbrew:$PATH"' >> "$config"
 fi

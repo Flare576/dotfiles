@@ -69,10 +69,6 @@ if [ "$doDestroy" == "true" ]; then
   if command -v sdcv &> /dev/null; then
     dotRemove sdcv
   fi
-
-  if command jedi &> /dev/null; then
-    dotRemove "python:jedi"
-  fi
   exit
 fi
 
@@ -228,7 +224,7 @@ fi
 
 echo "Setting up shortcuts"
 
-cat<<END > ${config}
+cat<<END > "${config}"
 export EDITOR=vim
 
 # Quick-edit configs
