@@ -35,7 +35,6 @@ shift $((OPTIND -1))
 brews=(
   flare576/scripts/monitorjobs    # AWS-cli based job monitoring
   flare576/scripts/git-clone      # Manage multiple git accounts for cloning projects
-  flare576/scripts/gac            # 'gac' git overlay for add/commit
   flare576/scripts/dvol           # manage Docker Volumes outside of project docker-compose files
   flare576/scripts/newScript      # facilitate creating new scripts in varius languages
   flare576/scripts/vroom          # wrapper for 'make' command to start/manage project execution
@@ -91,3 +90,7 @@ if command -v brew &> /dev/null ; then
 else
   echo 'export PATH="$FLARE_SCRIPTS/nonbrew:$PATH"' >> "$config"
 fi
+
+# Install NPM-based tools
+# NVM / NPM are controlled via OMZ, so load ZSH
+zsh -c "npm install -g git-gac"

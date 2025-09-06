@@ -4,16 +4,33 @@
 #
 # It should be noted that this file will allow you to install as root; this is to allow me to setup new Docker images
 
-# Pull the rest of the project
 cd $HOME
-git clone https://github.com/Flare576/dotfiles.git
 
-# Install safety precautions around this repo
-bash $HOME/dotfiles/setup/secureRepo.sh
+if [ ! -d dotfiles ]; then
+  if ! command -v git &> /dev/null; then
+    echo "Installing git for project clone"
+    apt-get install -y --no-install-recommends git
+  fi
+  # Pull the rest of the project
+  git clone https://github.com/Flare576/dotfiles.git
 
-# Install Applications
-bash $HOME/dotfiles/setup/installer.sh -p personal
+  pushd dotfiles
+  git pull; git switch add-npm-scripts
+  popd
+
+  # Install safety precautions around this repo
+  bash $HOME/dotfiles/setup/secureRepo.sh
+fi
+
+CORE="ca-certificates curl unzip"
+
+apt-get update &> /dev/null
+apt-get install -y --no-install-recommends "$CORE" &> /dev/null
 
 # Link dotFiles
 echo "Linking dotfiles"
 bash $HOME/dotfiles/setup/linkFiles.sh
+
+# Install Applications
+bash $HOME/dotfiles/setup/installer.sh -p personal
+

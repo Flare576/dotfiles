@@ -1,4 +1,8 @@
 #!/bin/bash
+# 2025-09-06: Messing with default shell was probably never a great idea, but between all these variables, I'm taking it out:
+# - Steam Deck (DO NOT SWITCH)
+# - OSX (ZSH _is_ default)
+# - Ubuntu VMs (just -it /bin/zsh)
 source "$(dirname "$0")/../utils.sh"
 usage="$(basename "$0") [-hmvdu]
 Links dotfile configs and installs or updates zsh, omz, and plugins by default.
@@ -6,7 +10,6 @@ ZSH is an alternative shell to bash that supports many more features, plugins, a
 OMZ (oh my zsh) is a customization framework for Zsh
 Options:
   -h Show this help
-  -m Minimal install, skips setting default shell
   -v Display version
   -d Unlink files and Uninstall zsh/omz/plugins
   -u Update if installed
@@ -25,7 +28,7 @@ while getopts ':hvadmu' option; do
       ;;
     a) echo "Ignoring -a, no all settings"
       ;;
-    m) minimal="true"
+    m) echo "Ignoring -m, no all settings"
       ;;
     *) echo "Unknown Option '$OPTARG', exiting"
       exit
@@ -54,15 +57,6 @@ if [ "$doDestroy" == "true" ]; then
   pushd "$HOME" &> /dev/null || exit
   rm -rf .oh-my-zsh .z .zcomp* &> /dev/null
   popd &> /dev/null || exit
-
-  if [ "$isLinux" == "true" ]; then
-    echo "Reverting to bash, removing zsh from shells listing"
-    chsh -s "$(which bash)"
-    sudo sed -i"" -e "/\/zsh/d" "/etc/shells"
-  else
-    echo "Reverting to bash"
-    sudo dscl . -create "/Users/$USER" UserShell "$(which bash)"
-  fi
 
   dotRemove zsh
   exit
@@ -107,19 +101,3 @@ do
   echo "Linking $link"
   ln -fs "$HOME/dotfiles/$link" "$HOME/$link"
 done
-
-# if "doUpdate" is true, or "minimal" is true, DON'T make zsh default
-if [ -z "$doUpdate" ] && [ -z "$minimal" ]; then
-  echo "Making Zsh default"
-  loc="$(which zsh)"
-  if [ "$isLinux" == "true" ] ; then
-    if grep -vq "$loc" /etc/shells; then
-      # using sudo because most users can't (and shouldn't) direct-access /etc/shells
-      echo "$loc" | sudo tee -a /etc/shells
-    fi
-    chsh -s "$loc"
-  else
-    # dscl is an OSX tool that updates the same underlying system as 'chsh' and OSX doesn't require updating /etc/shells
-    sudo dscl . -create "/Users/$USER" UserShell "$loc"
-  fi
-fi

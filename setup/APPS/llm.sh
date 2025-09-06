@@ -1,7 +1,7 @@
 #!/bin/bash
 source "$(dirname "$0")/../utils.sh"
 usage="$(basename "$0") [-hmvdu]
-If installing on Linux, install after python.sh.
+If installing on Linux, install after uv.
 Installs 'llm' CLI tool, llm-gemini plugin, and sets envars.
 Options:
   -h Show this help

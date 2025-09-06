@@ -208,14 +208,22 @@ for app in "${simple[@]}"
 do
   [ -n "$target" ] && [ "$target" != "$app" ] && continue
   if [ -n "$doDestroy" ]; then
-   dotRemove "$app"
+    case "$app" in
+      "uv")
+          uv cache clean
+          rm -r "$(uv python dir)"
+          rm -r "$(uv tool dir)"
+        ;;
+      *) dotRemove "$app"
+        ;;
+    esac
   elif [ -n "$doUpdate" ]; then
     case "$app" in
       "the_silver_searcher")
         command -v ag && dotInstall "$app" "silversearcher-ag"
         ;;
       "uv")
-        command -v uv && dotInstall "$app" "python-uv"
+        command -v uv && dotInstall "$app" "manual" || uv self update
         ;;
       *) command -v "$app" && dotInstall "$app"
         ;;
@@ -224,7 +232,7 @@ do
     case "$app" in
       "the_silver_searcher") dotInstall "$app" "silversearcher-ag"
         ;;
-      "uv") dotInstall "$app" "python-uv"
+      "uv") dotInstall "$app" "manual" || curl -LsSf https://astral.sh/uv/install.sh | sh
         ;;
       *) dotInstall "$app"
         ;;
