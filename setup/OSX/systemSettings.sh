@@ -10,13 +10,14 @@ By default, makes several changes to system settings. With -d, resets to 'origin
  - Shows all files in Finder
  - Disable 'Swipe to scroll'
  - Enable 'Tap to click'
- - Enable showing battery percent in staus bar (broken)
+ - Enable showing battery percent in staus bar - Must be done manually
  - Allow tabbing in dialog boxes
  - Set hold-to-repeat time for keys from 25 to 15
  - Set repeat rate from 6 to 1
  - Disable Smart-Quotes
  - Set show-scrollbars from 'Automatic' to 'WhenScrolling'
  - Display sound icon in status bar by default
+ - Dispaly bluetooth icon in status bar by default
 
   -h Show this help
   -v Display version
@@ -54,7 +55,8 @@ initialRepeat=15
 keyRepeat=1
 smartQuotes='false'
 scrollbars='WhenScrolling'
-showSound="true"
+showSound="18"
+showBluetooth="18"
 if [ "$doDestroy" == "true" ]; then
   dockside="bottom"
   autoHide="false"
@@ -69,7 +71,8 @@ if [ "$doDestroy" == "true" ]; then
   keyRepeat=6
   smartQuotes='true'
   scrollbars='Automatic'
-  showShound="false"
+  showSound="0"
+  showBluetooth="0"
 fi
 echo "Configuring Dock and System settings"
 
@@ -96,21 +99,22 @@ defaults write -g com.apple.swipescrolldirection -bool $swipeScroll
 defaults write NSGlobalDomain AppleShowScrollBars -string "$scrollbars"
 # Tap to click
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool $tapToClick
-# Enable battery icon in menu bar
-defaults write com.apple.menuextra.battery ShowPercent $showPercent
+# Enable battery icon percent in menu bar - Not available via defaults write in Sequoia
+# defaults write com.apple.menuextra.battery ShowPercent $showPercent
 # Tab through controls of dialog boxes
 defaults write NSGlobalDomain AppleKeyboardUIMode -int $dialogTab
 # make repeating keys fast
 defaults write -g InitialKeyRepeat -int $initialRepeat # normal minimum is 15 (225 ms)
 defaults write -g KeyRepeat -int $keyRepeat # normal minimum is 2 (30 ms)
 # Show sound on menu bar at all times
-defaults write -g com.apple.controlcenter "NSStatusItem Visible Sound" -bool $showSound
+defaults write com.apple.controlcenter Sound -int $showSound
+# Show bluetooth on menu bar at all times
+defaults write com.apple.controlcenter Bluetooth -int $showBluetooth
 
 # Disable SmartQuotes
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool $smartQuotes
 
 bash $HOME/dotfiles/setup/OSX/reassignCapsLock.sh $1
-bash $HOME/dotfiles/setup/OSX/menuClock.sh $1
 
 killall Finder
 killall Dock

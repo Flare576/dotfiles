@@ -21,3 +21,5 @@ fileignoreconfig:
   checksum: 009ffd671c734ea95e0e5055129697bc32780081313e708d00a17ca1b226f90e
 - filename: setup/NIX/steamdeck.sh
   checksum: 39600e716ab345a91003a06b6657c2ee483434e104bfede82694250235f4156a
+- filename: setup/OSX/reassignCapsLock.sh
+  checksum: f51e2cab000fdd9c190ff44bd5128564f62489df92ebea5b014d0eb66ce80c0e

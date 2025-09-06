@@ -45,7 +45,7 @@ filename="$HOME/Library/Application Support/Code/User/settings.json"
 # Then update the 'workbench.colorTheme' using jq and write back atomically.
 # The '2>/dev/null' suppresses potential error messages from 'cat' if the file is not found initially.
 ( [ -f "$filename" ] && cat "$filename" 2>/dev/null || echo "{}" ) | \
-jq --arg theme "$code_theme" '.{"vim.vimrc.enable": true,"vim.vimrc.path":"~/.vimrc"}' > "$filename.tmp" && \
+jq '{"vim.vimrc.enable": true,"vim.vimrc.path":"~/.vimrc"}' > "$filename.tmp" && \
 mv "$filename.tmp" "$filename"
 
 # Force setup of apps

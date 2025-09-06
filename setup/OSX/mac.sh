@@ -10,24 +10,27 @@ if test ! $(which brew); then
   [ -f "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-echo "Installing git for project clone"
-brew install git
-
-# Pull the rest of the project
 cd $HOME
-git clone https://github.com/Flare576/dotfiles.git
 
-# Install safety precautions around this repo
-bash $HOME/dotfiles/setup/secureRepo.sh
+if [ ! -d dotfiles ]; then
+  if ! command -v git &> /dev/null; then
+    echo "Installing git for project clone"
+    brew install git
+  fi
+  git clone https://github.com/Flare576/dotfiles.git
+
+  # Install safety precautions around this repo
+  bash $HOME/dotfiles/setup/secureRepo.sh
+
+  # Setup background and dock settings
+  bash $HOME/dotfiles/setup/OSX/systemSettings.sh
+
+  # Clean dock
+  bash $HOME/dotfiles/setup/OSX/cleanDock.sh
+fi
 
 # Link dotFiles
 bash $HOME/dotfiles/setup/linkFiles.sh
-
-# Setup background and dock settings
-bash $HOME/dotfiles/setup/OSX/systemSettings.sh
-
-# Clean dock
-bash $HOME/dotfiles/setup/OSX/cleanDock.sh
 
 # Install applications
 bash $HOME/dotfiles/setup/installer.sh -p "work"

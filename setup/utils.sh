@@ -1,5 +1,5 @@
 # This file defines some common functions used throughout the setup scripts and defines the global version of the scripts
-VERSION=3.0.0
+VERSION=3.1.0
 isLinux=0; [ -f "/etc/os-release" ] && isLinux="true"
 
 function cloneOrUpdateGit() {

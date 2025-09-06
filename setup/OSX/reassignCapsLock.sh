@@ -33,24 +33,35 @@ tell application "System Events"
   delay 0.5
 
   --Open modifier keys submenu
-  repeat 3 times
-    keystroke tab using shift down
-    delay 0.5
+  repeat 9 times
+    keystroke tab
+    delay 0.25
   end repeat
   keystroke space
+  delay 0.5
+
+  --Select "Modifier Keys", switch panes
+  repeat 13 times
+    key code 125 --down arrow
+    delay 0.25
+  end repeat
+  keystroke tab -- Switch pane
   delay 0.1
 
-  --Open drop-down and go to top
-  keystroke space
+  --Caps Lock is first option after keyboard
+  keystroke tab -- select caps lock
   delay 0.1
-  repeat 4 times
+  keystroke space
+  delay 0.25
+
+  --Move menu to top, in case we re-run the script
+  repeat 5 times
     key code 126 --up arrow
+    delay 0.1
   end repeat
 
   --Select "Option" option
-  repeat 2 times
-    key code 125 --down arrow
-  end repeat
+  key code 125 --down arrow
   delay 0.1
 
   keystroke return

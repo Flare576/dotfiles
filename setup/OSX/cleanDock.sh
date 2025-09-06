@@ -1,18 +1,19 @@
 #!/bin/sh
-DLURL=$(curl --silent "https://api.github.com/repos/kcrawford/dockutil/releases/latest" | jq -r '.assets[].browser_download_url' | grep pkg)
-curl -sL ${DLURL} -o /tmp/dockutil.pkg
-sudo installer -pkg "/tmp/dockutil.pkg" -target /
-rm /tmp/dockutil.pkg
+
+brew install dockutil
 
 toremove=(
   Safari
   Messages
+  Mail
   Maps
   Photos
   FaceTime
+  Calendar
   Contacts
   Reminders
   Notes
+  Freeform
   TV
   Music
   Podcasts
@@ -25,4 +26,4 @@ for crapapp in "${toremove[@]}"; do
   dockutil --remove "$crapapp" &> /dev/null
 done
 
-sudo rm /usr/local/bin/dockutil
+brew uninstall dockutil

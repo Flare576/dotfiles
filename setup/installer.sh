@@ -244,20 +244,21 @@ if [ -z "$target" ] && [ -n "$doDestroy" ]; then
   # not really sure how to uninstall from Linux...
   if [ "$isLinux" == "true" ] ; then
     echo "We can pretend I uninstalled Jetbrains font..."
-  elif brew ls --versions homebrew/cask-fonts/font-jetbrains-mono >/dev/null; then
-    brew uninstall --cask homebrew/cask-fonts/font-jetbrains-mono
+  elif brew ls --versions font-jetbrains-mono >/dev/null; then
+    brew uninstall --cask font-jetbrains-mono
   fi
 elif [ -z "$target" ]; then
   if [ "$isLinux" == "true" ]; then
+    # TODO - I do want this on my steam deck, but I don't know if it needs distrobox-host-exec or not yet
     if [ "$profile" != "remote" ] && [ "$profile" != "steamdeck" ]; then
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
     fi
   elif [[ "$1" == "update" ]]; then
-    if brew ls --versions homebrew/cask-fonts/font-jetbrains-mono >/dev/null; then
-      brew upgrade --cask homebrew/cask-fonts/font-jetbrains-mono
+    if brew ls --versions font-jetbrains-mono &> /dev/null; then
+      brew upgrade --cask font-jetbrains-mono
     fi
   else
-    brew install --cask homebrew/cask-fonts/font-jetbrains-mono
+    brew install --cask font-jetbrains-mono
   fi
 fi
 
