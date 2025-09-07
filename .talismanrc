@@ -4,9 +4,9 @@ fileignoreconfig:
 - filename: cheat/*
   checksum: f5f609cca669e97213ebdf1b6d1aca19f2fa0edd4f9223579dfcd753cc4857b2
 - filename: .tmux.conf
-  checksum: 8848a416d8fde0eff4acc2143e8becb6b76d0ade558d9738e5e2ba02360d6c69
+  checksum: f03fbb2a3a5113f83af99ab351f8ba464db0637630cefe4d25b58373ae199951
 - filename: .zshenv
-  checksum: b4fe97397736de5a63e3b77710c2f68f48313887770a1f800a6fd45f205b7f0d
+  checksum: c4fb88e292ca89ec105061641a81d545dca3524583faa69fb08126763c6997de
 - filename: .zshenv.llm
   checksum: dc9caf197b53f5c03bb69ab79ca1db5ab81d1cb0bb737167426113947f3de28b
 - filename: .zshrc
@@ -23,3 +23,5 @@ fileignoreconfig:
   checksum: 39600e716ab345a91003a06b6657c2ee483434e104bfede82694250235f4156a
 - filename: setup/OSX/reassignCapsLock.sh
   checksum: f51e2cab000fdd9c190ff44bd5128564f62489df92ebea5b014d0eb66ce80c0e
+- filename: setup/APPS/llm.sh
+  checksum: ed63dfedb3b01e727afc3407e881ddc5cfa10dece9a9ea881534772dd391fe6f

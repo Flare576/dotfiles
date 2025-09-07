@@ -1,7 +1,6 @@
 #!/bin/bash
 source "$(dirname "$0")/../utils.sh"
 usage="$(basename "$0") [-hmvdu]
-If installing on Linux, install after python.sh.
 Installs 'llm' CLI tool, llm-gemini plugin, and sets envars.
 Options:
   -h Show this help
@@ -37,11 +36,9 @@ config="$HOME/.doNotCommit.d/.doNotCommit.llm"
 
 if [ "$doDestroy" == "true" ]; then
   echo "Uninstalling llm and plugins"
-  if ! dotRemove llm "manual"; then
-    # ideally, we'd loop over the results of llm plugins, but I'm lazy
-    llm uninstall -y llm-gemini &> /dev/null
-    pip uninstall -y llm
-  fi
+  # ideally, we'd loop over the results of llm plugins, but I'm lazy
+  llm uninstall -y llm-gemini &> /dev/null
+  dotRemove "python:llm"
   echo "Deleting .doNotCommit.llm and configs"
   # This is commented out because I'm testing the script and this is irrecoverable
   # rm "$config"
@@ -53,10 +50,7 @@ if [ "$doUpdate" == "true" ] && ! command -v llm; then
   exit
 fi
 
-if ! dotInstall llm "manual"; then
-  echo "Setting up llm"
-  uv tool install llm
-fi
+dotInstall "python:llm"
 
 if [ "$doUpdate" == "true" ]; then
   if llm plugins | grep -q "llm-gemini"; then
@@ -67,9 +61,9 @@ else
     llm install llm-gemini
     if [ ! -f "$config" ]; then
       echo "Please provide Gemini API key. It will be stored in .doNotCommit.llm"
-      read -s gemini_key
-      cat<<END > ${config}
-export LLM_GEMINI_KEY=$gemini_key
+      read -rs gemini_key
+      cat<<END > "${config}"
+export LLM_GEMINI_KEY="$gemini_key"
 export LLM_USER_PATH="\$HOME/.config/llm"
 alias vl='vi ~/.config/llm -c "cd ~/.config/llm"'
 END

@@ -55,7 +55,7 @@ fi
 if ! dotInstall cheat "manual"; then
 
   DLURL=$(latestGit "cheat/cheat" "cheat-linux-amd64.gz")
-  curl -sL ${DLURL} -o /tmp/cheat-linux-amd64.gz \
+  curl -sL "${DLURL}" -o /tmp/cheat-linux-amd64.gz \
   && gunzip /tmp/cheat-linux-amd64.gz \
   && chmod +x /tmp/cheat-linux-amd64 \
   && rm /tmp/cheat-linux-amd64.gz \

@@ -29,9 +29,8 @@ setopt PUSHDSILENT
 export XDG_CONFIG_HOME="$HOME/.config" # https://wiki.archlinux.org/title/XDG_Base_Directory
 export CHEAT_CONFIG_PATH="$HOME/cheat/conf.yml"
 
-# Initialize pyenv
-# Monterey 12.3 stopped shipping python2 - using pyenv to manage installs
-command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
+# Initialize uv
+[ -f "$HOME/.local/bin/env" ] && source "$HOME/.local/bin/env"
 
 alias chrome='open -a Google\ Chrome'
 alias firefox='open -a Firefox'
