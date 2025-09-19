@@ -29,8 +29,8 @@ setopt PUSHDSILENT
 export XDG_CONFIG_HOME="$HOME/.config" # https://wiki.archlinux.org/title/XDG_Base_Directory
 export CHEAT_CONFIG_PATH="$HOME/cheat/conf.yml"
 
-# Initialize uv
-[ -f "$HOME/.local/bin/env" ] && source "$HOME/.local/bin/env"
+# Pull in uv-installed execs
+export PATH="$HOME/.local/bin:$PATH"
 
 alias chrome='open -a Google\ Chrome'
 alias firefox='open -a Firefox'
