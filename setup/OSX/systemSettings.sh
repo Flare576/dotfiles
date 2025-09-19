@@ -14,6 +14,7 @@ By default, makes several changes to system settings. With -d, resets to 'origin
  - Allow tabbing in dialog boxes
  - Set hold-to-repeat time for keys from 25 to 15
  - Set repeat rate from 6 to 1
+ - Set mouse tracking speed from 1 to 3
  - Disable Smart-Quotes
  - Set show-scrollbars from 'Automatic' to 'WhenScrolling'
  - Display sound icon in status bar by default
@@ -52,6 +53,7 @@ tapToClick="true"
 showPercent="YES"
 dialogTab="3"
 initialRepeat=15
+mouseTrack="3"
 keyRepeat=1
 smartQuotes='false'
 scrollbars='WhenScrolling'
@@ -68,6 +70,7 @@ if [ "$doDestroy" == "true" ]; then
   showPercent="NO"
   dialogTab="0"
   initialRepeat=25
+  mouseTrack=1
   keyRepeat=6
   smartQuotes='true'
   scrollbars='Automatic'
@@ -106,6 +109,8 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int $dialogTab
 # make repeating keys fast
 defaults write -g InitialKeyRepeat -int $initialRepeat # normal minimum is 15 (225 ms)
 defaults write -g KeyRepeat -int $keyRepeat # normal minimum is 2 (30 ms)
+# make mouse fast
+defaults write -g com.apple.mouse.scaling -float $mouseTrack
 # Show sound on menu bar at all times
 defaults write com.apple.controlcenter Sound -int $showSound
 # Show bluetooth on menu bar at all times
