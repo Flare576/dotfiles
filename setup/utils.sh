@@ -1,7 +1,7 @@
 #!/bin/bash
 # This file defines some common functions used throughout the setup scripts and defines the global version of the scripts
 # shellcheck disable=SC2034
-VERSION=3.3.0
+VERSION=3.3.1
 # shellcheck disable=SC2034
 isLinux=0; [ -f "/etc/os-release" ] && isLinux="true"
 

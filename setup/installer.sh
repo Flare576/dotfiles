@@ -168,20 +168,13 @@ while getopts ':hfvadmp:u' option; do
 done
 shift $((OPTIND -1))
 
-if [ -z "$profile" ]; then
-  echo "You don't want to install everything, trust me..."
-  exit 1
-fi
-
 # Handle app ecosystems, like python and NodeJS
 NVM_DIR="${NVM_DIR:-"$HOME/.nvm"}"
 # NOTE: "Destroy" is handled after the rest of the script because individual apps might have their own cleanup
 if [ -z "$doDestroy" ]; then # Install / Update
   echo "Installing / Updating uv and Python Ecosystem"
-  if ! command -v uv &> /dev/null; then
-     dotInstall "uv" "manual" || curl -LsSf https://astral.sh/uv/install.sh | sh
-   else
-    uv self update
+  if ! dotInstall "uv" "manual" &> /dev/null; then
+     uv self update &> /dev/null || curl -LsSf https://astral.sh/uv/install.sh | sh
   fi
 
   # Technically, omz-nvm will install NVM on first load, but it also uses whats there
@@ -192,6 +185,7 @@ if [ -z "$doDestroy" ]; then # Install / Update
   if ! [ -d ".git" ]; then
     git clone https://github.com/nvm-sh/nvm.git .
   else
+    git switch master
     git pull
   fi
   source "nvm.sh"
@@ -200,6 +194,12 @@ if [ -z "$doDestroy" ]; then # Install / Update
 fi
 
 target="$1"
+
+if [ -z "$profile$target" ]; then
+  echo "Assuming -u when called with no profile"
+  doUpdate="-u"
+fi
+
 
 if [ -n "$force" ]; then
   if [ -n "$doUpdate" ]; then
