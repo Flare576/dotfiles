@@ -1,7 +1,7 @@
 #!/bin/bash
 # This file defines some common functions used throughout the setup scripts and defines the global version of the scripts
 # shellcheck disable=SC2034
-VERSION=3.2.0
+VERSION=3.3.0
 # shellcheck disable=SC2034
 isLinux=0; [ -f "/etc/os-release" ] && isLinux="true"
 
@@ -104,3 +104,41 @@ function latestGit() {
   filter="$2" # artifact to look for
   curl --silent "https://api.github.com/repos/$repository/releases/latest" | jq -r '.assets[].browser_download_url' | grep "$filter"
 }
+
+# Don't just create symlinks, create smart-links
+# Expects just a filename, and that file to ultimately be ${HOME}/${file} -> dotfiles/${file}
+# Checks if ${HOME}/${file} exists, is a symlink, has content, etc.
+function linkToHome() {
+  link="$1"
+  echo "Linking $link"
+
+  # Check if the file already exists
+  if [ -e "$HOME/$link" ]; then
+    # If it's already a symbolic link, skip it
+    if [ -L "$HOME/$link" ]; then
+      echo "Skipping $link: already a symbolic link"
+      return 0
+    fi
+    # I previously attempted to "Merge" the existing file with the dotfiles file,
+    # but the only mechanism that made any sense was appending the existing to
+    # the end of the dotfiles, and that just seemed both dangerous and probably
+    # undesirable. So, now, just backup the file, notify, and move on
+    echo "$link exists - backing up to \$HOME/$link.bkp"
+    mv "$HOME/$link" "$HOME/$link.bkp"
+  fi
+
+  ln -fs "$HOME/dotfiles/$link" "$HOME/$link"
+}
+
+# Undo the linkToHome process
+function unLink() {
+  link="$1"
+  if [ -f "$HOME/$link" ]; then
+    rm -rf "$HOME/$link"
+    if [ -e "$HOME/$link.bkp" ]; then
+      echo "Restoring original file"
+      mv "$HOME/$link.bkp" "$HOME/$link"
+    fi
+  fi
+}
+
