@@ -20,6 +20,7 @@ all_simple=(
   universal-ctags      # generates indexes used by vim for "intellisense"-like features
   watch                # repeatedly call a command and monitor output
   watson               # Great time tracker
+  lm-studio            # Local LLMs
   samba                # Shared Directories for Linux
   lftp                 # For deploying website
   make                 # Steam Deck doesn't have make somehow
@@ -48,6 +49,7 @@ work_simple=(
   jq
   k9s
   lazydocker
+  lm-studio
   rpg-cli
   shellcheck
   universal-ctags
