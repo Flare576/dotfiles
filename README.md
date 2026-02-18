@@ -103,8 +103,12 @@ horizontally or vertically!
 - [undotree](https://github.com/mbbill/undotree) - Makes traversing the undo tree not suck
 - [gutentags](https://github.com/ludovicchabant/vim-gutentags) + [tagabar](https://github.com/majutsushi/tagbar) - Index your source code and <Ctrl-]> your way to happiness
 - [MergeTool](https://github.com/samoshkin/vim-mergetool) - Makes `git mergetool` way more useful
-- [vim-surround]() - easily change '' to "" to ` `, with `cs` then the thing that's there, and the thing you want
+- [vim-surround](https://github.com/tpope/vim-surround) - easily change '' to "" to ` `, with `cs` then the thing that's there, and the thing you want
   - (e.g. 'hello world' to "hello world", do `cs'"`)
+- [vim-abolish](https://github.com/tpope/vim-abolish) - 3-in-one
+    * [Abbreviation](https://github.com/tpope/vim-abolish?tab=readme-ov-file#abbreviation): allows `:Abolish teh the` to handle teh, Teh, and TEH
+    * [Substitution](https://github.com/tpope/vim-abolish?tab=readme-ov-file#substitution): allows `:%Subvert/facilit{y,ies}/building{,s}/g`
+    * [Coercion](https://github.com/tpope/vim-abolish?tab=readme-ov-file#coercion): allows \<leader>`crs` to turn camelCase into camel_case
 
 #### Hand-picked values!
 See https://dougblack.io/words/a-good-vimrc.html for info, or the `.vimrc` file for line-by-line comments
@@ -279,3 +283,36 @@ fliptable -> (╯°□°）╯︵ ┻━┻
 fixtable -> ┬─┬ノ( º _ ºノ)
 middlefinger -> 凸 (｀0´)凸
 ```
+
+# New Computer Backup Checklist
+
+- Any updates to this repo
+    * Double-check any new software to add to **setup/installer.sh**
+- Any updates to personaldot
+    * Notes, scripts, etc.
+- Any updates to ~/scripts
+    * Sub-Projects, too!
+- **~/.ssh**
+    * All the PEMs you've collected!
+- **~/.config**
+    * For reference - don't just drop all that cruft into the new machine!
+- **~/.doNotCommit.d**
+    * (Also) For reference - don't just drop all that cruft into the new machine!
+- Check VS Code for DB connections
+    * I didn't find a good way to pull these programatically, I think they're saved encrypted or in key chain
+- (zipup) **Projects**
+- (zipup) **Documents**
+- Host file / DNS
+- (zipup) **~/.Library/Preferences**
+- (zipup) **~/.Library/Application Support**
+- (zipup) **~/.Library/Application Support/Google/Chrome**
+    * Remeber, to "Restore" a profile:
+        + Open **~/.Library/Application Support/Google/Chrome** and take note of the highest-number **Profile** folder
+        + Open Chrome
+        + Create a new Profile in Chrome (name it whatever)
+        + Check **~/.Library/Application Support/Google/Chrome** and note the new **Profile** folder
+        + Close Chrome
+        + DELETE the new **Profile** folder from **~/.Library/Application Support/Google/Chrome**
+        + MOVE the desired Profile into **~/.Library/Application Support/Google/Chrome**
+        + Rename it to the folder you just deleted
+        + Profit!
