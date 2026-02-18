@@ -1,3 +1,4 @@
+# Supported tools (ag, Opencode, etc.) also read this file
 node_modules
 git
 __tests__
@@ -10,3 +11,9 @@ lib
 yarn.lock
 build
 
+# Allow these files/folders to be searched/used
+# Leading ! means "show" to these tools
+!AGENTS.md
+!CLAUDE.md
+!.sisyphus
+!.claude

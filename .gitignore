@@ -20,10 +20,18 @@ cookies.js
 cheat/community
 cheat/private
 .env*
+.npmrc
 talisman_reports
 
 # A lot of AI-related files SHOULD be source controlled, but not all
-CLAUDE.local.md
-AGENTS.local.md
-.claude/settings.local.json
-.claude/plans
+*.local.md
+*.local.json
+.claude
+.sisyphus
+opencode.jsonc
+# Add CLAUDE.md and AGENTS.md on a project-by-project basis
+CLAUDE.md
+AGENTS.md
+.mcp.json
+# ASU-specific
+vault.tf
