@@ -1,9 +1,16 @@
 # See https://github.com/robbyrussell/oh-my-zsh/blob/master/templates/zshrc.zsh-template
 # This file is loaded after .zshenv
+# Minimal shell for Cursor Agent / tooling (skip Oh My Zsh, zle, theme — breaks output capture)
+if [ -n "$CURSOR_AGENT" ]; then
+  export PATH="/opt/homebrew/bin:$HOME/.bun/bin:$HOME/.local/bin:$PATH"
+  [ -d "$HOME/.nvm/versions/node" ] && n=$(ls "$HOME/.nvm/versions/node" 2>/dev/null | sort -V | tail -1) && [ -n "$n" ] && export PATH="$HOME/.nvm/versions/node/$n/bin:$PATH"
+  return 0
+fi
+
 PATH="$FLARE_PATH"
 
 export ZSH=$HOME/.oh-my-zsh
-# Removed due to lack of use: aws, kubectl, docker-aliases, docker-compose, node, npm, yarn
+# Removed due to lack of use: aws, kubectl, docker-aliases, docker-compose, node, npm, yarn, bun
 plugins=(vi-mode git extract z tmux zsh-nvm zsh-better-npm-completion)
 
 #Setup NVM
@@ -46,3 +53,6 @@ function zle-line-init zle-keymap-select {
 function h() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac --height "50%" | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
 }
+
+# Added by Homebrew Update Script
+export PATH="/opt/homebrew/bin:$PATH"

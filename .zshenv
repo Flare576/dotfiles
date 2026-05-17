@@ -1,4 +1,18 @@
 # This file is loaded before .zshrc
+# Streamlined env for Cursor Agent / non-interactive tooling (full config breaks output capture)
+if [ -n "$CURSOR_AGENT" ]; then
+  typeset -aU path
+  [ -x /usr/libexec/path_helper ] && eval $(/usr/libexec/path_helper -s)
+  [ -f /opt/homebrew/bin/brew ] && eval $(/opt/homebrew/bin/brew shellenv)
+  export PATH="$HOME/.local/bin:$HOME/.bun/bin:$PATH"
+  # default nvm node so npm/node work without sourcing nvm
+  if [ -d "$HOME/.nvm/versions/node" ]; then
+    n=$(ls "$HOME/.nvm/versions/node" 2>/dev/null | sort -V | tail -1)
+    [ -n "$n" ] && export PATH="$HOME/.nvm/versions/node/$n/bin:$PATH"
+  fi
+  return 0
+fi
+
 # Change "path" to an -a(rray) -U(nique) (special) type, prevents dup entries
 typeset -aU path
 

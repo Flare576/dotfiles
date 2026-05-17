@@ -5,16 +5,12 @@ fileignoreconfig:
   checksum: f5f609cca669e97213ebdf1b6d1aca19f2fa0edd4f9223579dfcd753cc4857b2
 - filename: .tmux.conf
   checksum: f03fbb2a3a5113f83af99ab351f8ba464db0637630cefe4d25b58373ae199951
-- filename: .zshenv
-  checksum: b30de2d1baaf2c16155f92b9cc32602d7c7d0c2f52c7e30634e57b818f64e2f5
 - filename: .zshenv.llm
   checksum: dc9caf197b53f5c03bb69ab79ca1db5ab81d1cb0bb737167426113947f3de28b
+- filename: .zshenv
+  checksum: 9b8f0c90cf59e1cc11854e87bce789ae20766ae2ddd944ba34210933727cbb71
 - filename: .zshrc
-  checksum: 7404acca40efebe5b1b6b729a78d9ae5470b8e7565e280bae75be0d0fe599f68
-- filename: .zshrc
-  checksum: 7404acca40efebe5b1b6b729a78d9ae5470b8e7565e280bae75be0d0fe599f68
-- filename: cheat/personal/cloudformation
-  checksum: 831a525cb7f160e45196a1a3fd0e75e53fa5422d6f92a8aa206167da7c8473e7
+  checksum: fc620508aac85e2ffaeae07100c867a94509e1cc757e6c08011226c9cc15f842
 - filename: .vimrc
   checksum: 5573157c45c54bb7170d930032f6800a30bde1371ee8a01e0f22ea5fdcd77fbe
 - filename: cheat/personal/tunnel
