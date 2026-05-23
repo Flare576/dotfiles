@@ -23,8 +23,16 @@ source $ZSH/oh-my-zsh.sh
 # Jira cli auto complete
 eval "$(jira --completion-script-zsh > /dev/null 2>&1)"
 
+# NVM
 if [ -f "$(pwd)/.nvmrc" ] ; then
   nvm install
+fi
+
+# Bun
+if [ -d "$HOME/.bun" ] ; then
+  [ -s "/home/flare/.oh-my-zsh/completions/_bun" ] && source "/home/flare/.oh-my-zsh/completions/_bun"
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
 fi
 
 # vim zsh
