@@ -119,6 +119,7 @@ write=(
 if ! dotInstall vim gvim; then
   # Some flavors of linux don't have gvim (might just be arch)
   dotInstall vim
+  # Note: Mint Linux should install vim-gtk3
 fi
 
 echo "Linking .vimrc, setting up plugins"
