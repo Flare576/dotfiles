@@ -24,6 +24,7 @@ all_simple=(
   samba                # Shared Directories for Linux
   lftp                 # For deploying website
   make                 # Steam Deck doesn't have make somehow
+  xclip                # Linux + tmux love
 )
 all_scripted=(
   cheat.sh
@@ -193,6 +194,9 @@ if [ -z "$doDestroy" ]; then # Install / Update
   source "nvm.sh"
   nvm install stable
   popd &> /dev/null || exit
+
+  echo "Installing / Updating Bun"
+  bun upgrade || curl -fsSL https://bun.com/install | bash
 fi
 
 target="$1"
@@ -301,4 +305,7 @@ if [ -n "$doDestroy" ]; then
   echo "Removing NVM and NodeJS ecosystem"
   nvm unload
   rm -rf "$NVM_DIR"
+
+  echo "Uninstalling Bun"
+  rm -rf ~/.bun
 fi
