@@ -1,63 +1,142 @@
-# AWS Params
-# AWS_ADFS_HOST=""
-# AWS_MAIN_PROFILE=""
-# AWS_DOCKER_PROFILE=""
-# AWS_DOCKER_SERVER=""
-# AWS_ROLE_ARN=""
+# ── AWS Shell Utilities ────────────────────────────────────────────────────────
+#
+# Portable layer: works with any auth method (SSO, saml2aws, etc.)
+# No credentials, no client-specific config lives here.
+#
+# Per-client overrides belong in ~/.doNotCommit.d/ or ~/personaldot:
+#   - Override awsrefresh() with your actual auth flow (saml2aws, sso, etc.)
+#   - Set AWS_PROFILE / AWS_DEFAULT_REGION for your context
+#
+# Variables you may want to set externally:
+#   AWS_DOCKER_PROFILE  - profile for ECR auth
+#   AWS_DOCKER_SERVER   - ECR registry URL
+#   AWS_ROLE_ARN        - default role for awskeys
+#   AWS_MAIN_PROFILE    - profile for awskeys assume-role call
+# ──────────────────────────────────────────────────────────────────────────────
 
-# Login to AWS ADFS
-awslogin () {
-  if [[ "$1" == "-h" ]]; then
-    echo "$(basename "$0") [AWS_PROFILE]"
-    return 0
+# Stop AWS CLI from opening `less` after every command
+export AWS_PAGER=""
+
+# ── Profile switching ──────────────────────────────────────────────────────────
+
+# Switch the active AWS profile in the current shell
+awsuse() {
+  if [[ -z "$1" ]]; then
+    echo "Usage: awsuse <profile>"
+    echo "Current: ${AWS_PROFILE:-<none>}"
+    return 1
   fi
-  [ -z "$1" ] && PROFILE="master"  || PROFILE="$1"
-  aws-adfs login --profile=$PROFILE --adfs-host=$AWS_ADFS_HOST --ssl-verification --session-duration 14400 --no-sspi
+  export AWS_PROFILE="$1"
+  echo "Now using AWS profile: $AWS_PROFILE"
 }
 
-# Auth w/ Docker via AWS
-awsdocker () {
-  if [[ "$1" == "-h" ]]; then
-    echo "$(basename "$0") You must have AWS_DOCKER_PROFILE and AWS_DOCKER_SERVER set"
-    return 0
-  fi
-  aws ecr get-login-password --profile="$AWS_DOCKER_PROFILE" | docker login --username AWS --password-stdin "$AWS_DOCKER_SERVER"}
+# ── Auth ───────────────────────────────────────────────────────────────────────
 
-# Get Secrets
-# Note: Set $AWS_PROFILE to avoid second arg: try `asp` from the "aws" oh-my-zsh plugin!
-awssecret () {
+# Login via SSO (uses current profile unless you pass one)
+# Override awsrefresh() in your personal dotfiles if you use saml2aws or ADFS
+awslogin() {
+  local profile="${1:-${AWS_PROFILE:-default}}"
+  aws sso login --profile "$profile"
+}
+
+# Run any aws command; if the SSO token is expired, re-login and retry once.
+# Works with awsuse: set AWS_PROFILE first, then just call `awsr <subcommand>`
+awsr() {
+  local profile="${AWS_PROFILE:-default}"
+  local out
+  out="$(aws "$@" 2>&1)"
+  local code=$?
+
+  if [[ $code -ne 0 ]] && echo "$out" | grep -qiE "sso|token|expired|unauthorized|forbidden|The SSO session associated with this profile is invalid"; then
+    echo "$out"
+    echo
+    echo "SSO auth may be expired. Logging in for profile: $profile ..."
+    aws sso login --profile "$profile" || return 1
+    aws "$@"
+    return $?
+  fi
+
+  echo "$out"
+  return $code
+}
+
+# Auth Docker with ECR (requires AWS_DOCKER_PROFILE and AWS_DOCKER_SERVER)
+awsdocker() {
   if [[ "$1" == "-h" ]]; then
-    echo "$(basename "$0") AWS_SECRET_NAME [AWS_PROFILE]"
+    echo "Usage: awsdocker  (requires AWS_DOCKER_PROFILE and AWS_DOCKER_SERVER)"
     return 0
   fi
-  if [ -z "$1" ]; then
+  aws ecr get-login-password --profile="$AWS_DOCKER_PROFILE" \
+    | docker login --username AWS --password-stdin "$AWS_DOCKER_SERVER"
+}
+
+# ── Resource access ────────────────────────────────────────────────────────────
+
+# Fetch a Secrets Manager secret (plain JSON output)
+# Usage: awssecret <secret-name> [profile]
+# Tip: set AWS_PROFILE via awsuse to skip the second arg
+awssecret() {
+  if [[ "$1" == "-h" ]]; then
+    echo "Usage: awssecret <secret-name> [profile]"
+    return 0
+  fi
+  if [[ -z "$1" ]]; then
     echo "Gotta tell me what secret you want"
     return 1
   fi
-  [ -z "$2" ] && PROFILE="$AWS_PROFILE"  || PROFILE="$2"
-  aws secretsmanager get-secret-value --profile "$PROFILE" --secret-id "$1"
+  local profile="${2:-${AWS_PROFILE}}"
+  aws secretsmanager get-secret-value --profile "$profile" --secret-id "$1"
 }
 
-awsparameter () {
+# Fetch a Parameter Store value (plaintext)
+# Usage: awsparameter <param-name> [profile]
+awsparameter() {
   if [[ "$1" == "-h" ]]; then
-    echo "$(basename "$0") AWS_PARAMETER_NAME [AWS_PROFILE]"
+    echo "Usage: awsparameter <param-name> [profile]"
     return 0
   fi
-  if [ -z "$1" ]; then
+  if [[ -z "$1" ]]; then
     echo "Gotta tell me what parameter you want"
     return 1
   fi
-  [ -z "$2" ] && PROFILE="$AWS_PROFILE"  || PROFILE="$2"
-  aws ssm get-parameter --profile "$PROFILE" --name "$1" --query 'Parameter.Value' --output text
+  local profile="${2:-${AWS_PROFILE}}"
+  aws ssm get-parameter --profile "$profile" --name "$1" \
+    --query 'Parameter.Value' --output text
 }
 
-# Get Keys
-awskeys () {
+# Assume a role and print temporary credentials
+# Usage: awskeys [role-arn [session-name]]
+awskeys() {
   if [[ "$1" == "-h" ]]; then
-    echo "$(basename "$0") [ARN [SESSION_NAME]]"
+    echo "Usage: awskeys [role-arn [session-name]]"
     return 0
   fi
-  [ -z "$1" ] && ARN="$AWS_ROLE_ARN"  || ARN="$1"
-  [ -z "$2" ] && SESSION_NAME="personal"  || SESSION_NAME="$2"
-  aws sts assume-role --role-arn $ARN --role-session-name "$SESSION_NAME" --profile "$AWS_MAIN_PROFILE"
+  local arn="${1:-$AWS_ROLE_ARN}"
+  local session="${2:-personal}"
+  aws sts assume-role --role-arn "$arn" --role-session-name "$session" \
+    --profile "$AWS_MAIN_PROFILE"
+}
+
+# ── Session keepalive (hook point) ────────────────────────────────────────────
+#
+# awsrefresh: called at startup and every 45 min by awswatch.
+# Default impl just re-runs awslogin with the current profile.
+# Override this in ~/.doNotCommit.d/ or ~/personaldot for saml2aws/ADFS flows.
+#
+awsrefresh() {
+  awslogin
+}
+
+# awswatch: start a background loop that calls awsrefresh every 45 min.
+# Returns the PID via $AWSWATCH_PID so the caller can kill it on exit.
+# Usage:
+#   awswatch
+#   # ... do your work ...
+#   kill $AWSWATCH_PID
+awswatch() {
+  (while true; do
+    sleep 2700
+    awsrefresh
+  done) >/dev/null 2>&1 &
+  AWSWATCH_PID=$!
 }

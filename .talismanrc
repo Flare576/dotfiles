@@ -21,3 +21,5 @@ fileignoreconfig:
   checksum: f51e2cab000fdd9c190ff44bd5128564f62489df92ebea5b014d0eb66ce80c0e
 - filename: setup/APPS/llm.sh
   checksum: ed63dfedb3b01e727afc3407e881ddc5cfa10dece9a9ea881534772dd391fe6f
+- filename: .zshenv.aws
+  checksum: a12e631db78e97af1beae6b63a063bbcf42ebc9387b4b1ca484ae6c40f7964a4
