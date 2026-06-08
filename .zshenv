@@ -55,12 +55,6 @@ alias wata='watson aggregate'
 alias sz='source ~/.zshrc && source ~/.zshenv'
 alias tm='tmux new-session'
 
-alias pi='pipenv'
-alias py='pipenv run python'
-alias sysup="$HOME/dotfiles/setup/installer.sh -u"
-# Leaving this as a reminder to never do this
-# alias python='echo "maybe try pi/py..."'
-
 # Utilities
 command -v batcat > /dev/null && alias bat='batcat' # Some *nix systems needed a different name
 command -v bat &> /dev/null && alias cat='bat'      # Just for safety in case bat is missing
