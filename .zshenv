@@ -54,6 +54,7 @@ alias waty='watson report --from $(date -v -1d "+%Y-%m-%d") --to $(date -v -1d "
 alias wata='watson aggregate'
 alias sz='source ~/.zshrc && source ~/.zshenv'
 alias tm='tmux new-session'
+alias sysup="$HOME/dotfiles/setup/installer.sh -u"
 
 # Utilities
 command -v batcat > /dev/null && alias bat='batcat' # Some *nix systems needed a different name
