@@ -28,7 +28,6 @@ all_simple=(
 )
 all_scripted=(
   cheat.sh
-  jira.sh
   omz.sh
   scripts.sh
   silversearcher.sh
@@ -59,7 +58,6 @@ work_simple=(
 )
 work_scripted=(
   cheat.sh
-  jira.sh
   omz.sh
   scripts.sh
   silversearcher.sh
@@ -86,7 +84,6 @@ personal_scripted=(
   omz.sh
   scripts.sh
   silversearcher.sh
-  jira.sh
   tmux.sh
   vim.sh
   llm.sh

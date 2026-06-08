@@ -11,6 +11,8 @@ fileignoreconfig:
   checksum: 9b8f0c90cf59e1cc11854e87bce789ae20766ae2ddd944ba34210933727cbb71
 - filename: .zshrc
   checksum: fc620508aac85e2ffaeae07100c867a94509e1cc757e6c08011226c9cc15f842
+- filename: cheat/personal/cloudformation
+  checksum: 831a525cb7f160e45196a1a3fd0e75e53fa5422d6f92a8aa206167da7c8473e7
 - filename: .vimrc
   checksum: 5573157c45c54bb7170d930032f6800a30bde1371ee8a01e0f22ea5fdcd77fbe
 - filename: cheat/personal/tunnel

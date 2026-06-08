@@ -16,17 +16,9 @@ plugins=(vi-mode git extract z tmux zsh-nvm zsh-better-npm-completion)
 #Setup NVM
 export NVM_COMPLETION=true  # Tab-completion
 export NVM_LAZY_LOAD=true   # Make it fast
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('gac' 'jira' 'vroom')
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('gac' 'vroom','opencode')
 
 source $ZSH/oh-my-zsh.sh
-
-# Jira cli auto complete
-eval "$(jira --completion-script-zsh > /dev/null 2>&1)"
-
-# NVM
-if [ -f "$(pwd)/.nvmrc" ] ; then
-  nvm install
-fi
 
 # Bun
 if [ -d "$HOME/.bun" ] ; then
