@@ -102,7 +102,6 @@ personaldot="$HOME/personaldot/.zshenv"
 # application shortcuts
 [ -f $HOME/.zshenv.llm ] && source $HOME/.zshenv.llm
 [ -f $HOME/.zshenv.aws ] && source $HOME/.zshenv.aws
-[ -f $HOME/.zshenv.rpg ] && source $HOME/.zshenv.rpg
 
 # OSX will use /etc/zshrc between this file and .zshenv - ignore the path changes
 # https://github.com/sorin-ionescu/prezto/issues/381
