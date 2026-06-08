@@ -53,6 +53,3 @@ function zle-line-init zle-keymap-select {
 function h() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac --height "50%" | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
 }
-
-# Added by Homebrew Update Script
-export PATH="/opt/homebrew/bin:$PATH"
