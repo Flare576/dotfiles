@@ -65,4 +65,6 @@ fileignoreconfig:
   checksum: 781d5eb7dc15520e730bce45d5e5ba2ea8cf8e86bf26a8e7282c9f7dcd2a3173
 - filename: skills/atlassian-rest/scripts/sync.mjs
   checksum: 1a1315269de206e6746e7ada60526d7436889135303308264a2de54c6d8e332b
+- filename: skills/git-master/SKILL.md
+  checksum: 837adf9d6ca78477c935cc3974d1be059ba21036a2da202c6cb7197c6e2691b8
 version: "1.0"
