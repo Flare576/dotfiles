@@ -34,6 +34,7 @@ all_scripted=(
   tmux.sh
   vim.sh
   llm.sh
+  omp.sh
 )
 
 # Each should be a subset of all
@@ -64,6 +65,7 @@ work_scripted=(
   tmux.sh
   vim.sh
   llm.sh
+  omp.sh
 )
 personal_simple=(
   bat
@@ -87,6 +89,7 @@ personal_scripted=(
   tmux.sh
   vim.sh
   llm.sh
+  omp.sh
 )
 steamdeck_simple=(
   bat
@@ -110,6 +113,7 @@ steamdeck_scripted=(
   tmux.sh
   vim.sh
   llm.sh
+  omp.sh
 )
 remote_simple=(
   bat

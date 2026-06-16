@@ -8,7 +8,7 @@ fileignoreconfig:
 - filename: .zshenv.llm
   checksum: dc9caf197b53f5c03bb69ab79ca1db5ab81d1cb0bb737167426113947f3de28b
 - filename: .zshenv
-  checksum: d3d3ea2d33c89bd147429b10cff6c623f107a8a5d1f625bb05babe1e54dc49c2
+  checksum: 454eb44c75df6c52e54168a1a99c344f27df39b2deea129a1ef8ea749bba06b7
 - filename: .zshrc
   checksum: 4c6a2d8038c0d239ad855906cb0231321208c883313d4020175c176c12381555
 - filename: cheat/personal/cloudformation
@@ -25,3 +25,44 @@ fileignoreconfig:
   checksum: ed63dfedb3b01e727afc3407e881ddc5cfa10dece9a9ea881534772dd391fe6f
 - filename: .zshenv.aws
   checksum: a12e631db78e97af1beae6b63a063bbcf42ebc9387b4b1ca484ae6c40f7964a4
+- filename: .zshenv.omp
+  checksum: 2b073bab2d37b0e18058d440320b3e2c321fd05fb3495937422d09a52566ab20
+- filename: skills/atlassian-rest/scripts/package-lock.json
+  checksum: cad504e1d0b8534e12547bd7ef89684685d5b9f6f6218bcd89d4d4a5832e3a58
+- filename: skills/atlassian-rest/references/report-templates.md
+  checksum: 3d40f3b857b601afa99d97bf54c07f0d16c00bf344d316b411ee36f977e16220
+- filename: skills/atlassian-rest/workflows/search-company-knowledge.md
+  checksum: 05bbcfd02a7d9f8644cad674b7f2be7d0bcd6fe7a65f2861247abb7912572c34
+- filename: skills/atlassian-rest/workflows/generate-status-report.md
+  checksum: 43fa690a2b3a5b2280dc5ce4e5c000ecb6eeafefed3578452206bdb78bfe7029
+- filename: skills/atlassian-rest/references/jira-api.md
+  checksum: d29efc6b706656b5fa3a209c4b1c8c71c93a2448f10c1f71a251248da977f9a0
+- filename: skills/atlassian-rest/references/search-patterns.md
+  checksum: 0603f84fe994f908ec29ec8015486a1953c0f3ec56a950f736ecc47cdc07bfdd
+- filename: skills/atlassian-rest/references/confluence-api.md
+  checksum: 528a1fea002bb61c6f6b2b5e967e96077b491e207f81afb9da15305986160628
+- filename: skills/atlassian-rest/workflows/triage-issue.md
+  checksum: 8519d6abcb4ef74989e18976c3712aa4040178733140e8fab2e07b00348513fc
+- filename: skills/atlassian-rest/references/confluence-formatting.md
+  checksum: 8b2fd1a35fde9e3a43374a3640d056a5a4d057468c0fb6cedb55c0f7fcc38421
+- filename: skills/atlassian-rest/references/sync-mapping-guide.md
+  checksum: 516c15525760fb3303f645bc255d48eae97de087c813cc93e99083d34d1e22d4
+- filename: skills/atlassian-rest/scripts/confluence.mjs
+  checksum: df1da6f725688f77441b63bb2efff23ce56d9e88181e4613b1e8227770baf4b3
+- filename: skills/atlassian-rest/workflows/sync-bmad-documents.md
+  checksum: 82cd82a070274efc43c85f7523a1bffba2954343f9844d0e2140ea925ef05eee
+- filename: skills/atlassian-rest/scripts/jira.mjs
+  checksum: 8ac6a0fbedd52123449a6a8ff644ecbf20c8bb4f93da8778ef8d407d50f7fcd7
+- filename: skills/atlassian-rest/scripts/test-format.mjs
+  checksum: 99e813947c8e1dfa22c157d7f7853542efab3f4646c2d2a430fa8a62ecb5a1d0
+- filename: skills/atlassian-rest/SKILL.md
+  checksum: 1447e52f83d2243f9d23d68b9075df6a8a3ba86d53cbd1b8004626912341b1fd
+- filename: skills/atlassian-rest/scripts/sync-confluence-space.mjs
+  checksum: da2dd5336d04f101b6512c618ce8110d4b246e64a917ca18a27f5d918a4d3460
+- filename: skills/atlassian-rest/scripts/confluence-format.mjs
+  checksum: 010a136eafc23142d0fd429cda0861190e555d51f23b983780b51c61eb7da54d
+- filename: skills/atlassian-rest/evals/evals.json
+  checksum: 781d5eb7dc15520e730bce45d5e5ba2ea8cf8e86bf26a8e7282c9f7dcd2a3173
+- filename: skills/atlassian-rest/scripts/sync.mjs
+  checksum: 1a1315269de206e6746e7ada60526d7436889135303308264a2de54c6d8e332b
+version: "1.0"
