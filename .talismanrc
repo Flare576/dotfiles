@@ -10,7 +10,7 @@ fileignoreconfig:
 - filename: .zshenv
   checksum: d3d3ea2d33c89bd147429b10cff6c623f107a8a5d1f625bb05babe1e54dc49c2
 - filename: .zshrc
-  checksum: fc620508aac85e2ffaeae07100c867a94509e1cc757e6c08011226c9cc15f842
+  checksum: 4c6a2d8038c0d239ad855906cb0231321208c883313d4020175c176c12381555
 - filename: cheat/personal/cloudformation
   checksum: 831a525cb7f160e45196a1a3fd0e75e53fa5422d6f92a8aa206167da7c8473e7
 - filename: .vimrc

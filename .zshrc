@@ -22,7 +22,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Bun
 if [ -d "$HOME/.bun" ] ; then
-  [ -s "/home/flare/.oh-my-zsh/completions/_bun" ] && source "/home/flare/.oh-my-zsh/completions/_bun"
+  [ -s "$HOME/.oh-my-zsh/completions/_bun" ] && source "$HOME/.oh-my-zsh/completions/_bun"
   export BUN_INSTALL="$HOME/.bun"
   export PATH="$BUN_INSTALL/bin:$PATH"
 fi
