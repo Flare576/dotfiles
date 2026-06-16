@@ -8,7 +8,7 @@ fileignoreconfig:
 - filename: .zshenv.llm
   checksum: dc9caf197b53f5c03bb69ab79ca1db5ab81d1cb0bb737167426113947f3de28b
 - filename: .zshenv
-  checksum: 5b183c4c075d38ada01268dcbc40b1934fa679bcd74d3301643abc26f31902a1
+  checksum: d3d3ea2d33c89bd147429b10cff6c623f107a8a5d1f625bb05babe1e54dc49c2
 - filename: .zshrc
   checksum: fc620508aac85e2ffaeae07100c867a94509e1cc757e6c08011226c9cc15f842
 - filename: cheat/personal/cloudformation

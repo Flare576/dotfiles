@@ -1,15 +1,22 @@
 # This file is loaded before .zshrc
+
+# default nvm node so npm/node work without sourcing nvm
+if [ -d "$HOME/.nvm/versions/node" ]; then
+  n=$(ls "$HOME/.nvm/versions/node" 2>/dev/null | sort -V | tail -1)
+  [ -n "$n" ] && export PATH="$HOME/.nvm/versions/node/$n/bin:$PATH"
+fi
+
+# Secrets and App-Specific Shortcuts
+if [ -d "$HOME/.doNotCommit.d" ]; then
+  for f in "$HOME/.doNotCommit.d"/.doNotCommit*; do [[ $f != *".sw"* ]] && source $f; done
+fi
+
 # Streamlined env for Cursor Agent / non-interactive tooling (full config breaks output capture)
 if [ -n "$CURSOR_AGENT" ]; then
   typeset -aU path
   [ -x /usr/libexec/path_helper ] && eval $(/usr/libexec/path_helper -s)
   [ -f /opt/homebrew/bin/brew ] && eval $(/opt/homebrew/bin/brew shellenv)
   export PATH="$HOME/.local/bin:$HOME/.bun/bin:$PATH"
-  # default nvm node so npm/node work without sourcing nvm
-  if [ -d "$HOME/.nvm/versions/node" ]; then
-    n=$(ls "$HOME/.nvm/versions/node" 2>/dev/null | sort -V | tail -1)
-    [ -n "$n" ] && export PATH="$HOME/.nvm/versions/node/$n/bin:$PATH"
-  fi
   return 0
 fi
 
@@ -19,11 +26,6 @@ typeset -aU path
 # OSX baseline paths (see note on path_helper at bottom of file)
 if [ -x /usr/libexec/path_helper ]; then
 	eval `/usr/libexec/path_helper -s`
-fi
-
-# Secrets and App-Specific Shortcuts
-if [ -d "$HOME/.doNotCommit.d" ]; then
-  for f in "$HOME/.doNotCommit.d"/.doNotCommit*; do [[ $f != *".sw"* ]] && source $f; done
 fi
 
 if [ -f "/opt/homebrew/bin/brew" ]; then
