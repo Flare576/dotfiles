@@ -34,6 +34,12 @@ Analyze the user's request to determine operation mode:
 
 ---
 
+## Project Conventions
+
+**`.sisyphus/` is gitignored** — always. It holds agent handoff artifacts, review notes, plans, and working logs (`.sisyphus/reviews/`, `.sisyphus/plans/`, `.sisyphus/human/`). Never stage, commit, or mention it in commit messages. When running `git status`, treat any `.sisyphus/` entries as noise. If Flare asks to commit "everything", that still excludes `.sisyphus/`.
+
+---
+
 ## CORE PRINCIPLE: MULTIPLE COMMITS BY DEFAULT (NON-NEGOTIABLE)
 
 <critical_warning>
