@@ -26,7 +26,7 @@ fileignoreconfig:
 - filename: .zshenv.aws
   checksum: a12e631db78e97af1beae6b63a063bbcf42ebc9387b4b1ca484ae6c40f7964a4
 - filename: .zshenv.omp
-  checksum: 2b073bab2d37b0e18058d440320b3e2c321fd05fb3495937422d09a52566ab20
+  checksum: d22630c2d68724bca38d9326b7a0e40fc1799a7b5ed4dbc42b1cb30f65491fa3
 - filename: skills/atlassian-rest/scripts/package-lock.json
   checksum: cad504e1d0b8534e12547bd7ef89684685d5b9f6f6218bcd89d4d4a5832e3a58
 - filename: skills/atlassian-rest/references/report-templates.md

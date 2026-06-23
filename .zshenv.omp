@@ -1,6 +1,8 @@
 # ~/.zshenv.omp — OMP shell utilities
 # Sourced from ~/.zshenv (symlinked from ~/dotfiles/.zshenv.omp)
 #
-# Instance switching for Atlassian/other skills is handled by the skill's
-# own wrapper scripts (e.g. skills/atlassian-rest/scripts/omp-atlassian.sh).
-# Add shell-level OMP utilities here as they emerge.
+# Start dev-mode OMP in the current dir
+function domp() {
+  curdir="$(pwd)"
+  pushd ~/Projects/Personal/oh-my-pi && bun dev --cwd "$curdir" && popd
+}
