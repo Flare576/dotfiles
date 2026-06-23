@@ -15,5 +15,5 @@ build
 # Leading ! means "show" to these tools
 !AGENTS.md
 !CLAUDE.md
-!.sisyphus
-!.claude
+!.sisyphus/
+!.claude/
